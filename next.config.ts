@@ -1,7 +1,11 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Pin Turbopack root when a parent directory also has a lockfile (e.g. user home).
+  turbopack: {
+    root: path.join(__dirname),
+  },
 };
 
 export default nextConfig;

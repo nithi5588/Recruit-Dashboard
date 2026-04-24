@@ -1,26 +1,681 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand */
+  --color-brand-50: #F4F1FF;
+  --color-brand-100: #EEE9FF;
+  --color-brand-200: #D8D0FF;
+  --color-brand-300: #B8A9FC;
+  --color-brand-400: #8D77F9;
+  --color-brand-500: #5B3DF5;
+  --color-brand-600: #4B32D4;
+  --color-brand-700: #3B28AA;
+
+  /* Neutrals */
+  --color-bg-base: #F7F8FC;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F3F4F8;
+  --color-border: #E5E7EF;
+  --color-border-strong: #D5D8E5;
+  --color-text: #171A2B;
+  --color-text-secondary: #667085;
+  --color-text-muted: #98A2B3;
+
+  /* Semantic */
+  --color-success: #22C55E;
+  --color-success-light: #EAFBF1;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FFF4DB;
+  --color-error: #EF4444;
+  --color-error-light: #FDECEC;
+  --color-info: #3B82F6;
+  --color-info-light: #EAF2FF;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Radii */
+  --radius-input: 12px;
+  --radius-button: 12px;
+  --radius-card: 18px;
+  --radius-panel: 20px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 18px rgba(23, 26, 43, 0.06);
+  --shadow-panel: 0 10px 32px rgba(23, 26, 43, 0.08);
+  --shadow-dropdown: 0 8px 24px rgba(23, 26, 43, 0.10);
+  --shadow-ring-brand: 0 0 0 4px rgba(91, 61, 245, 0.15);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ------------------------------------------------------------------------- */
+/*  Appearance — density scale                                                */
+/* ------------------------------------------------------------------------- */
+:root {
+  --density-scale: 1;
+  --density-font: 14px;
+  --density-radius: 1;
+}
+html[data-density="compact"] {
+  --density-scale: 0.9;
+  --density-font: 13px;
+  --density-radius: 0.92;
+}
+html[data-density="spacious"] {
+  --density-scale: 1.1;
+  --density-font: 15px;
+  --density-radius: 1.08;
+}
+
+html[data-density="compact"] body { font-size: 13px; }
+html[data-density="spacious"] body { font-size: 15px; }
+
+/* Scale the primary scroll area so padding, font-size and card sizing
+   visibly shift between densities without touching every component. */
+html[data-density="compact"] main {
+  zoom: 0.94;
+}
+html[data-density="spacious"] main {
+  zoom: 1.06;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Dark mode — redefine the CSS variables                                    */
+/* ------------------------------------------------------------------------- */
+html[data-theme="dark"] {
+  --color-bg-base: #0F1020;
+  --color-surface: #1A1C30;
+  --color-surface-2: #242743;
+  --color-border: #2F3352;
+  --color-border-strong: #3B3F63;
+  --color-text: #E5E7F5;
+  --color-text-secondary: #A4ACCB;
+  --color-text-muted: #7A83A6;
+
+  --color-success-light: rgba(34, 197, 94, 0.15);
+  --color-warning-light: rgba(245, 158, 11, 0.15);
+  --color-error-light: rgba(239, 68, 68, 0.18);
+  --color-info-light: rgba(59, 130, 246, 0.15);
+
+  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.45);
+  --shadow-panel: 0 10px 32px rgba(0, 0, 0, 0.55);
+  --shadow-dropdown: 0 8px 24px rgba(0, 0, 0, 0.55);
+
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Semantic chip / pill tokens                                               */
+/*  Used by status badges, role chips, and tag pills. Defined for both       */
+/*  themes so chips always read well on the surface.                          */
+/* ------------------------------------------------------------------------- */
+:root {
+  --chip-brand-bg: rgba(var(--accent-rgb, 91, 61, 245), 0.12);
+  --chip-brand-fg: var(--color-brand-600);
+  --chip-info-bg: #EAF2FF;
+  --chip-info-fg: #1D4ED8;
+  --chip-success-bg: #EAFBF1;
+  --chip-success-fg: #15803D;
+  --chip-warning-bg: #FFF4DB;
+  --chip-warning-fg: #B45309;
+  --chip-error-bg: #FDECEC;
+  --chip-error-fg: #B91C1C;
+  --chip-neutral-bg: var(--color-surface-2);
+  --chip-neutral-fg: var(--color-text-secondary);
+  --control-track-off: #D1D5DB;
+}
+html[data-theme="dark"] {
+  --chip-brand-bg: rgba(var(--accent-rgb, 91, 61, 245), 0.22);
+  --chip-brand-fg: #C8BCFF;
+  --chip-info-bg: rgba(59, 130, 246, 0.20);
+  --chip-info-fg: #93C5FD;
+  --chip-success-bg: rgba(34, 197, 94, 0.18);
+  --chip-success-fg: #6EE7B7;
+  --chip-warning-bg: rgba(245, 158, 11, 0.20);
+  --chip-warning-fg: #FCD34D;
+  --chip-error-bg: rgba(239, 68, 68, 0.22);
+  --chip-error-fg: #FCA5A5;
+  --chip-neutral-bg: rgba(255, 255, 255, 0.06);
+  --chip-neutral-fg: var(--color-text-secondary);
+  --control-track-off: #3B3F63;
+}
+/* When the accent is the default purple, also brighten the dark brand chip
+   text to a soft lilac that reads well on the translucent chip bg. */
+html[data-theme="dark"][data-accent="#5b3df5"] {
+  --chip-brand-fg: #C4B5FD;
+}
+
+html,
+body {
+  background: var(--color-bg-base);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Dark mode — overrides for hardcoded inline-style literals                 */
+/*  React serializes inline styles without spaces after the colon, so the     */
+/*  attribute-selector substrings must match that exact shape. Inline styles  */
+/*  are beaten by CSS rules with !important, so these win.                    */
+/* ------------------------------------------------------------------------- */
+
+/* White surfaces → dark surface */
+html[data-theme="dark"] [style*="background:#fff"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background:#FFF"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background:#ffffff"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background:#FFFFFF"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background-color:#fff"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background-color:#FFF"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background-color:#FFFFFF"]:not([style*="gradient"]) {
+  background-color: var(--color-surface) !important;
+}
+
+/* Base app background */
+html[data-theme="dark"] [style*="background:#F7F8FC"],
+html[data-theme="dark"] [style*="background:#f7f8fc"],
+html[data-theme="dark"] [style*="background-color:#F7F8FC"],
+html[data-theme="dark"] [style*="background-color:#f7f8fc"] {
+  background-color: var(--color-bg-base) !important;
+}
+
+/* Secondary surface */
+html[data-theme="dark"] [style*="background:#F3F4F8"],
+html[data-theme="dark"] [style*="background:#f3f4f8"],
+html[data-theme="dark"] [style*="background-color:#F3F4F8"] {
+  background-color: var(--color-surface-2) !important;
+}
+
+/* Borders — inline styles keep spaces INSIDE the value, so match them */
+html[data-theme="dark"] [style*="border:1.5px solid #E5E7EF"],
+html[data-theme="dark"] [style*="border:1px solid #E5E7EF"],
+html[data-theme="dark"] [style*="border:2px solid #E5E7EF"],
+html[data-theme="dark"] [style*="border-color:#E5E7EF"],
+html[data-theme="dark"] [style*="border-right:1.5px solid #E5E7EF"],
+html[data-theme="dark"] [style*="border-right:1px solid #E5E7EF"],
+html[data-theme="dark"] [style*="border-left:1.5px solid #E5E7EF"],
+html[data-theme="dark"] [style*="border-bottom:1px solid #E5E7EF"],
+html[data-theme="dark"] [style*="border-top:1px solid #E5E7EF"],
+html[data-theme="dark"] [style*="border-bottom:1.5px solid #E5E7EF"] {
+  border-color: var(--color-border) !important;
+}
+html[data-theme="dark"] [style*="border:1.5px solid #D5D8E5"],
+html[data-theme="dark"] [style*="border:1px solid #D5D8E5"],
+html[data-theme="dark"] [style*="border-color:#D5D8E5"] {
+  border-color: var(--color-border-strong) !important;
+}
+/* Very-light borders (against #F7F8FC / #F3F4F8) */
+html[data-theme="dark"] [style*="border:1px solid #F7F8FC"],
+html[data-theme="dark"] [style*="border-bottom:1px solid #F7F8FC"],
+html[data-theme="dark"] [style*="border-top:1px solid #F7F8FC"],
+html[data-theme="dark"] [style*="border:1px solid #F3F4F8"],
+html[data-theme="dark"] [style*="border-bottom:1px solid #F3F4F8"] {
+  border-color: var(--color-border) !important;
+}
+
+/* Primary text */
+html[data-theme="dark"] [style*="color:#171A2B"],
+html[data-theme="dark"] [style*="color:#171a2b"] {
+  color: var(--color-text) !important;
+}
+/* Secondary text */
+html[data-theme="dark"] [style*="color:#667085"] {
+  color: var(--color-text-secondary) !important;
+}
+/* Muted text */
+html[data-theme="dark"] [style*="color:#98A2B3"],
+html[data-theme="dark"] [style*="color:#98a2b3"] {
+  color: var(--color-text-muted) !important;
+}
+
+/* Inputs / selects / textareas with light backgrounds */
+html[data-theme="dark"] input[style*="background:#F7F8FC"],
+html[data-theme="dark"] textarea[style*="background:#F7F8FC"],
+html[data-theme="dark"] select[style*="background:#F7F8FC"],
+html[data-theme="dark"] input[style*="background:#f7f8fc"],
+html[data-theme="dark"] textarea[style*="background:#f7f8fc"],
+html[data-theme="dark"] select[style*="background:#f7f8fc"],
+html[data-theme="dark"] input[style*="background:#fff"],
+html[data-theme="dark"] textarea[style*="background:#fff"],
+html[data-theme="dark"] select[style*="background:#fff"] {
+  background-color: var(--color-surface-2) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+  color: var(--color-text-muted) !important;
+}
+
+/* Soft brand-tint backgrounds → faint accent overlay */
+html[data-theme="dark"] [style*="background:#EEE9FF"],
+html[data-theme="dark"] [style*="background:#eee9ff"] {
+  background-color: rgba(var(--accent-rgb), 0.18) !important;
+}
+html[data-theme="dark"] [style*="background:#F4F1FF"],
+html[data-theme="dark"] [style*="background:#D8D0FF"] {
+  background-color: rgba(var(--accent-rgb), 0.22) !important;
+}
+
+/* Pastel semantic backgrounds — dim so they read on dark */
+html[data-theme="dark"] [style*="background:#EAFBF1"] {
+  background-color: rgba(34, 197, 94, 0.18) !important;
+}
+html[data-theme="dark"] [style*="background:#FFF4DB"] {
+  background-color: rgba(245, 158, 11, 0.18) !important;
+}
+html[data-theme="dark"] [style*="background:#FDECEC"],
+html[data-theme="dark"] [style*="background:#FEF2F2"] {
+  background-color: rgba(239, 68, 68, 0.18) !important;
+}
+html[data-theme="dark"] [style*="background:#EAF2FF"] {
+  background-color: rgba(59, 130, 246, 0.18) !important;
+}
+
+/* Brand purple literals → live accent */
+html[data-theme="dark"] [style*="background:#5B3DF5"]:not([style*="linear-gradient"]),
+html[data-theme="dark"] [style*="background:#5b3df5"]:not([style*="linear-gradient"]),
+html[data-theme="dark"] [style*="background-color:#5B3DF5"] {
+  background-color: var(--accent) !important;
+}
+html[data-theme="dark"] [style*="color:#5B3DF5"],
+html[data-theme="dark"] [style*="color:#5b3df5"] {
+  color: var(--accent) !important;
+}
+html[data-theme="dark"] [style*="border:2px solid #5B3DF5"],
+html[data-theme="dark"] [style*="border:3px solid #5B3DF5"],
+html[data-theme="dark"] [style*="border:2px solid #5b3df5"],
+html[data-theme="dark"] [style*="border:3px solid #5b3df5"] {
+  border-color: var(--accent) !important;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Dark mode — Tailwind utility-class overrides                              */
+/*  (catches .bg-white everywhere the codebase uses Tailwind instead of       */
+/*   CSS variables — pricing page, auth story panel, illustration cards.)    */
+/* ------------------------------------------------------------------------- */
+
+html[data-theme="dark"] .bg-white {
+  background-color: var(--color-surface) !important;
+}
+html[data-theme="dark"] .hover\:bg-white\/95:hover,
+html[data-theme="dark"] .hover\:bg-white:hover {
+  background-color: var(--color-surface-2) !important;
+}
+html[data-theme="dark"] .border-white {
+  border-color: var(--color-border) !important;
+}
+/* Tailwind arbitrary "bg-[#XXX]" values compile to escaped class names.
+   These are the light-tint arbitrary values the codebase actually uses. */
+html[data-theme="dark"] .bg-\[\#EEF1FF\] {
+  background-color: rgba(var(--accent-rgb), 0.18) !important;
+}
+html[data-theme="dark"] .bg-\[\#EAFBF1\],
+html[data-theme="dark"] .bg-\[\#F0FDF4\] {
+  background-color: rgba(34, 197, 94, 0.18) !important;
+}
+html[data-theme="dark"] .bg-\[\#FDE68A\] {
+  background-color: rgba(245, 158, 11, 0.20) !important;
+}
+html[data-theme="dark"] .bg-\[\#FDECEC\],
+html[data-theme="dark"] .bg-\[\#FDECEC\]\/30,
+html[data-theme="dark"] .bg-\[\#FDECEC\]\/60 {
+  background-color: rgba(239, 68, 68, 0.18) !important;
+}
+html[data-theme="dark"] .border-\[\#BBF0CF\],
+html[data-theme="dark"] .border-\[\#BBF7D0\] {
+  border-color: rgba(34, 197, 94, 0.35) !important;
+}
+/* Semantic text-on-tint chips: lighten so they read on dark surfaces */
+html[data-theme="dark"] .text-\[\#166534\],
+html[data-theme="dark"] .text-\[\#16A34A\] {
+  color: #4ADE80 !important;
+}
+html[data-theme="dark"] .text-\[\#2563EB\] {
+  color: #60A5FA !important;
+}
+html[data-theme="dark"] .text-\[\#78350F\] {
+  color: #FBBF24 !important;
+}
+html[data-theme="dark"] .text-\[\#B91C1C\] {
+  color: #FCA5A5 !important;
+}
+
+/* Arbitrary brand-purple Tailwind classes → live accent */
+html:not([data-accent="#5b3df5"]) .bg-\[\#5B3DF5\],
+html[data-theme="dark"] .bg-\[\#5B3DF5\] {
+  background-color: var(--accent) !important;
+}
+html:not([data-accent="#5b3df5"]) .text-\[\#5B3DF5\],
+html[data-theme="dark"] .text-\[\#5B3DF5\] {
+  color: var(--accent) !important;
+}
+html:not([data-accent="#5b3df5"]) .border-\[\#5B3DF5\],
+html[data-theme="dark"] .border-\[\#5B3DF5\] {
+  border-color: var(--accent) !important;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Dark mode — hardcoded gradient hex literals (pricing hero, CTA strips)    */
+/*  We can't convert hex-inside-gradient, so we replace the entire            */
+/*  `background:` declaration on known containers.                            */
+/* ------------------------------------------------------------------------- */
+
+html[data-theme="dark"] [style*="#FBFAFF"],
+html[data-theme="dark"] [style*="#fbfaff"],
+html[data-theme="dark"] [style*="#F9F7FF"],
+html[data-theme="dark"] [style*="#f9f7ff"],
+html[data-theme="dark"] [style*="#F6F4FF"],
+html[data-theme="dark"] [style*="#f6f4ff"],
+html[data-theme="dark"] [style*="#FAFAFF"],
+html[data-theme="dark"] [style*="#F9F8FF"] {
+  background: radial-gradient(
+      1200px 320px at 50% 0%,
+      rgba(var(--accent-rgb), 0.28),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #171930 0%, #0F1020 80%) !important;
+}
+
+html[data-theme="dark"] [style*="#F4F1FF"],
+html[data-theme="dark"] [style*="#f4f1ff"] {
+  background: radial-gradient(
+      900px 200px at 100% 0%,
+      rgba(var(--accent-rgb), 0.22),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #1C1E38 0%, #0F1020 80%) !important;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Accent color — recolor brand-tinted gradient backgrounds in LIGHT mode    */
+/*  so those hero/CTA strips follow the accent swatch.                        */
+/* ------------------------------------------------------------------------- */
+
+html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="#FBFAFF"],
+html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="#F9F7FF"],
+html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="#F6F4FF"] {
+  background: radial-gradient(
+      1200px 320px at 50% 0%,
+      rgba(var(--accent-rgb), 0.18),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #FBFAFF 0%, #FFFFFF 70%) !important;
+}
+html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="#F4F1FF"] {
+  background: radial-gradient(
+      900px 200px at 100% 0%,
+      rgba(var(--accent-rgb), 0.18),
+      transparent 60%
+    ),
+    linear-gradient(180deg, rgba(var(--accent-rgb), 0.08) 0%, #FFFFFF 80%) !important;
+}
+
+/* Scrollbar styling for dark mode */
+html[data-theme="dark"] ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 6px;
+  border: 3px solid var(--color-bg-base);
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-strong);
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Accent — live overrides that work in BOTH light and dark modes            */
+/*  Re-point any literal #5B3DF5 inline style to the chosen accent           */
+/* ------------------------------------------------------------------------- */
+html:not([data-accent="#5b3df5"]) [style*="background:#5B3DF5"]:not([style*="linear-gradient"]),
+html:not([data-accent="#5b3df5"]) [style*="background:#5b3df5"]:not([style*="linear-gradient"]),
+html:not([data-accent="#5b3df5"]) [style*="background-color:#5B3DF5"] {
+  background-color: var(--accent) !important;
+}
+html:not([data-accent="#5b3df5"]) [style*="color:#5B3DF5"],
+html:not([data-accent="#5b3df5"]) [style*="color:#5b3df5"] {
+  color: var(--accent) !important;
+}
+html:not([data-accent="#5b3df5"]) [style*="border:2px solid #5B3DF5"],
+html:not([data-accent="#5b3df5"]) [style*="border:3px solid #5B3DF5"],
+html:not([data-accent="#5b3df5"]) [style*="border:2px solid #5b3df5"],
+html:not([data-accent="#5b3df5"]) [style*="border:3px solid #5b3df5"],
+html:not([data-accent="#5b3df5"]) [style*="border-color:#5B3DF5"] {
+  border-color: var(--accent) !important;
+}
+
+/* Brand-100 tint (#EEE9FF) → translucent accent so it tracks the color */
+html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="background:#EEE9FF"],
+html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="background:#eee9ff"] {
+  background-color: rgba(var(--accent-rgb), 0.14) !important;
+}
+
+/* Purple hero / avatar gradients → follow the accent in both light and dark.
+   Covers all `linear-gradient(135deg, #5B3DF5 …)` variants used in the app. */
+html:not([data-accent="#5b3df5"]) [style*="linear-gradient(135deg, #5B3DF5"],
+html:not([data-accent="#5b3df5"]) [style*="linear-gradient(135deg,#5B3DF5"],
+html[data-theme="dark"] [style*="linear-gradient(135deg, #5B3DF5"],
+html[data-theme="dark"] [style*="linear-gradient(135deg,#5B3DF5"] {
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    var(--accent-600, var(--accent)) 100%
+  ) !important;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Auth & utility                                                            */
+/* ------------------------------------------------------------------------- */
+.auth-background {
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(var(--accent-rgb, 91, 61, 245), 0.07), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(var(--accent-rgb, 91, 61, 245), 0.05), transparent 60%),
+    linear-gradient(180deg, #F6F4FF 0%, #F9F7FF 50%, #F7F8FC 100%);
+}
+html[data-theme="dark"] .auth-background {
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(var(--accent-rgb), 0.12), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(var(--accent-rgb), 0.08), transparent 60%),
+    linear-gradient(180deg, #0C0E1F 0%, #111330 50%, #0F1020 100%);
+}
+
+/* Custom focus ring for inputs */
+.input-base {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px 0 42px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  outline: none;
+}
+
+.input-base::placeholder {
+  color: var(--color-text-muted);
+}
+
+.input-base:hover {
+  border-color: var(--color-border-strong);
+}
+
+.input-base:focus {
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb, 91, 61, 245), 0.15);
+}
+
+.input-base:disabled {
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.input-base[aria-invalid="true"] {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
+}
+
+/* Button primary */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 20px;
+  width: 100%;
+  background: var(--color-brand-500);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: var(--radius-button);
+  transition: background 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 6px 16px rgba(var(--accent-rgb, 91, 61, 245), 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--color-brand-600);
+}
+
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb, 91, 61, 245), 0.15),
+    0 6px 16px rgba(var(--accent-rgb, 91, 61, 245), 0.25);
+}
+
+.btn-primary:disabled {
+  background: var(--color-brand-200);
+  color: #fff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 18px;
+  width: 100%;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-2);
+}
+
+.btn-secondary:focus-visible {
+  outline: none;
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb, 91, 61, 245), 0.15);
+}
+
+/* Link style */
+.link-brand {
+  color: var(--color-brand-500);
+  font-weight: 600;
+  transition: color 120ms ease;
+}
+.link-brand:hover {
+  color: var(--color-brand-600);
+}
+
+/* Label */
+.field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+/* ─── Task kanban drag-and-drop animations ─────────────────────────────── */
+@keyframes task-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
+.task-enter {
+  animation: task-enter 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes task-drop-pulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(91, 61, 245, 0),
+      var(--shadow-card);
+  }
+  30% {
+    box-shadow:
+      0 0 0 6px rgba(91, 61, 245, 0.18),
+      0 10px 24px rgba(91, 61, 245, 0.22);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(91, 61, 245, 0),
+      var(--shadow-card);
+  }
+}
+.task-just-dropped {
+  animation: task-drop-pulse 800ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.task-card-dragging {
+  opacity: 0.45;
+  transform: scale(0.97) rotate(-1.5deg);
+  cursor: grabbing !important;
+}
+
+.task-column {
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.task-column-droppable {
+  background-color: rgba(91, 61, 245, 0.06);
+  border-color: var(--color-brand-300);
+  box-shadow:
+    inset 0 0 0 1px var(--color-brand-300),
+    0 6px 20px rgba(91, 61, 245, 0.10);
+}
+
+@keyframes drop-zone-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.45; }
+}
+.drop-zone-active {
+  animation: drop-zone-pulse 1.4s ease-in-out infinite;
 }
