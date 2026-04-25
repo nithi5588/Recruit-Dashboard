@@ -1,4 +1,4 @@
-export type MatchQuality = "Excellent" | "Good" | "Fair";
+export type MatchQuality = "Excellent" | "Good" | "Fair" | "Low";
 
 export type MatchCandidate = {
   id: string;
@@ -19,6 +19,8 @@ export type MatchJob = {
   isVerified: boolean;
   location: string;
   type: string;
+  workMode?: "Remote" | "Hybrid" | "On-site";
+  applicants?: number;
   source: string;
   salary: string;
   skills: string[];
@@ -39,10 +41,12 @@ export type Match = {
 };
 
 export const matchStats = {
-  total: 78,
-  excellent: 24,
-  good: 32,
-  fair: 14,
+  total: 156,
+  excellent: 56,
+  good: 68,
+  fair: 20,
+  low: 12,
+  saved: 12,
   viewed: 8,
 };
 
@@ -67,6 +71,8 @@ export const allMatches: Match[] = [
       isVerified: true,
       location: "Toronto, Canada",
       type: "Full-time",
+      workMode: "Hybrid",
+      applicants: 45,
       source: "Shopify Careers",
       salary: "$120K – $160K / year",
       skills: ["Figma", "UI/UX", "Design Systems"],
@@ -75,7 +81,7 @@ export const allMatches: Match[] = [
       logoColor: "#96BF48",
       logoText: "S",
     },
-    score: 92,
+    score: 93,
     quality: "Excellent",
     whyMatch: [
       "Skills match 95% of job requirements",

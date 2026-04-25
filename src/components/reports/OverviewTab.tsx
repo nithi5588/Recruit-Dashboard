@@ -11,7 +11,7 @@ import {
   TrophyIcon,
   UsersIcon,
 } from "@/components/icons/AppIcons";
-import { CircularProgress, MiniDonut, Sparkline } from "@/components/reports/charts";
+import { CircularProgress, MiniDonut } from "@/components/reports/charts";
 import { StatCard, StatIconWrap } from "@/components/reports/shared";
 import {
   activityData,
@@ -60,40 +60,34 @@ function ActivityTypeIcon({ type }: { type: string }) {
   );
 }
 
-// ─── Tapered Funnel SVG ───────────────────────────────────────────────────────
+// ─── Tapered Funnel SVG (muted monochromatic) ─────────────────────────────────
 
 function TaperedFunnel() {
   const VW = 760;
   const leftCol = 150;  // label column
   const rightCol = 58;  // conversion pill column
-  const rowH = 56;
-  const gap = 6;
+  const rowH = 42;
+  const gap = 4;
   const funnelX = leftCol;
   const funnelW = VW - leftCol - rightCol;
   const funnelCx = funnelX + funnelW / 2;
   const max = funnelData[0].count;
   const widthFor = (n: number) => Math.max((n / max) * funnelW, 28);
+  const opacities = [0.92, 0.78, 0.62, 0.46, 0.30];
+  const accent = "#5B3DF5";
 
   const stages = funnelData.map((d, i) => ({
     ...d,
     topW:    widthFor(d.count),
     bottomW: widthFor(funnelData[i + 1]?.count ?? d.count * 0.85),
     y: i * (rowH + gap),
+    opacity: opacities[i] ?? 0.3,
   }));
 
   const VH = funnelData.length * (rowH + gap) - gap + 2;
 
   return (
     <svg viewBox={`0 0 ${VW} ${VH}`} className="w-full" style={{ maxWidth: "100%" }} role="img" aria-label="Recruitment funnel">
-      <defs>
-        {stages.map((s, i) => (
-          <linearGradient key={i} id={`funnel-g-${i}`} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%"   stopColor={s.color} stopOpacity="0.82" />
-            <stop offset="100%" stopColor={s.color} stopOpacity="1" />
-          </linearGradient>
-        ))}
-      </defs>
-
       {/* Trapezoids + centered count labels */}
       {stages.map((s, i) => {
         const tL = funnelCx - s.topW / 2, tR = funnelCx + s.topW / 2;
@@ -103,21 +97,37 @@ function TaperedFunnel() {
           <g key={`trap-${i}`}>
             <path
               d={`M ${tL} ${s.y} L ${tR} ${s.y} L ${bR} ${s.y + rowH} L ${bL} ${s.y + rowH} Z`}
-              fill={`url(#funnel-g-${i})`}
+              fill={accent}
+              fillOpacity={s.opacity}
             />
-            <text x={funnelCx} y={cy + 6} textAnchor="middle" fontSize="18" fontWeight="800" fill="white">{s.count}</text>
+            <text
+              x={funnelCx}
+              y={cy + 5}
+              textAnchor="middle"
+              fontSize="14"
+              fontWeight="700"
+              fill={s.opacity > 0.5 ? "white" : accent}
+            >
+              {s.count}
+            </text>
           </g>
         );
       })}
 
-      {/* Left-side stage labels with dots */}
+      {/* Left-side stage labels (muted, no colored dots) */}
       {stages.map((s, i) => {
         const cy = s.y + rowH / 2;
         return (
-          <g key={`lbl-${i}`}>
-            <circle cx={14} cy={cy} r={5} fill={s.color} />
-            <text x={26} y={cy + 4} fontSize="12" fontWeight="600" style={{ fill: "var(--color-text)" }}>{s.label}</text>
-          </g>
+          <text
+            key={`lbl-${i}`}
+            x={12}
+            y={cy + 4}
+            fontSize="11"
+            fontWeight="500"
+            style={{ fill: "var(--color-text-secondary)" }}
+          >
+            {s.label}
+          </text>
         );
       })}
 
@@ -126,21 +136,20 @@ function TaperedFunnel() {
         const fromCount = funnelData[i].count;
         const pct = ((s.count / fromCount) * 100).toFixed(1);
         const cy = i * (rowH + gap) + rowH + gap / 2;
-        const pillW = 50, pillH = 20;
+        const pillW = 48, pillH = 18;
         const px = VW - rightCol + 2;
         return (
           <g key={`pill-${i}`}>
             <rect
               x={px} y={cy - pillH / 2}
               width={pillW} height={pillH}
-              rx={10}
-              style={{ fill: "var(--color-surface)", stroke: "var(--color-border)" }}
-              strokeWidth={1}
+              rx={9}
+              style={{ fill: "var(--color-surface-2)" }}
             />
             <text
               x={px + pillW / 2} y={cy + 4}
-              fontSize="10" fontWeight="800" textAnchor="middle"
-              style={{ fill: "var(--color-text)" }}
+              fontSize="10" fontWeight="700" textAnchor="middle"
+              style={{ fill: "var(--color-text-secondary)" }}
             >
               {pct}%
             </text>
@@ -266,63 +275,72 @@ export function OverviewTab() {
       </div>
 
       {/* Row 2: Pulse hero | Tapered funnel */}
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-[5fr_6fr]">
-        {/* Pulse hero */}
-        <div className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-border)] shadow-[var(--shadow-card)]">
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(135deg, #5B3DF5 0%, #7C3AED 45%, #A78BFA 100%)",
-            }}
-          />
-          <div
-            className="absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-30"
-            style={{ background: "radial-gradient(circle, #FDE68A 0%, transparent 60%)" }}
-          />
-          <div className="relative grid grid-cols-1 gap-5 p-5 text-white sm:grid-cols-[auto_1fr]">
-            <div className="flex flex-col items-center sm:items-start">
-              <div className="relative">
-                <CircularProgress
-                  value={recruitmentPulse.score}
-                  size={144}
-                  color="#FFFFFF"
-                  trackColor="rgba(255,255,255,0.18)"
-                  stroke={12}
-                  showLabel={false}
-                />
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-[32px] font-extrabold leading-none text-white">{recruitmentPulse.score}</p>
-                    <p className="mt-1 text-[10px] font-medium text-white/80">/ 100</p>
-                  </div>
-                </div>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[5fr_6fr]">
+        {/* Pulse hero — muted, clean */}
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)]">
+          <div className="mb-3 flex items-start justify-between gap-2">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--color-text-muted)]">
+                Recruitment Pulse
+              </p>
+              <h2 className="mt-0.5 text-[15px] font-bold text-[color:var(--color-text)]">
+                This week at a glance
+              </h2>
+            </div>
+            <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--color-surface-2)] px-2 py-0.5 text-[10px] font-semibold text-[color:var(--color-text-secondary)]">
+              <span
+                aria-hidden
+                className="h-1.5 w-1.5 rounded-full bg-[color:var(--color-success)]"
+              />
+              Live
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            {/* Compact ring */}
+            <div className="relative shrink-0">
+              <CircularProgress
+                value={recruitmentPulse.score}
+                size={96}
+                color="var(--color-brand-500)"
+                trackColor="var(--color-surface-2)"
+                stroke={8}
+                showLabel={false}
+              />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+                <p className="text-[22px] font-bold leading-none text-[color:var(--color-text)]">
+                  {recruitmentPulse.score}
+                </p>
+                <p className="mt-0.5 text-[9px] font-medium text-[color:var(--color-text-muted)]">
+                  / 100
+                </p>
               </div>
-              <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-semibold backdrop-blur">
-                <TrendUpIcon size={10} /> ▲ {recruitmentPulse.delta} pts
-              </span>
             </div>
 
-            <div className="min-w-0">
-              <div className="mb-2 flex items-center justify-between gap-2">
-                <div>
-                  <p className="text-[11px] font-medium uppercase tracking-wider opacity-80">Recruitment Pulse</p>
-                  <h2 className="text-[18px] font-extrabold">This week at a glance</h2>
-                </div>
-                <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold backdrop-blur">Live</span>
+            {/* Narrative rows */}
+            <div className="min-w-0 flex-1">
+              <div className="mb-2 flex items-center gap-2">
+                <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--color-success-light)] px-1.5 py-0.5 text-[10px] font-bold text-[color:var(--color-success)]">
+                  <TrendUpIcon size={9} />▲ {recruitmentPulse.delta} pts
+                </span>
+                <span className="text-[10px] text-[color:var(--color-text-muted)]">
+                  vs last week
+                </span>
               </div>
-              <div className="mb-3">
-                <Sparkline values={recruitmentPulse.pulseTrend} color="#FDE68A" width={240} height={34} />
-              </div>
-              <ul className="space-y-1.5">
+              <ul className="divide-y divide-[color:var(--color-border)]">
                 {recruitmentPulse.narrative.map((item) => (
-                  <li key={item.label} className="flex items-center justify-between gap-2 rounded-[10px] bg-white/10 px-2.5 py-1.5 backdrop-blur">
-                    <div className="flex min-w-0 items-center gap-2">
-                      <span className="text-[14px]">{item.icon}</span>
-                      <span className="truncate text-[12px]">{item.label}</span>
-                    </div>
+                  <li
+                    key={item.label}
+                    className="flex items-center justify-between gap-2 py-1.5"
+                  >
+                    <span className="truncate text-[12px] text-[color:var(--color-text-secondary)]">
+                      {item.label}
+                    </span>
                     <div className="flex shrink-0 items-center gap-2">
-                      <span className="text-[14px] font-extrabold">{item.value}</span>
-                      <span className="inline-flex items-center gap-0.5 rounded-full bg-white/20 px-1.5 text-[10px] font-semibold">
+                      <span className="text-[13px] font-bold text-[color:var(--color-text)]">
+                        {item.value}
+                      </span>
+                      <span className="inline-flex w-[44px] items-center justify-end gap-0.5 text-[10px] font-semibold text-[color:var(--color-success)]">
                         ▲ {item.change}%
                       </span>
                     </div>
@@ -333,13 +351,22 @@ export function OverviewTab() {
           </div>
         </div>
 
-        {/* Tapered funnel */}
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 shadow-[var(--shadow-card)]">
+        {/* Tapered funnel — muted monochromatic */}
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)]">
           <div className="mb-1 flex items-center justify-between">
-            <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">Recruitment Funnel</h3>
-            <button type="button" className="rounded-[8px] border border-[color:var(--color-border)] px-3 py-1 text-[12px] font-medium text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)]">This Week ▾</button>
+            <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">
+              Recruitment Funnel
+            </h3>
+            <button
+              type="button"
+              className="rounded-[8px] border border-[color:var(--color-border)] px-2.5 py-1 text-[11px] font-medium text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)]"
+            >
+              This Week ▾
+            </button>
           </div>
-          <p className="mb-4 text-[11px] text-[color:var(--color-text-muted)]">Candidate progression — conversion % between stages</p>
+          <p className="mb-3 text-[11px] text-[color:var(--color-text-muted)]">
+            Candidate progression — conversion % between stages
+          </p>
           <div className="overflow-x-auto">
             <div className="min-w-[520px]">
               <TaperedFunnel />
@@ -347,14 +374,20 @@ export function OverviewTab() {
           </div>
           <div className="mt-3 flex items-center justify-between border-t border-[color:var(--color-border)] pt-3">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-wide text-[color:var(--color-text-muted)]">Overall Conversion</p>
-              <p className="text-[18px] font-extrabold text-[color:var(--color-text)]">
+              <p className="text-[10px] font-semibold uppercase tracking-wide text-[color:var(--color-text-muted)]">
+                Overall conversion
+              </p>
+              <p className="text-[16px] font-bold text-[color:var(--color-text)]">
                 {((funnelData[funnelData.length - 1].count / funnelData[0].count) * 100).toFixed(1)}%
               </p>
             </div>
             <div className="text-right">
-              <p className="text-[10px] font-semibold uppercase tracking-wide text-[color:var(--color-text-muted)]">Lift vs Last Week</p>
-              <p className="text-[18px] font-extrabold text-[color:var(--color-success)]">▲ 4.2%</p>
+              <p className="text-[10px] font-semibold uppercase tracking-wide text-[color:var(--color-text-muted)]">
+                Lift vs last week
+              </p>
+              <p className="text-[16px] font-bold text-[color:var(--color-success)]">
+                ▲ 4.2%
+              </p>
             </div>
           </div>
         </div>

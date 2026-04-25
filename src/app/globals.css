@@ -679,3 +679,55 @@ html[data-theme="dark"] .auth-background {
 .drop-zone-active {
   animation: drop-zone-pulse 1.4s ease-in-out infinite;
 }
+
+/* ─── Sidebar "Upgrade to Pro" card — theme-aware ──────────────────────── */
+.pro-card {
+  background-color: rgba(91, 61, 245, 0.08);
+  border-color: rgba(91, 61, 245, 0.22);
+}
+.pro-card:hover {
+  background-color: rgba(91, 61, 245, 0.12);
+  border-color: rgba(91, 61, 245, 0.35);
+  box-shadow: 0 6px 16px rgba(91, 61, 245, 0.18);
+}
+.pro-card-title {
+  color: var(--color-text);
+}
+.pro-card-sub {
+  color: var(--color-text-secondary);
+}
+.pro-card-arrow {
+  color: var(--color-brand-500);
+}
+
+html[data-theme="dark"] .pro-card {
+  background-color: rgba(91, 61, 245, 0.14);
+  border-color: rgba(139, 119, 249, 0.28);
+}
+html[data-theme="dark"] .pro-card:hover {
+  background-color: rgba(91, 61, 245, 0.20);
+  border-color: rgba(139, 119, 249, 0.45);
+  box-shadow: 0 8px 20px rgba(91, 61, 245, 0.28);
+}
+html[data-theme="dark"] .pro-card-title {
+  color: #F5F3FF;
+}
+html[data-theme="dark"] .pro-card-sub {
+  color: #C4BFE0;
+}
+html[data-theme="dark"] .pro-card-arrow {
+  color: #B8A9FC;
+}
+
+/* ─── Sidebar active nav item — theme-aware ───────────────────────────── */
+.nav-item-active {
+  background-color: var(--color-brand-100);
+  color: var(--color-brand-600);
+}
+html[data-theme="dark"] .nav-item-active {
+  background-color: rgba(91, 61, 245, 0.18);
+  color: #C4B5FD;
+}
+html[data-theme="dark"] .nav-item-active .text-\[color\:var\(--color-brand-500\)\] {
+  color: #C4B5FD;
+}

@@ -79,7 +79,7 @@ function NavItem({
       onClick={onNavigate}
       className={`group relative flex h-[42px] items-center gap-3 rounded-[10px] px-3 text-[13.5px] transition-all duration-150 ${
         active
-          ? "bg-[color:var(--color-brand-100)] font-semibold text-[color:var(--color-brand-600)]"
+          ? "nav-item-active font-semibold"
           : "font-medium text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text)]"
       }`}
     >
@@ -107,31 +107,32 @@ function NavItem({
 
 function ProPlanCard() {
   return (
-    <div className="px-3 pb-3">
+    <div className="pro-card-wrap px-3 pb-3">
       <Link
         href="/pricing"
-        className="group flex items-center gap-2.5 rounded-[10px] border border-[color:var(--color-brand-200)] bg-[color:var(--color-brand-50)] px-2.5 py-2 transition-all hover:-translate-y-[1px] hover:border-[color:var(--color-brand-300)] hover:shadow-[0_6px_16px_rgba(91,61,245,0.15)]"
+        className="pro-card group flex items-center gap-2.5 rounded-[10px] border px-2.5 py-2 transition-all hover:-translate-y-[1px]"
       >
         <span
           aria-hidden
           className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] text-white"
           style={{
             background: "linear-gradient(135deg, #5B3DF5 0%, #3B28AA 100%)",
+            boxShadow: "0 4px 10px rgba(91, 61, 245, 0.30)",
           }}
         >
           <SparklesIcon size={13} />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-[12px] font-semibold leading-tight text-[color:var(--color-text)]">
+          <p className="pro-card-title text-[12px] font-semibold leading-tight">
             Upgrade to Pro
           </p>
-          <p className="truncate text-[11px] text-[color:var(--color-text-secondary)]">
+          <p className="pro-card-sub truncate text-[11px]">
             Unlock the full platform
           </p>
         </div>
         <span
           aria-hidden
-          className="shrink-0 text-[color:var(--color-brand-500)] transition-transform group-hover:translate-x-0.5"
+          className="pro-card-arrow shrink-0 transition-transform group-hover:translate-x-0.5"
         >
           <ChevronRight size={14} />
         </span>

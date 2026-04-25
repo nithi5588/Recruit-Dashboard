@@ -43,21 +43,31 @@ export function AIAssistant({
 
   return (
     <section
-      className={`relative overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--color-brand-200)] ${
+      className={`ai-assistant relative overflow-hidden rounded-[var(--radius-card)] border ${
         hero ? "p-5 sm:p-6" : "p-5"
       }`}
-      style={{
-        background:
-          "radial-gradient(1200px 240px at 0% 0%, rgba(91,61,245,0.12), transparent 60%), linear-gradient(180deg, #F4F1FF 0%, #F9F7FF 60%, #FFFFFF 100%)",
-        boxShadow: "var(--shadow-card)",
-      }}
     >
+      <style jsx>{`
+        .ai-assistant {
+          border-color: var(--color-brand-200);
+          background:
+            radial-gradient(1200px 240px at 0% 0%, rgba(var(--accent-rgb, 91, 61, 245), 0.10), transparent 60%),
+            linear-gradient(180deg, var(--color-brand-50) 0%, var(--color-surface) 100%);
+          box-shadow: var(--shadow-card);
+        }
+        :global(html[data-theme="dark"]) .ai-assistant {
+          border-color: rgba(var(--accent-rgb, 91, 61, 245), 0.30);
+          background:
+            radial-gradient(1200px 240px at 0% 0%, rgba(var(--accent-rgb, 91, 61, 245), 0.18), transparent 60%),
+            linear-gradient(180deg, rgba(var(--accent-rgb, 91, 61, 245), 0.05) 0%, var(--color-surface) 100%);
+        }
+      `}</style>
       {hero && (
         <>
           <span
             aria-hidden
             className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full blur-3xl"
-            style={{ background: "rgba(91,61,245,0.18)" }}
+            style={{ background: "rgba(var(--accent-rgb, 91, 61, 245), 0.18)" }}
           />
           <span
             aria-hidden
@@ -79,7 +89,7 @@ export function AIAssistant({
           <header className="mb-3 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <span
-                className={`inline-flex shrink-0 items-center justify-center rounded-[10px] bg-white/70 text-[color:var(--color-brand-600)] shadow-[0_2px_8px_rgba(91,61,245,0.15)] ${
+                className={`inline-flex shrink-0 items-center justify-center rounded-[10px] bg-[color:var(--color-surface)] text-[color:var(--color-brand-600)] shadow-[0_2px_8px_rgba(91,61,245,0.15)] ${
                   hero ? "h-9 w-9" : "h-8 w-8"
                 }`}
               >
@@ -110,14 +120,14 @@ export function AIAssistant({
               <button
                 type="button"
                 aria-label="Reset conversation"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-white hover:text-[color:var(--color-text-secondary)]"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface)] hover:text-[color:var(--color-text-secondary)]"
               >
                 <RefreshIcon size={14} />
               </button>
               <button
                 type="button"
                 aria-label="Open full assistant"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-white hover:text-[color:var(--color-text-secondary)]"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface)] hover:text-[color:var(--color-text-secondary)]"
               >
                 <ExpandIcon size={14} />
               </button>
@@ -151,7 +161,7 @@ export function AIAssistant({
         <div className={hero ? "space-y-3" : ""}>
           <form
             onSubmit={handleSubmit}
-            className={`flex items-center gap-2 rounded-[12px] border border-[color:var(--color-border)] bg-white p-2 shadow-[0_2px_10px_rgba(23,26,43,0.04)] ${
+            className={`flex items-center gap-2 rounded-[12px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-2 shadow-[0_2px_10px_rgba(23,26,43,0.04)] ${
               hero ? "sm:p-2.5" : ""
             }`}
           >
@@ -220,7 +230,7 @@ export function AIAssistant({
                   key={ex}
                   type="button"
                   onClick={() => setPrompt(ex)}
-                  className="rounded-[999px] border border-[color:var(--color-border)] bg-white px-3 py-1.5 text-[12px] text-[color:var(--color-text-secondary)] transition-colors hover:-translate-y-[1px] hover:border-[color:var(--color-brand-300)] hover:text-[color:var(--color-brand-600)] hover:shadow-[0_4px_12px_rgba(91,61,245,0.10)]"
+                  className="rounded-[999px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-[12px] text-[color:var(--color-text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[color:var(--color-brand-300)] hover:text-[color:var(--color-brand-600)] hover:shadow-[0_4px_12px_rgba(91,61,245,0.10)]"
                 >
                   {ex}
                 </button>
