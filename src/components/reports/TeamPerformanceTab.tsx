@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import {
-  SolidStar,
-  StarIcon,
-  TargetIcon,
-  TrendUpIcon,
-  TrophyIcon,
-  UsersIcon,
-  WrenchIcon,
-} from "@/components/icons/AppIcons";
+  Cup,
+  Discover,
+  Profile2User,
+  Setting4,
+  Star1,
+  TrendUp,
+} from "iconsax-reactjs";
 import { InsightsPanel, StatCard, StatIconWrap } from "@/components/reports/shared";
 import {
   recruiterActivityMix,
@@ -25,14 +24,14 @@ import {
 // ─── Stat icon mapping ────────────────────────────────────────────────────────
 
 function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string }) {
-  const cls = { size: 20, style: { color } };
+  const props = { size: 20, color, variant: "Bulk" as const };
   const n =
-    icon === "team"   ? <UsersIcon {...cls} />
-    : icon === "trophy" ? <TrophyIcon {...cls} />
-    : icon === "target" ? <TargetIcon {...cls} />
-    : icon === "bolt"   ? <WrenchIcon {...cls} />
-    : icon === "star"   ? <SolidStar {...cls} />
-    : <UsersIcon {...cls} />;
+    icon === "team"     ? <Profile2User {...props} />
+    : icon === "trophy" ? <Cup {...props} />
+    : icon === "target" ? <Discover {...props} />
+    : icon === "bolt"   ? <Setting4 {...props} />
+    : icon === "star"   ? <Star1 {...props} variant="Bold" />
+    : <Profile2User {...props} />;
   return <StatIconWrap bg={bg}>{n}</StatIconWrap>;
 }
 
@@ -40,7 +39,7 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 
 const TEAM_SERIES = [
   { key: "offers"     as const, label: "Offers",     color: "#5B3DF5" },
-  { key: "placements" as const, label: "Placements", color: "#22C55E" },
+  { key: "placements" as const, label: "Placements", color: "#16A34A" },
 ];
 
 function TeamTrendChart() {
@@ -147,12 +146,12 @@ function RankBadge({ rank }: { rank: number }) {
 function RankTrend({ trend }: { trend: number }) {
   if (trend > 0) return (
     <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-[color:var(--color-success)]">
-      <TrendUpIcon size={10} /> {trend}
+      <TrendUp size={10} variant="Bold" color="currentColor" /> {trend}
     </span>
   );
   if (trend < 0) return (
     <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-[color:var(--color-error)]">
-      <TrendUpIcon size={10} style={{ transform: "rotate(180deg)" }} /> {Math.abs(trend)}
+      <TrendUp size={10} variant="Bold" color="currentColor" style={{ transform: "rotate(180deg)" }} /> {Math.abs(trend)}
     </span>
   );
   return <span className="text-[10px] font-semibold text-[color:var(--color-text-muted)]">–</span>;
@@ -161,8 +160,8 @@ function RankTrend({ trend }: { trend: number }) {
 // ─── Trend arrow for table ────────────────────────────────────────────────────
 
 function TrendArrow({ trend }: { trend: "up" | "down" | "flat" }) {
-  if (trend === "up")   return <TrendUpIcon size={12} className="text-[color:var(--color-success)]" />;
-  if (trend === "down") return <TrendUpIcon size={12} className="text-[color:var(--color-error)]" style={{ transform: "rotate(180deg)" }} />;
+  if (trend === "up")   return <TrendUp size={12} variant="Bold" color="var(--color-success)" />;
+  if (trend === "down") return <TrendUp size={12} variant="Bold" color="var(--color-error)" style={{ transform: "rotate(180deg)" }} />;
   return <span className="text-[color:var(--color-text-muted)]">–</span>;
 }
 
@@ -204,7 +203,7 @@ export function TeamPerformanceTab() {
           <div className="relative p-5 text-white">
             <div className="mb-4 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
-                <TrophyIcon size={12} /> Top Performer
+                <Cup size={12} variant="Bulk" color="currentColor" /> Top Performer
               </span>
               <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-medium">This Period</span>
             </div>
@@ -236,7 +235,7 @@ export function TeamPerformanceTab() {
                 <p className="text-[10px] opacity-80">Rating</p>
                 <p className="flex items-center gap-1 text-[18px] font-extrabold leading-none">
                   {topRecruiter.rating}
-                  <StarIcon size={12} />
+                  <Star1 size={12} variant="Linear" color="currentColor" />
                 </p>
               </div>
             </div>
@@ -348,8 +347,8 @@ export function TeamPerformanceTab() {
                   </div>
                   <div className="flex h-2 w-full overflow-hidden rounded-full bg-[color:var(--color-surface-2)]" style={{ width: `${w}%` }}>
                     <div style={{ width: `${(r.calls / total) * 100}%`, backgroundColor: "#5B3DF5" }} />
-                    <div style={{ width: `${(r.emails / total) * 100}%`, backgroundColor: "#3B82F6" }} />
-                    <div style={{ width: `${(r.meetings / total) * 100}%`, backgroundColor: "#22C55E" }} />
+                    <div style={{ width: `${(r.emails / total) * 100}%`, backgroundColor: "#8B7DF7" }} />
+                    <div style={{ width: `${(r.meetings / total) * 100}%`, backgroundColor: "#16A34A" }} />
                   </div>
                 </li>
               );
@@ -403,7 +402,7 @@ export function TeamPerformanceTab() {
                     </td>
                     <td className="px-2 py-3 text-right">
                       <span className="inline-flex items-center gap-1 text-[color:var(--color-warning)]">
-                        <SolidStar size={11} />
+                        <Star1 size={11} variant="Bold" color="currentColor" />
                         <span className="font-semibold text-[color:var(--color-text)]">{r.rating}</span>
                       </span>
                     </td>

@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  CalendarIcon,
-  ChevronLeft,
-  ChevronRight,
-  XIcon,
-} from "@/components/icons/AppIcons";
+  ArrowLeft2,
+  ArrowRight2,
+  Calendar,
+  CloseCircle,
+} from "iconsax-reactjs";
 
 export type DateRange = { start: Date; end: Date };
 
@@ -397,12 +397,13 @@ export function DateRangePicker({
         aria-haspopup="dialog"
         aria-expanded={open}
       >
-        <CalendarIcon
+        <Calendar
           size={13}
-          className={
+          variant="Bulk"
+          color={
             variant === "primary"
-              ? "text-[color:var(--color-brand-500)]"
-              : "text-[color:var(--color-text-muted)]"
+              ? "var(--color-brand-500)"
+              : "var(--color-text-muted)"
           }
         />
         <span className="hidden sm:inline">{formatRange(value)}</span>
@@ -448,7 +449,7 @@ export function DateRangePicker({
               aria-label="Close"
               className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] text-[color:var(--color-text-muted)] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text)]"
             >
-              <XIcon size={14} />
+              <CloseCircle size={14} variant="Bold" color="currentColor" />
             </button>
           </div>
 
@@ -486,7 +487,7 @@ export function DateRangePicker({
                 aria-label="Previous month"
                 className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] text-[color:var(--color-text-muted)] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text)]"
               >
-                <ChevronLeft size={14} />
+                <ArrowLeft2 size={14} variant="Linear" color="currentColor" />
               </button>
               <div className="flex items-center gap-1">
                 <select
@@ -545,7 +546,7 @@ export function DateRangePicker({
                 aria-label="Next month"
                 className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] text-[color:var(--color-text-muted)] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text)]"
               >
-                <ChevronRight size={14} />
+                <ArrowRight2 size={14} variant="Linear" color="currentColor" />
               </button>
             </div>
 

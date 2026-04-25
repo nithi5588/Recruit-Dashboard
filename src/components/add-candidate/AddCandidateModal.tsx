@@ -19,6 +19,7 @@ import {
   type WizardStep,
 } from "@/components/add-candidate/StepIndicator";
 import { UploadResumeStep } from "@/components/add-candidate/UploadResumeStep";
+import { ArrowLeft2, ArrowRight2, CloseCircle } from "iconsax-reactjs";
 import { CheckIcon, ShieldIcon } from "@/components/icons/AppIcons";
 
 const STEPS: WizardStep[] = [
@@ -199,14 +200,7 @@ export function AddCandidateModal({
           onClick={handleClose}
           className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] text-[color:var(--color-text-muted)] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text)]"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-            <path
-              d="M6 6l12 12M18 6 6 18"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+          <CloseCircle size={18} color="currentColor" variant="Linear" />
         </button>
       </header>
 
@@ -275,21 +269,7 @@ export function AddCandidateModal({
               onClick={() => setStep(step - 1)}
               className="inline-flex h-10 items-center gap-2 rounded-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 text-[13px] font-semibold text-[color:var(--color-text)] transition-colors hover:border-[color:var(--color-border-strong)]"
             >
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden
-              >
-                <path
-                  d="M19 12H5M11 6l-6 6 6 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <ArrowLeft2 size={14} color="currentColor" variant="Linear" />
               Back
             </button>
           )}
@@ -311,21 +291,7 @@ export function AddCandidateModal({
               {isFinal ? (
                 <CheckIcon size={14} />
               ) : (
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M5 12h14M13 6l6 6-6 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <ArrowRight2 size={14} color="currentColor" variant="Linear" />
               )}
             </button>
           </div>

@@ -1,9 +1,9 @@
 export const reportStatCards = [
   { label: "Jobs Added",        value: 24,  change: 20, icon: "briefcase", iconBg: "#F4F1FF", iconColor: "#5B3DF5" },
   { label: "New Candidates",   value: 126, change: 18, icon: "users",     iconBg: "#EEE9FF", iconColor: "#5B3DF5" },
-  { label: "Applications Sent",value: 56,  change: 25, icon: "plane",     iconBg: "#EAF2FF", iconColor: "#3B82F6" },
-  { label: "Interviews",       value: 18,  change: 12, icon: "calendar",  iconBg: "#EAFBF1", iconColor: "#22C55E" },
-  { label: "Offers",           value: 7,   change: 16, icon: "check",     iconBg: "#EAFBF1", iconColor: "#22C55E" },
+  { label: "Applications Sent",value: 56,  change: 25, icon: "plane",     iconBg: "#EAF2FF", iconColor: "#B8A9FC" },
+  { label: "Interviews",       value: 18,  change: 12, icon: "calendar",  iconBg: "#EAFBF1", iconColor: "#16A34A" },
+  { label: "Offers",           value: 7,   change: 16, icon: "check",     iconBg: "#EAFBF1", iconColor: "#16A34A" },
   { label: "Placements",       value: 4,   change: 33, icon: "trophy",    iconBg: "#FFF4DB", iconColor: "#F59E0B" },
 ];
 
@@ -17,48 +17,48 @@ export const activityData = {
 
 export const sourceData = [
   { label: "LinkedIn",        count: 24, pct: 42.9, color: "#5B3DF5" },
-  { label: "Company Careers", count: 12, pct: 21.4, color: "#22C55E" },
-  { label: "Referral",        count:  8, pct: 14.3, color: "#3B82F6" },
+  { label: "Company Careers", count: 12, pct: 21.4, color: "#16A34A" },
+  { label: "Referral",        count:  8, pct: 14.3, color: "#B8A9FC" },
   { label: "Naukri",          count:  6, pct: 10.7, color: "#F59E0B" },
-  { label: "Indeed",          count:  4, pct:  7.1, color: "#06B6D4" },
-  { label: "Others",          count:  2, pct:  3.6, color: "#9CA3AF" },
+  { label: "Indeed",          count:  4, pct:  7.1, color: "#D8D0FF" },
+  { label: "Others",          count:  2, pct:  3.6, color: "#94A3B8" },
 ];
 
 export const funnelData = [
-  { label: "Profiles Added",    count: 126, color: "#8B5CF6" },
-  { label: "Applications Sent", count:  56, color: "#6366F1" },
-  { label: "Interviews",        count:  18, color: "#3B82F6" },
-  { label: "Offers",            count:   7, color: "#22C55E" },
+  { label: "Profiles Added",    count: 126, color: "#8B7DF7" },
+  { label: "Applications Sent", count:  56, color: "#8B7DF7" },
+  { label: "Interviews",        count:  18, color: "#B8A9FC" },
+  { label: "Offers",            count:   7, color: "#16A34A" },
   { label: "Placements",        count:   4, color: "#F59E0B" },
 ];
 
 export const interviewStageData = [
-  { label: "Screening Call",    count: 7, pct: 38.9, color: "#8B5CF6" },
-  { label: "Technical Round",   count: 5, pct: 27.8, color: "#3B82F6" },
-  { label: "HR Round",          count: 3, pct: 16.7, color: "#22C55E" },
+  { label: "Screening Call",    count: 7, pct: 38.9, color: "#8B7DF7" },
+  { label: "Technical Round",   count: 5, pct: 27.8, color: "#B8A9FC" },
+  { label: "HR Round",          count: 3, pct: 16.7, color: "#16A34A" },
   { label: "Managerial Round",  count: 2, pct: 11.1, color: "#F59E0B" },
-  { label: "Final Round",       count: 1, pct:  5.5, color: "#06B6D4" },
+  { label: "Final Round",       count: 1, pct:  5.5, color: "#D8D0FF" },
 ];
 
 export const topJobsData = [
-  { title: "Product Designer",   applications: 12, color: "#8B5CF6", icon: "🎨" },
-  { title: "Frontend Developer", applications:  9, color: "#3B82F6", icon: "💻" },
-  { title: "UX Researcher",      applications:  7, color: "#22C55E", icon: "🔍" },
+  { title: "Product Designer",   applications: 12, color: "#8B7DF7", icon: "🎨" },
+  { title: "Frontend Developer", applications:  9, color: "#B8A9FC", icon: "💻" },
+  { title: "UX Researcher",      applications:  7, color: "#16A34A", icon: "🔍" },
   { title: "Marketing Manager",  applications:  6, color: "#F59E0B", icon: "📢" },
-  { title: "Data Analyst",       applications:  5, color: "#06B6D4", icon: "📊" },
+  { title: "Data Analyst",       applications:  5, color: "#D8D0FF", icon: "📊" },
 ];
 
 export const followUpsData = [
-  { label: "Completed", count: 16, pct: 57.1, color: "#22C55E" },
+  { label: "Completed", count: 16, pct: 57.1, color: "#16A34A" },
   { label: "Pending",   count:  9, pct: 32.1, color: "#F59E0B" },
   { label: "Overdue",   count:  3, pct: 10.8, color: "#EF4444" },
 ];
 
 export const recentActivities = [
-  { name: "Savannah Nguyen",    action: "Interview scheduled", role: "Product Designer",  time: "10:30 AM",     type: "interview",   initials: "SN", color: "#8B5CF6" },
-  { name: "Ralph Edwards",      action: "Application submitted",role: "Frontend Developer",time: "9:15 AM",     type: "application", initials: "RE", color: "#3B82F6" },
-  { name: "Dianne Russell",     action: "Follow-up pending",   role: "Marketing Manager", time: "Yesterday",    type: "followup",    initials: "DR", color: "#EC4899" },
-  { name: "Cameron Williamson", action: "Offer accepted",      role: "Product Manager",   time: "Yesterday",    type: "offer",       initials: "CW", color: "#22C55E" },
+  { name: "Savannah Nguyen",    action: "Interview scheduled", role: "Product Designer",  time: "10:30 AM",     type: "interview",   initials: "SN", color: "#8B7DF7" },
+  { name: "Ralph Edwards",      action: "Application submitted",role: "Frontend Developer",time: "9:15 AM",     type: "application", initials: "RE", color: "#B8A9FC" },
+  { name: "Dianne Russell",     action: "Follow-up pending",   role: "Marketing Manager", time: "Yesterday",    type: "followup",    initials: "DR", color: "#94A3B8" },
+  { name: "Cameron Williamson", action: "Offer accepted",      role: "Product Manager",   time: "Yesterday",    type: "offer",       initials: "CW", color: "#16A34A" },
   { name: "Esther Howard",      action: "Interview completed", role: "UX Researcher",     time: "May 15, 2024", type: "interview",   initials: "EH", color: "#F59E0B" },
 ];
 
@@ -71,8 +71,8 @@ export const REPORT_TABS = [
 
 export const jobsStatCards = [
   { label: "Total Jobs",              value: "24",    change: 20, icon: "briefcase", iconBg: "#EEE9FF", iconColor: "#5B3DF5" },
-  { label: "Total Views",             value: "1,348", change: 18, icon: "eye",       iconBg: "#EAFBF1", iconColor: "#22C55E" },
-  { label: "Total Applications",      value: "256",   change: 25, icon: "cursor",    iconBg: "#EAF2FF", iconColor: "#3B82F6" },
+  { label: "Total Views",             value: "1,348", change: 18, icon: "eye",       iconBg: "#EAFBF1", iconColor: "#16A34A" },
+  { label: "Total Applications",      value: "256",   change: 25, icon: "cursor",    iconBg: "#EAF2FF", iconColor: "#B8A9FC" },
   { label: "Avg. Applications / Job", value: "10.7",  change: 12, icon: "trophy",    iconBg: "#FFF4DB", iconColor: "#F59E0B" },
   { label: "Jobs Conversion Rate",    value: "21.4%", change: 14, icon: "percent",   iconBg: "#FDECEC", iconColor: "#EF4444" },
 ];
@@ -84,10 +84,10 @@ export const applicationsOverTime = {
 
 export const jobsByStatus = [
   { label: "Active",  count: 12, pct: 50.0, color: "#5B3DF5" },
-  { label: "Draft",   count:  5, pct: 20.8, color: "#22C55E" },
+  { label: "Draft",   count:  5, pct: 20.8, color: "#16A34A" },
   { label: "On Hold", count:  3, pct: 12.5, color: "#F59E0B" },
-  { label: "Closed",  count:  3, pct: 12.5, color: "#3B82F6" },
-  { label: "Expired", count:  1, pct:  4.2, color: "#EC4899" },
+  { label: "Closed",  count:  3, pct: 12.5, color: "#B8A9FC" },
+  { label: "Expired", count:  1, pct:  4.2, color: "#94A3B8" },
 ];
 
 export const topPerformingJobs = [
@@ -100,19 +100,19 @@ export const topPerformingJobs = [
 
 export const jobsApplicationsBySource = [
   { label: "LinkedIn",        count: 96, pct: 37.5, color: "#5B3DF5" },
-  { label: "Company Careers", count: 64, pct: 25.0, color: "#22C55E" },
+  { label: "Company Careers", count: 64, pct: 25.0, color: "#16A34A" },
   { label: "Referral",        count: 48, pct: 18.8, color: "#F59E0B" },
-  { label: "Naukri",          count: 24, pct:  9.4, color: "#3B82F6" },
-  { label: "Indeed",          count: 16, pct:  6.3, color: "#EC4899" },
-  { label: "Others",          count:  8, pct:  3.1, color: "#9CA3AF" },
+  { label: "Naukri",          count: 24, pct:  9.4, color: "#B8A9FC" },
+  { label: "Indeed",          count: 16, pct:  6.3, color: "#94A3B8" },
+  { label: "Others",          count:  8, pct:  3.1, color: "#94A3B8" },
 ];
 
 export const jobsByDepartment = [
   { label: "Engineering", count: 12, pct: 50.0, color: "#5B3DF5" },
-  { label: "Design",      count:  5, pct: 20.8, color: "#3B82F6" },
+  { label: "Design",      count:  5, pct: 20.8, color: "#B8A9FC" },
   { label: "Marketing",   count:  3, pct: 12.5, color: "#F59E0B" },
-  { label: "Product",     count:  2, pct:  8.3, color: "#22C55E" },
-  { label: "Data",        count:  2, pct:  8.3, color: "#EC4899" },
+  { label: "Product",     count:  2, pct:  8.3, color: "#16A34A" },
+  { label: "Data",        count:  2, pct:  8.3, color: "#94A3B8" },
 ];
 
 export const timeToFill = {
@@ -147,8 +147,8 @@ export const jobsAiInsights: Array<{ tone: "positive" | "warning" | "info"; titl
 
 export const candidateStatCards = [
   { label: "Total Candidates", value: "126", change: 18, icon: "users",     iconBg: "#EEE9FF", iconColor: "#5B3DF5" },
-  { label: "New This Week",    value: "24",  change: 30, icon: "user-plus", iconBg: "#EAFBF1", iconColor: "#22C55E" },
-  { label: "Active Candidates",value: "98",  change: 12, icon: "target",    iconBg: "#EAF2FF", iconColor: "#3B82F6" },
+  { label: "New This Week",    value: "24",  change: 30, icon: "user-plus", iconBg: "#EAFBF1", iconColor: "#16A34A" },
+  { label: "Active Candidates",value: "98",  change: 12, icon: "target",    iconBg: "#EAF2FF", iconColor: "#B8A9FC" },
   { label: "Avg. Match Score", value: "78%", change:  5, icon: "trophy",    iconBg: "#FFF4DB", iconColor: "#F59E0B" },
   { label: "High Priority",    value: "14",  change:  8, icon: "star",      iconBg: "#FDECEC", iconColor: "#EF4444" },
 ];
@@ -160,53 +160,53 @@ export const candidateGrowthData = {
 };
 
 export const candidatesByStage = [
-  { label: "New Profiles", count: 18, pct: 19.8, color: "#8B5CF6" },
+  { label: "New Profiles", count: 18, pct: 19.8, color: "#8B7DF7" },
   { label: "Shortlisted",  count: 24, pct: 26.4, color: "#5B3DF5" },
-  { label: "Submitted",    count: 12, pct: 13.2, color: "#3B82F6" },
+  { label: "Submitted",    count: 12, pct: 13.2, color: "#B8A9FC" },
   { label: "Interview",    count:  8, pct:  8.8, color: "#F59E0B" },
-  { label: "Offered",      count:  5, pct:  5.5, color: "#EC4899" },
-  { label: "Placed",       count:  7, pct:  7.7, color: "#22C55E" },
+  { label: "Offered",      count:  5, pct:  5.5, color: "#94A3B8" },
+  { label: "Placed",       count:  7, pct:  7.7, color: "#16A34A" },
   { label: "Rejected",     count: 15, pct: 16.5, color: "#94A3B8" },
 ];
 
 export const topSkillsInDemand = [
   { skill: "React",      candidates: 42, color: "#5B3DF5" },
-  { skill: "Python",     candidates: 38, color: "#3B82F6" },
-  { skill: "TypeScript", candidates: 32, color: "#22C55E" },
+  { skill: "Python",     candidates: 38, color: "#B8A9FC" },
+  { skill: "TypeScript", candidates: 32, color: "#16A34A" },
   { skill: "Node.js",    candidates: 28, color: "#F59E0B" },
-  { skill: "AWS",        candidates: 24, color: "#EC4899" },
+  { skill: "AWS",        candidates: 24, color: "#94A3B8" },
 ];
 
 export const experienceDistribution = [
-  { bucket: "0–2 yrs",  count: 18, color: "#C4B5FD" },
-  { bucket: "3–5 yrs",  count: 42, color: "#8B5CF6" },
+  { bucket: "0–2 yrs",  count: 18, color: "#D8D0FF" },
+  { bucket: "3–5 yrs",  count: 42, color: "#8B7DF7" },
   { bucket: "6–8 yrs",  count: 31, color: "#5B3DF5" },
-  { bucket: "9–12 yrs", count: 22, color: "#4C1D95" },
-  { bucket: "13+ yrs",  count: 13, color: "#2E1065" },
+  { bucket: "9–12 yrs", count: 22, color: "#5B3DF5" },
+  { bucket: "13+ yrs",  count: 13, color: "#4B32D4" },
 ];
 
 export const candidatesByLocation = [
   { label: "New York",      count: 34, pct: 27.0, color: "#5B3DF5" },
-  { label: "San Francisco", count: 28, pct: 22.2, color: "#3B82F6" },
-  { label: "Remote",        count: 24, pct: 19.1, color: "#22C55E" },
+  { label: "San Francisco", count: 28, pct: 22.2, color: "#B8A9FC" },
+  { label: "Remote",        count: 24, pct: 19.1, color: "#16A34A" },
   { label: "Austin",        count: 18, pct: 14.3, color: "#F59E0B" },
-  { label: "Chicago",       count: 12, pct:  9.5, color: "#EC4899" },
-  { label: "Others",        count: 10, pct:  7.9, color: "#9CA3AF" },
+  { label: "Chicago",       count: 12, pct:  9.5, color: "#94A3B8" },
+  { label: "Others",        count: 10, pct:  7.9, color: "#94A3B8" },
 ];
 
 export const availabilityDistribution = [
-  { label: "Immediate",   count: 38, pct: 30.2, color: "#22C55E" },
+  { label: "Immediate",   count: 38, pct: 30.2, color: "#16A34A" },
   { label: "2 Weeks",     count: 42, pct: 33.3, color: "#5B3DF5" },
   { label: "1 Month",     count: 28, pct: 22.2, color: "#F59E0B" },
   { label: "2+ Months",   count: 18, pct: 14.3, color: "#94A3B8" },
 ];
 
 export const recruiterPerformance = [
-  { name: "Emma Rodriguez", initials: "ER", color: "#8B5CF6", candidates: 32, submissions: 18, interviews: 8, placements: 3, conversion:  9.4 },
-  { name: "Liam Chen",      initials: "LC", color: "#3B82F6", candidates: 28, submissions: 15, interviews: 6, placements: 2, conversion:  7.1 },
-  { name: "Sophia Patel",   initials: "SP", color: "#22C55E", candidates: 26, submissions: 14, interviews: 7, placements: 4, conversion: 15.4 },
+  { name: "Emma Rodriguez", initials: "ER", color: "#8B7DF7", candidates: 32, submissions: 18, interviews: 8, placements: 3, conversion:  9.4 },
+  { name: "Liam Chen",      initials: "LC", color: "#B8A9FC", candidates: 28, submissions: 15, interviews: 6, placements: 2, conversion:  7.1 },
+  { name: "Sophia Patel",   initials: "SP", color: "#16A34A", candidates: 26, submissions: 14, interviews: 7, placements: 4, conversion: 15.4 },
   { name: "Noah Kim",       initials: "NK", color: "#F59E0B", candidates: 22, submissions: 12, interviews: 5, placements: 1, conversion:  4.5 },
-  { name: "Olivia Brown",   initials: "OB", color: "#EC4899", candidates: 18, submissions: 10, interviews: 4, placements: 2, conversion: 11.1 },
+  { name: "Olivia Brown",   initials: "OB", color: "#94A3B8", candidates: 18, submissions: 10, interviews: 4, placements: 2, conversion: 11.1 },
 ];
 
 export const candidateAiInsights: Array<{ tone: "positive" | "warning" | "info"; title: string; body: string }> = [
@@ -220,8 +220,8 @@ export const candidateAiInsights: Array<{ tone: "positive" | "warning" | "info";
 
 export const interviewStatCards = [
   { label: "Total Interviews",      value: "42",  change:  18, icon: "calendar", iconBg: "#EEE9FF", iconColor: "#5B3DF5", positive: true  },
-  { label: "Scheduled",             value: "18",  change:  12, icon: "clock",    iconBg: "#EAF2FF", iconColor: "#3B82F6", positive: true  },
-  { label: "Completed",             value: "22",  change:  25, icon: "check",    iconBg: "#EAFBF1", iconColor: "#22C55E", positive: true  },
+  { label: "Scheduled",             value: "18",  change:  12, icon: "clock",    iconBg: "#EAF2FF", iconColor: "#B8A9FC", positive: true  },
+  { label: "Completed",             value: "22",  change:  25, icon: "check",    iconBg: "#EAFBF1", iconColor: "#16A34A", positive: true  },
   { label: "No-Shows",              value: "2",   change: -50, icon: "x",        iconBg: "#FDECEC", iconColor: "#EF4444", positive: true  },
   { label: "Interview → Offer Rate",value: "28%", change:   8, icon: "trophy",   iconBg: "#FFF4DB", iconColor: "#F59E0B", positive: true  },
 ];
@@ -233,42 +233,42 @@ export const interviewsOverTime = {
 };
 
 export const interviewsByRound = [
-  { label: "Screening Call",    count: 14, pct: 33.3, color: "#8B5CF6" },
+  { label: "Screening Call",    count: 14, pct: 33.3, color: "#8B7DF7" },
   { label: "Technical Round",   count: 12, pct: 28.6, color: "#5B3DF5" },
-  { label: "HR Round",          count:  8, pct: 19.0, color: "#3B82F6" },
+  { label: "HR Round",          count:  8, pct: 19.0, color: "#B8A9FC" },
   { label: "Managerial Round",  count:  5, pct: 11.9, color: "#F59E0B" },
-  { label: "Final Round",       count:  3, pct:  7.1, color: "#22C55E" },
+  { label: "Final Round",       count:  3, pct:  7.1, color: "#16A34A" },
 ];
 
 export const topInterviewers = [
-  { name: "Priya Shah",      initials: "PS", color: "#8B5CF6", interviews: 12, rating: 4.8 },
-  { name: "Marcus Johnson",  initials: "MJ", color: "#3B82F6", interviews: 10, rating: 4.6 },
-  { name: "Aisha Khan",      initials: "AK", color: "#22C55E", interviews:  8, rating: 4.7 },
+  { name: "Priya Shah",      initials: "PS", color: "#8B7DF7", interviews: 12, rating: 4.8 },
+  { name: "Marcus Johnson",  initials: "MJ", color: "#B8A9FC", interviews: 10, rating: 4.6 },
+  { name: "Aisha Khan",      initials: "AK", color: "#16A34A", interviews:  8, rating: 4.7 },
   { name: "Daniel Martinez", initials: "DM", color: "#F59E0B", interviews:  7, rating: 4.5 },
-  { name: "Rachel O'Brien",  initials: "RO", color: "#EC4899", interviews:  5, rating: 4.9 },
+  { name: "Rachel O'Brien",  initials: "RO", color: "#94A3B8", interviews:  5, rating: 4.9 },
 ];
 
 export const interviewOutcomes = [
-  { label: "Passed",      count: 16, pct: 38.1, color: "#22C55E" },
+  { label: "Passed",      count: 16, pct: 38.1, color: "#16A34A" },
   { label: "Failed",      count:  6, pct: 14.3, color: "#EF4444" },
   { label: "No-Show",     count:  2, pct:  4.8, color: "#94A3B8" },
   { label: "Rescheduled", count:  4, pct:  9.5, color: "#F59E0B" },
-  { label: "Pending",     count: 14, pct: 33.3, color: "#3B82F6" },
+  { label: "Pending",     count: 14, pct: 33.3, color: "#B8A9FC" },
 ];
 
 export const avgTimePerStage = [
   { label: "Screening → Technical", days: 3.2, color: "#5B3DF5" },
-  { label: "Technical → HR",        days: 4.5, color: "#3B82F6" },
-  { label: "HR → Managerial",       days: 2.8, color: "#22C55E" },
+  { label: "Technical → HR",        days: 4.5, color: "#B8A9FC" },
+  { label: "HR → Managerial",       days: 2.8, color: "#16A34A" },
   { label: "Managerial → Final",    days: 3.5, color: "#F59E0B" },
-  { label: "Final → Offer",         days: 2.1, color: "#EC4899" },
+  { label: "Final → Offer",         days: 2.1, color: "#94A3B8" },
 ];
 
 export const upcomingInterviews = [
-  { name: "Savannah Nguyen",    role: "Product Designer",   stage: "Technical",  time: "Today, 2:30 PM",  color: "#8B5CF6", initials: "SN" },
-  { name: "Ralph Edwards",      role: "Frontend Dev",       stage: "Screening",  time: "Today, 4:00 PM",  color: "#3B82F6", initials: "RE" },
-  { name: "Dianne Russell",     role: "Marketing Manager",  stage: "Final",      time: "Tomorrow, 10 AM", color: "#EC4899", initials: "DR" },
-  { name: "Cameron Williamson", role: "Product Manager",    stage: "HR",         time: "Tomorrow, 3 PM",  color: "#22C55E", initials: "CW" },
+  { name: "Savannah Nguyen",    role: "Product Designer",   stage: "Technical",  time: "Today, 2:30 PM",  color: "#8B7DF7", initials: "SN" },
+  { name: "Ralph Edwards",      role: "Frontend Dev",       stage: "Screening",  time: "Today, 4:00 PM",  color: "#B8A9FC", initials: "RE" },
+  { name: "Dianne Russell",     role: "Marketing Manager",  stage: "Final",      time: "Tomorrow, 10 AM", color: "#94A3B8", initials: "DR" },
+  { name: "Cameron Williamson", role: "Product Manager",    stage: "HR",         time: "Tomorrow, 3 PM",  color: "#16A34A", initials: "CW" },
   { name: "Esther Howard",      role: "UX Researcher",      stage: "Managerial", time: "May 20, 11 AM",   color: "#F59E0B", initials: "EH" },
 ];
 
@@ -291,8 +291,8 @@ export const interviewAiInsights: Array<{ tone: "positive" | "warning" | "info";
 
 export const activityStatCards = [
   { label: "Total Activities",  value: "342",  change: 22,  icon: "activity", iconBg: "#EEE9FF", iconColor: "#5B3DF5" },
-  { label: "Daily Average",     value: "49",   change: 18,  icon: "calendar", iconBg: "#EAF2FF", iconColor: "#3B82F6" },
-  { label: "Response Rate",     value: "87%",  change:  5,  icon: "check",    iconBg: "#EAFBF1", iconColor: "#22C55E" },
+  { label: "Daily Average",     value: "49",   change: 18,  icon: "calendar", iconBg: "#EAF2FF", iconColor: "#B8A9FC" },
+  { label: "Response Rate",     value: "87%",  change:  5,  icon: "check",    iconBg: "#EAFBF1", iconColor: "#16A34A" },
   { label: "Active Recruiters", value: "6",    change:  0,  icon: "users",    iconBg: "#FFF4DB", iconColor: "#F59E0B" },
   { label: "Peak Hour",         value: "2 PM", change: null, icon: "clock",    iconBg: "#FDECEC", iconColor: "#EF4444", subtitle: "Most activity logged" },
 ] as const;
@@ -318,10 +318,10 @@ export const activityHeatmap: {
 
 export const activityTypeBreakdown = [
   { label: "Emails",       count: 98, pct: 28.7, color: "#5B3DF5" },
-  { label: "Calls",        count: 82, pct: 24.0, color: "#3B82F6" },
-  { label: "Applications", count: 56, pct: 16.4, color: "#22C55E" },
+  { label: "Calls",        count: 82, pct: 24.0, color: "#B8A9FC" },
+  { label: "Applications", count: 56, pct: 16.4, color: "#16A34A" },
   { label: "Interviews",   count: 42, pct: 12.3, color: "#F59E0B" },
-  { label: "Notes",        count: 38, pct: 11.1, color: "#EC4899" },
+  { label: "Notes",        count: 38, pct: 11.1, color: "#94A3B8" },
   { label: "Follow-ups",   count: 26, pct:  7.6, color: "#94A3B8" },
 ];
 
@@ -332,12 +332,12 @@ export const activityVolumeOverTime = {
 };
 
 export const activitiesByRecruiter = [
-  { name: "Sophia Patel",    initials: "SP", color: "#8B5CF6", count: 72 },
-  { name: "Emma Rodriguez",  initials: "ER", color: "#3B82F6", count: 65 },
-  { name: "Liam Chen",       initials: "LC", color: "#22C55E", count: 58 },
+  { name: "Sophia Patel",    initials: "SP", color: "#8B7DF7", count: 72 },
+  { name: "Emma Rodriguez",  initials: "ER", color: "#B8A9FC", count: 65 },
+  { name: "Liam Chen",       initials: "LC", color: "#16A34A", count: 58 },
   { name: "Olivia Brown",    initials: "OB", color: "#F59E0B", count: 54 },
-  { name: "Noah Kim",        initials: "NK", color: "#EC4899", count: 48 },
-  { name: "Aarav Mehta",     initials: "AM", color: "#06B6D4", count: 45 },
+  { name: "Noah Kim",        initials: "NK", color: "#94A3B8", count: 48 },
+  { name: "Aarav Mehta",     initials: "AM", color: "#D8D0FF", count: 45 },
 ];
 
 // 24 hours of day — relative activity volume
@@ -356,16 +356,16 @@ export type ActivityFeedItem = {
 };
 
 export const activityFeed: ActivityFeedItem[] = [
-  { id: "1",  group: "Today",     type: "call",        actor: { name: "Sophia Patel",   initials: "SP", color: "#8B5CF6" }, title: "Called Savannah Nguyen", subject: "Product Designer role · 12 min", time: "2:30 PM" },
+  { id: "1",  group: "Today",     type: "call",        actor: { name: "Sophia Patel",   initials: "SP", color: "#8B7DF7" }, title: "Called Savannah Nguyen", subject: "Product Designer role · 12 min", time: "2:30 PM" },
   { id: "2",  group: "Today",     type: "interview",   actor: { name: "Priya Shah",     initials: "PS", color: "#5B3DF5" }, title: "Technical round scheduled", subject: "Ralph Edwards · Frontend Developer", time: "1:12 PM" },
-  { id: "3",  group: "Today",     type: "email",       actor: { name: "Emma Rodriguez", initials: "ER", color: "#3B82F6" }, title: "Sent offer letter",    subject: "Cameron Williamson · Product Manager", time: "11:40 AM" },
-  { id: "4",  group: "Today",     type: "application", actor: { name: "Liam Chen",      initials: "LC", color: "#22C55E" }, title: "Submitted profile",    subject: "Dianne Russell → Acme Corp", time: "9:58 AM" },
+  { id: "3",  group: "Today",     type: "email",       actor: { name: "Emma Rodriguez", initials: "ER", color: "#B8A9FC" }, title: "Sent offer letter",    subject: "Cameron Williamson · Product Manager", time: "11:40 AM" },
+  { id: "4",  group: "Today",     type: "application", actor: { name: "Liam Chen",      initials: "LC", color: "#16A34A" }, title: "Submitted profile",    subject: "Dianne Russell → Acme Corp", time: "9:58 AM" },
   { id: "5",  group: "Yesterday", type: "followup",    actor: { name: "Olivia Brown",   initials: "OB", color: "#F59E0B" }, title: "Follow-up logged",     subject: "Esther Howard · UX Researcher", time: "5:20 PM" },
-  { id: "6",  group: "Yesterday", type: "note",        actor: { name: "Sophia Patel",   initials: "SP", color: "#8B5CF6" }, title: "Added candidate note", subject: "Priority flagged: ‘Strong React fit’", time: "3:04 PM" },
-  { id: "7",  group: "Yesterday", type: "offer",       actor: { name: "Emma Rodriguez", initials: "ER", color: "#3B82F6" }, title: "Offer accepted",       subject: "Cameron Williamson · Product Manager", time: "10:11 AM" },
-  { id: "8",  group: "Earlier This Week", type: "call",      actor: { name: "Noah Kim",     initials: "NK", color: "#EC4899" }, title: "Screening call completed", subject: "Ralph Edwards · 22 min", time: "May 16, 4:45 PM" },
-  { id: "9",  group: "Earlier This Week", type: "interview", actor: { name: "Aisha Khan",   initials: "AK", color: "#22C55E" }, title: "HR round completed",       subject: "Savannah Nguyen · Product Designer", time: "May 16, 2:30 PM" },
-  { id: "10", group: "Earlier This Week", type: "email",     actor: { name: "Aarav Mehta",  initials: "AM", color: "#06B6D4" }, title: "Nurture campaign sent",    subject: "12 candidates · React pool", time: "May 15, 9:00 AM" },
+  { id: "6",  group: "Yesterday", type: "note",        actor: { name: "Sophia Patel",   initials: "SP", color: "#8B7DF7" }, title: "Added candidate note", subject: "Priority flagged: ‘Strong React fit’", time: "3:04 PM" },
+  { id: "7",  group: "Yesterday", type: "offer",       actor: { name: "Emma Rodriguez", initials: "ER", color: "#B8A9FC" }, title: "Offer accepted",       subject: "Cameron Williamson · Product Manager", time: "10:11 AM" },
+  { id: "8",  group: "Earlier This Week", type: "call",      actor: { name: "Noah Kim",     initials: "NK", color: "#94A3B8" }, title: "Screening call completed", subject: "Ralph Edwards · 22 min", time: "May 16, 4:45 PM" },
+  { id: "9",  group: "Earlier This Week", type: "interview", actor: { name: "Aisha Khan",   initials: "AK", color: "#16A34A" }, title: "HR round completed",       subject: "Savannah Nguyen · Product Designer", time: "May 16, 2:30 PM" },
+  { id: "10", group: "Earlier This Week", type: "email",     actor: { name: "Aarav Mehta",  initials: "AM", color: "#D8D0FF" }, title: "Nurture campaign sent",    subject: "12 candidates · React pool", time: "May 15, 9:00 AM" },
 ];
 
 export const activityAiInsights: Array<{ tone: "positive" | "warning" | "info"; title: string; body: string }> = [
@@ -379,8 +379,8 @@ export const activityAiInsights: Array<{ tone: "positive" | "warning" | "info"; 
 
 export const followupStatCards = [
   { label: "Total Follow-ups",    value: "86",   change:  14, icon: "list",   iconBg: "#EEE9FF", iconColor: "#5B3DF5", positive: true  },
-  { label: "Completed",           value: "58",   change:  22, icon: "check",  iconBg: "#EAFBF1", iconColor: "#22C55E", positive: true  },
-  { label: "Pending",             value: "21",   change:  -8, icon: "clock",  iconBg: "#EAF2FF", iconColor: "#3B82F6", positive: true  },
+  { label: "Completed",           value: "58",   change:  22, icon: "check",  iconBg: "#EAFBF1", iconColor: "#16A34A", positive: true  },
+  { label: "Pending",             value: "21",   change:  -8, icon: "clock",  iconBg: "#EAF2FF", iconColor: "#B8A9FC", positive: true  },
   { label: "Overdue",             value: "7",    change: -30, icon: "alert",  iconBg: "#FDECEC", iconColor: "#EF4444", positive: true  },
   { label: "Avg. Response Time",  value: "4.2h", change: -18, icon: "bolt",   iconBg: "#FFF4DB", iconColor: "#F59E0B", positive: true  },
 ];
@@ -392,7 +392,7 @@ export const followupTrend = {
 };
 
 export const followupStatusDonut = [
-  { label: "Completed", count: 58, pct: 67.4, color: "#22C55E" },
+  { label: "Completed", count: 58, pct: 67.4, color: "#16A34A" },
   { label: "Pending",   count: 21, pct: 24.4, color: "#F59E0B" },
   { label: "Overdue",   count:  7, pct:  8.2, color: "#EF4444" },
 ];
@@ -401,21 +401,21 @@ export const followupStatusDonut = [
 export const followupPriority = [
   { label: "High",   count: 18, pct: 20.9, color: "#EF4444" },
   { label: "Medium", count: 42, pct: 48.8, color: "#F59E0B" },
-  { label: "Low",    count: 26, pct: 30.3, color: "#22C55E" },
+  { label: "Low",    count: 26, pct: 30.3, color: "#16A34A" },
 ];
 
 export const followupByChannel = [
   { label: "Phone Call", count: 32, color: "#5B3DF5" },
-  { label: "Email",      count: 28, color: "#3B82F6" },
-  { label: "LinkedIn",   count: 15, color: "#22C55E" },
+  { label: "Email",      count: 28, color: "#B8A9FC" },
+  { label: "LinkedIn",   count: 15, color: "#16A34A" },
   { label: "SMS",        count:  8, color: "#F59E0B" },
-  { label: "In-person",  count:  3, color: "#EC4899" },
+  { label: "In-person",  count:  3, color: "#94A3B8" },
 ];
 
 export const responseTimeByChannel = [
-  { label: "Phone Call", hours: 1.2, color: "#22C55E" },
+  { label: "Phone Call", hours: 1.2, color: "#16A34A" },
   { label: "SMS",        hours: 2.4, color: "#5B3DF5" },
-  { label: "Email",      hours: 6.8, color: "#3B82F6" },
+  { label: "Email",      hours: 6.8, color: "#B8A9FC" },
   { label: "LinkedIn",   hours: 8.5, color: "#F59E0B" },
 ];
 
@@ -427,12 +427,12 @@ export const upcomingFollowups: Array<{
   due: string; priority: FollowupPriority; channel: FollowupChannel;
   assigned: string; overdue?: boolean;
 }> = [
-  { candidate: "Ralph Edwards",      initials: "RE", color: "#3B82F6", role: "Frontend Developer", due: "Today, 3:00 PM",     priority: "High",   channel: "Call",     assigned: "Sophia P" },
-  { candidate: "Dianne Russell",     initials: "DR", color: "#EC4899", role: "Marketing Manager",  due: "Today, 5:00 PM",     priority: "High",   channel: "Email",    assigned: "Emma R" },
-  { candidate: "Savannah Nguyen",    initials: "SN", color: "#8B5CF6", role: "Product Designer",   due: "Tomorrow, 10:00 AM", priority: "Medium", channel: "Call",     assigned: "Liam C" },
-  { candidate: "Cameron Williamson", initials: "CW", color: "#22C55E", role: "Product Manager",    due: "Tomorrow, 2:00 PM",  priority: "Medium", channel: "LinkedIn", assigned: "Olivia B" },
+  { candidate: "Ralph Edwards",      initials: "RE", color: "#B8A9FC", role: "Frontend Developer", due: "Today, 3:00 PM",     priority: "High",   channel: "Call",     assigned: "Sophia P" },
+  { candidate: "Dianne Russell",     initials: "DR", color: "#94A3B8", role: "Marketing Manager",  due: "Today, 5:00 PM",     priority: "High",   channel: "Email",    assigned: "Emma R" },
+  { candidate: "Savannah Nguyen",    initials: "SN", color: "#8B7DF7", role: "Product Designer",   due: "Tomorrow, 10:00 AM", priority: "Medium", channel: "Call",     assigned: "Liam C" },
+  { candidate: "Cameron Williamson", initials: "CW", color: "#16A34A", role: "Product Manager",    due: "Tomorrow, 2:00 PM",  priority: "Medium", channel: "LinkedIn", assigned: "Olivia B" },
   { candidate: "Esther Howard",      initials: "EH", color: "#F59E0B", role: "UX Researcher",      due: "May 20, 11:00 AM",   priority: "Low",    channel: "Email",    assigned: "Noah K" },
-  { candidate: "Marcus Lee",         initials: "ML", color: "#06B6D4", role: "Data Analyst",       due: "Yesterday, 4:00 PM", priority: "High",   channel: "Call",     assigned: "Sophia P", overdue: true },
+  { candidate: "Marcus Lee",         initials: "ML", color: "#D8D0FF", role: "Data Analyst",       due: "Yesterday, 4:00 PM", priority: "High",   channel: "Call",     assigned: "Sophia P", overdue: true },
   { candidate: "Priya Sharma",       initials: "PS", color: "#5B3DF5", role: "DevOps Engineer",    due: "2 days ago",         priority: "Medium", channel: "SMS",      assigned: "Aarav M", overdue: true },
 ];
 
@@ -448,8 +448,8 @@ export const followupAiInsights: Array<{ tone: "positive" | "warning" | "info"; 
 export const teamStatCards = [
   { label: "Team Size",          value: "6",     change: null, icon: "team",   iconBg: "#EEE9FF", iconColor: "#5B3DF5", subtitle: "6 active recruiters" },
   { label: "Total Placements",   value: "12",    change:  20,  icon: "trophy", iconBg: "#FFF4DB", iconColor: "#F59E0B" },
-  { label: "Avg. Conversion",    value: "12.4%", change:   8,  icon: "target", iconBg: "#EAF2FF", iconColor: "#3B82F6" },
-  { label: "Team Utilization",   value: "84%",   change:   6,  icon: "bolt",   iconBg: "#EAFBF1", iconColor: "#22C55E" },
+  { label: "Avg. Conversion",    value: "12.4%", change:   8,  icon: "target", iconBg: "#EAF2FF", iconColor: "#B8A9FC" },
+  { label: "Team Utilization",   value: "84%",   change:   6,  icon: "bolt",   iconBg: "#EAFBF1", iconColor: "#16A34A" },
   { label: "Avg. Rating",        value: "4.7",   change: null, icon: "star",   iconBg: "#FDECEC", iconColor: "#EF4444", subtitle: "Out of 5.0 across 42 reviews" },
 ] as const;
 
@@ -458,7 +458,7 @@ export const topRecruiter = {
   initials: "SP",
   role: "Senior Recruiter",
   tenure: "3 yrs",
-  color: "#8B5CF6",
+  color: "#8B7DF7",
   placements: 4,
   conversion: 15.4,
   activities: 72,
@@ -466,12 +466,12 @@ export const topRecruiter = {
 };
 
 export const teamLeaderboard = [
-  { rank: 1, name: "Sophia Patel",    initials: "SP", color: "#8B5CF6", placements: 4, score: 94, trend: 2  },
-  { rank: 2, name: "Emma Rodriguez",  initials: "ER", color: "#3B82F6", placements: 3, score: 88, trend: 0  },
-  { rank: 3, name: "Liam Chen",       initials: "LC", color: "#22C55E", placements: 2, score: 82, trend: 1  },
+  { rank: 1, name: "Sophia Patel",    initials: "SP", color: "#8B7DF7", placements: 4, score: 94, trend: 2  },
+  { rank: 2, name: "Emma Rodriguez",  initials: "ER", color: "#B8A9FC", placements: 3, score: 88, trend: 0  },
+  { rank: 3, name: "Liam Chen",       initials: "LC", color: "#16A34A", placements: 2, score: 82, trend: 1  },
   { rank: 4, name: "Olivia Brown",    initials: "OB", color: "#F59E0B", placements: 2, score: 76, trend: -1 },
-  { rank: 5, name: "Noah Kim",        initials: "NK", color: "#EC4899", placements: 1, score: 68, trend: 0  },
-  { rank: 6, name: "Aarav Mehta",     initials: "AM", color: "#06B6D4", placements: 0, score: 54, trend: 0  },
+  { rank: 5, name: "Noah Kim",        initials: "NK", color: "#94A3B8", placements: 1, score: 68, trend: 0  },
+  { rank: 6, name: "Aarav Mehta",     initials: "AM", color: "#D8D0FF", placements: 0, score: 54, trend: 0  },
 ];
 
 export const teamTrend = {
@@ -481,11 +481,11 @@ export const teamTrend = {
 };
 
 export const recruiterGoals = [
-  { name: "Sophia Patel",   initials: "SP", color: "#8B5CF6", target: 5, actual: 4 },
-  { name: "Emma Rodriguez", initials: "ER", color: "#3B82F6", target: 4, actual: 3 },
-  { name: "Liam Chen",      initials: "LC", color: "#22C55E", target: 4, actual: 2 },
+  { name: "Sophia Patel",   initials: "SP", color: "#8B7DF7", target: 5, actual: 4 },
+  { name: "Emma Rodriguez", initials: "ER", color: "#B8A9FC", target: 4, actual: 3 },
+  { name: "Liam Chen",      initials: "LC", color: "#16A34A", target: 4, actual: 2 },
   { name: "Olivia Brown",   initials: "OB", color: "#F59E0B", target: 3, actual: 2 },
-  { name: "Noah Kim",       initials: "NK", color: "#EC4899", target: 3, actual: 1 },
+  { name: "Noah Kim",       initials: "NK", color: "#94A3B8", target: 3, actual: 1 },
 ];
 
 // Activity mix per recruiter — stacked horizontal bars
@@ -504,12 +504,12 @@ export const teamMatrix: Array<{
   offers: number; placements: number; conversion: number;
   rating: number; trend: "up" | "down" | "flat";
 }> = [
-  { name: "Sophia Patel",    initials: "SP", color: "#8B5CF6", candidates: 26, submissions: 14, interviews: 7, offers: 5, placements: 4, conversion: 15.4, rating: 4.9, trend: "up"   },
-  { name: "Emma Rodriguez",  initials: "ER", color: "#3B82F6", candidates: 32, submissions: 18, interviews: 8, offers: 4, placements: 3, conversion:  9.4, rating: 4.7, trend: "up"   },
-  { name: "Liam Chen",       initials: "LC", color: "#22C55E", candidates: 28, submissions: 15, interviews: 6, offers: 3, placements: 2, conversion:  7.1, rating: 4.6, trend: "up"   },
+  { name: "Sophia Patel",    initials: "SP", color: "#8B7DF7", candidates: 26, submissions: 14, interviews: 7, offers: 5, placements: 4, conversion: 15.4, rating: 4.9, trend: "up"   },
+  { name: "Emma Rodriguez",  initials: "ER", color: "#B8A9FC", candidates: 32, submissions: 18, interviews: 8, offers: 4, placements: 3, conversion:  9.4, rating: 4.7, trend: "up"   },
+  { name: "Liam Chen",       initials: "LC", color: "#16A34A", candidates: 28, submissions: 15, interviews: 6, offers: 3, placements: 2, conversion:  7.1, rating: 4.6, trend: "up"   },
   { name: "Olivia Brown",    initials: "OB", color: "#F59E0B", candidates: 18, submissions: 10, interviews: 4, offers: 3, placements: 2, conversion: 11.1, rating: 4.5, trend: "down" },
-  { name: "Noah Kim",        initials: "NK", color: "#EC4899", candidates: 22, submissions: 12, interviews: 5, offers: 2, placements: 1, conversion:  4.5, rating: 4.4, trend: "flat" },
-  { name: "Aarav Mehta",     initials: "AM", color: "#06B6D4", candidates: 16, submissions:  8, interviews: 3, offers: 1, placements: 0, conversion:  0.0, rating: 4.3, trend: "flat" },
+  { name: "Noah Kim",        initials: "NK", color: "#94A3B8", candidates: 22, submissions: 12, interviews: 5, offers: 2, placements: 1, conversion:  4.5, rating: 4.4, trend: "flat" },
+  { name: "Aarav Mehta",     initials: "AM", color: "#D8D0FF", candidates: 16, submissions:  8, interviews: 3, offers: 1, placements: 0, conversion:  0.0, rating: 4.3, trend: "flat" },
 ];
 
 export const teamAiInsights: Array<{ tone: "positive" | "warning" | "info"; title: string; body: string }> = [
@@ -565,9 +565,9 @@ export const recruitmentPulse = {
   delta: 9,
   narrative: [
     { icon: "🚀", label: "Applications sent",    value: "56",  change: 25, color: "#5B3DF5" },
-    { icon: "📅", label: "Interviews scheduled", value: "18",  change: 12, color: "#3B82F6" },
+    { icon: "📅", label: "Interviews scheduled", value: "18",  change: 12, color: "#B8A9FC" },
     { icon: "🎯", label: "Offers accepted",      value: "7",   change: 16, color: "#F59E0B" },
-    { icon: "🏆", label: "Placements made",      value: "4",   change: 33, color: "#22C55E" },
+    { icon: "🏆", label: "Placements made",      value: "4",   change: 33, color: "#16A34A" },
   ],
   pulseTrend: [68, 72, 70, 75, 78, 82, 84],
 };
@@ -592,10 +592,10 @@ export const topJobSpotlight = {
 
 export const jobPipelineFlow = [
   { title: "Frontend Developer", icon: "💻", stages: [512, 45, 18, 8, 3, 2], color: "#5B3DF5" },
-  { title: "Product Designer",   icon: "🎨", stages: [398, 38, 16, 7, 2, 1], color: "#3B82F6" },
-  { title: "UX Researcher",      icon: "🔍", stages: [276, 28, 12, 5, 2, 1], color: "#22C55E" },
+  { title: "Product Designer",   icon: "🎨", stages: [398, 38, 16, 7, 2, 1], color: "#B8A9FC" },
+  { title: "UX Researcher",      icon: "🔍", stages: [276, 28, 12, 5, 2, 1], color: "#16A34A" },
   { title: "Marketing Manager",  icon: "📢", stages: [224, 22,  9, 4, 1, 0], color: "#F59E0B" },
-  { title: "Data Analyst",       icon: "📊", stages: [186, 18,  7, 3, 1, 0], color: "#EC4899" },
+  { title: "Data Analyst",       icon: "📊", stages: [186, 18,  7, 3, 1, 0], color: "#94A3B8" },
 ];
 
 export const pipelineStageLabels = ["Views", "Apps", "Shortlisted", "Interviews", "Offers", "Hired"] as const;
@@ -650,12 +650,12 @@ export type InterviewSlot = {
 };
 
 export const todaySchedule: InterviewSlot[] = [
-  { id: "i1", hourStart:  9.5, duration: 45, candidate: { name: "Ralph Edwards",    initials: "RE", color: "#3B82F6" }, role: "Frontend Developer", stage: "Screening",  interviewer: "Sophia P" },
-  { id: "i2", hourStart: 10.5, duration: 60, candidate: { name: "Savannah Nguyen", initials: "SN", color: "#8B5CF6" }, role: "Product Designer",   stage: "Technical",  interviewer: "Priya S"  },
-  { id: "i3", hourStart: 13.0, duration: 45, candidate: { name: "Cameron Williamson", initials: "CW", color: "#22C55E" }, role: "Product Manager",  stage: "HR",         interviewer: "Marcus J" },
-  { id: "i4", hourStart: 14.0, duration: 60, candidate: { name: "Dianne Russell",  initials: "DR", color: "#EC4899" }, role: "Marketing Manager",  stage: "Final",      interviewer: "Aisha K"  },
+  { id: "i1", hourStart:  9.5, duration: 45, candidate: { name: "Ralph Edwards",    initials: "RE", color: "#B8A9FC" }, role: "Frontend Developer", stage: "Screening",  interviewer: "Sophia P" },
+  { id: "i2", hourStart: 10.5, duration: 60, candidate: { name: "Savannah Nguyen", initials: "SN", color: "#8B7DF7" }, role: "Product Designer",   stage: "Technical",  interviewer: "Priya S"  },
+  { id: "i3", hourStart: 13.0, duration: 45, candidate: { name: "Cameron Williamson", initials: "CW", color: "#16A34A" }, role: "Product Manager",  stage: "HR",         interviewer: "Marcus J" },
+  { id: "i4", hourStart: 14.0, duration: 60, candidate: { name: "Dianne Russell",  initials: "DR", color: "#94A3B8" }, role: "Marketing Manager",  stage: "Final",      interviewer: "Aisha K"  },
   { id: "i5", hourStart: 15.5, duration: 45, candidate: { name: "Esther Howard",   initials: "EH", color: "#F59E0B" }, role: "UX Researcher",      stage: "Managerial", interviewer: "Rachel O" },
-  { id: "i6", hourStart: 16.5, duration: 30, candidate: { name: "Marcus Lee",      initials: "ML", color: "#06B6D4" }, role: "Data Analyst",       stage: "Screening",  interviewer: "Daniel M" },
+  { id: "i6", hourStart: 16.5, duration: 30, candidate: { name: "Marcus Lee",      initials: "ML", color: "#D8D0FF" }, role: "Data Analyst",       stage: "Screening",  interviewer: "Daniel M" },
 ];
 
 export const scheduleHourRange = { start: 9, end: 18 }; // 9 AM – 6 PM

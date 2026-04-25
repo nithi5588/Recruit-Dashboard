@@ -7,6 +7,7 @@ import {
   useId,
   useState,
 } from "react";
+import { ArrowDown2 } from "iconsax-reactjs";
 import { EyeIcon, EyeOffIcon } from "@/components/icons/Icons";
 
 type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -190,15 +191,7 @@ export function Select({
           className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[color:var(--color-text-muted)]"
           aria-hidden
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path
-              d="m6 9 6 6 6-6"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ArrowDown2 size={18} color="currentColor" variant="Linear" />
         </span>
       </div>
     </div>

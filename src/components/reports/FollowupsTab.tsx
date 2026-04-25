@@ -2,16 +2,17 @@
 
 import { useState } from "react";
 import {
-  BellIcon,
-  CheckIcon,
-  ClockIcon,
-  InboxIcon,
-  LinkChainIcon,
-  MenuListIcon,
-  PaperPlaneIcon,
-  PhoneIcon,
-  SyncIcon,
-} from "@/components/icons/AppIcons";
+  Call,
+  Category2,
+  Clock,
+  Element4,
+  Link2,
+  Notification,
+  Refresh,
+  Send2,
+  Sms,
+  TickCircle,
+} from "iconsax-reactjs";
 import { CircularProgress, MiniDonut } from "@/components/reports/charts";
 import { InsightsPanel, StatCard, StatIconWrap } from "@/components/reports/shared";
 import {
@@ -30,21 +31,21 @@ import {
 // ─── Stat icon mapping ────────────────────────────────────────────────────────
 
 function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string }) {
-  const cls = { size: 20, style: { color } };
+  const props = { size: 20, color, variant: "Bulk" as const };
   const n =
-    icon === "list"  ? <MenuListIcon {...cls} />
-    : icon === "check" ? <CheckIcon {...cls} />
-    : icon === "clock" ? <ClockIcon {...cls} />
-    : icon === "alert" ? <BellIcon {...cls} />
-    : icon === "bolt"  ? <SyncIcon {...cls} />
-    : <InboxIcon {...cls} />;
+    icon === "list"   ? <Category2 {...props} />
+    : icon === "check" ? <TickCircle {...props} variant="Bold" />
+    : icon === "clock" ? <Clock {...props} />
+    : icon === "alert" ? <Notification {...props} />
+    : icon === "bolt"  ? <Refresh {...props} />
+    : <Element4 {...props} />;
   return <StatIconWrap bg={bg}>{n}</StatIconWrap>;
 }
 
 // ─── Trend line (completed vs pending) ────────────────────────────────────────
 
 const TREND_SERIES = [
-  { key: "completed" as const, label: "Completed", color: "#22C55E" },
+  { key: "completed" as const, label: "Completed", color: "#16A34A" },
   { key: "pending"   as const, label: "Pending",   color: "#F59E0B" },
 ];
 
@@ -190,10 +191,11 @@ function PriorityChip({ p }: { p: FollowupPriority }) {
 
 function ChannelIcon({ c }: { c: FollowupChannel }) {
   const size = 13;
-  if (c === "Call")     return <PhoneIcon size={size} />;
-  if (c === "Email")    return <PaperPlaneIcon size={size} />;
-  if (c === "LinkedIn") return <LinkChainIcon size={size} />;
-  return <SyncIcon size={size} />;
+  const props = { size, variant: "Bulk" as const, color: "currentColor" };
+  if (c === "Call")     return <Call {...props} />;
+  if (c === "Email")    return <Send2 {...props} />;
+  if (c === "LinkedIn") return <Link2 {...props} />;
+  return <Sms {...props} />;
 }
 
 // ─── Main Follow-ups Tab ──────────────────────────────────────────────────────
@@ -232,7 +234,7 @@ export function FollowupsTab() {
             </span>
           </div>
           <div className="flex flex-col items-center gap-4">
-            <CircularProgress value={completionRate} label="Completed" size={168} color="#22C55E" />
+            <CircularProgress value={completionRate} label="Completed" size={168} color="#16A34A" />
             <div className="grid w-full grid-cols-3 gap-2">
               {followupStatusDonut.map((s) => (
                 <div key={s.label} className="rounded-[10px] bg-white px-2 py-2 text-center shadow-[var(--shadow-card)]">

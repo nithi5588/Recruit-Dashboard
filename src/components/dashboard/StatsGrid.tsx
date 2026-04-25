@@ -1,4 +1,22 @@
+import Link from "next/link";
+import {
+  ArrowDown,
+  ArrowUp,
+  ProfileAdd,
+  Profile2User,
+  TickCircle,
+  Timer1,
+  type IconProps as IconsaxProps,
+} from "iconsax-reactjs";
+import type { ComponentType } from "react";
 import { stats, type Stat } from "@/lib/sample-data";
+
+function hrefFor(label: string): string {
+  if (/total|new this/i.test(label)) return "/candidates";
+  if (/in process/i.test(label))     return "/pipeline";
+  if (/placement/i.test(label))      return "/pipeline";
+  return "/candidates";
+}
 
 const TONE: Record<
   Stat["tone"],
@@ -30,51 +48,23 @@ const TONE: Record<
   },
 };
 
-function ArrowUp() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function ArrowDown() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
+type IconsaxComponent = ComponentType<IconsaxProps>;
 
-function StatIcon({ tone }: { tone: Stat["tone"] }) {
-  if (tone === "purple") {
-    return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <circle cx="9" cy="9" r="3.2" stroke="currentColor" strokeWidth="1.8" />
-        <path d="M3 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M15 20a5 5 0 0 1 6-4.9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  if (tone === "blue") {
-    return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <circle cx="10" cy="9" r="3.2" stroke="currentColor" strokeWidth="1.8" />
-        <path d="M4 20a6 6 0 0 1 12 0M19 8v6M16 11h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  if (tone === "orange") {
-    return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
-        <path d="M12 8v4l3 2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
+const TONE_ICON: Record<Stat["tone"], IconsaxComponent> = {
+  purple: Profile2User,
+  blue:   ProfileAdd,
+  orange: Timer1,
+  green:  TickCircle,
+};
+
+function StatIcon({ tone, color }: { tone: Stat["tone"]; color: string }) {
+  const Icon = TONE_ICON[tone];
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" strokeWidth="1.8" />
-      <path d="m8.5 12.2 2.4 2.4 4.6-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <Icon
+      variant={tone === "green" ? "Bold" : "Bulk"}
+      size={20}
+      color={color}
+    />
   );
 }
 
@@ -142,8 +132,9 @@ function StatCard({ stat }: { stat: Stat }) {
   const tone = TONE[stat.tone];
   const up = stat.deltaDirection === "up";
   return (
-    <div
-      className="group relative overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_28px_rgba(23,26,43,0.08)]"
+    <Link
+      href={hrefFor(stat.label)}
+      className="group relative block overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_28px_rgba(23,26,43,0.08)]"
       style={{ boxShadow: "var(--shadow-card)" }}
     >
       <span
@@ -166,7 +157,7 @@ function StatCard({ stat }: { stat: Stat }) {
             border: `1px solid ${tone.outline}`,
           }}
         >
-          <StatIcon tone={stat.tone} />
+          <StatIcon tone={stat.tone} color={tone.fg} />
         </span>
       </div>
 
@@ -179,7 +170,11 @@ function StatCard({ stat }: { stat: Stat }) {
           className="inline-flex items-center gap-1 text-[12px] font-semibold"
           style={{ color: up ? "#16A34A" : "#EF4444" }}
         >
-          {up ? <ArrowUp /> : <ArrowDown />}
+          {up ? (
+            <ArrowUp size={14} color="currentColor" variant="Bold" />
+          ) : (
+            <ArrowDown size={14} color="currentColor" variant="Bold" />
+          )}
           {stat.delta}
         </p>
         <div className="h-9 w-24 shrink-0 opacity-80 transition-opacity group-hover:opacity-100">
@@ -190,7 +185,7 @@ function StatCard({ stat }: { stat: Stat }) {
           />
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

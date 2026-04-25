@@ -1,3 +1,4 @@
+import { Teacher } from "iconsax-reactjs";
 import type { EducationEntry } from "@/lib/candidate-detail";
 
 export function EducationCard({ education }: { education: EducationEntry[] }) {
@@ -18,20 +19,7 @@ export function EducationCard({ education }: { education: EducationEntry[] }) {
               aria-hidden
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] border border-[color:var(--color-border)] bg-[color:var(--color-surface-2)] text-[color:var(--color-brand-600)]"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="m2 9 10-5 10 5-10 5L2 9Z"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M6 11v5a6 6 0 0 0 12 0v-5M22 9v5"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <Teacher size={20} color="currentColor" variant="Linear" />
             </span>
             <div className="min-w-0">
               <p className="text-[14px] font-semibold text-[color:var(--color-text)]">

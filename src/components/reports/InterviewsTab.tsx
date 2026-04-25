@@ -1,14 +1,14 @@
 "use client";
 
 import {
-  CalendarIcon,
-  CheckIcon,
-  ClockIcon,
-  SolidStar,
-  TrophyIcon,
-  VideoIcon,
-  XIcon,
-} from "@/components/icons/AppIcons";
+  Calendar,
+  Clock,
+  CloseCircle,
+  Cup,
+  Star1,
+  TickCircle,
+  VideoSquare,
+} from "iconsax-reactjs";
 import { CircularProgress, MiniDonut } from "@/components/reports/charts";
 import { InsightsPanel, StatCard, StatIconWrap } from "@/components/reports/shared";
 import {
@@ -29,14 +29,14 @@ import {
 // ─── Stat card icon ───────────────────────────────────────────────────────────
 
 function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string }) {
-  const cls = { size: 20, style: { color } };
+  const props = { size: 20, color, variant: "Bulk" as const };
   const n =
-    icon === "calendar" ? <CalendarIcon {...cls} />
-    : icon === "clock"    ? <ClockIcon {...cls} />
-    : icon === "check"    ? <CheckIcon {...cls} />
-    : icon === "x"        ? <XIcon {...cls} />
-    : icon === "trophy"   ? <TrophyIcon {...cls} />
-    : <CalendarIcon {...cls} />;
+    icon === "calendar"   ? <Calendar {...props} />
+    : icon === "clock"    ? <Clock {...props} />
+    : icon === "check"    ? <TickCircle {...props} variant="Bold" />
+    : icon === "x"        ? <CloseCircle {...props} variant="Bold" />
+    : icon === "trophy"   ? <Cup {...props} />
+    : <Calendar {...props} />;
   return <StatIconWrap bg={bg}>{n}</StatIconWrap>;
 }
 
@@ -44,9 +44,9 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 
 const STAGE_STYLES: Record<string, { bg: string; fg: string; border: string }> = {
   Screening:  { bg: "#EEE9FF", fg: "#5B3DF5", border: "#D8D0FF" },
-  Technical:  { bg: "#EAF2FF", fg: "#2563EB", border: "#BFDBFE" },
-  HR:         { bg: "#EAFBF1", fg: "#16A34A", border: "#BBF7D0" },
-  Managerial: { bg: "#FFF4DB", fg: "#B45309", border: "#FDE68A" },
+  Technical:  { bg: "#EAF2FF", fg: "#5B3DF5", border: "#D8D0FF" },
+  HR:         { bg: "#EAFBF1", fg: "#16A34A", border: "#BBF0CF" },
+  Managerial: { bg: "#FFF4DB", fg: "#B45309", border: "#FCD9B6" },
   Final:      { bg: "#FDECEC", fg: "#DC2626", border: "#FECACA" },
 };
 
@@ -226,7 +226,7 @@ export function InterviewsTab() {
             </div>
             <div className="flex items-center gap-2">
               <button type="button" className="flex items-center gap-1 rounded-[8px] border border-[color:var(--color-border)] px-3 py-1 text-[11px] font-medium text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)]">
-                <VideoIcon size={12} /> Join Next
+                <VideoSquare size={12} variant="Bulk" color="currentColor" /> Join Next
               </button>
               <button type="button" className="rounded-[8px] border border-[color:var(--color-border)] px-3 py-1 text-[11px] font-medium text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)]">
                 Full calendar ▾
@@ -248,7 +248,7 @@ export function InterviewsTab() {
           <div className="relative flex h-full flex-col p-5 text-white">
             <div className="mb-3 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
-                <TrophyIcon size={12} /> Pass Rate
+                <Cup size={12} variant="Bulk" color="currentColor" /> Pass Rate
               </span>
               <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-medium backdrop-blur">▲ {interviewPassRate.delta} pts</span>
             </div>
@@ -355,7 +355,7 @@ export function InterviewsTab() {
                     <span className="ml-1 font-normal text-[color:var(--color-text-muted)]">ints</span>
                   </span>
                   <span className="flex items-center gap-1 text-[12px] font-semibold text-[color:var(--color-warning)]">
-                    <SolidStar size={12} />
+                    <Star1 size={12} variant="Bold" color="currentColor" />
                     {p.rating.toFixed(1)}
                   </span>
                 </div>

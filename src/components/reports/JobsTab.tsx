@@ -2,9 +2,14 @@
 
 import { useState } from "react";
 import {
-  BriefcaseIcon,
-  TrophyIcon,
-} from "@/components/icons/AppIcons";
+  Briefcase,
+  Cup,
+  Eye,
+  Mouse,
+  PercentageSquare,
+  type IconProps as IconsaxProps,
+} from "iconsax-reactjs";
+import type { ComponentType } from "react";
 import { MiniDonut } from "@/components/reports/charts";
 import { InsightsPanel, StatCard, StatIconWrap } from "@/components/reports/shared";
 import {
@@ -25,43 +30,24 @@ import {
 
 // ─── Local icons for views/cursor/percent ─────────────────────────────────────
 
-function EyeIcon({ size = 20, color }: { size?: number; color?: string }) {
-  const s = { stroke: color ?? "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" {...s} />
-      <circle cx="12" cy="12" r="3" {...s} />
-    </svg>
-  );
+function makeIconsaxIcon(Icon: ComponentType<IconsaxProps>) {
+  return function IconsaxLocal({ size = 20, color }: { size?: number; color?: string }) {
+    return <Icon size={size} color={color ?? "currentColor"} variant="Linear" />;
+  };
 }
-function CursorIcon({ size = 20, color }: { size?: number; color?: string }) {
-  const s = { stroke: color ?? "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path d="M5 3l5 16 2.5-6.5L19 10 5 3Z" {...s} />
-    </svg>
-  );
-}
-function PercentIcon({ size = 20, color }: { size?: number; color?: string }) {
-  const s = { stroke: color ?? "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <line x1="5" y1="19" x2="19" y2="5" {...s} />
-      <circle cx="7.5" cy="7.5" r="2.5" {...s} />
-      <circle cx="16.5" cy="16.5" r="2.5" {...s} />
-    </svg>
-  );
-}
+const EyeIcon = makeIconsaxIcon(Eye);
+const CursorIcon = makeIconsaxIcon(Mouse);
+const PercentIcon = makeIconsaxIcon(PercentageSquare);
 
 function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string }) {
-  const cls = { size: 20, style: { color } };
+  const props = { size: 20, color, variant: "Bulk" as const };
   const n =
-    icon === "briefcase" ? <BriefcaseIcon {...cls} />
+    icon === "briefcase"   ? <Briefcase {...props} />
     : icon === "eye"       ? <EyeIcon size={20} color={color} />
     : icon === "cursor"    ? <CursorIcon size={20} color={color} />
-    : icon === "trophy"    ? <TrophyIcon {...cls} />
+    : icon === "trophy"    ? <Cup {...props} />
     : icon === "percent"   ? <PercentIcon size={20} color={color} />
-    : <BriefcaseIcon {...cls} />;
+    : <Briefcase {...props} />;
   return <StatIconWrap bg={bg}>{n}</StatIconWrap>;
 }
 
@@ -154,7 +140,7 @@ const STATUS_STYLES: Record<JobStatus, { bg: string; fg: string }> = {
   "Active":  { bg: "#EAFBF1", fg: "#16A34A" },
   "Draft":   { bg: "#F3F4F8", fg: "#667085" },
   "On Hold": { bg: "#FFF4DB", fg: "#B45309" },
-  "Closed":  { bg: "#EAF2FF", fg: "#2563EB" },
+  "Closed":  { bg: "#EAF2FF", fg: "#5B3DF5" },
   "Expired": { bg: "#FDECEC", fg: "#DC2626" },
 };
 
@@ -271,7 +257,7 @@ export function JobsTab() {
           <div className="relative p-5 text-white">
             <div className="mb-4 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
-                <TrophyIcon size={12} /> Top Performing Job
+                <Cup size={12} variant="Bulk" color="currentColor" /> Top Performing Job
               </span>
               <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-medium">Health {topJobSpotlight.healthScore}/100</span>
             </div>

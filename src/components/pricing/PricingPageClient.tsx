@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Fragment, useState, type ReactNode } from "react";
+import { Add } from "iconsax-reactjs";
 import {
   CheckIcon,
   ChevronRight,
@@ -622,16 +623,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
               : "bg-[color:var(--color-surface-2)] text-[color:var(--color-text-muted)]"
           }`}
         >
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 24 24"
-            fill="none"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          >
-            <path d="M12 5v14M5 12h14" stroke="currentColor" />
-          </svg>
+          <Add size={12} color="currentColor" variant="Linear" />
         </span>
       </div>
       {open ? (

@@ -6,7 +6,7 @@ export function levelBadgeTone(level: SkillLevel): BadgeTone {
     case "Expert":
       return "purple";
     case "Advanced":
-      return "blue";
+      return "purple";
     case "Intermediate":
       return "amber";
     case "Beginner":
@@ -29,16 +29,18 @@ export function levelPercent(level: SkillLevel): number {
   }
 }
 
+// All proficiency bars stay within one color family (brand purple ramp +
+// neutral) so a row of skills reads as a calm gradient instead of a rainbow.
 export function levelBarColor(level: SkillLevel): string {
   switch (level) {
     case "Expert":
-      return "#5B3DF5";
+      return "var(--color-brand-500)";
     case "Advanced":
-      return "#3B82F6";
+      return "var(--color-brand-400)";
     case "Intermediate":
-      return "#F59E0B";
+      return "var(--color-brand-300)";
     case "Beginner":
     default:
-      return "#98A2B3";
+      return "var(--color-text-muted)";
   }
 }

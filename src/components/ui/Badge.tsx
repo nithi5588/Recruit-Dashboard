@@ -9,14 +9,16 @@ export type BadgeTone =
   | "gray"
   | "amber";
 
+// Muted badge palette — backgrounds desaturated and borders dropped where
+// possible so a row of mixed badges reads as one cohesive band of color.
 const TONE: Record<BadgeTone, { bg: string; fg: string; border?: string }> = {
-  purple: { bg: "#EEE9FF", fg: "#4B32D4", border: "#D8D0FF" },
-  blue: { bg: "#EAF2FF", fg: "#1D4ED8", border: "#C7DBFC" },
-  green: { bg: "#EAFBF1", fg: "#15803D", border: "#BBF0CF" },
-  orange: { bg: "#FFF1E6", fg: "#C2410C", border: "#FCD9B6" },
-  red: { bg: "#FDECEC", fg: "#B91C1C", border: "#F5C6C6" },
-  amber: { bg: "#FFF4DB", fg: "#92400E", border: "#FDE7A7" },
-  gray: { bg: "#F3F4F8", fg: "#475467", border: "#E5E7EF" },
+  purple: { bg: "#EFEBFA", fg: "#5B4BAE", border: "#DCD4F2" },
+  blue:   { bg: "#EAF0F8", fg: "#3B5887", border: "#CFDCEC" },
+  green:  { bg: "#E8F2EC", fg: "#2F6B4A", border: "#CCDFD2" },
+  orange: { bg: "#F5EDE3", fg: "#8A5635", border: "#E0D3C2" },
+  red:    { bg: "#F2E5E5", fg: "#8C4B4B", border: "#DCC9C9" },
+  amber:  { bg: "#F4ECDC", fg: "#7A5B26", border: "#DFD1B0" },
+  gray:   { bg: "#F0F1F5", fg: "#5A6478", border: "#E0E3EC" },
 };
 
 export function Badge({
@@ -53,26 +55,25 @@ export function Badge({
 
 export function statusTone(status: string): BadgeTone {
   switch (status.toLowerCase()) {
+    // Active / pipeline stages — use brand purple as the dominant color so
+    // most rows in a list share one tone.
     case "open":
     case "open for opportunities":
     case "available":
-      return "purple";
     case "shortlisted":
-      return "blue";
-    case "interview":
-    case "interviewing":
-      return "orange";
     case "submitted":
     case "resume submitted":
-      return "blue";
     case "offered":
       return "purple";
+    case "interview":
+    case "interviewing":
+      return "amber";
     case "placed":
       return "green";
     case "rejected":
       return "red";
     case "on hold":
-      return "amber";
+      return "gray";
     default:
       return "gray";
   }
@@ -81,7 +82,7 @@ export function statusTone(status: string): BadgeTone {
 export function priorityTone(priority: string): BadgeTone {
   switch (priority.toLowerCase()) {
     case "high":
-      return "orange";
+      return "red";
     case "medium":
       return "amber";
     case "low":

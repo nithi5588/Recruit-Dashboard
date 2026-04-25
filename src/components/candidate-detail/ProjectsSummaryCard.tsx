@@ -1,3 +1,4 @@
+import { Buildings } from "iconsax-reactjs";
 import {
   ClockIcon,
   StarOutlineIcon,
@@ -13,16 +14,7 @@ type Tile = {
 };
 
 function BuildingsSmall() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M4 21V7l6-3v17M10 11h3a2 2 0 0 1 2 2v8M20 21V13a2 2 0 0 0-2-2h-3"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+  return <Buildings size={18} color="currentColor" variant="Linear" />;
 }
 
 function Stat({ tile }: { tile: Tile }) {

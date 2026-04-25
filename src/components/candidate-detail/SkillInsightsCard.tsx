@@ -8,11 +8,8 @@ export function SkillInsightsCard({
   if (!insight) return null;
   return (
     <section
-      className="rounded-[var(--radius-card)] border border-[color:var(--color-brand-200)] p-5"
-      style={{
-        background: "linear-gradient(180deg, #F4F1FF 0%, #F9F7FF 100%)",
-        boxShadow: "var(--shadow-card)",
-      }}
+      className="rounded-[var(--radius-card)] border border-[color:var(--color-brand-200)] bg-[color:var(--color-brand-50)] p-5"
+      style={{ boxShadow: "var(--shadow-card)" }}
     >
       <header className="mb-3 flex items-center justify-between">
         <h3 className="text-[15px] font-semibold text-[color:var(--color-text)]">

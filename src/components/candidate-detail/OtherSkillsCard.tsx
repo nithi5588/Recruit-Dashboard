@@ -6,28 +6,27 @@ import {
 } from "@/components/candidate-detail/skills-shared";
 
 const TONE_HEX: Record<ReturnType<typeof levelBadgeTone>, string> = {
-  purple: "#4B32D4",
-  blue: "#1D4ED8",
-  green: "#15803D",
-  orange: "#C2410C",
-  red: "#B91C1C",
-  amber: "#92400E",
-  gray: "#475467",
+  purple: "#5B4BAE",
+  blue: "#3B5887",
+  green: "#2F6B4A",
+  orange: "#8A5635",
+  red: "#8C4B4B",
+  amber: "#7A5B26",
+  gray: "#5A6478",
 };
 
 function SkillTile({ skill }: { skill: OtherSkill }) {
   const tone = levelBadgeTone(skill.level);
   return (
-    <div className="flex flex-col gap-2 rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3.5">
+    <div className="flex min-w-0 flex-col gap-2 rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3.5 transition-all hover:border-[color:var(--color-brand-200)] hover:shadow-[var(--shadow-card)]">
       <div className="flex items-start gap-2.5">
         <span
           aria-hidden
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] text-[11px] font-bold"
-          style={{ background: skill.bg, color: skill.fg }}
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-[color:var(--color-brand-100)] text-[11px] font-bold text-[color:var(--color-brand-600)]"
         >
           {skill.abbr}
         </span>
-        <p className="truncate text-[13px] font-semibold text-[color:var(--color-text)]">
+        <p className="truncate text-[13px] font-semibold text-[color:var(--color-text)]" title={skill.name}>
           {skill.name}
         </p>
       </div>

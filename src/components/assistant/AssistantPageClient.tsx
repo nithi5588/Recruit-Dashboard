@@ -1,11 +1,13 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useState, useRef, useEffect, useCallback, KeyboardEvent } from "react";
 import {
-  SparklesIcon, PaperPlaneIcon, PaperclipIcon,
+  SparklesIcon, PaperPlaneIcon,
   UsersIcon, CalendarIcon, RefreshIcon, MoreIcon,
   ClockIcon, CheckIcon, BarChartMiniIcon, DocumentIcon,
-  TemplateIcon, FilterIcon, TasksIcon, SearchIcon,
+  FilterIcon, TasksIcon, SearchIcon,
+  BriefcaseIcon, MatchIcon,
   ChevronLeft, ChevronRight, XIcon,
 } from "@/components/icons/AppIcons";
 import { exportToExcel } from "@/lib/export-utils";
@@ -33,23 +35,168 @@ interface Msg {
 /* ──────────────────────────────── data ────────────────────────────────────── */
 
 const CANDIDATES: Candidate[] = [
-  { id:"1", name:"Ananya Sharma", initials:"AS", color:"#5B3DF5", role:"Frontend Developer", exp:"4 yrs",   location:"Bangalore, KA", skills:["React","TypeScript","Next.js","Tailwind"], score:95, availability:"Available" },
-  { id:"2", name:"Rohit Menon",   initials:"RM", color:"#3B82F6", role:"Frontend Developer", exp:"3.5 yrs", location:"Bangalore, KA", skills:["React","Vue","CSS","Figma"],               score:92, availability:"Available" },
-  { id:"3", name:"Neha Iyer",     initials:"NI", color:"#22C55E", role:"Frontend Developer", exp:"5 yrs",   location:"Remote",        skills:["Angular","React","GraphQL","AWS"],         score:90, availability:"2 weeks"  },
-  { id:"4", name:"Karan Patel",   initials:"KP", color:"#F59E0B", role:"UI Engineer",        exp:"3 yrs",   location:"Mumbai, MH",    skills:["React","Redux","SCSS","Jest"],              score:85, availability:"Available" },
-  { id:"5", name:"Divya Reddy",   initials:"DR", color:"#EC4899", role:"Frontend Engineer",  exp:"4.5 yrs", location:"Hyderabad, TS", skills:["React","TypeScript","Node.js"],             score:82, availability:"1 month"  },
+  // ─── Frontend ──────────────────────────────────────────────────────────────
+  { id:"c1",  name:"Ananya Sharma",    initials:"AS", color:"#5B3DF5", role:"Senior Frontend Developer", exp:"6 yrs",   location:"Bangalore, KA", skills:["React","TypeScript","Next.js","Tailwind","GraphQL"],          score:95, availability:"Available" },
+  { id:"c2",  name:"Rohit Menon",      initials:"RM", color:"#8B7DF7", role:"Frontend Developer",        exp:"3.5 yrs", location:"Bangalore, KA", skills:["React","Vue","CSS","Figma"],                                  score:92, availability:"Available" },
+  { id:"c3",  name:"Neha Iyer",        initials:"NI", color:"#16A34A", role:"Frontend Engineer",         exp:"5 yrs",   location:"Remote · India",skills:["Angular","React","GraphQL","AWS"],                            score:90, availability:"2 weeks"  },
+  { id:"c4",  name:"Karan Patel",      initials:"KP", color:"#F59E0B", role:"UI Engineer",               exp:"3 yrs",   location:"Mumbai, MH",    skills:["React","Redux","SCSS","Jest"],                                score:85, availability:"Available" },
+  { id:"c5",  name:"Divya Reddy",      initials:"DR", color:"#94A3B8", role:"Frontend Engineer",         exp:"4.5 yrs", location:"Hyderabad, TS", skills:["React","TypeScript","Node.js"],                               score:82, availability:"1 month"  },
+  { id:"c6",  name:"Aarav Kapoor",     initials:"AK", color:"#5B3DF5", role:"Staff Frontend Engineer",   exp:"9 yrs",   location:"Pune, MH",      skills:["React","Next.js","TypeScript","Webpack","Performance"],       score:96, availability:"2 weeks"  },
+  { id:"c7",  name:"Mira Joshi",       initials:"MJ", color:"#8B7DF7", role:"Frontend Developer",        exp:"2 yrs",   location:"Chennai, TN",   skills:["Vue","Nuxt","TypeScript","Sass"],                             score:78, availability:"Available" },
+
+  // ─── Backend ───────────────────────────────────────────────────────────────
+  { id:"c8",  name:"Marvin McKinney",  initials:"MM", color:"#5B3DF5", role:"Senior Backend Developer",  exp:"7 yrs",   location:"Bangalore, KA", skills:["Python","Django","PostgreSQL","Redis","AWS"],                 score:94, availability:"Available" },
+  { id:"c9",  name:"Priya Shah",       initials:"PS", color:"#16A34A", role:"Backend Engineer",          exp:"4 yrs",   location:"Hyderabad, TS", skills:["Java","Spring Boot","Kafka","MySQL"],                          score:89, availability:"Available" },
+  { id:"c10", name:"Ralph Edwards",    initials:"RE", color:"#8B7DF7", role:"Senior Backend Developer",  exp:"8 yrs",   location:"Remote · India",skills:["Go","gRPC","Postgres","Kubernetes"],                          score:91, availability:"1 month"  },
+  { id:"c11", name:"Vikram Iyer",      initials:"VI", color:"#94A3B8", role:"Backend Engineer",          exp:"5 yrs",   location:"Delhi NCR",     skills:["Node.js","Express","MongoDB","TypeScript"],                   score:84, availability:"2 weeks"  },
+  { id:"c12", name:"Sanya Khurana",    initials:"SK", color:"#5B3DF5", role:"Staff Backend Engineer",    exp:"10 yrs",  location:"Bangalore, KA", skills:["Rust","Go","Postgres","Kafka","Distributed Systems"],         score:97, availability:"1 month"  },
+
+  // ─── Full-stack ────────────────────────────────────────────────────────────
+  { id:"c13", name:"Aditya Verma",     initials:"AV", color:"#8B7DF7", role:"Full-Stack Engineer",       exp:"5 yrs",   location:"Pune, MH",      skills:["React","Node.js","TypeScript","AWS","PostgreSQL"],            score:88, availability:"Available" },
+  { id:"c14", name:"Tara Nambiar",     initials:"TN", color:"#16A34A", role:"Full-Stack Developer",      exp:"3 yrs",   location:"Bangalore, KA", skills:["Next.js","tRPC","Prisma","TypeScript"],                       score:86, availability:"Available" },
+
+  // ─── DevOps / SRE ──────────────────────────────────────────────────────────
+  { id:"c15", name:"Robert Fox",       initials:"RF", color:"#5B3DF5", role:"DevOps Engineer",           exp:"6 yrs",   location:"Hyderabad, TS", skills:["AWS","Docker","Kubernetes","Terraform","Jenkins"],            score:90, availability:"Available" },
+  { id:"c16", name:"Ishaan Bose",      initials:"IB", color:"#94A3B8", role:"Site Reliability Engineer", exp:"4 yrs",   location:"Bangalore, KA", skills:["Kubernetes","Prometheus","GCP","Go","Linux"],                 score:87, availability:"2 weeks"  },
+
+  // ─── Data / ML ─────────────────────────────────────────────────────────────
+  { id:"c17", name:"Kathryn Murphy",   initials:"KM", color:"#5B3DF5", role:"Data Scientist",            exp:"5 yrs",   location:"Mumbai, MH",    skills:["Python","TensorFlow","SQL","Power BI","Pandas"],              score:91, availability:"Available" },
+  { id:"c18", name:"Cody Fisher",      initials:"CF", color:"#8B7DF7", role:"ML Engineer",               exp:"6 yrs",   location:"Bangalore, KA", skills:["Python","PyTorch","ML","Deep Learning","Kubernetes"],         score:93, availability:"1 month"  },
+  { id:"c19", name:"Meera Krishnan",   initials:"MK", color:"#16A34A", role:"Data Engineer",             exp:"4 yrs",   location:"Chennai, TN",   skills:["Python","Spark","Airflow","Snowflake","SQL"],                 score:85, availability:"Available" },
+
+  // ─── Mobile ────────────────────────────────────────────────────────────────
+  { id:"c20", name:"Arjun Rao",        initials:"AR", color:"#8B7DF7", role:"iOS Engineer",              exp:"5 yrs",   location:"Bangalore, KA", skills:["Swift","SwiftUI","Combine","Core Data"],                      score:88, availability:"Available" },
+  { id:"c21", name:"Nikita Sen",       initials:"NS", color:"#16A34A", role:"React Native Developer",    exp:"3 yrs",   location:"Remote · India",skills:["React Native","TypeScript","Expo","Firebase"],                score:84, availability:"2 weeks"  },
+  { id:"c22", name:"Daksh Malhotra",   initials:"DM", color:"#94A3B8", role:"Android Engineer",          exp:"4 yrs",   location:"Gurgaon, HR",   skills:["Kotlin","Jetpack Compose","Coroutines","MVVM"],               score:82, availability:"1 month"  },
+
+  // ─── Design ────────────────────────────────────────────────────────────────
+  { id:"c23", name:"Savannah Nguyen",  initials:"SN", color:"#5B3DF5", role:"Senior Product Designer",   exp:"6 yrs",   location:"Bangalore, KA", skills:["UI/UX","Figma","Design Systems","Prototyping"],               score:94, availability:"Available" },
+  { id:"c24", name:"Esther Howard",    initials:"EH", color:"#8B7DF7", role:"UX Researcher",             exp:"5 yrs",   location:"Mumbai, MH",    skills:["User Research","Figma","Usability Testing","Mixpanel"],       score:87, availability:"2 weeks"  },
+  { id:"c25", name:"Arlene McCoy",     initials:"AM", color:"#16A34A", role:"UX Designer",               exp:"3 yrs",   location:"Pune, MH",      skills:["Figma","Sketch","Adobe XD","Prototyping"],                    score:80, availability:"Available" },
+
+  // ─── Product / QA ──────────────────────────────────────────────────────────
+  { id:"c26", name:"Cameron Williamson", initials:"CW", color:"#5B3DF5", role:"Product Manager",         exp:"7 yrs",   location:"Bangalore, KA", skills:["Roadmapping","Jira","Analytics","Stakeholder Mgmt"],          score:90, availability:"Available" },
+  { id:"c27", name:"Jane Cooper",      initials:"JC", color:"#94A3B8", role:"Senior Product Manager",    exp:"9 yrs",   location:"Hyderabad, TS", skills:["Strategy","Roadmapping","B2B SaaS","Analytics"],              score:92, availability:"1 month"  },
+  { id:"c28", name:"Riya Bhatt",       initials:"RB", color:"#8B7DF7", role:"QA Engineer",               exp:"4 yrs",   location:"Bangalore, KA", skills:["Cypress","Playwright","Jest","Selenium","TypeScript"],        score:81, availability:"Available" },
 ];
+
+/** Heuristic: score how well a candidate matches a free-form prompt. */
+function scoreCandidateForQuery(c: Candidate, q: string): number {
+  if (!q) return 0;
+  const tokens = q
+    .toLowerCase()
+    .split(/[\s,/]+/)
+    .filter((t) => t.length > 1);
+  if (tokens.length === 0) return 0;
+
+  const hayParts = [
+    c.name.toLowerCase(),
+    c.role.toLowerCase(),
+    c.location.toLowerCase(),
+    c.exp.toLowerCase(),
+    c.availability.toLowerCase(),
+    c.skills.join(" ").toLowerCase(),
+  ];
+  const hay = hayParts.join(" • ");
+
+  // Stop words we shouldn't penalise on absence.
+  const STOP = new Set([
+    "in", "for", "the", "a", "an", "and", "or", "of", "with", "to",
+    "find", "show", "me", "top", "best", "candidates", "candidate",
+    "developer", "developers", "engineer", "engineers", "available",
+    "now", "next", "month", "weeks", "week",
+  ]);
+
+  let score = 0;
+  let meaningful = 0;
+  for (const t of tokens) {
+    if (STOP.has(t)) continue;
+    meaningful++;
+    if (hay.includes(t)) score += 1;
+    // Skill exact match bonus
+    if (c.skills.some((s) => s.toLowerCase() === t)) score += 0.5;
+  }
+  // No meaningful tokens — match nothing so we fall back to top-N by score.
+  if (meaningful === 0) return 0;
+  return score / meaningful;
+}
+
+/** Filter + rank candidates for a prompt. Falls back to top-N by fit score. */
+function filterCandidates(query: string, limit = 6): Candidate[] {
+  const q = query.trim();
+  if (!q) {
+    return [...CANDIDATES].sort((a, b) => b.score - a.score).slice(0, limit);
+  }
+  const ranked = CANDIDATES
+    .map((c) => ({ c, m: scoreCandidateForQuery(c, q) }))
+    .filter((r) => r.m > 0)
+    .sort((a, b) => b.m - a.m || b.c.score - a.c.score)
+    .map((r) => r.c);
+  if (ranked.length === 0) {
+    return [...CANDIDATES].sort((a, b) => b.score - a.score).slice(0, limit);
+  }
+  return ranked.slice(0, limit);
+}
 
 const SEED: Msg[] = [
   { id:"s1", role:"user",      text:"Show me top 5 candidates for Frontend Developer role in Bangalore", ts: new Date(Date.now()-120000) },
-  { id:"s2", role:"assistant", text:"Here are the top 5 Frontend Developer candidates matching your criteria. Results are ranked by fit score and availability.", candidates:CANDIDATES, ts: new Date(Date.now()-115000) },
+  {
+    id: "s2",
+    role: "assistant",
+    text: `Here are the top 5 Frontend Developer candidates in Bangalore — ranked by fit score and availability. ${CANDIDATES.length} total candidates in your pool right now.`,
+    candidates: filterCandidates("Frontend Developer Bangalore", 5),
+    ts: new Date(Date.now() - 115000),
+  },
 ];
 
-const STARTER_CARDS = [
-  { label:"Show me top candidates for\nFrontend Developer role.",   prompt:"Show me top candidates for Frontend Developer role" },
-  { label:"What are today's\ninterviews scheduled?",                prompt:"What are today's interviews scheduled?" },
-  { label:"Give me a full\npipeline summary.",                      prompt:"Give me a full pipeline summary" },
-  { label:"Find candidates with\nPython skills.",                   prompt:"Find candidates with Python skills" },
+type StarterCard = {
+  icon: ReactNode;
+  title: string;
+  hint: string;
+  prompt: string;
+  scope: Scope;
+};
+
+type Scope = "all" | "candidates" | "interviews" | "jobs" | "pipeline" | "tasks";
+
+const STARTER_CARDS_FACTORY = (): StarterCard[] => [
+  {
+    icon: <UsersIcon size={18} />,
+    title: "Find React developers in Bangalore",
+    hint: "Top 5 ranked by fit · available now",
+    prompt: "Show me the top React developers in Bangalore available immediately",
+    scope: "candidates",
+  },
+  {
+    icon: <CalendarIcon size={18} />,
+    title: "What's on my interview schedule today?",
+    hint: "5 scheduled · next at 10:30 AM",
+    prompt: "What interviews are scheduled today?",
+    scope: "interviews",
+  },
+  {
+    icon: <BarChartMiniIcon size={18} />,
+    title: "Walk me through the pipeline",
+    hint: "126 active across 7 stages · 5.6% conv.",
+    prompt: "Give me a full pipeline summary with conversion rates",
+    scope: "pipeline",
+  },
+  {
+    icon: <MatchIcon size={18} />,
+    title: "Match candidates to my newest job",
+    hint: "Run AI matching for the latest opening",
+    prompt: "Match candidates to my latest open job description",
+    scope: "candidates",
+  },
+];
+
+const SCOPES: { id: Scope; label: string; icon: ReactNode; placeholder: string }[] = [
+  { id: "all",         label: "Everything", icon: <SparklesIcon size={15} />,     placeholder: "Ask anything across your recruiting workspace…" },
+  { id: "candidates",  label: "Candidates", icon: <UsersIcon size={15} />,        placeholder: "Search candidates by skill, location, availability…" },
+  { id: "interviews",  label: "Interviews", icon: <CalendarIcon size={15} />,     placeholder: "Search today's schedule, upcoming interviews…" },
+  { id: "jobs",        label: "Jobs",       icon: <BriefcaseIcon size={15} />,    placeholder: "Search open jobs, JDs, requirements…" },
+  { id: "pipeline",    label: "Pipeline",   icon: <BarChartMiniIcon size={15} />, placeholder: "Ask about funnel stages, conversion, drop-off…" },
+  { id: "tasks",       label: "Tasks",      icon: <CheckIcon size={15} />,        placeholder: "Search follow-ups, due tasks, overdue items…" },
 ];
 
 const QUICK_ACTIONS = [
@@ -167,6 +314,8 @@ export function AssistantPageClient() {
   const [msgs, setMsgs]     = useState<Msg[]>(SEED);
   const [input, setInput]   = useState("");
   const [typing, setTyping] = useState(false);
+  const [scope, setScope]   = useState<Scope>("all");
+  const STARTER_CARDS = STARTER_CARDS_FACTORY();
 
   // ── Responsive sidebar state ───────────────────────────────
   const [sidebarWidth, setSidebarWidth]       = useState(SIDEBAR_DEFAULT);
@@ -252,20 +401,89 @@ export function AssistantPageClient() {
     else setSidebarCollapsed((c) => !c);
   }, [isMobile]);
 
-  function send(text: string) {
+  function send(text: string, overrideScope?: Scope) {
     const t = text.trim();
     if (!t) return;
+    const useScope: Scope = overrideScope ?? scope;
     setMsgs(p => [...p, { id:uid(), role:"user", text:t, ts:new Date() }]);
     setInput(""); setTyping(true);
     setTimeout(() => {
-      const isCand = /candidate|match|find|developer|engineer|designer|python|react|frontend|backend|java|devops|angular|node/i.test(t);
-      setMsgs(p => [...p,
-        isCand
-          ? { id:uid(), role:"assistant", text:"Here are the top candidates matching your criteria. Results are ranked by fit score and availability.", candidates:CANDIDATES, ts:new Date() }
-          : { id:uid(), role:"assistant", text:`I've analyzed your request: "${t}". I can search the candidate pool, filter by skills, location, or availability, and generate structured match reports. What would you like me to focus on?`, ts:new Date() }
-      ]);
+      const reply = generateReply(t, useScope);
+      setMsgs(p => [...p, reply]);
       setTyping(false);
     }, 1400);
+  }
+
+  // Scope-aware responses — if a scope is locked, the AI only searches that
+  // surface. With "all", it falls back to keyword detection.
+  function generateReply(t: string, useScope: Scope): Msg {
+    const wantsCandidates =
+      useScope === "candidates" ||
+      (useScope === "all" && /candidate|find|developer|engineer|designer|python|react|frontend|backend|java|devops|angular|node/i.test(t));
+
+    if (wantsCandidates) {
+      const matches = filterCandidates(t, 6);
+      const text =
+        matches.length === 0
+          ? `No candidates matched "${t}" exactly. Showing the top performers from your pool instead.`
+          : useScope === "candidates"
+            ? `Found ${matches.length} candidate${matches.length === 1 ? "" : "s"} matching "${t}". Ranked by fit score & availability.`
+            : `Here are ${matches.length} candidate${matches.length === 1 ? "" : "s"} matching "${t}", ranked by fit score and availability.`;
+      return {
+        id: uid(),
+        role: "assistant",
+        text,
+        candidates: matches,
+        ts: new Date(),
+      };
+    }
+
+    if (useScope === "interviews" || (useScope === "all" && /interview|schedule|today|tomorrow/i.test(t))) {
+      return {
+        id: uid(),
+        role: "assistant",
+        text: "You have 5 interviews today:\n• 10:30 AM — Client call with TechCorp (John Smith)\n• 1:00 PM — Technical round · Marvin McKinney (Senior Developer)\n• 3:00 PM — HR round · Cameron Williamson (Product Manager)\n• 4:30 PM — Final round · Dianne Russell (Marketing Manager)\n• 5:30 PM — Screening · Esther Howard (UX Researcher)",
+        ts: new Date(),
+      };
+    }
+
+    if (useScope === "jobs" || (useScope === "all" && /\bjob|jd|opening|posting|role open/i.test(t))) {
+      return {
+        id: uid(),
+        role: "assistant",
+        text: "You have 24 active jobs across 5 departments:\n• Engineering — 12 (Frontend Developer, Backend Engineer, DevOps, ML Engineer)\n• Design — 5 (Product Designer, UX Researcher, UI Engineer)\n• Marketing — 3 (Marketing Manager, Content Lead, Demand Gen)\n• Product — 2 (PM, Senior PM)\n• Data — 2 (Data Analyst, Data Scientist)\n\nFrontend Developer has the highest application volume (45). Marketing Manager has the longest time-to-fill (35 days).",
+        ts: new Date(),
+      };
+    }
+
+    if (useScope === "pipeline" || (useScope === "all" && /pipeline|funnel|stage|conversion|drop[- ]?off/i.test(t))) {
+      return {
+        id: uid(),
+        role: "assistant",
+        text: "Pipeline snapshot — 89 active candidates:\n• 18 New Profiles\n• 24 Shortlisted\n• 12 Submitted to clients\n• 8 in Interview\n• 5 with active Offers\n• 7 Placed (this period)\n• 15 Rejected\n\nApplication → Placement conversion: 5.6%. Biggest drop-off is Submitted → Interview (33% pass-through). Want me to highlight stalled candidates?",
+        ts: new Date(),
+      };
+    }
+
+    if (useScope === "tasks" || (useScope === "all" && /task|follow[- ]?up|due|overdue|reminder/i.test(t))) {
+      return {
+        id: uid(),
+        role: "assistant",
+        text: "12 pending tasks · 7 overdue (4 high priority) · 8 due today.\n\nTop actions for today:\n• ⚠ Nudge Acme on Cameron Williamson submission (3 days waiting)\n• Call Ralph Edwards — Frontend Developer screen (due 3 PM)\n• Email Dianne Russell offer letter (due EOD)\n• Follow up with Marcus Lee — overdue from yesterday",
+        ts: new Date(),
+      };
+    }
+
+    // Generic / fallback
+    const scopeLabel = SCOPES.find(s => s.id === useScope)?.label ?? "Everything";
+    return {
+      id: uid(),
+      role: "assistant",
+      text: useScope === "all"
+        ? `I've analyzed your request: "${t}". I can search candidates, interviews, jobs, the pipeline, or tasks. Pick a focus from the toolbar below or be more specific.`
+        : `Searching ${scopeLabel.toLowerCase()} for "${t}" — but I couldn't find a strong match. Try a different keyword or switch scope using the toolbar.`,
+      ts: new Date(),
+    };
   }
 
   function onKey(e: KeyboardEvent<HTMLTextAreaElement>) {
@@ -328,6 +546,9 @@ export function AssistantPageClient() {
 
         .tb-btn { transition:background .12s, color .12s; }
         .tb-btn:hover { background:#EEE9FF !important; color:#5B3DF5 !important; }
+
+        .scope-btn:hover { background: var(--color-surface-2) !important; color: var(--color-text) !important; }
+        .scope-btn[aria-pressed="true"]:hover { background: var(--color-brand-200) !important; }
       `}</style>
 
       <div className="assist-root">
@@ -406,19 +627,40 @@ export function AssistantPageClient() {
                   </div>
 
                   {/* starter cards */}
-                  <div style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:12, width:"100%", maxWidth:600 }}>
+                  <div style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:12, width:"100%", maxWidth:640 }}>
                     {STARTER_CARDS.map(card => (
                       <button key={card.prompt}
                         className="starter-card"
-                        onClick={() => send(card.prompt)}
+                        onClick={() => { setScope(card.scope); send(card.prompt, card.scope); }}
                         style={{
-                          textAlign:"left", padding:"18px 18px",
-                          background:"#fff", border:"1.5px solid #E5E7EF",
+                          textAlign:"left", padding:"16px",
+                          background:"var(--color-surface)",
+                          border:"1.5px solid var(--color-border)",
                           borderRadius:16, cursor:"pointer",
                           boxShadow:"0 2px 8px rgba(23,26,43,.04)",
+                          display:"flex", flexDirection:"column", gap:10,
                         }}>
-                        <p style={{ margin:0, fontSize:13.5, fontWeight:500, color:"#374151", lineHeight:1.6, whiteSpace:"pre-line" }}>
-                          {card.label}
+                        <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+                          <span style={{
+                            width:34, height:34, borderRadius:10, flexShrink:0,
+                            background:"var(--color-brand-100)",
+                            color:"var(--color-brand-600)",
+                            display:"flex", alignItems:"center", justifyContent:"center",
+                          }}>
+                            {card.icon}
+                          </span>
+                          <span style={{
+                            fontSize:9, fontWeight:700, letterSpacing:".08em", textTransform:"uppercase",
+                            color:"var(--color-text-muted)",
+                          }}>
+                            {SCOPES.find(s => s.id === card.scope)?.label}
+                          </span>
+                        </div>
+                        <p style={{ margin:0, fontSize:13.5, fontWeight:700, color:"var(--color-text)", lineHeight:1.4 }}>
+                          {card.title}
+                        </p>
+                        <p style={{ margin:0, fontSize:11.5, fontWeight:500, color:"var(--color-text-secondary)", lineHeight:1.45 }}>
+                          {card.hint}
                         </p>
                       </button>
                     ))}
@@ -543,52 +785,99 @@ export function AssistantPageClient() {
           </div>
 
           {/* ── Input ───────────────────────────────────────────────────── */}
-          <div style={{ padding:"10px 20px 18px", background:"#fff", borderTop:"1.5px solid #F3F4F8", flexShrink:0 }}>
+          <div style={{ padding:"10px 20px 18px", background:"var(--color-surface)", borderTop:"1.5px solid var(--color-border)", flexShrink:0 }}>
             <div className="chat-inner">
+
+              {/* Scope chip — shows when user has narrowed search to a specific source */}
+              {scope !== "all" && (
+                <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:8 }}>
+                  <span style={{
+                    display:"inline-flex", alignItems:"center", gap:6,
+                    padding:"4px 10px 4px 8px",
+                    background:"var(--color-brand-100)",
+                    color:"var(--color-brand-600)",
+                    borderRadius:999, fontSize:11, fontWeight:700,
+                    border:"1px solid var(--color-brand-200)",
+                  }}>
+                    <span style={{ display:"inline-flex" }}>
+                      {SCOPES.find(s => s.id === scope)?.icon}
+                    </span>
+                    Scope: {SCOPES.find(s => s.id === scope)?.label}
+                    <button
+                      type="button"
+                      onClick={() => setScope("all")}
+                      aria-label="Clear scope"
+                      style={{ display:"inline-flex", alignItems:"center", justifyContent:"center",
+                        width:14, height:14, borderRadius:999, border:"none",
+                        background:"rgba(91,61,245,.15)", color:"var(--color-brand-600)",
+                        cursor:"pointer", padding:0 }}
+                    >
+                      <XIcon size={9} />
+                    </button>
+                  </span>
+                  <span style={{ fontSize:11, color:"var(--color-text-muted)" }}>
+                    AI will only search {SCOPES.find(s => s.id === scope)?.label.toLowerCase()}.
+                  </span>
+                </div>
+              )}
+
               <div className="input-box">
                 <textarea
                   ref={inputRef}
                   value={input}
                   onChange={e => setInput(e.target.value)}
                   onKeyDown={onKey}
-                  placeholder="Ask follow-up or refine your search…"
+                  placeholder={SCOPES.find(s => s.id === scope)?.placeholder ?? "Ask follow-up or refine your search…"}
                   rows={2}
                   style={{ width:"100%", boxSizing:"border-box",
                     padding:"14px 16px 4px", border:"none", outline:"none",
                     borderRadius:"16px 16px 0 0", resize:"none",
-                    fontSize:14, color:"#171A2B", lineHeight:1.65,
+                    fontSize:14, color:"var(--color-text)", lineHeight:1.65,
                     background:"transparent", fontFamily:"inherit" }} />
 
-                {/* toolbar */}
-                <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"6px 10px 10px" }}>
-                  <div style={{ display:"flex", gap:2 }}>
-                    {[
-                      { label:"Attach",   node:<PaperclipIcon size={15} /> },
-                      { label:"Charts",   node:<BarChartMiniIcon size={15} /> },
-                      { label:"Filter",   node:<FilterIcon size={15} /> },
-                      { label:"Template", node:<TemplateIcon size={15} /> },
-                      { label:"Document", node:<DocumentIcon size={15} /> },
-                      { label:"Team",     node:<UsersIcon size={15} /> },
-                    ].map(b => (
-                      <button key={b.label} title={b.label} className="tb-btn"
-                        style={{ width:32, height:32, borderRadius:8, border:"none",
-                          background:"transparent", color:"#9CA3AF",
-                          display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer" }}>
-                        {b.node}
-                      </button>
-                    ))}
+                {/* Scope picker toolbar */}
+                <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"6px 10px 10px", gap:8 }}>
+                  <div style={{ display:"flex", gap:3, flexWrap:"wrap" }}>
+                    {SCOPES.map(s => {
+                      const active = scope === s.id;
+                      return (
+                        <button
+                          key={s.id}
+                          type="button"
+                          title={`${s.label} — ${active ? "active scope" : "click to scope search"}`}
+                          aria-pressed={active}
+                          onClick={() => setScope(active ? "all" : s.id)}
+                          className="scope-btn"
+                          style={{
+                            height:32, padding: active ? "0 10px 0 8px" : "0 8px",
+                            borderRadius:8, border: active
+                              ? "1.5px solid var(--color-brand-300)"
+                              : "1.5px solid transparent",
+                            background: active ? "var(--color-brand-100)" : "transparent",
+                            color: active ? "var(--color-brand-600)" : "var(--color-text-muted)",
+                            display:"flex", alignItems:"center", gap:5,
+                            cursor:"pointer",
+                            fontSize:11, fontWeight:700,
+                            transition:"all .15s",
+                          }}
+                        >
+                          {s.icon}
+                          {active && <span>{s.label}</span>}
+                        </button>
+                      );
+                    })}
                   </div>
-                  <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-                    <span style={{ fontSize:10, color:"#C8D0DD", display:"flex", gap:4, alignItems:"center" }}>
-                      <kbd style={{ background:"#F3F4F8", border:"1px solid #E5E7EF", borderRadius:4, padding:"1px 5px", fontSize:10, color:"#98A2B3", fontFamily:"inherit" }}>↵</kbd>
+                  <div style={{ display:"flex", alignItems:"center", gap:10, flexShrink:0 }}>
+                    <span style={{ fontSize:10, color:"var(--color-text-muted)", display:"flex", gap:4, alignItems:"center" }}>
+                      <kbd style={{ background:"var(--color-surface-2)", border:"1px solid var(--color-border)", borderRadius:4, padding:"1px 5px", fontSize:10, color:"var(--color-text-muted)", fontFamily:"inherit" }}>↵</kbd>
                       to send
                     </span>
                     <button
                       onClick={() => send(input)}
                       disabled={!input.trim() || typing}
                       style={{ width:36, height:36, borderRadius:10, border:"none",
-                        background: input.trim() && !typing ? "linear-gradient(135deg,#5B3DF5,#7C3AED)" : "#E5E7EF",
-                        color: input.trim() && !typing ? "#fff" : "#B0BAD0",
+                        background: input.trim() && !typing ? "linear-gradient(135deg,#5B3DF5,#7C3AED)" : "var(--color-surface-2)",
+                        color: input.trim() && !typing ? "#fff" : "var(--color-text-muted)",
                         display:"flex", alignItems:"center", justifyContent:"center",
                         cursor: input.trim() && !typing ? "pointer" : "default",
                         transition:"background .15s, box-shadow .15s",
@@ -599,7 +888,7 @@ export function AssistantPageClient() {
                 </div>
               </div>
 
-              <p style={{ textAlign:"center", fontSize:10, color:"#C8D0DD", margin:"7px 0 0" }}>
+              <p style={{ textAlign:"center", fontSize:10, color:"var(--color-text-muted)", margin:"7px 0 0" }}>
                 AI can make mistakes · Always verify before sending submissions
               </p>
             </div>

@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import {
-  BriefcaseIcon,
-  CalendarIcon,
-  CheckIcon,
-  PlaneIcon,
-  ReportsIcon,
-  TrendUpIcon,
-  TrophyIcon,
-  UsersIcon,
-} from "@/components/icons/AppIcons";
+  Briefcase,
+  Calendar,
+  Chart,
+  Cup,
+  Profile2User,
+  Send,
+  TickCircle,
+  TrendUp,
+} from "iconsax-reactjs";
 import { CircularProgress, MiniDonut } from "@/components/reports/charts";
 import { StatCard, StatIconWrap } from "@/components/reports/shared";
 import {
@@ -29,14 +29,14 @@ import {
 // ─── Stat icon mapping ────────────────────────────────────────────────────────
 
 function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string }) {
-  const cls = { size: 20, style: { color } };
+  const props = { size: 20, color, variant: "Bulk" as const };
   const n =
-    icon === "briefcase" ? <BriefcaseIcon {...cls} />
-    : icon === "users"     ? <UsersIcon {...cls} />
-    : icon === "plane"     ? <PlaneIcon {...cls} />
-    : icon === "calendar"  ? <CalendarIcon {...cls} />
-    : icon === "check"     ? <CheckIcon {...cls} />
-    : <TrophyIcon {...cls} />;
+    icon === "briefcase" ? <Briefcase {...props} />
+    : icon === "users"     ? <Profile2User {...props} />
+    : icon === "plane"     ? <Send {...props} />
+    : icon === "calendar"  ? <Calendar {...props} />
+    : icon === "check"     ? <TickCircle {...props} variant="Bold" />
+    : <Cup {...props} />;
   return <StatIconWrap bg={bg}>{n}</StatIconWrap>;
 }
 
@@ -44,16 +44,16 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 
 function ActivityTypeIcon({ type }: { type: string }) {
   const configs: Record<string, { bg: string; color: string; icon: React.ReactNode }> = {
-    interview:   { bg: "#EEE9FF", color: "#5B3DF5", icon: <CalendarIcon size={14} /> },
-    application: { bg: "#EAF2FF", color: "#3B82F6", icon: <PlaneIcon size={14} /> },
-    followup:    { bg: "#FFF4DB", color: "#F59E0B", icon: <ReportsIcon size={14} /> },
-    offer:       { bg: "#EAFBF1", color: "#22C55E", icon: <CheckIcon size={14} /> },
+    interview:   { bg: "#EEE9FF", color: "#5B3DF5", icon: <Calendar size={14} variant="Bulk" color="#5B3DF5" /> },
+    application: { bg: "#EAF2FF", color: "#8B7DF7", icon: <Send size={14} variant="Bulk" color="#8B7DF7" /> },
+    followup:    { bg: "#FFF4DB", color: "#F59E0B", icon: <Chart size={14} variant="Bulk" color="#F59E0B" /> },
+    offer:       { bg: "#EAFBF1", color: "#16A34A", icon: <TickCircle size={14} variant="Bold" color="#16A34A" /> },
   };
   const c = configs[type] ?? configs.interview;
   return (
     <div
       className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px]"
-      style={{ backgroundColor: c.bg, color: c.color }}
+      style={{ backgroundColor: c.bg }}
     >
       {c.icon}
     </div>
@@ -164,8 +164,8 @@ function TaperedFunnel() {
 
 const CHART_SERIES = [
   { key: "applications" as const, label: "Applications", color: "#5B3DF5" },
-  { key: "interviews"   as const, label: "Interviews",   color: "#3B82F6" },
-  { key: "followUps"    as const, label: "Follow-ups",   color: "#22C55E" },
+  { key: "interviews"   as const, label: "Interviews",   color: "#8B7DF7" },
+  { key: "followUps"    as const, label: "Follow-ups",   color: "#16A34A" },
   { key: "offers"       as const, label: "Offers",       color: "#F59E0B" },
 ];
 
@@ -321,7 +321,7 @@ export function OverviewTab() {
             <div className="min-w-0 flex-1">
               <div className="mb-2 flex items-center gap-2">
                 <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--color-success-light)] px-1.5 py-0.5 text-[10px] font-bold text-[color:var(--color-success)]">
-                  <TrendUpIcon size={9} />▲ {recruitmentPulse.delta} pts
+                  <TrendUp size={9} variant="Bold" color="currentColor" />▲ {recruitmentPulse.delta} pts
                 </span>
                 <span className="text-[10px] text-[color:var(--color-text-muted)]">
                   vs last week

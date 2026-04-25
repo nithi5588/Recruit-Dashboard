@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import {
-  SolidStar,
-  SparklesIcon,
-  TargetIcon,
-  TrophyIcon,
-  UserPlusIcon,
-  UsersIcon,
-} from "@/components/icons/AppIcons";
+  Cup,
+  Discover,
+  MagicStar,
+  Profile2User,
+  ProfileAdd,
+  Star1,
+} from "iconsax-reactjs";
 import { MiniDonut } from "@/components/reports/charts";
 import { InsightsPanel, StatCard, StatIconWrap } from "@/components/reports/shared";
 import {
@@ -28,14 +28,14 @@ import {
 // ─── Stat card icon ───────────────────────────────────────────────────────────
 
 function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string }) {
-  const cls = { size: 20, style: { color } };
+  const props = { size: 20, color, variant: "Bulk" as const };
   const n =
-    icon === "users"     ? <UsersIcon {...cls} />
-    : icon === "user-plus" ? <UserPlusIcon {...cls} />
-    : icon === "target"  ? <TargetIcon {...cls} />
-    : icon === "trophy"  ? <TrophyIcon {...cls} />
-    : icon === "star"    ? <SolidStar {...cls} />
-    : <UsersIcon {...cls} />;
+    icon === "users"        ? <Profile2User {...props} />
+    : icon === "user-plus"  ? <ProfileAdd {...props} />
+    : icon === "target"     ? <Discover {...props} />
+    : icon === "trophy"     ? <Cup {...props} />
+    : icon === "star"       ? <Star1 {...props} variant="Bold" />
+    : <Profile2User {...props} />;
   return <StatIconWrap bg={bg}>{n}</StatIconWrap>;
 }
 
@@ -43,7 +43,7 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 
 const GROWTH_SERIES = [
   { key: "newCandidates"   as const, label: "New Candidates",   color: "#5B3DF5" },
-  { key: "updatedProfiles" as const, label: "Updated Profiles", color: "#22C55E" },
+  { key: "updatedProfiles" as const, label: "Updated Profiles", color: "#16A34A" },
 ];
 
 function GrowthChart() {
@@ -167,7 +167,7 @@ function SkillsCloud() {
   const shaded = [...skillsCloud]
     .sort((a, b) => b.size - a.size)
     .map((s) => {
-      const hue = s.size > 0.85 ? "#4B32D4" : s.size > 0.65 ? "#5B3DF5" : s.size > 0.5 ? "#7C3AED" : s.size > 0.4 ? "#8B5CF6" : "#A78BFA";
+      const hue = s.size > 0.85 ? "#4B32D4" : s.size > 0.65 ? "#5B3DF5" : s.size > 0.5 ? "#5B3DF5" : s.size > 0.4 ? "#8B7DF7" : "#B8A9FC";
       return { ...s, hue };
     });
   return (
@@ -234,7 +234,7 @@ export function CandidatesTab() {
           <div className="relative p-5 text-white">
             <div className="mb-4 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
-                <SparklesIcon size={12} /> Candidate Spotlight
+                <MagicStar size={12} variant="Bold" color="currentColor" /> Candidate Spotlight
               </span>
               <div className="flex items-center gap-2">
                 <span className="text-[10px] opacity-80">Match score</span>

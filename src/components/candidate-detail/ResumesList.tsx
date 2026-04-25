@@ -1,5 +1,6 @@
 "use client";
 
+import { InfoCircle } from "iconsax-reactjs";
 import { Badge, type BadgeTone } from "@/components/ui/Badge";
 import { PdfFileIcon } from "@/components/candidate-detail/PdfFileIcon";
 import { MoreIcon, UploadIcon } from "@/components/icons/AppIcons";
@@ -53,17 +54,7 @@ function ResumeRow({
 }
 
 function InfoIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-      <path
-        d="M12 11v5M12 8v.01"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+  return <InfoCircle size={20} color="currentColor" variant="Linear" />;
 }
 
 export function ResumesList({

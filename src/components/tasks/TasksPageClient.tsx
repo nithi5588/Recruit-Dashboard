@@ -7,6 +7,7 @@ import {
   useState,
   type DragEvent,
 } from "react";
+import { More } from "iconsax-reactjs";
 import {
   BriefcaseIcon,
   CalendarIcon,
@@ -993,14 +994,7 @@ export function TasksPageClient() {
             aria-hidden
             className="inline-flex h-4 w-4 items-center justify-center rounded-[4px] bg-[color:var(--color-brand-50)] text-[color:var(--color-brand-600)]"
           >
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path
-                d="M8 6h.01M8 12h.01M8 18h.01M16 6h.01M16 12h.01M16 18h.01"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-            </svg>
+            <More size={10} color="currentColor" variant="Bold" />
           </span>
           Drag any card between columns to update its status.
         </p>

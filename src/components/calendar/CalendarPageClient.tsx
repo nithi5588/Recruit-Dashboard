@@ -282,6 +282,30 @@ function EvIcon({ type, size = 12 }: { type: EventIconType; size?: number }) {
 
 // ─── Event Card ───────────────────────────────────────────────────────────────
 
+// ─── Hour Slot (click anywhere to add event) ──────────────────────────────────
+
+function HourSlot({ hour, onClick }: { hour: number; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={`Add event at ${fmt12(hour, 0)}`}
+      className="group/slot absolute inset-x-0 z-0 flex items-center justify-center transition-colors hover:bg-[color:var(--color-brand-500)]/[0.06]"
+      style={{
+        top: `${(hour - START_H) * HOUR_H}px`,
+        height: `${HOUR_H}px`,
+      }}
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none flex h-7 w-7 scale-90 items-center justify-center rounded-full bg-[color:var(--color-brand-500)] text-white opacity-0 shadow-[0_4px_12px_rgba(91,61,245,0.4)] transition-all group-hover/slot:scale-100 group-hover/slot:opacity-100"
+      >
+        <PlusIcon size={14} />
+      </span>
+    </button>
+  );
+}
+
 function EventCard({
   event,
   isSelected,
@@ -396,6 +420,7 @@ function WeekView({
   events,
   selectedEvent,
   onEventClick,
+  onSlotClick,
 }: {
   weekDays: Date[];
   today: Date;
@@ -403,6 +428,7 @@ function WeekView({
   events: CalendarEvent[];
   selectedEvent: CalendarEvent | null;
   onEventClick: (e: CalendarEvent) => void;
+  onSlotClick: (day: Date, hour: number) => void;
 }) {
   const todayYMD = toYMD(today);
   const nowTop = (now.getHours() + now.getMinutes() / 60 - START_H) * HOUR_H;
@@ -460,9 +486,8 @@ function WeekView({
             return (
               <div
                 key={i}
-                className={`relative min-w-0 flex-1 border-l border-[color:var(--color-border)] ${
-                  isToday ? "bg-[color:var(--color-brand-50)]" : ""
-                }`}
+                className="relative min-w-0 flex-1 border-l border-[color:var(--color-border)]"
+                style={isToday ? { background: "rgba(91,61,245,0.07)" } : undefined}
               >
                 {/* Hour grid lines */}
                 {HOURS.map((h) => (
@@ -479,6 +504,15 @@ function WeekView({
                     key={`${h}h`}
                     className="absolute inset-x-0 border-t border-dashed border-[color:var(--color-border)]"
                     style={{ top: `${(h - START_H) * HOUR_H + HOUR_H / 2}px`, opacity: 0.5 }}
+                  />
+                ))}
+
+                {/* Hour slot click + hover overlays */}
+                {HOURS.map((h) => (
+                  <HourSlot
+                    key={`slot-${h}`}
+                    hour={h}
+                    onClick={() => onSlotClick(day, h)}
                   />
                 ))}
 
@@ -523,6 +557,7 @@ function DayView({
   events,
   selectedEvent,
   onEventClick,
+  onSlotClick,
 }: {
   selectedDay: Date;
   today: Date;
@@ -530,6 +565,7 @@ function DayView({
   events: CalendarEvent[];
   selectedEvent: CalendarEvent | null;
   onEventClick: (e: CalendarEvent) => void;
+  onSlotClick: (day: Date, hour: number) => void;
 }) {
   const ymd = toYMD(selectedDay);
   const dayEvents = events.filter((e) => e.date === ymd);
@@ -563,9 +599,8 @@ function DayView({
           <TimeGutter now={now} showNowLabel={isToday} />
 
           <div
-            className={`relative flex-1 border-l border-[color:var(--color-border)] ${
-              isToday ? "bg-[color:var(--color-brand-50)]" : ""
-            }`}
+            className="relative flex-1 border-l border-[color:var(--color-border)]"
+            style={isToday ? { background: "rgba(91,61,245,0.07)" } : undefined}
           >
             {HOURS.map((h) => (
               <div
@@ -579,6 +614,13 @@ function DayView({
                 key={`${h}h`}
                 className="absolute inset-x-0 border-t border-dashed border-[color:var(--color-border)]"
                 style={{ top: `${(h - START_H) * HOUR_H + HOUR_H / 2}px`, opacity: 0.5 }}
+              />
+            ))}
+            {HOURS.map((h) => (
+              <HourSlot
+                key={`slot-${h}`}
+                hour={h}
+                onClick={() => onSlotClick(selectedDay, h)}
               />
             ))}
             {isToday && nowTop >= 0 && nowTop <= (END_H - START_H) * HOUR_H && (
@@ -1066,19 +1108,23 @@ function EventDetailCard({
 function NewEventModal({
   open,
   defaultDate,
+  defaultStart,
+  defaultEnd,
   onClose,
   onCreate,
 }: {
   open: boolean;
   defaultDate: Date;
+  defaultStart?: string;
+  defaultEnd?: string;
   onClose: () => void;
   onCreate: (e: CalendarEvent) => void;
 }) {
   const [title, setTitle] = useState("");
   const [type, setType] = useState<EventType>("interview");
   const [date, setDate] = useState<string>(toYMD(defaultDate));
-  const [start, setStart] = useState<string>("10:00");
-  const [end, setEnd] = useState<string>("11:00");
+  const [start, setStart] = useState<string>(defaultStart ?? "10:00");
+  const [end, setEnd] = useState<string>(defaultEnd ?? "11:00");
   const [subtitle, setSubtitle] = useState("");
   const [candidateName, setCandidateName] = useState("");
   const [notes, setNotes] = useState("");
@@ -1090,15 +1136,15 @@ function NewEventModal({
       setTitle("");
       setType("interview");
       setDate(toYMD(defaultDate));
-      setStart("10:00");
-      setEnd("11:00");
+      setStart(defaultStart ?? "10:00");
+      setEnd(defaultEnd ?? "11:00");
       setSubtitle("");
       setCandidateName("");
       setNotes("");
       setError(null);
       requestAnimationFrame(() => firstInputRef.current?.focus());
     }
-  }, [open, defaultDate]);
+  }, [open, defaultDate, defaultStart, defaultEnd]);
 
   useEffect(() => {
     if (!open) return;
@@ -1411,8 +1457,25 @@ export function CalendarPageClient() {
     return new Date(d.getFullYear(), d.getMonth(), 1);
   });
   const [newEventOpen, setNewEventOpen] = useState(false);
+  const [slotDefaults, setSlotDefaults] = useState<{
+    date: Date;
+    start: string;
+    end: string;
+  } | null>(null);
   const filterRef = useRef<HTMLDivElement>(null);
   const datePickerRef = useRef<HTMLDivElement>(null);
+
+  function pad(n: number) {
+    return n < 10 ? `0${n}` : `${n}`;
+  }
+  function openSlotModal(day: Date, hour: number) {
+    setSlotDefaults({
+      date: day,
+      start: `${pad(hour)}:00`,
+      end: `${pad(Math.min(hour + 1, 23))}:00`,
+    });
+    setNewEventOpen(true);
+  }
 
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 60_000);
@@ -1864,6 +1927,7 @@ export function CalendarPageClient() {
               events={events}
               selectedEvent={selectedEvent}
               onEventClick={toggleEvent}
+              onSlotClick={openSlotModal}
             />
           )}
           {view === "day" && (
@@ -1874,6 +1938,7 @@ export function CalendarPageClient() {
               events={dayViewEvents}
               selectedEvent={selectedEvent}
               onEventClick={toggleEvent}
+              onSlotClick={openSlotModal}
             />
           )}
           {view === "agenda" && (
@@ -1971,8 +2036,15 @@ export function CalendarPageClient() {
 
       <NewEventModal
         open={newEventOpen}
-        defaultDate={view === "day" ? selectedDay : today}
-        onClose={() => setNewEventOpen(false)}
+        defaultDate={
+          slotDefaults?.date ?? (view === "day" ? selectedDay : today)
+        }
+        defaultStart={slotDefaults?.start}
+        defaultEnd={slotDefaults?.end}
+        onClose={() => {
+          setNewEventOpen(false);
+          setSlotDefaults(null);
+        }}
         onCreate={addUserEvent}
       />
     </div>

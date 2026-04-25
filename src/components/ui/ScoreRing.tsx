@@ -13,9 +13,16 @@ export function ScoreRing({
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (clamped / 100) * circumference;
+  // Muted scoring palette — high scores use brand (so they follow user accent),
+  // mid uses a soft amber, low uses a soft rose. Less saturated than pure
+  // green/orange/red to keep lists calm.
   const color =
-    clamped >= 80 ? "#22C55E" : clamped >= 60 ? "#F59E0B" : "#EF4444";
-  const track = "#EDEFF5";
+    clamped >= 80
+      ? "var(--color-brand-500)"
+      : clamped >= 60
+        ? "#C99431"
+        : "#B26B6E";
+  const track = "var(--color-surface-2)";
   const labelSuffix = suffix ? `${clamped}${suffix}` : `${clamped} out of 100`;
 
   return (

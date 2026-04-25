@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { DownloadIcon, ReportsIcon } from "@/components/icons/AppIcons";
+import { Chart, DocumentDownload } from "iconsax-reactjs";
 import { ActivitiesTab } from "@/components/reports/ActivitiesTab";
 import { CandidatesTab } from "@/components/reports/CandidatesTab";
 import {
@@ -31,7 +31,7 @@ function ComingSoonTab({ name }: { name: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-24">
       <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-[20px] bg-[color:var(--color-brand-100)]">
-        <ReportsIcon size={28} className="text-[color:var(--color-brand-500)]" />
+        <Chart size={28} variant="Bulk" color="var(--color-brand-500)" />
       </div>
       <h3 className="mb-1.5 text-[16px] font-bold text-[color:var(--color-text)]">{name} Report</h3>
       <p className="text-[13px] text-[color:var(--color-text-secondary)]">Detailed {name.toLowerCase()} analytics coming soon.</p>
@@ -209,7 +209,7 @@ export function ReportsPageClient() {
             <h1 className="text-[22px] font-bold tracking-tight text-[color:var(--color-text)] sm:text-[26px]">
               Reports
             </h1>
-            <ReportsIcon size={22} className="text-[color:var(--color-brand-500)]" />
+            <Chart size={22} variant="Bulk" color="var(--color-brand-500)" />
           </div>
           <p className="mt-0.5 text-[13px] text-[color:var(--color-text-secondary)]">
             Track your recruitment activities and performance in one place.
@@ -224,7 +224,7 @@ export function ReportsPageClient() {
             title={`Export ${activeTab} report to Excel`}
             className="flex h-9 items-center gap-2 rounded-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 text-[12px] font-semibold text-[color:var(--color-text)] shadow-[var(--shadow-card)] transition-colors hover:border-[color:var(--color-brand-300)] hover:bg-[color:var(--color-brand-50)] hover:text-[color:var(--color-brand-600)]"
           >
-            <DownloadIcon size={14} />
+            <DocumentDownload size={14} variant="Bulk" color="currentColor" />
             <span className="hidden sm:inline">Export {activeTab}</span>
             <span className="sm:hidden">Export</span>
           </button>

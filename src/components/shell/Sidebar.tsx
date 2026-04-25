@@ -46,7 +46,22 @@ const navItems: NavEntry[] = [
   { label: "Clients", href: "/clients", icon: <ClientsIcon size={18} /> },
   { label: "Calendar", href: "/calendar", icon: <CalendarIcon size={18} /> },
   { label: "Tasks", href: "/tasks", icon: <TasksIcon size={18} /> },
-  { label: "Reports", href: "/reports", icon: <ReportsIcon size={18} /> },
+  {
+    label: "Reports",
+    href: "/reports",
+    icon: <ReportsIcon size={18} />,
+    badge: (
+      <span
+        className="inline-flex items-center rounded-[5px] px-[6px] py-[2px] text-[9px] font-bold uppercase tracking-wider text-white"
+        style={{
+          background: "linear-gradient(135deg, #22C55E 0%, #16A34A 100%)",
+          boxShadow: "0 2px 6px rgba(34, 197, 94, 0.32)",
+        }}
+      >
+        New
+      </span>
+    ),
+  },
   {
     label: "AI Assistant",
     href: "/assistant",

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import {
   ExpandIcon,
@@ -120,17 +121,20 @@ export function AIAssistant({
               <button
                 type="button"
                 aria-label="Reset conversation"
+                title="Clear prompt"
+                onClick={() => setPrompt("")}
                 className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface)] hover:text-[color:var(--color-text-secondary)]"
               >
                 <RefreshIcon size={14} />
               </button>
-              <button
-                type="button"
+              <Link
+                href="/assistant"
                 aria-label="Open full assistant"
+                title="Open full assistant"
                 className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface)] hover:text-[color:var(--color-text-secondary)]"
               >
                 <ExpandIcon size={14} />
-              </button>
+              </Link>
             </div>
           </header>
 

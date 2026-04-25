@@ -11,9 +11,9 @@ function SkillTile({ skill }: { skill: CoreSkill }) {
   const percent = levelPercent(skill.level);
   const color = levelBarColor(skill.level);
   return (
-    <div className="flex flex-col gap-2 rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3.5">
+    <div className="flex min-w-0 flex-col gap-2 rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3.5 transition-all hover:border-[color:var(--color-brand-200)] hover:shadow-[var(--shadow-card)]">
       <div className="flex items-start justify-between gap-2">
-        <p className="truncate text-[13px] font-semibold text-[color:var(--color-text)]">
+        <p className="min-w-0 flex-1 truncate text-[13px] font-semibold text-[color:var(--color-text)]" title={skill.name}>
           {skill.name}
         </p>
         <Badge tone={levelBadgeTone(skill.level)}>{skill.level}</Badge>
@@ -27,7 +27,7 @@ function SkillTile({ skill }: { skill: CoreSkill }) {
         className="h-1.5 overflow-hidden rounded-[999px] bg-[color:var(--color-surface-2)]"
       >
         <span
-          className="block h-full rounded-[999px]"
+          className="block h-full rounded-[999px] transition-[width] duration-500"
           style={{ width: `${percent}%`, background: color }}
         />
       </div>
@@ -76,7 +76,7 @@ export function CoreSkillsCard({ skills }: { skills: CoreSkill[] }) {
           No core skills added yet.
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((s) => (
             <SkillTile key={s.name} skill={s} />
           ))}

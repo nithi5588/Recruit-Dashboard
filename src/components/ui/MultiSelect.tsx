@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { Add, TickCircle } from "iconsax-reactjs";
 import { ChevronDownIcon } from "@/components/icons/Icons";
 
 export function MultiSelect({
@@ -95,14 +96,12 @@ export function MultiSelect({
                 onClick={() => toggle(v)}
                 className="inline-flex h-4 w-4 items-center justify-center rounded-full text-[color:var(--color-brand-600)] hover:bg-[color:var(--color-brand-200)]"
               >
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden>
-                  <path
-                    d="M6 6l12 12M18 6 6 18"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                <Add
+                  size={12}
+                  color="currentColor"
+                  variant="Linear"
+                  style={{ transform: "rotate(45deg)" }}
+                />
               </button>
             </span>
           ))}
@@ -141,15 +140,7 @@ export function MultiSelect({
                     }`}
                   >
                     {selected ? (
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden>
-                        <path
-                          d="M5 12l4 4L19 6"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      <TickCircle size={11} color="currentColor" variant="Bold" />
                     ) : null}
                   </span>
                 </button>

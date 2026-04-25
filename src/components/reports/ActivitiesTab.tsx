@@ -2,18 +2,17 @@
 
 import { useState } from "react";
 import {
-  BellIcon,
-  CalendarIcon,
-  CheckIcon,
-  ClockIcon,
-  NoteLinesIcon,
-  PaperPlaneIcon,
-  PhoneIcon,
-  ReportsIcon,
-  SparklesIcon,
-  TrophyIcon,
-  UsersIcon,
-} from "@/components/icons/AppIcons";
+  Activity,
+  Calendar,
+  Call,
+  Clock,
+  Cup,
+  Notification,
+  Note1,
+  Profile2User,
+  Send2,
+  TickCircle,
+} from "iconsax-reactjs";
 import { MiniDonut } from "@/components/reports/charts";
 import { InsightsPanel, StatCard, StatIconWrap } from "@/components/reports/shared";
 import {
@@ -31,14 +30,14 @@ import {
 // ─── Stat icon mapping ────────────────────────────────────────────────────────
 
 function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string }) {
-  const cls = { size: 20, style: { color } };
+  const props = { size: 20, color, variant: "Bulk" as const };
   const n =
-    icon === "activity" ? <ReportsIcon {...cls} />
-    : icon === "calendar" ? <CalendarIcon {...cls} />
-    : icon === "check"    ? <CheckIcon {...cls} />
-    : icon === "users"    ? <UsersIcon {...cls} />
-    : icon === "clock"    ? <ClockIcon {...cls} />
-    : <BellIcon {...cls} />;
+    icon === "activity"   ? <Activity {...props} />
+    : icon === "calendar" ? <Calendar {...props} />
+    : icon === "check"    ? <TickCircle {...props} variant="Bold" />
+    : icon === "users"    ? <Profile2User {...props} />
+    : icon === "clock"    ? <Clock {...props} />
+    : <Notification {...props} />;
   return <StatIconWrap bg={bg}>{n}</StatIconWrap>;
 }
 
@@ -130,7 +129,7 @@ function ActivityHeatmap() {
 
 const VOL_SERIES = [
   { key: "total"     as const, label: "Total Activities", color: "#5B3DF5" },
-  { key: "responses" as const, label: "Responses",        color: "#22C55E" },
+  { key: "responses" as const, label: "Responses",        color: "#16A34A" },
 ];
 
 function VolumeChart() {
@@ -205,8 +204,8 @@ function VolumeChart() {
             <stop offset="100%" stopColor="#5B3DF5" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="volAreaG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#22C55E" stopOpacity="0.14" />
-            <stop offset="100%" stopColor="#22C55E" stopOpacity="0" />
+            <stop offset="0%" stopColor="#16A34A" stopOpacity="0.14" />
+            <stop offset="100%" stopColor="#16A34A" stopOpacity="0" />
           </linearGradient>
         </defs>
         {yTicks.map((t) => (
@@ -279,13 +278,13 @@ function PeakHoursChart() {
 
 function FeedIcon({ type }: { type: ActivityFeedItem["type"] }) {
   const configs = {
-    call:        { bg: "#EEE9FF", fg: "#5B3DF5", icon: <PhoneIcon size={14} /> },
-    email:       { bg: "#EAF2FF", fg: "#3B82F6", icon: <PaperPlaneIcon size={14} /> },
-    interview:   { bg: "#FFF4DB", fg: "#F59E0B", icon: <CalendarIcon size={14} /> },
-    application: { bg: "#EAFBF1", fg: "#22C55E", icon: <CheckIcon size={14} /> },
-    note:        { bg: "#FDECEC", fg: "#EC4899", icon: <NoteLinesIcon size={14} /> },
-    followup:    { bg: "#FFF4DB", fg: "#B45309", icon: <ClockIcon size={14} /> },
-    offer:       { bg: "#EAFBF1", fg: "#16A34A", icon: <TrophyIcon size={14} /> },
+    call:        { bg: "#EEE9FF", fg: "#5B3DF5", icon: <Call size={14} variant="Bulk" color="#5B3DF5" /> },
+    email:       { bg: "#EAF2FF", fg: "#8B7DF7", icon: <Send2 size={14} variant="Bulk" color="#8B7DF7" /> },
+    interview:   { bg: "#FFF4DB", fg: "#F59E0B", icon: <Calendar size={14} variant="Bulk" color="#F59E0B" /> },
+    application: { bg: "#EAFBF1", fg: "#16A34A", icon: <TickCircle size={14} variant="Bold" color="#16A34A" /> },
+    note:        { bg: "#FDECEC", fg: "#94A3B8", icon: <Note1 size={14} variant="Bulk" color="#94A3B8" /> },
+    followup:    { bg: "#FFF4DB", fg: "#B45309", icon: <Clock size={14} variant="Bulk" color="#B45309" /> },
+    offer:       { bg: "#EAFBF1", fg: "#16A34A", icon: <Cup size={14} variant="Bulk" color="#16A34A" /> },
   } as const;
   const c = configs[type];
   return (

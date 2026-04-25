@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { SparklesIcon, TrendUpIcon } from "@/components/icons/AppIcons";
+import { MagicStar, TrendUp } from "iconsax-reactjs";
 import { Sparkline } from "@/components/reports/charts";
 
 // ─── Stat card ────────────────────────────────────────────────────────────────
@@ -37,7 +37,12 @@ export function StatCard({
       <div className="mt-3 flex items-center justify-between gap-2">
         {showTrend ? (
           <div className="flex min-w-0 items-center gap-1 text-[11px] font-semibold" style={{ color: trendColor }}>
-            <TrendUpIcon size={12} style={change! < 0 ? { transform: "rotate(180deg)" } : undefined} />
+            <TrendUp
+              size={12}
+              variant="Bold"
+              color="currentColor"
+              style={change! < 0 ? { transform: "rotate(180deg)" } : undefined}
+            />
             {Math.abs(change!)}%
             <span className="truncate font-normal text-[color:var(--color-text-muted)]"> vs last 7 days</span>
           </div>
@@ -94,7 +99,7 @@ export function InsightsPanel({ insights }: { insights: Insight[] }) {
         <div className="flex items-center gap-2">
           <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">AI Insights</h3>
           <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--color-brand-100)] px-2 py-0.5 text-[10px] font-semibold text-[color:var(--color-brand-500)]">
-            <SparklesIcon size={10} /> Beta
+            <MagicStar size={10} variant="Bold" color="currentColor" /> Beta
           </span>
         </div>
         <button

@@ -1,112 +1,56 @@
+"use client";
+
+/**
+ * Auth-flow icons (login, signup, password fields).
+ * Single-line wrappers around iconsax-reactjs so the look matches the
+ * rest of the app. Brand logos (Google / Microsoft) stay as hand-drawn
+ * SVGs since iconsax doesn't ship those marks.
+ */
+
+import {
+  ArrowDown2,
+  Buildings,
+  Eye,
+  EyeSlash,
+  Lock,
+  Profile,
+  Sms,
+  TickCircle,
+  type IconProps as IconsaxProps,
+} from "iconsax-reactjs";
+import type { ComponentType, SVGAttributes } from "react";
+
 type IconProps = { className?: string; size?: number };
+type Variant = NonNullable<IconsaxProps["variant"]>;
+type IconsaxComponent = ComponentType<
+  IconsaxProps & Omit<SVGAttributes<SVGElement>, "color">
+>;
 
-export function MailIcon({ className, size = 18 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <path
-        d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
+function wrap(Icon: IconsaxComponent, variant: Variant = "Linear", defaultSize = 18) {
+  return function WrappedIcon({ className, size = defaultSize }: IconProps) {
+    return (
+      <Icon
+        variant={variant}
+        size={size}
+        color="currentColor"
+        className={className}
       />
-      <path d="m4 7 8 6 8-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+    );
+  };
 }
 
-export function LockIcon({ className, size = 18 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" strokeWidth="1.6" />
-      <path
-        d="M8 10V7a4 4 0 0 1 8 0v3"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
+// ─── Form-field icons ────────────────────────────────────────────────────────
 
-export function UserIcon({ className, size = 18 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <path
-        d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 20a8 8 0 0 1 16 0"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+export const MailIcon = wrap(Sms);
+export const LockIcon = wrap(Lock);
+export const UserIcon = wrap(Profile);
+export const BuildingIcon = wrap(Buildings);
+export const EyeIcon = wrap(Eye);
+export const EyeOffIcon = wrap(EyeSlash);
+export const ChevronDownIcon = wrap(ArrowDown2);
+export const CheckCircleIcon = wrap(TickCircle, "Bold", 16);
 
-export function BuildingIcon({ className, size = 18 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <path
-        d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 21V11h3a1 1 0 0 1 1 1v9M8 7h4M8 11h4M8 15h4"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-export function EyeIcon({ className, size = 18 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <path
-        d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
-  );
-}
-
-export function EyeOffIcon({ className, size = 18 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <path
-        d="M3 3l18 18M10.6 6.1A10.9 10.9 0 0 1 12 6c6 0 9.5 6 9.5 6a17.4 17.4 0 0 1-3.4 3.9M6.1 7.6A17.4 17.4 0 0 0 2.5 12s3.5 6 9.5 6c1.5 0 2.9-.3 4-.8M9.9 9.9A3 3 0 0 0 14.1 14.1"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-export function ChevronDownIcon({ className, size = 18 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-export function CheckCircleIcon({ className, size = 16 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <path
-        d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <path
-        d="m8.5 12.2 2.4 2.4 4.6-5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+// ─── Brand marks (kept as hand-drawn SVG) ────────────────────────────────────
 
 export function GoogleIcon({ size = 18 }: IconProps) {
   return (
