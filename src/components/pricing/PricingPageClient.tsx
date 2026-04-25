@@ -134,6 +134,8 @@ export function PricingPageClient() {
               "radial-gradient(circle, rgba(91,61,245,0.35), transparent 70%)",
           }}
         />
+
+        
         <span
           aria-hidden
           className="pointer-events-none absolute -left-16 -bottom-20 h-48 w-48 rounded-full opacity-40 blur-3xl"
