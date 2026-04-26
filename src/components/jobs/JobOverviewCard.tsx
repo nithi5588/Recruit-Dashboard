@@ -89,7 +89,7 @@ export function JobOverviewCard({ job }: { job: ResolvedJob }) {
         className="mt-6 flex items-start gap-3 rounded-[14px] border border-[color:var(--color-brand-200)] p-4"
         style={{
           background:
-            "linear-gradient(180deg, #F4F1FF 0%, #F9F7FF 100%)",
+            "linear-gradient(180deg, #FFF6EE 0%, #FAFAF7 100%)",
         }}
       >
         <span

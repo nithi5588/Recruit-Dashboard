@@ -4,10 +4,10 @@ import { useState } from "react";
 import {
   SettingsIcon, UsersIcon, ShieldIcon, BellIcon, GlobeIcon,
   MonitorIcon, AtIcon, CheckIcon, PlusIcon, XIcon, EditIcon,
-  ChevronRight,
+  ChevronRight, CopyIcon, LinkChainIcon, RefreshIcon,
 } from "@/components/icons/AppIcons";
+import { CompanyLogo } from "@/components/ui/CompanyLogo";
 import {
-  ACCENT_PRESETS,
   useTheme,
   type Density,
   type ThemeMode,
@@ -27,10 +27,10 @@ const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
 ];
 
 const TEAM_MEMBERS = [
-  { id: "1", name: "Nithish Baddula", email: "Invisiedge@gmail.com",       role: "Admin",     avatar: "NB", color: "#8B5CF6", status: "active" },
-  { id: "2", name: "Priya Mehta",     email: "priya.mehta@recruit.io",     role: "Recruiter", avatar: "PM", color: "#3B82F6", status: "active" },
-  { id: "3", name: "Alex Johnson",    email: "alex.johnson@recruit.io",    role: "Recruiter", avatar: "AJ", color: "#22C55E", status: "active" },
-  { id: "4", name: "Sarah Wilson",    email: "sarah.wilson@recruit.io",    role: "Viewer",    avatar: "SW", color: "#F59E0B", status: "pending" },
+  { id: "1", name: "Nithish Baddula", email: "Invisiedge@gmail.com",       role: "Admin",     avatar: "NB", color: "#EA6814", status: "active",  lastActive: "Active now" },
+  { id: "2", name: "Priya Mehta",     email: "priya.mehta@recruit.io",     role: "Recruiter", avatar: "PM", color: "#6B6358", status: "active",  lastActive: "12 min ago" },
+  { id: "3", name: "Alex Johnson",    email: "alex.johnson@recruit.io",    role: "Recruiter", avatar: "AJ", color: "#EA6814", status: "active",  lastActive: "3 hr ago" },
+  { id: "4", name: "Sarah Wilson",    email: "sarah.wilson@recruit.io",    role: "Viewer",    avatar: "SW", color: "#ED8E55", status: "pending", lastActive: "Invited 2 days ago" },
 ];
 
 type Integration = {
@@ -120,7 +120,7 @@ function SaveBtn({ label = "Save changes" }: { label?: string }) {
   const [saved, setSaved] = useState(false);
   const [hover, setHover] = useState(false);
   const background = saved
-    ? "#16A34A"
+    ? "#C75510"
     : hover
       ? "var(--color-brand-600)"
       : "var(--color-brand-500)";
@@ -147,8 +147,8 @@ function SaveBtn({ label = "Save changes" }: { label?: string }) {
         justifyContent: "center",
         gap: 7,
         boxShadow: hover
-          ? "0 6px 16px rgba(91, 61, 245, 0.28)"
-          : "0 2px 6px rgba(91, 61, 245, 0.18)",
+          ? "0 6px 16px rgba(234, 104, 20, 0.28)"
+          : "0 2px 6px rgba(234, 104, 20, 0.18)",
         transform: hover ? "translateY(-1px)" : "translateY(0)",
         letterSpacing: "-0.01em",
       }}
@@ -174,7 +174,7 @@ function ProfileTab() {
         <h3 style={{ margin: "0 0 16px", fontSize: 16, fontWeight: 700, color: "var(--color-text)" }}>Personal Information</h3>
         {/* Avatar */}
         <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-          <div style={{ width: 72, height: 72, borderRadius: 16, background: "linear-gradient(135deg,#5B3DF5,#818CF8)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 700, color: "var(--color-surface)" }}>
+          <div style={{ width: 72, height: 72, borderRadius: 16, background: "linear-gradient(135deg,#EA6814,#F2B187)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 700, color: "var(--color-surface)" }}>
             NB
           </div>
           <div>
@@ -243,15 +243,135 @@ function ProfileTab() {
   );
 }
 
+type TeamRole = "Admin" | "Recruiter" | "Viewer";
+type TeamStatus = "active" | "pending";
+type TeamMember = (typeof TEAM_MEMBERS)[number] & {
+  role: TeamRole;
+  status: TeamStatus;
+  invitedAt?: number;
+  lastActive?: string;
+};
+
+const ROLE_DESCRIPTIONS: Record<TeamRole, string> = {
+  Admin: "Full access to settings, billing & team",
+  Recruiter: "Can manage candidates, jobs & calendar",
+  Viewer: "Read-only access to candidates & reports",
+};
+
+const ROLE_OPTIONS: TeamRole[] = ["Admin", "Recruiter", "Viewer"];
+const AVATAR_PALETTE = ["#EA6814", "#C75510", "#ED8E55", "#9F430D", "#6B6358", "#F2B187"];
+
+function emailIsValid(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
+function nameFromEmail(email: string): string {
+  const local = email.split("@")[0] ?? email;
+  return local
+    .split(/[._-]+/)
+    .filter(Boolean)
+    .map((s) => s[0]?.toUpperCase() + s.slice(1).toLowerCase())
+    .join(" ") || email;
+}
+
+function initialsFromName(name: string): string {
+  return (
+    name
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((s) => s[0]?.toUpperCase() ?? "")
+      .join("") || "??"
+  );
+}
+
 function TeamTab() {
-  const [members, setMembers] = useState(TEAM_MEMBERS);
+  const [members, setMembers] = useState<TeamMember[]>(
+    () => TEAM_MEMBERS as TeamMember[],
+  );
   const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteRole, setInviteRole] = useState<TeamRole>("Recruiter");
+  const [feedback, setFeedback] = useState<{ kind: "ok" | "err"; msg: string } | null>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [resentId, setResentId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const adminCount    = members.filter((m) => m.role === "Admin").length;
+  const recruiterCount = members.filter((m) => m.role === "Recruiter").length;
+  const viewerCount   = members.filter((m) => m.role === "Viewer").length;
+  const pendingCount  = members.filter((m) => m.status === "pending").length;
+
+  const filteredMembers = members.filter((m) => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      m.name.toLowerCase().includes(q) ||
+      m.email.toLowerCase().includes(q) ||
+      m.role.toLowerCase().includes(q)
+    );
+  });
 
   function removeMember(id: string) {
-    setMembers(prev => prev.filter(m => m.id !== id));
+    setMembers((prev) => prev.filter((m) => m.id !== id));
   }
 
-  const roleChip = (role: string) => {
+  function changeRole(id: string, role: TeamRole) {
+    setMembers((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, role } : m)),
+    );
+  }
+
+  function inviteMember() {
+    const email = inviteEmail.trim().toLowerCase();
+    if (!emailIsValid(email)) {
+      setFeedback({ kind: "err", msg: "Please enter a valid email address." });
+      return;
+    }
+    if (members.some((m) => m.email.toLowerCase() === email)) {
+      setFeedback({ kind: "err", msg: "That email is already on the team." });
+      return;
+    }
+    const name = nameFromEmail(email);
+    const newMember: TeamMember = {
+      id: `inv_${Date.now()}`,
+      name,
+      email,
+      role: inviteRole,
+      avatar: initialsFromName(name),
+      color: AVATAR_PALETTE[members.length % AVATAR_PALETTE.length],
+      status: "pending",
+      invitedAt: Date.now(),
+      lastActive: "Invited just now",
+    };
+    setMembers((prev) => [...prev, newMember]);
+    setInviteEmail("");
+    setFeedback({ kind: "ok", msg: `Invite sent to ${email} as ${inviteRole}.` });
+  }
+
+  function resendInvite(id: string) {
+    setResentId(id);
+    setMembers((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, invitedAt: Date.now() } : m)),
+    );
+    setTimeout(() => setResentId(null), 1800);
+  }
+
+  function copyInviteLink() {
+    const link = `https://recruit.app/invite/${Math.random().toString(36).slice(2, 10)}`;
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(link).catch(() => {});
+    }
+    setLinkCopied(true);
+    setTimeout(() => setLinkCopied(false), 1800);
+  }
+
+  // Auto-clear feedback after a few seconds so the inline message doesn't
+  // linger forever.
+  if (feedback) {
+    setTimeout(() => setFeedback((f) => (f === feedback ? null : f)), 3500);
+  }
+
+  const roleChip = (role: TeamRole) => {
     if (role === "Admin")     return { bg: "var(--chip-brand-bg)",   text: "var(--chip-brand-fg)" };
     if (role === "Recruiter") return { bg: "var(--chip-info-bg)",    text: "var(--chip-info-fg)" };
     return { bg: "var(--chip-neutral-bg)", text: "var(--chip-neutral-fg)" };
@@ -260,119 +380,355 @@ function TeamTab() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <style>{`
-        .team-header { display:flex; flex-direction:column; gap:14px; align-items:flex-start; justify-content:space-between; margin-bottom:18px; }
-        @media(min-width:720px){ .team-header { flex-direction:row; align-items:center; } }
-        .team-invite { display:flex; align-items:center; gap:8px; width:100%; }
-        @media(min-width:720px){ .team-invite { width:auto; min-width:360px; } }
-        .team-invite-input { flex:1; }
+        /* ── Hero invite block ─────────────────────────────────────────── */
+        .team-hero { position:relative; overflow:hidden; border-radius:16px; padding:22px; border:1px solid var(--color-brand-200); background:radial-gradient(900px 220px at 0% 0%, rgba(234,104,20,0.10), transparent 60%), linear-gradient(180deg, #FFF6EE 0%, var(--color-surface) 70%); }
+        html[data-theme="dark"] .team-hero { background:radial-gradient(900px 220px at 0% 0%, rgba(234,104,20,0.18), transparent 60%), linear-gradient(180deg, rgba(234,104,20,0.06) 0%, var(--color-surface) 70%); border-color:rgba(234,104,20,0.32); }
+        .team-hero-head { display:flex; align-items:flex-start; gap:14px; margin-bottom:18px; }
+        .team-hero-tile { width:44px; height:44px; border-radius:12px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--color-brand-500), var(--color-brand-600)); color:#fff; box-shadow:0 6px 18px rgba(234,104,20,0.32); }
+        .team-hero-text h3 { margin:0; font-size:17px; font-weight:800; letter-spacing:-0.01em; color:var(--color-text); }
+        .team-hero-text p  { margin:3px 0 0; font-size:13px; color:var(--color-text-secondary); }
 
-        .team-row { display:grid; gap:12px; align-items:center; padding:12px 12px; border-bottom:1px solid var(--color-border); }
+        .team-invite-row { display:flex; flex-direction:column; gap:10px; }
+        @media(min-width:780px){ .team-invite-row { flex-direction:row; align-items:stretch; } }
+        .team-invite-input { flex:1; min-width:0; }
+        .team-invite-input input { height:46px !important; border-radius:12px !important; }
+
+        .team-role-select { height:46px; padding:0 36px 0 14px; border-radius:12px; border:1.5px solid var(--color-border); background:var(--color-surface); font-size:13px; font-weight:600; color:var(--color-text); cursor:pointer; appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none'><path d='m6 9 6 6 6-6' stroke='%239A9183' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>"); background-repeat:no-repeat; background-position:right 12px center; min-width:140px; transition:border-color .15s, box-shadow .15s; }
+        .team-role-select:hover { border-color:var(--color-border-strong); }
+        .team-role-select:focus { outline:none; border-color:var(--color-brand-500); box-shadow:var(--shadow-ring-brand); }
+
+        .invite-btn { height:46px; padding:0 20px; border-radius:12px; border:none; background:var(--color-brand-500); color:#fff; font-size:13.5px; font-weight:700; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:7px; transition: background .15s, box-shadow .15s, transform .15s; box-shadow:0 6px 18px rgba(234,104,20,0.34); }
+        .invite-btn:hover:not(:disabled) { background:var(--color-brand-600); transform:translateY(-1px); box-shadow:0 8px 22px rgba(234,104,20,0.42); }
+        .invite-btn:disabled { opacity:0.5; cursor:not-allowed; box-shadow:none; }
+
+        .team-role-hint { margin-top:8px; font-size:12px; color:var(--color-text-muted); display:flex; align-items:center; gap:6px; }
+        .team-role-hint strong { color:var(--color-text-secondary); font-weight:600; }
+
+        .team-divider { display:flex; align-items:center; gap:10px; margin:18px 0 14px; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-text-muted); }
+        .team-divider::before, .team-divider::after { content:""; flex:1; height:1px; background:var(--color-border); }
+
+        .team-link-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px; border-radius:12px; background:var(--color-surface); border:1px solid var(--color-border); transition:border-color .15s; }
+        .team-link-row:hover { border-color:var(--color-border-strong); }
+        .team-link-text { display:flex; align-items:center; gap:10px; min-width:0; font-size:12.5px; color:var(--color-text-secondary); flex:1; }
+        .team-link-icon { width:28px; height:28px; border-radius:8px; background:var(--color-brand-50); color:var(--color-brand-600); display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .team-link-text strong { color:var(--color-text); font-weight:600; font-family:ui-monospace, monospace; font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .team-link-btn { height:34px; padding:0 14px; border-radius:9px; border:1px solid var(--color-border); background:var(--color-bg-base); font-size:12px; font-weight:600; color:var(--color-text-secondary); cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition: all .15s; flex-shrink:0; }
+        .team-link-btn:hover { border-color:var(--color-brand-300); color:var(--color-brand-600); background:var(--color-brand-50); }
+        .team-link-btn.copied { background:var(--chip-success-bg); color:var(--chip-success-fg); border-color:transparent; }
+
+        .team-feedback { margin-top:12px; padding:10px 14px; border-radius:10px; font-size:12.5px; font-weight:600; display:flex; align-items:center; gap:8px; }
+        .team-feedback.ok  { background:var(--chip-success-bg); color:var(--chip-success-fg); }
+        .team-feedback.err { background:var(--chip-error-bg);   color:var(--chip-error-fg); }
+
+        /* ── Members header strip ──────────────────────────────────────── */
+        .team-summary { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+        .team-summary-counts { display:flex; flex-wrap:wrap; gap:6px; }
+        .team-count-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px; background:var(--color-bg-base); border:1px solid var(--color-border); font-size:11.5px; font-weight:600; color:var(--color-text-secondary); }
+        .team-count-chip strong { color:var(--color-text); font-weight:700; font-size:12px; }
+        .team-count-dot { width:7px; height:7px; border-radius:999px; }
+
+        .team-search { position:relative; width:100%; max-width:240px; }
+        .team-search input { width:100%; height:36px; padding:0 12px 0 34px; border-radius:10px; border:1px solid var(--color-border); background:var(--color-bg-base); font-size:13px; color:var(--color-text); outline:none; transition:border-color .15s, box-shadow .15s; }
+        .team-search input::placeholder { color:var(--color-text-muted); }
+        .team-search input:focus { border-color:var(--color-brand-500); box-shadow:var(--shadow-ring-brand); background:var(--color-surface); }
+        .team-search-icon { position:absolute; left:11px; top:50%; transform:translateY(-50%); color:var(--color-text-muted); pointer-events:none; }
+
+        /* ── Member rows ───────────────────────────────────────────────── */
+        .team-list { display:flex; flex-direction:column; border:1px solid var(--color-border); border-radius:14px; overflow:hidden; background:var(--color-surface); }
+        .team-row { display:grid; gap:14px; align-items:center; padding:14px 16px; border-bottom:1px solid var(--color-border); transition:background .15s; }
         .team-row:last-child { border-bottom:none; }
-        .team-row-header { padding:10px 12px; border-radius:8px; background:var(--color-bg-base); border:none; }
-        .team-row-header span { font-size:11px; font-weight:700; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:.05em; }
+        .team-row:hover { background:var(--color-bg-base); }
+        .team-row-pending { background:rgba(237,142,85,0.04); }
+        html[data-theme="dark"] .team-row-pending { background:rgba(237,142,85,0.06); }
 
-        /* Compact grid on narrow screens */
-        .team-row, .team-row-header { grid-template-columns: minmax(0, 1.3fr) 90px 90px 36px; }
-        .team-col-email { display:none; }
-        @media(min-width:900px){
-          .team-row, .team-row-header { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) 110px 100px 36px; }
-          .team-col-email { display:block; }
+        /* Compact: avatar+name | role | actions */
+        .team-row { grid-template-columns: minmax(0, 1fr) 138px 90px; }
+        .team-col-status, .team-col-actions { display:none; }
+        @media(min-width:760px){
+          .team-row { grid-template-columns: minmax(0, 1.4fr) 140px 110px 96px; }
+          .team-col-status { display:flex; }
+        }
+        @media(min-width:1080px){
+          .team-row { grid-template-columns: minmax(0, 1.4fr) 150px 130px 96px; }
+          .team-col-actions { display:flex; }
         }
 
-        .team-member-cell { display:flex; align-items:center; gap:10px; min-width:0; }
-        .team-avatar { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0; letter-spacing:-0.01em; }
-        .team-name { font-size:14px; font-weight:600; color:var(--color-text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
-        .team-email { font-size:13px; color:var(--color-text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .team-member-cell { display:flex; align-items:center; gap:12px; min-width:0; }
+        .team-avatar { position:relative; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; flex-shrink:0; letter-spacing:-0.02em; }
+        .team-avatar-pulse { position:absolute; bottom:-2px; right:-2px; width:11px; height:11px; border-radius:999px; background:var(--color-brand-500); border:2px solid var(--color-surface); }
+        .team-avatar-pulse.online::after { content:""; position:absolute; inset:-3px; border-radius:999px; border:2px solid var(--color-brand-500); opacity:0.5; animation:teamPulse 2s ease-out infinite; }
+        @keyframes teamPulse { 0%{ transform:scale(0.8); opacity:0.6; } 100%{ transform:scale(1.5); opacity:0; } }
 
-        .chip { display:inline-flex; align-items:center; justify-content:center; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:0.01em; white-space:nowrap; }
+        .team-info { min-width:0; }
+        .team-name { font-size:13.5px; font-weight:700; color:var(--color-text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px; }
+        .team-you-badge { font-size:9.5px; font-weight:700; padding:1px 6px; border-radius:5px; background:var(--color-brand-50); color:var(--color-brand-600); text-transform:uppercase; letter-spacing:0.04em; }
+        .team-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:2px; font-size:11.5px; color:var(--color-text-muted); }
+        .team-meta-email { color:var(--color-text-secondary); }
+        .team-meta-sep { color:var(--color-text-muted); opacity:0.6; }
 
-        .team-remove { width:28px; height:28px; border-radius:8px; border:1px solid var(--color-border); background:var(--color-surface); color:#EF4444; display:flex; align-items:center; justify-content:center; cursor:pointer; transition: background .15s, border-color .15s, transform .15s; }
-        .team-remove:hover:not(:disabled) { background:var(--chip-error-bg); border-color:transparent; transform:scale(1.05); }
-        .team-remove:disabled { opacity:0.25; cursor:not-allowed; }
+        .row-role-select { width:100%; height:32px; padding:0 28px 0 12px; border-radius:9px; border:1px solid transparent; font-size:12px; font-weight:700; cursor:pointer; appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none'><path d='m6 9 6 6 6-6' stroke='%239A9183' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>"); background-repeat:no-repeat; background-position:right 9px center; transition:transform .12s; }
+        .row-role-select:hover:not(:disabled) { transform:translateY(-1px); }
+        .row-role-select:focus { outline:none; box-shadow:var(--shadow-ring-brand); }
+        .row-role-select:disabled { opacity:0.6; cursor:not-allowed; }
 
-        .invite-btn { height:42px; padding:0 16px; border-radius:10px; border:none; background:var(--color-brand-500); color:#fff; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:6px; transition: background .15s, box-shadow .15s, transform .15s; box-shadow:0 4px 12px rgba(var(--accent-rgb, 91,61,245), 0.28); }
-        .invite-btn:hover { background:var(--color-brand-600); transform:translateY(-1px); }
+        .status-chip { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+        .status-chip .dot { width:6px; height:6px; border-radius:999px; flex-shrink:0; }
+
+        .team-actions { display:flex; align-items:center; justify-content:flex-end; gap:6px; }
+        .team-action-btn { height:30px; padding:0 10px; border-radius:8px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); font-size:11.5px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:5px; transition: all .15s; white-space:nowrap; }
+        .team-action-btn:hover:not(:disabled) { border-color:var(--color-brand-300); color:var(--color-brand-600); background:var(--color-brand-50); }
+        .team-action-btn:disabled { opacity:0.35; cursor:not-allowed; }
+        .team-action-btn.danger:hover:not(:disabled) { border-color:transparent; color:var(--chip-error-fg); background:var(--chip-error-bg); }
+        .team-action-btn.success { background:var(--chip-success-bg); color:var(--chip-success-fg); border-color:transparent; }
+        .team-action-btn.icon { padding:0; width:30px; justify-content:center; }
+
+        .team-empty { padding:36px 16px; text-align:center; color:var(--color-text-muted); font-size:13px; }
       `}</style>
 
-      <Card>
-        <div className="team-header">
-          <div>
-            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "var(--color-text)" }}>Team Members</h3>
-            <p style={{ margin: "4px 0 0", fontSize: 13, color: "var(--color-text-secondary)" }}>
-              {members.length} members · <span style={{ color: "var(--chip-brand-fg)", fontWeight: 600 }}>Pro plan</span>
+      {/* ── Hero invite block ─────────────────────────────────────────── */}
+      <div className="team-hero">
+        <div className="team-hero-head">
+          <span className="team-hero-tile">
+            <UsersIcon size={20} />
+          </span>
+          <div className="team-hero-text">
+            <h3>Invite teammates</h3>
+            <p>
+              Send an email invite or share a private link. New members
+              receive their access instantly.
             </p>
-          </div>
-          <div className="team-invite">
-            <div className="team-invite-input">
-              <Input value={inviteEmail} onChange={setInviteEmail} placeholder="colleague@company.com" type="email" />
-            </div>
-            <button type="button" className="invite-btn">
-              <PlusIcon size={14} /> Invite
-            </button>
           </div>
         </div>
 
-        <div>
-          {/* Header */}
-          <div className="team-row team-row-header">
-            <span>Member</span>
-            <span className="team-col-email">Email</span>
-            <span>Role</span>
-            <span>Status</span>
-            <span aria-hidden></span>
+        <div className="team-invite-row">
+          <div className="team-invite-input">
+            <Input
+              value={inviteEmail}
+              onChange={setInviteEmail}
+              placeholder="colleague@company.com"
+              type="email"
+            />
           </div>
-          {members.map((m) => {
-            const rc = roleChip(m.role);
-            const isActive = m.status === "active";
-            return (
-              <div key={m.id} className="team-row">
-                <div className="team-member-cell">
-                  <div
-                    className="team-avatar"
+          <select
+            aria-label="Invite role"
+            className="team-role-select"
+            value={inviteRole}
+            onChange={(e) => setInviteRole(e.target.value as TeamRole)}
+          >
+            {ROLE_OPTIONS.map((r) => (
+              <option key={r} value={r}>{r}</option>
+            ))}
+          </select>
+          <button
+            type="button"
+            className="invite-btn"
+            onClick={inviteMember}
+            disabled={!inviteEmail.trim()}
+          >
+            <PlusIcon size={14} /> Send invite
+          </button>
+        </div>
+
+        <div className="team-role-hint">
+          <strong>{inviteRole}</strong> · {ROLE_DESCRIPTIONS[inviteRole]}
+        </div>
+
+        {feedback ? (
+          <div className={`team-feedback ${feedback.kind}`}>
+            {feedback.kind === "ok" ? <CheckIcon size={13} /> : <XIcon size={13} />}
+            {feedback.msg}
+          </div>
+        ) : null}
+
+        <div className="team-divider">or share a link</div>
+
+        <div className="team-link-row">
+          <span className="team-link-text">
+            <span className="team-link-icon">
+              <LinkChainIcon size={14} />
+            </span>
+            <span style={{ display: "flex", flexDirection: "column", minWidth: 0, flex: 1 }}>
+              <span style={{ fontSize: 11, color: "var(--color-text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                Workspace invite link
+              </span>
+              <strong>recruit.app/invite/your-team</strong>
+            </span>
+          </span>
+          <button
+            type="button"
+            onClick={copyInviteLink}
+            className={`team-link-btn${linkCopied ? " copied" : ""}`}
+          >
+            {linkCopied ? <CheckIcon size={12} /> : <CopyIcon size={12} />}
+            {linkCopied ? "Copied!" : "Copy link"}
+          </button>
+        </div>
+      </div>
+
+      {/* ── Team Members list ─────────────────────────────────────────── */}
+      <Card>
+        <div className="team-summary">
+          <div>
+            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "var(--color-text)" }}>
+              Team Members
+            </h3>
+            <div className="team-summary-counts" style={{ marginTop: 8 }}>
+              <span className="team-count-chip">
+                <span className="team-count-dot" style={{ background: "var(--color-brand-500)" }} />
+                <strong>{adminCount}</strong> Admin
+              </span>
+              <span className="team-count-chip">
+                <span className="team-count-dot" style={{ background: "var(--color-text-secondary)" }} />
+                <strong>{recruiterCount}</strong> Recruiter
+              </span>
+              <span className="team-count-chip">
+                <span className="team-count-dot" style={{ background: "var(--color-text-muted)" }} />
+                <strong>{viewerCount}</strong> Viewer
+              </span>
+              {pendingCount > 0 ? (
+                <span className="team-count-chip" style={{ background: "var(--chip-warning-bg)", borderColor: "transparent", color: "var(--chip-warning-fg)" }}>
+                  <strong style={{ color: "var(--chip-warning-fg)" }}>{pendingCount}</strong> Pending
+                </span>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="team-search">
+            <span className="team-search-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.6" />
+                <path d="m20 20-3.5-3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            </span>
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by name, email or role…"
+              aria-label="Search team members"
+            />
+          </div>
+        </div>
+
+        <div className="team-list">
+          {filteredMembers.length === 0 ? (
+            <div className="team-empty">
+              {searchQuery ? `No members match "${searchQuery}"` : "No team members yet."}
+            </div>
+          ) : (
+            filteredMembers.map((m, idx) => {
+              const isActive = m.status === "active";
+              const isOnlyAdmin = m.role === "Admin" && adminCount <= 1;
+              const isYou = idx === 0; // first member acts as the signed-in user
+              const rc = roleChip(m.role);
+              return (
+                <div
+                  key={m.id}
+                  className={`team-row${!isActive ? " team-row-pending" : ""}`}
+                >
+                  <div className="team-member-cell">
+                    <div
+                      className="team-avatar"
+                      style={{
+                        background: `linear-gradient(135deg, ${m.color}33 0%, ${m.color}1A 100%)`,
+                        color: m.color,
+                        boxShadow: `inset 0 0 0 1.5px ${m.color}40`,
+                      }}
+                    >
+                      {m.avatar}
+                      {isActive && /now|min/i.test(m.lastActive ?? "") ? (
+                        <span className="team-avatar-pulse online" />
+                      ) : null}
+                    </div>
+                    <div className="team-info">
+                      <div className="team-name">
+                        <span title={m.name}>{m.name}</span>
+                        {isYou ? <span className="team-you-badge">You</span> : null}
+                      </div>
+                      <div className="team-meta">
+                        <span className="team-meta-email" title={m.email}>{m.email}</span>
+                        {m.lastActive ? (
+                          <>
+                            <span className="team-meta-sep">·</span>
+                            <span>{m.lastActive}</span>
+                          </>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
+
+                  <select
+                    aria-label={`Change role for ${m.name}`}
+                    className="row-role-select"
+                    value={m.role}
+                    onChange={(e) => changeRole(m.id, e.target.value as TeamRole)}
+                    disabled={isOnlyAdmin}
+                    title={isOnlyAdmin ? "At least one Admin is required" : ROLE_DESCRIPTIONS[m.role]}
+                    style={{ background: rc.bg, color: rc.text }}
+                  >
+                    {ROLE_OPTIONS.map((r) => (
+                      <option key={r} value={r}>{r}</option>
+                    ))}
+                  </select>
+
+                  <span
+                    className="status-chip team-col-status"
                     style={{
-                      background: `linear-gradient(135deg, ${m.color}33 0%, ${m.color}1A 100%)`,
-                      color: m.color,
-                      boxShadow: `inset 0 0 0 1px ${m.color}33`,
+                      background: isActive ? "var(--chip-success-bg)" : "var(--chip-warning-bg)",
+                      color: isActive ? "var(--chip-success-fg)" : "var(--chip-warning-fg)",
                     }}
                   >
-                    {m.avatar}
+                    <span
+                      className="dot"
+                      style={{ background: isActive ? "var(--chip-success-fg)" : "var(--chip-warning-fg)" }}
+                    />
+                    {isActive ? "Active" : "Pending"}
+                  </span>
+
+                  <div className="team-actions team-col-actions">
+                    {!isActive ? (
+                      <button
+                        type="button"
+                        onClick={() => resendInvite(m.id)}
+                        className={`team-action-btn${resentId === m.id ? " success" : ""}`}
+                        title="Resend invite email"
+                      >
+                        {resentId === m.id ? <CheckIcon size={11} /> : <RefreshIcon size={11} />}
+                        {resentId === m.id ? "Sent" : "Resend"}
+                      </button>
+                    ) : null}
+                    <button
+                      type="button"
+                      aria-label={`Remove ${m.name}`}
+                      onClick={() => removeMember(m.id)}
+                      disabled={isOnlyAdmin || isYou}
+                      title={
+                        isOnlyAdmin
+                          ? "Can't remove the only Admin"
+                          : isYou
+                          ? "Can't remove yourself"
+                          : `Remove ${m.name}`
+                      }
+                      className="team-action-btn danger icon"
+                    >
+                      <XIcon size={12} />
+                    </button>
                   </div>
-                  <span className="team-name" title={m.name}>{m.name}</span>
                 </div>
-                <span className="team-email team-col-email" title={m.email}>{m.email}</span>
-                <span className="chip" style={{ background: rc.bg, color: rc.text }}>{m.role}</span>
-                <span
-                  className="chip"
-                  style={{
-                    background: isActive ? "var(--chip-success-bg)" : "var(--chip-warning-bg)",
-                    color: isActive ? "var(--chip-success-fg)" : "var(--chip-warning-fg)",
-                  }}
-                >
-                  {isActive ? "Active" : "Pending"}
-                </span>
-                <button
-                  type="button"
-                  aria-label={`Remove ${m.name}`}
-                  onClick={() => removeMember(m.id)}
-                  disabled={m.role === "Admin"}
-                  className="team-remove"
-                >
-                  <XIcon size={12} />
-                </button>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </Card>
 
       <Card>
         <h3 style={{ margin: "0 0 16px", fontSize: 16, fontWeight: 700, color: "var(--color-text)" }}>Role Permissions</h3>
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          {[
-            { role: "Admin",     perms: ["Full access", "Manage team", "Billing", "Settings"] },
-            { role: "Recruiter", perms: ["Manage candidates", "Jobs", "Calendar", "Reports"] },
-            { role: "Viewer",    perms: ["View candidates", "View reports"] },
-          ].map((r) => {
+          {([
+            { role: "Admin"     as TeamRole, perms: ["Full access", "Manage team", "Billing", "Settings"] },
+            { role: "Recruiter" as TeamRole, perms: ["Manage candidates", "Jobs", "Calendar", "Reports"] },
+            { role: "Viewer"    as TeamRole, perms: ["View candidates", "View reports"] },
+          ]).map((r) => {
             const rc = roleChip(r.role);
             return (
               <div
@@ -642,13 +998,15 @@ function IntegrationCard({
       <div className="int-card-body">
         {/* Header — icon + name + category */}
         <div className="int-card-head">
-          <span
-            className="int-icon"
-            style={{ background: app.color, boxShadow: `0 4px 14px ${app.color}40` }}
-            aria-hidden
-          >
-            {app.icon}
-          </span>
+          <CompanyLogo
+            company={app.name}
+            size={40}
+            fallbackBg={app.color}
+            fallbackText={app.icon}
+            rounded="rounded-[11px]"
+            padding={6}
+            className="shadow-sm"
+          />
           <div className="int-title-wrap">
             <div className="int-title-row">
               <span className="int-title">{app.name}</span>
@@ -730,19 +1088,19 @@ function IntegrationsTab() {
         @media(min-width:1200px){ .int-grid { grid-template-columns:repeat(3, minmax(0,1fr)); } }
 
         .int-card { position:relative; border-radius:14px; border:1.5px solid var(--color-border); background:var(--color-surface); transition:border-color .18s, transform .18s, box-shadow .18s; overflow:hidden; }
-        .int-card[data-connected="true"] { border-color:rgba(34,197,94,0.22); }
-        .int-card:hover { border-color:var(--color-brand-300); transform:translateY(-2px); box-shadow:0 8px 22px rgba(91,61,245,0.10); }
+        .int-card[data-connected="true"] { border-color:rgba(234,104,20,0.22); }
+        .int-card:hover { border-color:var(--color-brand-300); transform:translateY(-2px); box-shadow:0 8px 22px rgba(234,104,20,0.10); }
         .int-card-body { display:flex; flex-direction:column; gap:12px; padding:16px; height:100%; }
 
-        .int-ribbon { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent 0%, rgba(34,197,94,0.55) 50%, transparent 100%); }
+        .int-ribbon { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent 0%, rgba(234,104,20,0.55) 50%, transparent 100%); }
 
         .int-card-head { display:flex; gap:12px; align-items:center; }
         .int-icon { flex-shrink:0; width:40px; height:40px; border-radius:11px; display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:16px; letter-spacing:-0.01em; text-transform:lowercase; }
         .int-title-wrap { min-width:0; flex:1; display:flex; flex-direction:column; gap:3px; }
         .int-title-row { display:flex; align-items:center; gap:6px; }
         .int-title { font-size:14px; font-weight:700; color:var(--color-text); letter-spacing:-0.01em; }
-        .int-mini-status { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:999px; background:rgba(34,197,94,0.15); }
-        .int-mini-dot { width:6px; height:6px; border-radius:999px; background:#22C55E; box-shadow:0 0 0 2px rgba(34,197,94,0.25); }
+        .int-mini-status { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:999px; background:rgba(234,104,20,0.15); }
+        .int-mini-dot { width:6px; height:6px; border-radius:999px; background:#EA6814; box-shadow:0 0 0 2px rgba(234,104,20,0.25); }
         .int-category { display:inline-flex; align-self:flex-start; font-size:9.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--color-text-muted); background:var(--color-surface-2); padding:2px 7px; border-radius:999px; }
         .int-desc { margin:0; font-size:12.5px; line-height:1.5; color:var(--color-text-secondary); }
 
@@ -750,15 +1108,15 @@ function IntegrationsTab() {
         .int-status { display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; color:var(--color-text-muted); }
         .int-status-label { white-space:nowrap; }
         .int-status-dot { width:7px; height:7px; border-radius:999px; background:var(--color-border-strong); flex-shrink:0; }
-        .int-status[data-connected="true"] { color:#16A34A; }
-        .int-status[data-connected="true"] .int-status-dot { background:#22C55E; box-shadow:0 0 0 3px rgba(34,197,94,0.22); }
+        .int-status[data-connected="true"] { color:#C75510; }
+        .int-status[data-connected="true"] .int-status-dot { background:#EA6814; box-shadow:0 0 0 3px rgba(234,104,20,0.22); }
         .int-sync { font-size:11px; font-weight:500; color:var(--color-text-muted); white-space:nowrap; }
 
         .int-btn { width:100%; height:34px; padding:0 14px; border-radius:9px; font-size:12.5px; font-weight:700; cursor:pointer; transition:background .15s, border-color .15s, color .15s, transform .12s; border:1.5px solid transparent; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; letter-spacing:-0.01em; }
-        .int-btn-primary { background:var(--color-brand-500); color:#fff; box-shadow:0 4px 12px rgba(91,61,245,0.22); }
+        .int-btn-primary { background:var(--color-brand-500); color:#fff; box-shadow:0 4px 12px rgba(234,104,20,0.22); }
         .int-btn-primary:hover { background:var(--color-brand-600); transform:translateY(-1px); }
         .int-btn-secondary { background:var(--color-surface-2); border-color:var(--color-border); color:var(--color-text-secondary); }
-        .int-btn-secondary:hover { border-color:rgba(239,68,68,0.35); color:#EF4444; background:rgba(239,68,68,0.08); }
+        .int-btn-secondary:hover { border-color:rgba(159,67,13,0.35); color:#9F430D; background:rgba(159,67,13,0.08); }
 
         .int-empty { padding:40px 16px; border:1.5px dashed var(--color-border); border-radius:14px; text-align:center; color:var(--color-text-muted); font-size:12.5px; }
       `}</style>
@@ -814,8 +1172,8 @@ function IntegrationsTab() {
 
 function AppearanceTab() {
   const {
-    theme, accent, density, resolvedTheme,
-    setTheme, setAccent, setDensity, reset,
+    theme, density, resolvedTheme,
+    setTheme, setDensity, reset,
     save, discard, isDirty, savedAt,
   } = useTheme();
   const [justSaved, setJustSaved] = useState(false);
@@ -846,71 +1204,18 @@ function AppearanceTab() {
                 style={{
                   padding: 14, borderRadius: 12, cursor: "pointer",
                   border: selected ? "2px solid var(--color-brand-500)" : "1.5px solid var(--color-border)",
-                  background: t === "dark" ? "#1E1B2E" : "var(--color-bg-base)",
+                  background: t === "dark" ? "#2A241B" : "var(--color-bg-base)",
                   display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
                   transition: "transform .12s, border-color .12s",
                 }}
               >
-                <div style={{ width: "100%", height: 48, borderRadius: 8, background: t === "dark" ? "#2D2A3E" : "var(--color-surface)", border: "1px solid rgba(0,0,0,.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <MonitorIcon size={18} style={{ color: t === "dark" ? "#818CF8" : "var(--color-brand-500)" }} />
+                <div style={{ width: "100%", height: 48, borderRadius: 8, background: t === "dark" ? "#2A241B" : "var(--color-surface)", border: "1px solid rgba(0,0,0,.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <MonitorIcon size={18} style={{ color: t === "dark" ? "#F2B187" : "var(--color-brand-500)" }} />
                 </div>
-                <span style={{ fontSize: 13, fontWeight: 600, color: t === "dark" ? "#E2E8F0" : "var(--color-text)", textTransform: "capitalize" }}>{t}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: t === "dark" ? "#E8E4DC" : "var(--color-text)", textTransform: "capitalize" }}>{t}</span>
               </button>
             );
           })}
-        </div>
-      </Card>
-
-      <Card>
-        <h3 style={{ margin: "0 0 4px", fontSize: 16, fontWeight: 700, color: "var(--color-text)" }}>Accent Color</h3>
-        <p style={{ margin: "0 0 16px", fontSize: 13, color: "var(--color-text-secondary)" }}>
-          Drives buttons, active states, focus rings, and chart accents across the app.
-        </p>
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-          {ACCENT_PRESETS.map((c) => {
-            const selected = accent.toLowerCase() === c.toLowerCase();
-            return (
-              <button
-                key={c}
-                type="button"
-                aria-pressed={selected}
-                aria-label={`Accent ${c}`}
-                onClick={() => { setAccent(c);}}
-                style={{
-                  width: 36, height: 36, borderRadius: 10, background: c,
-                  border: selected ? "3px solid var(--color-text)" : "3px solid transparent",
-                  cursor: "pointer", transition: "transform .12s, border .12s",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-              >
-                {selected && <CheckIcon size={14} style={{ color: "var(--color-surface)" }} />}
-              </button>
-            );
-          })}
-
-          {/* Custom color picker */}
-          <label
-            style={{
-              display: "inline-flex", alignItems: "center", gap: 6,
-              marginLeft: 4, padding: "6px 10px", borderRadius: 999,
-              border: "1.5px dashed var(--color-border)", cursor: "pointer",
-              fontSize: 12, fontWeight: 600, color: "var(--color-text-secondary)",
-            }}
-          >
-            <span
-              aria-hidden
-              style={{ width: 16, height: 16, borderRadius: 999, background: accent, border: "1px solid rgba(0,0,0,.1)" }}
-            />
-            Custom
-            <input
-              type="color"
-              value={accent}
-              onChange={(e) => { setAccent(e.target.value);}}
-              style={{ position: "absolute", opacity: 0, width: 0, height: 0, pointerEvents: "none" }}
-            />
-          </label>
         </div>
       </Card>
 
@@ -1038,7 +1343,7 @@ function AppearanceTab() {
           alignItems: "center",
           justifyContent: "space-between",
           gap: 12,
-          boxShadow: "0 10px 32px rgba(23, 26, 43, 0.08)",
+          boxShadow: "0 10px 32px rgba(31, 27, 23, 0.08)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
@@ -1046,7 +1351,7 @@ function AppearanceTab() {
             aria-hidden
             style={{
               width: 8, height: 8, borderRadius: 999,
-              background: isDirty ? "#F59E0B" : justSaved ? "#22C55E" : "#D1D5DB",
+              background: isDirty ? "#ED8E55" : justSaved ? "#EA6814" : "#D6D1C5",
               flexShrink: 0,
               transition: "background .15s",
             }}
@@ -1063,12 +1368,6 @@ function AppearanceTab() {
             </div>
             <div style={{ fontSize: 11, color: "var(--color-text-muted)", marginTop: 2 }}>
               Previewing <strong style={{ color: "var(--color-text-secondary)" }}>{resolvedTheme}</strong>
-              {" · "}accent
-              <span
-                aria-hidden
-                style={{ display: "inline-block", width: 8, height: 8, borderRadius: 999, background: accent, verticalAlign: "middle", margin: "0 4px" }}
-              />
-              <span style={{ fontFamily: "ui-monospace, monospace" }}>{accent.toUpperCase()}</span>
               {" · "}{density}
             </div>
           </div>
@@ -1103,13 +1402,13 @@ function AppearanceTab() {
             disabled={!isDirty && !justSaved}
             style={{
               height: 40, padding: "0 22px", borderRadius: 10, border: "none",
-              background: justSaved ? "#22C55E" : "var(--color-brand-500)",
+              background: justSaved ? "#EA6814" : "var(--color-brand-500)",
               color: "var(--color-surface)", fontSize: 14, fontWeight: 600,
               cursor: isDirty || justSaved ? "pointer" : "not-allowed",
               opacity: isDirty || justSaved ? 1 : 0.55,
               display: "flex", alignItems: "center", gap: 6,
               transition: "background .15s, opacity .15s",
-              boxShadow: isDirty ? "0 6px 16px rgba(91, 61, 245, 0.25)" : "none",
+              boxShadow: isDirty ? "0 6px 16px rgba(234, 104, 20, 0.25)" : "none",
             }}
           >
             {justSaved ? <><CheckIcon size={14} /> Saved</> : "Save changes"}
@@ -1135,57 +1434,103 @@ export function SettingsPageClient() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "calc(100dvh - 64px)", background: "var(--color-bg-base)" }}>
-      {/* Sidebar */}
-      <aside style={{ width: 240, minWidth: 240, background: "var(--color-surface)", borderRight: "1.5px solid var(--color-border)", padding: "24px 12px" }}>
-        <div style={{ padding: "0 8px 16px", fontSize: 11, fontWeight: 700, color: "var(--color-text-muted)", letterSpacing: ".06em", textTransform: "uppercase" }}>
-          Settings
-        </div>
+    <div className="settings-shell">
+      <style>{`
+        .settings-shell { display:flex; flex-direction:column; min-height:calc(100dvh - 64px); background:var(--color-bg-base); }
+        @media(min-width:900px){ .settings-shell { flex-direction:row; } }
+
+        /* Mobile: horizontal scrolling tab strip pinned at the top */
+        .settings-tabs-mobile { display:flex; overflow-x:auto; gap:6px; padding:10px 14px; background:var(--color-surface); border-bottom:1px solid var(--color-border); position:sticky; top:0; z-index:5; scrollbar-width:none; }
+        .settings-tabs-mobile::-webkit-scrollbar { display:none; }
+        .settings-tab-pill { display:inline-flex; align-items:center; gap:7px; height:34px; padding:0 14px; border-radius:999px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); font-size:13px; font-weight:600; white-space:nowrap; cursor:pointer; flex-shrink:0; transition:all .15s; }
+        .settings-tab-pill:hover { color:var(--color-text); border-color:var(--color-border-strong); }
+        .settings-tab-pill[aria-pressed="true"] { background:var(--color-brand-50); border-color:var(--color-brand-200); color:var(--color-brand-600); }
+
+        @media(min-width:900px){ .settings-tabs-mobile { display:none; } }
+
+        /* Desktop sidebar */
+        .settings-sidebar { display:none; }
+        @media(min-width:900px){
+          .settings-sidebar { display:block; width:240px; min-width:240px; background:var(--color-surface); border-right:1.5px solid var(--color-border); padding:24px 12px; }
+        }
+        .settings-side-title { padding:0 8px 16px; font-size:11px; font-weight:700; color:var(--color-text-muted); letter-spacing:.06em; text-transform:uppercase; }
+        .settings-side-btn { width:100%; text-align:left; height:42px; padding:0 12px; border-radius:10px; border:none; background:transparent; color:var(--color-text-secondary); font-size:14px; font-weight:500; cursor:pointer; display:flex; align-items:center; gap:10px; margin-bottom:2px; transition:all .12s; }
+        .settings-side-btn:hover { background:var(--color-bg-base); }
+        .settings-side-btn[aria-pressed="true"] { background:var(--color-brand-100); color:var(--color-brand-500); font-weight:600; }
+        .settings-side-btn[aria-pressed="true"] .settings-side-icon { opacity:1; }
+        .settings-side-icon { opacity:0.6; }
+
+        /* Danger zone */
+        .settings-danger { margin-top:24px; padding:0 8px; }
+        .settings-danger-title { font-size:11px; font-weight:700; color:var(--color-text-muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:8px; }
+        .settings-danger-btn { width:100%; height:38px; border-radius:10px; border:1.5px solid #F8D5BD; background:#F8D5BD; color:#9F430D; font-size:13px; font-weight:600; cursor:pointer; transition:all .15s; }
+        .settings-danger-btn:hover { background:transparent; }
+
+        /* Content */
+        .settings-content { flex:1; min-width:0; padding:18px 16px 32px; overflow-y:auto; }
+        @media(min-width:640px){ .settings-content { padding:24px 22px 32px; } }
+        @media(min-width:900px){ .settings-content { padding:28px 32px; } }
+        .settings-content-inner { max-width:760px; margin:0 auto; }
+        @media(min-width:900px){ .settings-content-inner { margin:0; } }
+        .settings-page-title { margin:0 0 4px; font-size:22px; font-weight:700; color:var(--color-text); letter-spacing:-0.01em; }
+        @media(min-width:640px){ .settings-page-title { font-size:24px; } }
+        .settings-page-sub { margin:0 0 24px; font-size:13.5px; color:var(--color-text-secondary); }
+      `}</style>
+
+      {/* Mobile tabs */}
+      <nav className="settings-tabs-mobile" aria-label="Settings sections">
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            className="settings-tab-pill"
+            aria-pressed={activeTab === tab.id}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            <span style={{ display: "inline-flex" }}>{tab.icon}</span>
+            {tab.label}
+          </button>
+        ))}
+      </nav>
+
+      {/* Desktop sidebar */}
+      <aside className="settings-sidebar">
+        <div className="settings-side-title">Settings</div>
         <nav>
-          {TABS.map(tab => (
+          {TABS.map((tab) => (
             <button
               key={tab.id}
+              type="button"
+              className="settings-side-btn"
+              aria-pressed={activeTab === tab.id}
               onClick={() => setActiveTab(tab.id)}
-              style={{
-                width: "100%", textAlign: "left", height: 42,
-                padding: "0 12px", borderRadius: 10, border: "none",
-                background: activeTab === tab.id ? "var(--color-brand-100)" : "transparent",
-                color: activeTab === tab.id ? "var(--color-brand-500)" : "var(--color-text-secondary)",
-                fontSize: 14, fontWeight: activeTab === tab.id ? 600 : 500,
-                cursor: "pointer", display: "flex", alignItems: "center", gap: 10,
-                marginBottom: 2, transition: "all .12s",
-              }}
-              onMouseEnter={e => { if (activeTab !== tab.id) (e.currentTarget as HTMLButtonElement).style.background = "var(--color-bg-base)"; }}
-              onMouseLeave={e => { if (activeTab !== tab.id) (e.currentTarget as HTMLButtonElement).style.background = "transparent"; }}
             >
-              <span style={{ opacity: activeTab === tab.id ? 1 : 0.6 }}>{tab.icon}</span>
+              <span className="settings-side-icon">{tab.icon}</span>
               {tab.label}
-              {activeTab === tab.id && (
+              {activeTab === tab.id ? (
                 <ChevronRight size={13} style={{ marginLeft: "auto", color: "var(--color-brand-500)" }} />
-              )}
+              ) : null}
             </button>
           ))}
         </nav>
 
-        {/* Danger zone */}
-        <div style={{ marginTop: 24, padding: "0 8px" }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: "var(--color-text-muted)", letterSpacing: ".06em", textTransform: "uppercase", marginBottom: 8 }}>Danger Zone</div>
-          <button style={{ width: "100%", height: 38, borderRadius: 10, border: "1.5px solid #FECACA", background: "#FEF2F2", color: "#EF4444", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
+        <div className="settings-danger">
+          <div className="settings-danger-title">Danger Zone</div>
+          <button type="button" className="settings-danger-btn">
             Delete Account
           </button>
         </div>
       </aside>
 
       {/* Content */}
-      <div style={{ flex: 1, padding: "28px 32px", overflowY: "auto" }}>
-        <div style={{ maxWidth: 760 }}>
-          {/* Header */}
-          <div style={{ marginBottom: 24 }}>
-            <h1 style={{ margin: "0 0 4px", fontSize: 22, fontWeight: 700, color: "var(--color-text)" }}>
-              {TABS.find(t => t.id === activeTab)?.label}
+      <div className="settings-content">
+        <div className="settings-content-inner">
+          <div>
+            <h1 className="settings-page-title">
+              {TABS.find((t) => t.id === activeTab)?.label}
             </h1>
-            <p style={{ margin: 0, fontSize: 14, color: "var(--color-text-secondary)" }}>
-              Manage your {TABS.find(t => t.id === activeTab)?.label.toLowerCase()} settings
+            <p className="settings-page-sub">
+              Manage your {TABS.find((t) => t.id === activeTab)?.label.toLowerCase()} settings
             </p>
           </div>
           {tabContent[activeTab]}

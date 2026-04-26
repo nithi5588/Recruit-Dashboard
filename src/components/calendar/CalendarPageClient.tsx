@@ -11,6 +11,7 @@ import {
   DownloadIcon,
   FilterIcon,
   LinkChainIcon,
+  MenuListIcon,
   MoreIcon,
   PhoneIcon,
   PlusIcon,
@@ -90,16 +91,16 @@ const EVENT_TYPE_ORDER: EventType[] = [
 ];
 
 const EVENT_STYLES: Record<EventType, { bg: string; text: string; dot: string }> = {
-  interview:               { bg: "#EDE9FF", text: "#4B32D4", dot: "#5B3DF5" },
-  screening:               { bg: "#FFF3E0", text: "#B45309", dot: "#F59E0B" },
-  "client-call":           { bg: "#EAFBF1", text: "#166534", dot: "#22C55E" },
-  "client-meeting":        { bg: "#EAFBF1", text: "#166534", dot: "#22C55E" },
-  "hiring-manager-call":   { bg: "#FDF2F8", text: "#9D174D", dot: "#EC4899" },
-  "offer-discussion":      { bg: "#FFFBEB", text: "#92400E", dot: "#D97706" },
-  "team-standup":          { bg: "#EAF2FF", text: "#1E40AF", dot: "#3B82F6" },
-  "team-retro":            { bg: "#EAF2FF", text: "#1E40AF", dot: "#3B82F6" },
-  "follow-up":             { bg: "#FFF7ED", text: "#92400E", dot: "#F97316" },
-  "feedback-call":         { bg: "#ECFDF5", text: "#065F46", dot: "#10B981" },
+  interview:               { bg: "#FCE9DD", text: "#C75510", dot: "#EA6814" },
+  screening:               { bg: "#FFF6EE", text: "#C75510", dot: "#ED8E55" },
+  "client-call":           { bg: "#FCE9DD", text: "#9F430D", dot: "#EA6814" },
+  "client-meeting":        { bg: "#FCE9DD", text: "#9F430D", dot: "#EA6814" },
+  "hiring-manager-call":   { bg: "#FCE9DD", text: "#9F430D", dot: "#EA6814" },
+  "offer-discussion":      { bg: "#FFF6EE", text: "#9F430D", dot: "#C75510" },
+  "team-standup":          { bg: "#F4F2EE", text: "#6B6358", dot: "#6B6358" },
+  "team-retro":            { bg: "#F4F2EE", text: "#6B6358", dot: "#6B6358" },
+  "follow-up":             { bg: "#FFF6EE", text: "#9F430D", dot: "#F97316" },
+  "feedback-call":         { bg: "#FFF6EE", text: "#9F430D", dot: "#C75510" },
 };
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -177,7 +178,7 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       id: "e1", title: "Interview", type: "interview",
       subtitle: "Savannah Nguyen", date: mon,
       startHour: 9, startMin: 0, endHour: 10, endMin: 0, iconType: "video",
-      candidate: { name: "Savannah Nguyen", role: "Senior Product Designer", company: "Shopify", initials: "SN", color: "#8B5CF6" },
+      candidate: { name: "Savannah Nguyen", role: "Senior Product Designer", company: "Shopify", initials: "SN", color: "#EA6814" },
     },
     {
       id: "e2", title: "Client Call", type: "client-call",
@@ -198,19 +199,19 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       id: "e5", title: "Screening Call", type: "screening",
       subtitle: "Esther Howard", date: tue,
       startHour: 8, startMin: 30, endHour: 9, endMin: 15, iconType: "phone",
-      candidate: { name: "Esther Howard", role: "UX Researcher", company: "Google", initials: "EH", color: "#F59E0B" },
+      candidate: { name: "Esther Howard", role: "UX Researcher", company: "Google", initials: "EH", color: "#ED8E55" },
     },
     {
       id: "e6", title: "Interview", type: "interview",
       subtitle: "Ralph Edwards", date: tue,
       startHour: 10, startMin: 30, endHour: 11, endMin: 15, iconType: "video",
-      candidate: { name: "Ralph Edwards", role: "Frontend Developer", company: "Atlassian", initials: "RE", color: "#3B82F6" },
+      candidate: { name: "Ralph Edwards", role: "Frontend Developer", company: "Atlassian", initials: "RE", color: "#6B6358" },
       meetLink: "meet.google.com/abc-defg-hij",
       attendees: [
-        { initials: "SN", color: "#8B5CF6" },
-        { initials: "EH", color: "#F59E0B" },
-        { initials: "RE", color: "#3B82F6" },
-        { initials: "CM", color: "#22C55E" },
+        { initials: "SN", color: "#EA6814" },
+        { initials: "EH", color: "#ED8E55" },
+        { initials: "RE", color: "#6B6358" },
+        { initials: "CM", color: "#EA6814" },
       ],
       notes: "Assess technical skills and culture fit...",
     },
@@ -228,7 +229,7 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       id: "e9", title: "Interview", type: "interview",
       subtitle: "Dianne Russell", date: wed,
       startHour: 9, startMin: 0, endHour: 10, endMin: 0, iconType: "video",
-      candidate: { name: "Dianne Russell", role: "Marketing Specialist", company: "Notion", initials: "DR", color: "#EC4899" },
+      candidate: { name: "Dianne Russell", role: "Marketing Specialist", company: "Notion", initials: "DR", color: "#EA6814" },
     },
     {
       id: "e10", title: "Feedback Call", type: "feedback-call",
@@ -239,7 +240,7 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       id: "e11", title: "Interview", type: "interview",
       subtitle: "Floyd Miles", date: wed,
       startHour: 15, startMin: 0, endHour: 16, endMin: 0, iconType: "video",
-      candidate: { name: "Floyd Miles", role: "Product Manager", company: "Linear", initials: "FM", color: "#6366F1" },
+      candidate: { name: "Floyd Miles", role: "Product Manager", company: "Linear", initials: "FM", color: "#ED8E55" },
     },
     {
       id: "e12", title: "Client Call", type: "client-call",
@@ -250,7 +251,7 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       id: "e13", title: "Interview", type: "interview",
       subtitle: "Albert Flores", date: fri,
       startHour: 9, startMin: 30, endHour: 10, endMin: 30, iconType: "video",
-      candidate: { name: "Albert Flores", role: "DevOps Engineer", company: "AWS", initials: "AF", color: "#F59E0B" },
+      candidate: { name: "Albert Flores", role: "DevOps Engineer", company: "AWS", initials: "AF", color: "#ED8E55" },
     },
     {
       id: "e14", title: "Offer Discussion", type: "offer-discussion",
@@ -261,7 +262,7 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       id: "e15", title: "Screening Call", type: "screening",
       subtitle: "Jane Cooper", date: fri,
       startHour: 14, startMin: 0, endHour: 15, endMin: 0, iconType: "phone",
-      candidate: { name: "Jane Cooper", role: "UI Designer", company: "Figma", initials: "JC", color: "#EC4899" },
+      candidate: { name: "Jane Cooper", role: "UI Designer", company: "Figma", initials: "JC", color: "#EA6814" },
     },
     {
       id: "e16", title: "Team Retro", type: "team-retro",
@@ -298,7 +299,7 @@ function HourSlot({ hour, onClick }: { hour: number; onClick: () => void }) {
     >
       <span
         aria-hidden
-        className="pointer-events-none flex h-7 w-7 scale-90 items-center justify-center rounded-full bg-[color:var(--color-brand-500)] text-white opacity-0 shadow-[0_4px_12px_rgba(91,61,245,0.4)] transition-all group-hover/slot:scale-100 group-hover/slot:opacity-100"
+        className="pointer-events-none flex h-7 w-7 scale-90 items-center justify-center rounded-full bg-[color:var(--color-brand-500)] text-white opacity-0 shadow-[0_4px_12px_rgba(234,104,20,0.4)] transition-all group-hover/slot:scale-100 group-hover/slot:opacity-100"
       >
         <PlusIcon size={14} />
       </span>
@@ -487,7 +488,7 @@ function WeekView({
               <div
                 key={i}
                 className="relative min-w-0 flex-1 border-l border-[color:var(--color-border)]"
-                style={isToday ? { background: "rgba(91,61,245,0.07)" } : undefined}
+                style={isToday ? { background: "rgba(234,104,20,0.07)" } : undefined}
               >
                 {/* Hour grid lines */}
                 {HOURS.map((h) => (
@@ -600,7 +601,7 @@ function DayView({
 
           <div
             className="relative flex-1 border-l border-[color:var(--color-border)]"
-            style={isToday ? { background: "rgba(91,61,245,0.07)" } : undefined}
+            style={isToday ? { background: "rgba(234,104,20,0.07)" } : undefined}
           >
             {HOURS.map((h) => (
               <div
@@ -878,7 +879,7 @@ function MiniCalendar({
               {hasEv && !isToday && (
                 <span
                   className="absolute bottom-[3px] left-1/2 h-[3px] w-[3px] -translate-x-1/2 rounded-full"
-                  style={{ backgroundColor: "#5B3DF5" }}
+                  style={{ backgroundColor: "#EA6814" }}
                 />
               )}
             </button>
@@ -1423,7 +1424,7 @@ function NewEventModal({
           <button
             type="button"
             onClick={handleSubmit}
-            className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(91,61,245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+            className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(234,104,20,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
           >
             <PlusIcon size={14} />
             Create event
@@ -1452,6 +1453,7 @@ export function CalendarPageClient() {
   );
   const [filterOpen, setFilterOpen] = useState(false);
   const [datePickerOpen, setDatePickerOpen] = useState(false);
+  const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
   const [datePickerMonth, setDatePickerMonth] = useState<Date>(() => {
     const d = new Date();
     return new Date(d.getFullYear(), d.getMonth(), 1);
@@ -1638,7 +1640,7 @@ export function CalendarPageClient() {
       style={{ height: "calc(100dvh - 64px)" }}
     >
       {/* ── Page Header ──────────────────────────────────── */}
-      <div className="flex shrink-0 items-center justify-between border-b border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-6 py-4">
+      <div className="flex shrink-0 items-center justify-between border-b border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 sm:px-6 sm:py-4">
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-[22px] font-bold tracking-tight text-[color:var(--color-text)]">
@@ -1907,10 +1909,19 @@ export function CalendarPageClient() {
           <button
             type="button"
             onClick={() => setNewEventOpen(true)}
-            className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-3 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(91,61,245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+            className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-3 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(234,104,20,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
           >
             <PlusIcon size={15} />
             <span className="hidden sm:inline">New event</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMobilePanelOpen(true)}
+            aria-label="Open calendar details panel"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text-secondary)] transition-colors hover:border-[color:var(--color-brand-300)] hover:bg-[color:var(--color-brand-50)] hover:text-[color:var(--color-brand-600)] lg:hidden"
+          >
+            <MenuListIcon size={16} />
           </button>
         </div>
       </div>
@@ -1952,8 +1963,37 @@ export function CalendarPageClient() {
           )}
         </div>
 
-        {/* ── Right Panel ──────────────────────────────── */}
-        <div className="flex w-[300px] shrink-0 flex-col overflow-y-auto border-l border-[color:var(--color-border)] bg-[color:var(--color-surface)]">
+        {/* ── Right Panel — docked on lg+, drawer on smaller ──────── */}
+        {/* Backdrop (mobile only) */}
+        <div
+          aria-hidden
+          onClick={() => setMobilePanelOpen(false)}
+          className={`fixed inset-0 z-40 bg-[rgba(31,27,23,0.45)] transition-opacity lg:hidden ${
+            mobilePanelOpen
+              ? "pointer-events-auto opacity-100"
+              : "pointer-events-none opacity-0"
+          }`}
+        />
+        <div
+          className={`fixed inset-y-0 right-0 z-50 flex w-[min(320px,90vw)] shrink-0 flex-col overflow-y-auto border-l border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-[var(--shadow-panel)] transition-transform lg:static lg:z-auto lg:w-[300px] lg:translate-x-0 lg:shadow-none ${
+            mobilePanelOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          {/* Mobile header with close */}
+          <div className="flex items-center justify-between border-b border-[color:var(--color-border)] px-4 py-3 lg:hidden">
+            <span className="text-[13px] font-bold text-[color:var(--color-text)]">
+              Calendar details
+            </span>
+            <button
+              type="button"
+              onClick={() => setMobilePanelOpen(false)}
+              aria-label="Close panel"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] text-[color:var(--color-text-muted)] hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text)]"
+            >
+              <XIcon size={14} />
+            </button>
+          </div>
+
           {/* Date header + mini calendar */}
           <div className="shrink-0 border-b border-[color:var(--color-border)] p-4">
             <div className="mb-3 flex items-center gap-2">
@@ -2008,13 +2048,13 @@ export function CalendarPageClient() {
       </div>
 
       {/* ── Legend Footer ────────────────────────────────── */}
-      <div className="flex shrink-0 items-center gap-5 border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-6 py-3">
+      <div className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 sm:gap-x-5 sm:px-6">
         {[
-          { label: "Interviews", color: "#5B3DF5" },
-          { label: "Calls",      color: "#F59E0B" },
-          { label: "Meetings",   color: "#22C55E" },
+          { label: "Interviews", color: "#EA6814" },
+          { label: "Calls",      color: "#ED8E55" },
+          { label: "Meetings",   color: "#EA6814" },
           { label: "Follow-ups", color: "#F97316" },
-          { label: "Reminders",  color: "#EF4444" },
+          { label: "Reminders",  color: "#9F430D" },
         ].map(({ label, color }) => (
           <div key={label} className="flex items-center gap-1.5">
             <span

@@ -38,7 +38,7 @@ const PLANS: Plan[] = [
     }),
     seatLabel: "Team of up to 5",
     cta: { label: "Start with Team", href: "#" },
-    accent: "#3B82F6",
+    accent: "#6B6358",
     features: [
       { label: "Up to 5 recruiter seats", included: true },
       { label: "Unlimited candidates", included: true },
@@ -62,7 +62,7 @@ const PLANS: Plan[] = [
     cta: { label: "Upgrade to Growth", href: "#" },
     highlight: true,
     tag: "Most popular",
-    accent: "#5B3DF5",
+    accent: "#EA6814",
     features: [
       { label: "Up to 20 recruiter seats", included: true },
       { label: "Everything in Team, plus:", included: true },
@@ -81,7 +81,7 @@ const PLANS: Plan[] = [
     priceLabel: () => ({ amount: "Custom", period: "contact sales" }),
     seatLabel: "Unlimited seats",
     cta: { label: "Contact sales", href: "mailto:sales@recruit.app" },
-    accent: "#171A2B",
+    accent: "#1F1B17",
     features: [
       { label: "Unlimited seats & workspaces", included: true },
       { label: "Everything in Growth, plus:", included: true },
@@ -123,7 +123,7 @@ export function PricingPageClient() {
       <section className="relative mb-8 overflow-hidden rounded-[24px] border border-[color:var(--color-brand-200)] px-5 py-8 text-center sm:mb-10 sm:px-10 sm:py-12"
         style={{
           background:
-            "radial-gradient(1200px 320px at 50% 0%, rgba(91,61,245,0.18), transparent 60%), radial-gradient(900px 240px at 100% 100%, rgba(59,130,246,0.10), transparent 55%), linear-gradient(180deg, #FBFAFF 0%, #FFFFFF 70%)",
+            "radial-gradient(1200px 320px at 50% 0%, rgba(234,104,20,0.18), transparent 60%), radial-gradient(900px 240px at 100% 100%, rgba(107,99,88,0.10), transparent 55%), linear-gradient(180deg, #FAFAF7 0%, #FFFFFF 70%)",
         }}
       >
         <span
@@ -131,7 +131,7 @@ export function PricingPageClient() {
           className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full opacity-50 blur-3xl"
           style={{
             background:
-              "radial-gradient(circle, rgba(91,61,245,0.35), transparent 70%)",
+              "radial-gradient(circle, rgba(234,104,20,0.35), transparent 70%)",
           }}
         />
 
@@ -141,7 +141,7 @@ export function PricingPageClient() {
           className="pointer-events-none absolute -left-16 -bottom-20 h-48 w-48 rounded-full opacity-40 blur-3xl"
           style={{
             background:
-              "radial-gradient(circle, rgba(59,130,246,0.35), transparent 70%)",
+              "radial-gradient(circle, rgba(107,99,88,0.35), transparent 70%)",
           }}
         />
 
@@ -168,7 +168,7 @@ export function PricingPageClient() {
                   onClick={() => setCycle(c)}
                   className={`relative inline-flex h-9 items-center gap-2 rounded-[10px] px-3.5 text-[13px] font-semibold transition-colors ${
                     on
-                      ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_12px_rgba(91,61,245,0.25)]"
+                      ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_12px_rgba(234,104,20,0.25)]"
                       : "text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text)]"
                   }`}
                 >
@@ -176,7 +176,7 @@ export function PricingPageClient() {
                   {c === "yearly" ? (
                     <span
                       className={`inline-flex items-center rounded-[999px] px-1.5 py-0.5 text-[10px] font-bold ${
-                        on ? "bg-white/20 text-white" : "bg-[#EAFBF1] text-[#16A34A]"
+                        on ? "bg-white/20 text-white" : "bg-[#FCE9DD] text-[#C75510]"
                       }`}
                     >
                       Save 20%
@@ -199,17 +199,17 @@ export function PricingPageClient() {
       {/* ── Trust strip ────────────────────────────────── */}
       <section className="mt-8 grid grid-cols-1 gap-4 rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 shadow-[var(--shadow-card)] sm:grid-cols-3 sm:p-6">
         <TrustItem
-          accent="#5B3DF5"
+          accent="#EA6814"
           title="14-day free trial"
           body="Try every feature of any plan risk-free. No credit card required."
         />
         <TrustItem
-          accent="#16A34A"
+          accent="#C75510"
           title="Cancel any time"
           body="Monthly plans cancel with one click. Yearly plans are refundable in 30 days."
         />
         <TrustItem
-          accent="#F59E0B"
+          accent="#ED8E55"
           title="Secure by default"
           body="SOC 2 Type II, GDPR compliant, and encrypted at rest and in transit."
         />
@@ -247,7 +247,7 @@ export function PricingPageClient() {
         className="relative mt-10 overflow-hidden rounded-[20px] border border-[color:var(--color-brand-200)] p-5 sm:p-8"
         style={{
           background:
-            "radial-gradient(900px 200px at 100% 0%, rgba(91,61,245,0.15), transparent 60%), linear-gradient(180deg, #F4F1FF 0%, #FFFFFF 80%)",
+            "radial-gradient(900px 200px at 100% 0%, rgba(234,104,20,0.15), transparent 60%), linear-gradient(180deg, #FFF6EE 0%, #FFFFFF 80%)",
         }}
       >
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -270,7 +270,7 @@ export function PricingPageClient() {
             </Link>
             <Link
               href="mailto:sales@recruit.app"
-              className="inline-flex h-11 items-center gap-1.5 rounded-[12px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_8px_20px_rgba(91,61,245,0.28)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+              className="inline-flex h-11 items-center gap-1.5 rounded-[12px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_8px_20px_rgba(234,104,20,0.28)] transition-colors hover:bg-[color:var(--color-brand-600)]"
             >
               Contact sales
               <ChevronRight size={14} />
@@ -293,14 +293,14 @@ function PlanCard({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
     <article
       className={`relative flex flex-col overflow-hidden rounded-[20px] border bg-[color:var(--color-surface)] p-5 transition-transform sm:p-6 ${
         highlight
-          ? "border-[color:var(--color-brand-300)] shadow-[0_16px_40px_rgba(91,61,245,0.16)] lg:-translate-y-2"
+          ? "border-[color:var(--color-brand-300)] shadow-[0_16px_40px_rgba(234,104,20,0.16)] lg:-translate-y-2"
           : "border-[color:var(--color-border)] shadow-[var(--shadow-card)]"
       }`}
       style={
         highlight
           ? {
               background:
-                "linear-gradient(180deg, #FBFAFF 0%, #FFFFFF 60%)",
+                "linear-gradient(180deg, #FAFAF7 0%, #FFFFFF 60%)",
             }
           : undefined
       }
@@ -311,13 +311,13 @@ function PlanCard({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
           className="absolute inset-x-0 top-0 h-[3px]"
           style={{
             background:
-              "linear-gradient(90deg, transparent, #5B3DF5 50%, transparent)",
+              "linear-gradient(90deg, transparent, #EA6814 50%, transparent)",
           }}
         />
       ) : null}
 
       {plan.tag ? (
-        <span className="absolute right-5 top-5 inline-flex items-center gap-1 rounded-[999px] bg-[color:var(--color-brand-500)] px-2.5 py-1 text-[11px] font-bold text-white shadow-[0_4px_10px_rgba(91,61,245,0.30)]">
+        <span className="absolute right-5 top-5 inline-flex items-center gap-1 rounded-[999px] bg-[color:var(--color-brand-500)] px-2.5 py-1 text-[11px] font-bold text-white shadow-[0_4px_10px_rgba(234,104,20,0.30)]">
           <SparklesIcon size={11} />
           {plan.tag}
         </span>
@@ -352,7 +352,7 @@ function PlanCard({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
         />
         {plan.seatLabel}
         {cycle === "yearly" && !isEnterprise ? (
-          <span className="ml-auto inline-flex items-center gap-1 rounded-[999px] bg-[#EAFBF1] px-1.5 py-0.5 text-[10px] font-bold text-[#16A34A]">
+          <span className="ml-auto inline-flex items-center gap-1 rounded-[999px] bg-[#FCE9DD] px-1.5 py-0.5 text-[10px] font-bold text-[#C75510]">
             Billed annually
           </span>
         ) : null}
@@ -362,7 +362,7 @@ function PlanCard({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
         href={plan.cta.href}
         className={`mt-5 inline-flex h-11 w-full items-center justify-center gap-1.5 rounded-[12px] px-4 text-[13px] font-semibold transition-all ${
           highlight
-            ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_8px_20px_rgba(91,61,245,0.30)] hover:bg-[color:var(--color-brand-600)]"
+            ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_8px_20px_rgba(234,104,20,0.30)] hover:bg-[color:var(--color-brand-600)]"
             : isEnterprise
               ? "bg-[color:var(--color-text)] text-white hover:brightness-110"
               : "border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] hover:bg-[color:var(--color-surface-2)]"
@@ -495,8 +495,8 @@ function CompareCell({ value, accent }: { value: CompareValue; accent?: string }
         aria-label="Included"
         className="inline-flex h-6 w-6 items-center justify-center rounded-full"
         style={{
-          background: `${accent ?? "#5B3DF5"}18`,
-          color: accent ?? "#5B3DF5",
+          background: `${accent ?? "#EA6814"}18`,
+          color: accent ?? "#EA6814",
         }}
       >
         <CheckIcon size={12} />
@@ -579,13 +579,13 @@ function CompareTable() {
                       {row.label}
                     </td>
                     <td className="px-4 py-3 text-center sm:px-5">
-                      <CompareCell value={row.team} accent="#3B82F6" />
+                      <CompareCell value={row.team} accent="#6B6358" />
                     </td>
                     <td className="bg-[color:var(--color-brand-50)]/40 px-4 py-3 text-center sm:px-5">
-                      <CompareCell value={row.growth} accent="#5B3DF5" />
+                      <CompareCell value={row.growth} accent="#EA6814" />
                     </td>
                     <td className="px-4 py-3 text-center sm:px-5">
-                      <CompareCell value={row.enterprise} accent="#171A2B" />
+                      <CompareCell value={row.enterprise} accent="#1F1B17" />
                     </td>
                   </tr>
                 ))}

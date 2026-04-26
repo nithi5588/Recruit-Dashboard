@@ -24,20 +24,33 @@ export function AppShell({ children }: { children: ReactNode }) {
     };
   }, [drawerOpen]);
 
+  // Desktop sidebar is FIXED so the page content scrolls behind its
+  // glass surface. We expose the current sidebar width as a CSS variable
+  // and the content wrapper picks it up as its left padding (only on lg+).
+  const sidebarPx = sidebarCollapsed ? 72 : 260;
+
   return (
-    <div className="flex min-h-screen bg-[color:var(--color-bg-base)]">
+    <div
+      className="min-h-screen bg-[color:var(--color-bg-base)]"
+      style={{ ["--sidebar-w" as string]: `${sidebarPx}px` }}
+    >
       <Sidebar
         drawerOpen={drawerOpen}
         onCloseDrawer={() => setDrawerOpen(false)}
         collapsed={sidebarCollapsed}
         onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
       />
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div
+        className="shell-padded flex min-h-screen flex-col"
+        style={{
+          transition: "padding-left 240ms cubic-bezier(0.22, 0.94, 0.46, 1)",
+        }}
+      >
         <Topbar
           onOpenDrawer={() => setDrawerOpen(true)}
           onAddCandidate={() => setAddCandidateOpen(true)}
         />
-        <main className="flex-1">{children}</main>
+        <main className="min-w-0 flex-1">{children}</main>
       </div>
 
       <AddCandidateModal

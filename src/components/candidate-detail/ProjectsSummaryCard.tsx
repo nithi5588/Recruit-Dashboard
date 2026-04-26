@@ -45,25 +45,25 @@ export function ProjectsSummaryCard({ block }: { block: ProjectsBlock }) {
       icon: <StarOutlineIcon size={16} />,
       value: String(block.totalProjects),
       label: "Total Projects",
-      tint: { bg: "#EEE9FF", fg: "#5B3DF5" },
+      tint: { bg: "#FCE9DD", fg: "#EA6814" },
     },
     {
       icon: <UsersIcon size={16} />,
       value: String(block.featuredCount),
       label: "Featured Projects",
-      tint: { bg: "#DBEAFE", fg: "#1D4ED8" },
+      tint: { bg: "#F4F2EE", fg: "#6B6358" },
     },
     {
       icon: <BuildingsSmall />,
       value: String(block.companiesCount),
       label: "Companies",
-      tint: { bg: "#EAFBF1", fg: "#16A34A" },
+      tint: { bg: "#FCE9DD", fg: "#C75510" },
     },
     {
       icon: <ClockIcon size={16} />,
       value: block.totalExperience,
       label: "Total Project Experience",
-      tint: { bg: "#FFEDD5", fg: "#C2410C" },
+      tint: { bg: "#FFF6EE", fg: "#C75510" },
     },
   ];
 

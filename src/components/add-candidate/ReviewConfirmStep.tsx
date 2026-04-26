@@ -40,7 +40,7 @@ function InfoRow({
     <div className="flex items-start gap-3">
       <span
         aria-hidden
-        className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-[#EEF1FF] text-[color:var(--color-brand-600)]"
+        className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-[#FCE9DD] text-[color:var(--color-brand-600)]"
       >
         {icon}
       </span>
@@ -173,7 +173,7 @@ export function ReviewConfirmStep({
         className="flex items-start gap-3 rounded-[14px] border border-[color:var(--color-brand-200)] p-4"
         style={{
           background:
-            "linear-gradient(180deg, #F4F1FF 0%, #F9F7FF 100%)",
+            "linear-gradient(180deg, #FFF6EE 0%, #FAFAF7 100%)",
         }}
       >
         <span

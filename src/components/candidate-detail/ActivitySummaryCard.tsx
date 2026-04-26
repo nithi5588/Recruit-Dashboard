@@ -45,25 +45,25 @@ export function ActivitySummaryCard({
       icon: <NoteLinesIcon size={16} />,
       value: String(summary.total),
       label: "Total Activities",
-      tint: { bg: "#EEE9FF", fg: "#5B3DF5" },
+      tint: { bg: "#FCE9DD", fg: "#EA6814" },
     },
     {
       icon: <UserIcon size={16} />,
       value: String(summary.updatesByYou),
       label: "Updates by You",
-      tint: { bg: "#EAFBF1", fg: "#16A34A" },
+      tint: { bg: "#FCE9DD", fg: "#C75510" },
     },
     {
       icon: <InboxIcon size={16} />,
       value: String(summary.interviewsScheduled),
       label: "Interviews Scheduled",
-      tint: { bg: "#FCE7F3", fg: "#BE185D" },
+      tint: { bg: "#FCE9DD", fg: "#9F430D" },
     },
     {
       icon: <CalendarIcon size={16} />,
       value: String(summary.notesAdded),
       label: "Notes Added",
-      tint: { bg: "#FFF4DB", fg: "#92400E" },
+      tint: { bg: "#FFF6EE", fg: "#9F430D" },
     },
   ];
 

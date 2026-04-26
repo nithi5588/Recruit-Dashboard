@@ -1,5 +1,6 @@
 import { Avatar } from "@/components/ui/Avatar";
 import { Badge } from "@/components/ui/Badge";
+import { CompanyLogo as RealCompanyLogo } from "@/components/ui/CompanyLogo";
 import {
   ExternalLinkIcon,
   InboxIcon,
@@ -14,19 +15,21 @@ import {
 
 function CompanyLogo({
   logo,
-  label,
+  company,
 }: {
   logo: ApplicationEntry["logo"];
-  label: string;
+  company: string;
 }) {
   return (
-    <span
-      aria-label={label}
-      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] text-[14px] font-bold"
-      style={{ background: logo.bg, color: logo.fg }}
-    >
-      {logo.abbr}
-    </span>
+    <RealCompanyLogo
+      company={company}
+      size={40}
+      fallbackBg={logo.bg}
+      fallbackFg={logo.fg}
+      fallbackText={logo.abbr}
+      rounded="rounded-[10px]"
+      padding={5}
+    />
   );
 }
 
@@ -100,7 +103,7 @@ export function ApplicationsTableCard({
                   >
                     <td className="px-5 py-4 align-middle sm:px-6">
                       <div className="flex items-center gap-3">
-                        <CompanyLogo logo={app.logo} label={app.company} />
+                        <CompanyLogo logo={app.logo} company={app.company} />
                         <div className="min-w-0">
                           <p className="truncate text-[13px] font-semibold text-[color:var(--color-text)]">
                             {app.jobTitle}

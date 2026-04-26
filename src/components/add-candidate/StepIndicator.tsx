@@ -40,7 +40,7 @@ export function StepIndicator({
               aria-current={isCurrent ? "step" : undefined}
               className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold transition-colors ${
                 isCurrent
-                  ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_0_0_4px_rgba(91,61,245,0.15)]"
+                  ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_0_0_4px_rgba(234,104,20,0.15)]"
                   : isCompleted
                     ? "bg-[color:var(--color-brand-500)] text-white"
                     : "border border-[color:var(--color-border-strong)] bg-[color:var(--color-surface)] text-[color:var(--color-text-muted)]"

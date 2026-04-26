@@ -51,7 +51,7 @@ export function StatCard({
         )}
         {spark && (
           <div className="hidden shrink-0 opacity-90 sm:block">
-            <Sparkline values={spark.values} color={spark.color ?? "#5B3DF5"} />
+            <Sparkline values={spark.values} color={spark.color ?? "#EA6814"} />
           </div>
         )}
       </div>
@@ -77,9 +77,9 @@ export type Insight = { tone: InsightTone; title: string; body: string };
 
 export function InsightBadge({ tone }: { tone: InsightTone }) {
   const map = {
-    positive: { bg: "#EAFBF1", fg: "#16A34A", icon: "📈" },
-    warning:  { bg: "#FFF4DB", fg: "#B45309", icon: "⚠" },
-    info:     { bg: "#EAF2FF", fg: "#2563EB", icon: "💡" },
+    positive: { bg: "#FCE9DD", fg: "#C75510", icon: "📈" },
+    warning:  { bg: "#FFF6EE", fg: "#C75510", icon: "⚠" },
+    info:     { bg: "#F4F2EE", fg: "#6B6358", icon: "💡" },
   } as const;
   const c = map[tone];
   return (

@@ -51,9 +51,9 @@ const SORT_OPTIONS: { key: SortKey; label: string }[] = [
 const PRIORITY_RANK: Record<PipelinePriority, number> = { High: 0, Medium: 1, Low: 2 };
 
 const PRIORITY_STYLES: Record<PipelinePriority, { bg: string; fg: string; dot: string }> = {
-  High:   { bg: "#FDECEC", fg: "#DC2626", dot: "#EF4444" },
-  Medium: { bg: "#FFF4DB", fg: "#B45309", dot: "#F59E0B" },
-  Low:    { bg: "#EAFBF1", fg: "#16A34A", dot: "#22C55E" },
+  High:   { bg: "#F8D5BD", fg: "#9F430D", dot: "#9F430D" },
+  Medium: { bg: "#FFF6EE", fg: "#C75510", dot: "#ED8E55" },
+  Low:    { bg: "#FCE9DD", fg: "#C75510", dot: "#EA6814" },
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -74,7 +74,7 @@ function uid() {
   return `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
 }
 
-const STAGE_AVATAR_COLORS = ["#5B3DF5", "#3B82F6", "#22C55E", "#F59E0B", "#EC4899", "#06B6D4"];
+const STAGE_AVATAR_COLORS = ["#EA6814", "#6B6358", "#EA6814", "#ED8E55", "#EA6814", "#6B6358"];
 
 function pickAvatarColor() {
   return STAGE_AVATAR_COLORS[Math.floor(Math.random() * STAGE_AVATAR_COLORS.length)];
@@ -224,7 +224,7 @@ function CandidateCard({
       draggable
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
-      className={`group relative cursor-grab rounded-[12px] border bg-[color:var(--color-surface)] p-3 shadow-[0_1px_2px_rgba(23,26,43,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)] active:cursor-grabbing ${
+      className={`group relative cursor-grab rounded-[12px] border bg-[color:var(--color-surface)] p-3 shadow-[0_1px_2px_rgba(31,27,23,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)] active:cursor-grabbing ${
         isDragging
           ? "border-[color:var(--color-brand-500)] opacity-50"
           : "border-[color:var(--color-border)] hover:border-[color:var(--color-border-strong)]"
@@ -462,7 +462,7 @@ function AddCardForm({
           type="button"
           disabled={!name.trim()}
           onClick={handleSubmit}
-          className="h-7 rounded-[6px] bg-[color:var(--color-brand-500)] px-3 text-[11px] font-semibold text-white shadow-[0_2px_8px_rgba(91,61,245,0.3)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
+          className="h-7 rounded-[6px] bg-[color:var(--color-brand-500)] px-3 text-[11px] font-semibold text-white shadow-[0_2px_8px_rgba(234,104,20,0.3)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
         >
           Add card
         </button>
@@ -888,8 +888,8 @@ export function PipelineBoardClient() {
       <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
         <div className="rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
           <div className="flex items-start gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#EEE9FF" }}>
-              <UsersIcon size={16} style={{ color: "#5B3DF5" }} />
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#FCE9DD" }}>
+              <UsersIcon size={16} style={{ color: "#EA6814" }} />
             </span>
             <div className="min-w-0">
               <p className="text-[11px] font-medium text-[color:var(--color-text-secondary)]">Total in Pipeline</p>
@@ -904,8 +904,8 @@ export function PipelineBoardClient() {
 
         <div className="rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
           <div className="flex items-start gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#EAF2FF" }}>
-              <TargetIcon size={16} style={{ color: "#3B82F6" }} />
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#F4F2EE" }}>
+              <TargetIcon size={16} style={{ color: "#6B6358" }} />
             </span>
             <div className="min-w-0">
               <p className="text-[11px] font-medium text-[color:var(--color-text-secondary)]">Active Candidates</p>
@@ -919,7 +919,7 @@ export function PipelineBoardClient() {
 
         <div className="rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
           <div className="flex items-start gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#FDECEC" }}>
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#F8D5BD" }}>
               <span aria-hidden className="text-[15px]">🔥</span>
             </span>
             <div className="min-w-0">
@@ -934,7 +934,7 @@ export function PipelineBoardClient() {
 
         <div className="rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
           <div className="flex items-start gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#EAFBF1" }}>
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#FCE9DD" }}>
               <span aria-hidden className="text-[15px]">🏆</span>
             </span>
             <div className="min-w-0">

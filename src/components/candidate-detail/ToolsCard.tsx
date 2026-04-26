@@ -1,3 +1,4 @@
+import { CompanyLogo } from "@/components/ui/CompanyLogo";
 import type { ToolEntry } from "@/lib/candidate-detail";
 
 export function ToolsCard({ tools }: { tools: ToolEntry[] }) {
@@ -11,15 +12,16 @@ export function ToolsCard({ tools }: { tools: ToolEntry[] }) {
       </h2>
       <ul className="mt-4 flex flex-wrap gap-2.5">
         {tools.map((tool) => (
-          <li key={tool.label}>
-            <span
-              title={tool.label}
-              className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-[color:var(--color-border)] text-[11px] font-bold"
-              style={{ background: tool.bg, color: tool.fg }}
-              aria-label={tool.label}
-            >
-              {tool.abbr}
-            </span>
+          <li key={tool.label} title={tool.label}>
+            <CompanyLogo
+              company={tool.label}
+              size={40}
+              fallbackBg={tool.bg}
+              fallbackFg={tool.fg}
+              fallbackText={tool.abbr}
+              rounded="rounded-[10px]"
+              padding={5}
+            />
           </li>
         ))}
       </ul>

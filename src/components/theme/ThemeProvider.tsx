@@ -14,18 +14,14 @@ import {
 export type ThemeMode = "light" | "dark" | "system";
 export type Density = "compact" | "default" | "spacious";
 
-export const ACCENT_PRESETS = [
-  "#5B3DF5",
-  "#3B82F6",
-  "#22C55E",
-  "#F59E0B",
-  "#EC4899",
-  "#06B6D4",
-  "#EF4444",
-] as const;
+/**
+ * The product is locked to a single monochrome orange accent — no color
+ * picker UI ships, but the export is kept for any internal tooling.
+ */
+export const ACCENT_PRESETS = ["#EA6814"] as const;
 
 export const DEFAULT_ACCENT = ACCENT_PRESETS[0];
-const STORAGE_KEY = "recruit:appearance:v1";
+const STORAGE_KEY = "recruit:appearance:v2";
 
 type Appearance = {
   theme: ThemeMode;

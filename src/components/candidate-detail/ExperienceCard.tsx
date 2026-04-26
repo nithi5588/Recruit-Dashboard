@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ExperienceEntry } from "@/lib/candidate-detail";
 import { ChevronRight } from "@/components/icons/AppIcons";
+import { CompanyLogo } from "@/components/ui/CompanyLogo";
 
 export function ExperienceCard({
   experience,
@@ -33,13 +34,17 @@ export function ExperienceCard({
           const isLast = idx === experience.length - 1;
           return (
             <li key={`${entry.role}-${entry.company}`} className="relative pl-12">
-              <span
-                aria-hidden
-                className="absolute left-0 top-0 flex h-9 w-9 items-center justify-center rounded-[10px] text-[12px] font-bold"
-                style={{ background: entry.logoBg, color: entry.logoFg }}
-              >
-                {entry.logoAbbr}
-              </span>
+              <div className="absolute left-0 top-0">
+                <CompanyLogo
+                  company={entry.company}
+                  size={36}
+                  fallbackBg={entry.logoBg}
+                  fallbackFg={entry.logoFg}
+                  fallbackText={entry.logoAbbr}
+                  rounded="rounded-[10px]"
+                  padding={4}
+                />
+              </div>
               {!isLast ? (
                 <span
                   aria-hidden

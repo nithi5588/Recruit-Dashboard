@@ -41,7 +41,7 @@ export function DonutChart({
         cx={size / 2}
         cy={size / 2}
         r={radius}
-        stroke="#F3F4F8"
+        stroke="#F4F2EE"
         strokeWidth={stroke}
         fill="none"
       />

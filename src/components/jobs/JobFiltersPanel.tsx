@@ -398,7 +398,7 @@ export function JobFiltersDrawer({
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className={`absolute inset-0 bg-[rgba(23,26,43,0.45)] transition-opacity duration-200 ${
+        className={`absolute inset-0 bg-[rgba(31,27,23,0.45)] transition-opacity duration-200 ${
           open ? "opacity-100" : "opacity-0"
         }`}
       />

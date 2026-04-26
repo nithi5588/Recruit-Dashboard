@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/Badge";
+import { CompanyLogo } from "@/components/ui/CompanyLogo";
 import {
   ClockIcon,
   ExternalLinkIcon,
@@ -32,13 +33,16 @@ export function JobDetailHeader({ job }: { job: ResolvedJob }) {
       style={{ boxShadow: "var(--shadow-card)" }}
     >
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
-        <span
-          aria-label={`${job.company} logo`}
-          className="flex h-[104px] w-[104px] shrink-0 items-center justify-center self-start rounded-[20px] border border-[color:var(--color-border)] text-[36px] font-bold"
-          style={{ background: job.logo.bg, color: job.logo.fg }}
-        >
-          {job.logo.abbr}
-        </span>
+        <CompanyLogo
+          company={job.company}
+          size={104}
+          fallbackBg={job.logo.bg}
+          fallbackFg={job.logo.fg}
+          fallbackText={job.logo.abbr}
+          rounded="rounded-[20px]"
+          padding={14}
+          className="self-start"
+        />
 
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
@@ -119,7 +123,7 @@ export function JobDetailHeader({ job }: { job: ResolvedJob }) {
             href={job.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-4 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(91,61,245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-4 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(234,104,20,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
           >
             <ExternalLinkIcon size={16} />
             View on {job.source}

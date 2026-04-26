@@ -39,7 +39,7 @@ export function ProfileHeader({ candidate }: { candidate: Candidate }) {
                 {candidate.priority === "High" ? (
                   <span
                     aria-label="High priority"
-                    className="text-[#F59E0B]"
+                    className="text-[#ED8E55]"
                     title="High priority"
                   >
                     <SolidStar size={18} />
@@ -68,7 +68,7 @@ export function ProfileHeader({ candidate }: { candidate: Candidate }) {
               </button>
               <button
                 type="button"
-                className="inline-flex h-10 items-center gap-2 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_6px_16px_rgba(91,61,245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+                className="inline-flex h-10 items-center gap-2 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_6px_16px_rgba(234,104,20,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
               >
                 <EditIcon size={16} />
                 Edit Profile
@@ -90,7 +90,7 @@ export function ProfileHeader({ candidate }: { candidate: Candidate }) {
             <div className="inline-flex items-center gap-1.5">
               <span
                 aria-hidden
-                className="inline-block h-2 w-2 rounded-full bg-[#22C55E]"
+                className="inline-block h-2 w-2 rounded-full bg-[#EA6814]"
               />
               <dt className="sr-only">Availability</dt>
               <dd>{candidate.availability}</dd>
@@ -115,7 +115,7 @@ export function ProfileHeader({ candidate }: { candidate: Candidate }) {
             <p className="inline-flex items-center gap-2 text-[13px] text-[color:var(--color-text-secondary)]">
               <span
                 aria-hidden
-                className="inline-block h-2 w-2 rounded-full bg-[#22C55E]"
+                className="inline-block h-2 w-2 rounded-full bg-[#EA6814]"
               />
               <span className="font-semibold text-[color:var(--color-text)]">
                 {candidate.availability}

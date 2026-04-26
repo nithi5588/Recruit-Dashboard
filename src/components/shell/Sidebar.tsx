@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { UserSearch } from "iconsax-reactjs";
 import { Wordmark } from "@/components/brand/Wordmark";
 import {
   BriefcaseIcon,
@@ -19,6 +20,10 @@ import {
   TasksIcon,
   UsersIcon,
 } from "@/components/icons/AppIcons";
+
+function EnrichmentIcon({ size = 18 }: { size?: number }) {
+  return <UserSearch size={size} color="currentColor" variant="Linear" />;
+}
 type NavEntry = {
   label: string;
   href: string;
@@ -42,7 +47,7 @@ const navItems: NavEntry[] = [
   { label: "Jobs", href: "/jobs", icon: <BriefcaseIcon size={18} /> },
   { label: "Matches", href: "/matches", icon: <MatchIcon size={18} /> },
   { label: "Pipeline", href: "/pipeline", icon: <PipelineNavIcon size={18} /> },
-  { label: "Enrichment", href: "/enrichment", icon: <SparklesIcon size={18} /> },
+  { label: "Enrichment", href: "/enrichment", icon: <EnrichmentIcon size={18} /> },
   { label: "Clients", href: "/clients", icon: <ClientsIcon size={18} /> },
   { label: "Calendar", href: "/calendar", icon: <CalendarIcon size={18} /> },
   { label: "Tasks", href: "/tasks", icon: <TasksIcon size={18} /> },
@@ -54,8 +59,8 @@ const navItems: NavEntry[] = [
       <span
         className="inline-flex items-center rounded-[5px] px-[6px] py-[2px] text-[9px] font-bold uppercase tracking-wider text-white"
         style={{
-          background: "linear-gradient(135deg, #22C55E 0%, #16A34A 100%)",
-          boxShadow: "0 2px 6px rgba(34, 197, 94, 0.32)",
+          background: "linear-gradient(135deg, #EA6814 0%, #C75510 100%)",
+          boxShadow: "0 2px 6px rgba(234, 104, 20, 0.32)",
         }}
       >
         New
@@ -131,8 +136,8 @@ function ProPlanCard() {
           aria-hidden
           className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] text-white"
           style={{
-            background: "linear-gradient(135deg, #5B3DF5 0%, #3B28AA 100%)",
-            boxShadow: "0 4px 10px rgba(91, 61, 245, 0.30)",
+            background: "linear-gradient(135deg, #EA6814 0%, #9F430D 100%)",
+            boxShadow: "0 4px 10px rgba(234, 104, 20, 0.30)",
           }}
         >
           <SparklesIcon size={13} />
@@ -167,7 +172,7 @@ function CollapsedSidebar({ onToggleCollapse }: { onToggleCollapse: () => void }
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] text-white"
           style={{
             background: "linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-700) 100%)",
-            boxShadow: "0 6px 16px rgba(91, 61, 245, 0.28)",
+            boxShadow: "0 6px 16px rgba(234, 104, 20, 0.28)",
           }}
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -285,11 +290,24 @@ export function Sidebar({
 }) {
   return (
     <>
-      {/* Desktop sidebar — collapsible */}
+      {/* Desktop sidebar — FIXED, so the main content scrolls behind it
+         and the backdrop-blur becomes a true frosted-glass surface. */}
       <aside
-        style={{ width: collapsed ? "72px" : "260px", transition: "width 200ms ease-in-out" }}
-        className="sticky top-0 hidden h-screen shrink-0 flex-col overflow-hidden border-r border-[color:var(--color-border)] bg-[color:var(--color-surface)] lg:flex"
+        style={{
+          width: collapsed ? "72px" : "260px",
+          transition:
+            "width 240ms cubic-bezier(0.22, 0.94, 0.46, 1), background-color 200ms ease, border-color 200ms ease",
+        }}
+        className="sidebar-glass fixed inset-y-0 left-0 z-40 hidden h-screen flex-col overflow-hidden lg:flex"
       >
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+        >
+          <span className="sidebar-glass-orb sidebar-glass-orb-1" />
+          <span className="sidebar-glass-orb sidebar-glass-orb-2" />
+        </div>
+
         {collapsed ? (
           <CollapsedSidebar onToggleCollapse={onToggleCollapse} />
         ) : (
@@ -297,23 +315,37 @@ export function Sidebar({
         )}
       </aside>
 
-      {/* Mobile drawer overlay */}
+      {/* Mobile drawer overlay — light enough that you can still see the
+         page behind it, but with a soft blur for depth. */}
       <div
         aria-hidden={!drawerOpen}
-        className={`fixed inset-0 z-40 bg-black/40 transition-opacity lg:hidden ${
+        className={`fixed inset-0 z-40 bg-black/15 backdrop-blur-[1.5px] transition-opacity duration-200 lg:hidden ${
           drawerOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={onCloseDrawer}
       />
 
-      {/* Mobile drawer panel */}
+      {/* Mobile drawer panel — real backdrop-blur glass */}
       <aside
         aria-label="Sidebar"
         aria-hidden={!drawerOpen}
-        className={`fixed inset-y-0 left-0 z-50 flex h-screen w-[280px] max-w-[85vw] flex-col border-r border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-[var(--shadow-panel)] transition-transform lg:hidden ${
-          drawerOpen ? "translate-x-0" : "-translate-x-full"
+        style={{
+          transition:
+            "transform 280ms cubic-bezier(0.22, 0.94, 0.46, 1), box-shadow 200ms ease",
+        }}
+        className={`sidebar-glass-drawer fixed inset-y-0 left-0 z-50 flex h-screen w-[280px] max-w-[85vw] flex-col overflow-hidden lg:hidden ${
+          drawerOpen
+            ? "translate-x-0 shadow-[0_24px_60px_rgba(0,0,0,0.18)]"
+            : "-translate-x-full shadow-none"
         }`}
       >
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+        >
+          <span className="sidebar-glass-orb sidebar-glass-orb-1" />
+          <span className="sidebar-glass-orb sidebar-glass-orb-2" />
+        </div>
         <ExpandedSidebar onNavigate={onCloseDrawer} />
       </aside>
     </>

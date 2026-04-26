@@ -255,7 +255,7 @@ function CalendarMonth({
               <span
                 className={`relative z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-medium transition-colors ${
                   isEndpoint
-                    ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(91,61,245,0.28)]"
+                    ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(234,104,20,0.28)]"
                     : inRange
                     ? "text-[color:var(--color-brand-700)]"
                     : inMonth
@@ -424,12 +424,12 @@ export function DateRangePicker({
           <div
             aria-hidden
             onClick={() => setOpen(false)}
-            className="fixed inset-0 z-[80] bg-[rgba(23,26,43,0.5)] sm:hidden"
+            className="fixed inset-0 z-[80] bg-[rgba(31,27,23,0.5)] sm:hidden"
           />
           <div
             role="dialog"
             aria-label="Select date range"
-            className={`fixed inset-x-0 bottom-0 z-[90] flex max-h-[92dvh] flex-col overflow-hidden rounded-t-[20px] border border-b-0 border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-[0_-12px_32px_rgba(23,26,43,0.18)] sm:absolute sm:inset-x-auto sm:bottom-auto sm:top-full sm:mt-2 sm:max-h-none sm:rounded-[14px] sm:border-b sm:shadow-[var(--shadow-panel)] ${
+            className={`fixed inset-x-0 bottom-0 z-[90] flex max-h-[92dvh] flex-col overflow-hidden rounded-t-[20px] border border-b-0 border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-[0_-12px_32px_rgba(31,27,23,0.18)] sm:absolute sm:inset-x-auto sm:bottom-auto sm:top-full sm:mt-2 sm:max-h-none sm:rounded-[14px] sm:border-b sm:shadow-[var(--shadow-panel)] ${
               align === "right" ? "sm:right-0" : "sm:left-0"
             }`}
           >
@@ -465,7 +465,7 @@ export function DateRangePicker({
                     onClick={() => applyPreset(p)}
                     className={`whitespace-nowrap rounded-[999px] px-2.5 py-1 text-[12px] font-semibold transition-colors sm:rounded-[8px] sm:px-3 sm:py-1.5 sm:text-left sm:font-medium ${
                       active
-                        ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(91,61,245,0.25)]"
+                        ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(234,104,20,0.25)]"
                         : "border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text-secondary)] hover:border-[color:var(--color-border-strong)] hover:text-[color:var(--color-text)] sm:border-0 sm:bg-transparent sm:hover:bg-[color:var(--color-surface)]"
                     }`}
                   >
@@ -606,7 +606,7 @@ export function DateRangePicker({
                 type="button"
                 disabled={!pendingStart || !pendingEnd}
                 onClick={apply}
-                className="h-9 rounded-[8px] bg-[color:var(--color-brand-500)] px-4 text-[12px] font-semibold text-white shadow-[0_4px_10px_rgba(91,61,245,0.25)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none sm:h-7 sm:rounded-[6px] sm:px-3 sm:text-[11px]"
+                className="h-9 rounded-[8px] bg-[color:var(--color-brand-500)] px-4 text-[12px] font-semibold text-white shadow-[0_4px_10px_rgba(234,104,20,0.25)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none sm:h-7 sm:rounded-[6px] sm:px-3 sm:text-[11px]"
               >
                 Apply
               </button>

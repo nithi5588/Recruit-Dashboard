@@ -39,21 +39,21 @@ function ProfileIllustration() {
         className="absolute inset-x-3 inset-y-3 flex items-center justify-center rounded-[14px] border border-[color:var(--color-brand-200)]"
         style={{
           background:
-            "linear-gradient(180deg, #F4F1FF 0%, #E9E3FF 100%)",
+            "linear-gradient(180deg, #FFF6EE 0%, #FCE9DD 100%)",
           boxShadow: "var(--shadow-card)",
         }}
       >
         <svg width="44" height="36" viewBox="0 0 44 36" fill="none">
-          <circle cx="13" cy="13" r="5" stroke="#5B3DF5" strokeWidth="1.8" />
+          <circle cx="13" cy="13" r="5" stroke="#EA6814" strokeWidth="1.8" />
           <path
             d="M5 28a8 8 0 0 1 16 0"
-            stroke="#5B3DF5"
+            stroke="#EA6814"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
           <path
             d="M25 11h14M25 16h10M25 21h14"
-            stroke="#5B3DF5"
+            stroke="#EA6814"
             strokeWidth="1.8"
             strokeLinecap="round"
             opacity="0.55"
@@ -65,8 +65,8 @@ function ProfileIllustration() {
         className="absolute -right-1 -bottom-1 flex h-7 w-7 items-center justify-center rounded-full text-white"
         style={{
           background:
-            "linear-gradient(135deg, #5B3DF5 0%, #4B32D4 100%)",
-          boxShadow: "0 6px 16px rgba(91, 61, 245, 0.3)",
+            "linear-gradient(135deg, #EA6814 0%, #C75510 100%)",
+          boxShadow: "0 6px 16px rgba(234, 104, 20, 0.3)",
         }}
       >
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -285,7 +285,7 @@ export function AddCandidateModal({
             ) : null}
             <button
               type="submit"
-              className="inline-flex h-10 items-center gap-2 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_6px_16px_rgba(91,61,245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+              className="inline-flex h-10 items-center gap-2 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_6px_16px_rgba(234,104,20,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
             >
               {isFinal ? "Create Candidate" : "Next"}
               {isFinal ? (

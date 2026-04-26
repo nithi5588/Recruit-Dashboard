@@ -1,16 +1,19 @@
 import { Badge } from "@/components/ui/Badge";
+import { CompanyLogo as RealCompanyLogo } from "@/components/ui/CompanyLogo";
 import { MoreIcon, PlusIcon } from "@/components/icons/AppIcons";
 import type { ExperienceEntry } from "@/lib/candidate-detail";
 
 function CompanyLogo({ entry }: { entry: ExperienceEntry }) {
   return (
-    <span
-      aria-hidden
-      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] text-[13px] font-bold"
-      style={{ background: entry.logoBg, color: entry.logoFg }}
-    >
-      {entry.logoAbbr}
-    </span>
+    <RealCompanyLogo
+      company={entry.company}
+      size={44}
+      fallbackBg={entry.logoBg}
+      fallbackFg={entry.logoFg}
+      fallbackText={entry.logoAbbr}
+      rounded="rounded-[12px]"
+      padding={6}
+    />
   );
 }
 

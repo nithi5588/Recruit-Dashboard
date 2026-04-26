@@ -44,10 +44,10 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 
 function ActivityTypeIcon({ type }: { type: string }) {
   const configs: Record<string, { bg: string; color: string; icon: React.ReactNode }> = {
-    interview:   { bg: "#EEE9FF", color: "#5B3DF5", icon: <Calendar size={14} variant="Bulk" color="#5B3DF5" /> },
-    application: { bg: "#EAF2FF", color: "#8B7DF7", icon: <Send size={14} variant="Bulk" color="#8B7DF7" /> },
-    followup:    { bg: "#FFF4DB", color: "#F59E0B", icon: <Chart size={14} variant="Bulk" color="#F59E0B" /> },
-    offer:       { bg: "#EAFBF1", color: "#16A34A", icon: <TickCircle size={14} variant="Bold" color="#16A34A" /> },
+    interview:   { bg: "#FCE9DD", color: "#EA6814", icon: <Calendar size={14} variant="Bulk" color="#EA6814" /> },
+    application: { bg: "#F4F2EE", color: "#ED8E55", icon: <Send size={14} variant="Bulk" color="#ED8E55" /> },
+    followup:    { bg: "#FFF6EE", color: "#ED8E55", icon: <Chart size={14} variant="Bulk" color="#ED8E55" /> },
+    offer:       { bg: "#FCE9DD", color: "#C75510", icon: <TickCircle size={14} variant="Bold" color="#C75510" /> },
   };
   const c = configs[type] ?? configs.interview;
   return (
@@ -74,7 +74,7 @@ function TaperedFunnel() {
   const max = funnelData[0].count;
   const widthFor = (n: number) => Math.max((n / max) * funnelW, 28);
   const opacities = [0.92, 0.78, 0.62, 0.46, 0.30];
-  const accent = "#5B3DF5";
+  const accent = "#EA6814";
 
   const stages = funnelData.map((d, i) => ({
     ...d,
@@ -163,10 +163,10 @@ function TaperedFunnel() {
 // ─── Activity line chart ──────────────────────────────────────────────────────
 
 const CHART_SERIES = [
-  { key: "applications" as const, label: "Applications", color: "#5B3DF5" },
-  { key: "interviews"   as const, label: "Interviews",   color: "#8B7DF7" },
-  { key: "followUps"    as const, label: "Follow-ups",   color: "#16A34A" },
-  { key: "offers"       as const, label: "Offers",       color: "#F59E0B" },
+  { key: "applications" as const, label: "Applications", color: "#EA6814" },
+  { key: "interviews"   as const, label: "Interviews",   color: "#ED8E55" },
+  { key: "followUps"    as const, label: "Follow-ups",   color: "#C75510" },
+  { key: "offers"       as const, label: "Offers",       color: "#ED8E55" },
 ];
 
 function ActivityChart() {

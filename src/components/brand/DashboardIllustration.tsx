@@ -26,8 +26,8 @@ export function DashboardIllustration() {
           <svg viewBox="0 0 200 64" className="h-full w-full" fill="none">
             <defs>
               <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#5B3DF5" stopOpacity="0.28" />
-                <stop offset="100%" stopColor="#5B3DF5" stopOpacity="0" />
+                <stop offset="0%" stopColor="#EA6814" stopOpacity="0.28" />
+                <stop offset="100%" stopColor="#EA6814" stopOpacity="0" />
               </linearGradient>
             </defs>
             <path
@@ -36,7 +36,7 @@ export function DashboardIllustration() {
             />
             <path
               d="M0 52 L22 44 L46 48 L70 30 L96 36 L120 22 L146 28 L172 14 L200 18"
-              stroke="#5B3DF5"
+              stroke="#EA6814"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -63,8 +63,8 @@ export function DashboardIllustration() {
                 style={{
                   background:
                     i % 2 === 0
-                      ? "linear-gradient(135deg,#B8A9FC,#5B3DF5)"
-                      : "linear-gradient(135deg,#FDE68A,#F59E0B)",
+                      ? "linear-gradient(135deg,#F2B187,#EA6814)"
+                      : "linear-gradient(135deg,#F8D5BD,#ED8E55)",
                 }}
               />
               <div className="flex-1 space-y-1.5">
@@ -107,7 +107,7 @@ export function DashboardIllustration() {
       <div
         className="absolute bottom-[6%] left-[0%] flex h-9 w-9 items-center justify-center rounded-full text-white"
         style={{
-          background: "linear-gradient(135deg,#34D399,#16A34A)",
+          background: "linear-gradient(135deg,#F2B187,#C75510)",
           boxShadow: "var(--shadow-panel)",
         }}
       >
@@ -126,7 +126,7 @@ export function DashboardIllustration() {
       <div
         className="absolute bottom-[2%] right-[12%] flex h-9 w-9 items-center justify-center rounded-full text-white"
         style={{
-          background: "linear-gradient(135deg,#FBBF24,#F59E0B)",
+          background: "linear-gradient(135deg,#ED8E55,#ED8E55)",
           boxShadow: "var(--shadow-panel)",
         }}
       >

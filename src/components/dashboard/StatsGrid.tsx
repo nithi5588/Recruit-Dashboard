@@ -23,28 +23,28 @@ const TONE: Record<
   { bg: string; fg: string; outline: string; accent: string }
 > = {
   purple: {
-    bg: "#EEE9FF",
-    fg: "#5B3DF5",
-    outline: "#D8D0FF",
-    accent: "#5B3DF5",
+    bg: "#FCE9DD",
+    fg: "#EA6814",
+    outline: "#F8D5BD",
+    accent: "#EA6814",
   },
   blue: {
-    bg: "#EAF2FF",
-    fg: "#2563EB",
-    outline: "#C7DBFC",
-    accent: "#2563EB",
+    bg: "#F4F2EE",
+    fg: "#6B6358",
+    outline: "#E8E4DC",
+    accent: "#6B6358",
   },
   orange: {
-    bg: "#FFF1E6",
+    bg: "#FFF6EE",
     fg: "#F97316",
-    outline: "#FCD9B6",
+    outline: "#F8D5BD",
     accent: "#F97316",
   },
   green: {
-    bg: "#EAFBF1",
-    fg: "#16A34A",
-    outline: "#BBF0CF",
-    accent: "#16A34A",
+    bg: "#FCE9DD",
+    fg: "#C75510",
+    outline: "#F8D5BD",
+    accent: "#C75510",
   },
 };
 
@@ -134,7 +134,7 @@ function StatCard({ stat }: { stat: Stat }) {
   return (
     <Link
       href={hrefFor(stat.label)}
-      className="group relative block overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_28px_rgba(23,26,43,0.08)]"
+      className="group relative block overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_28px_rgba(31,27,23,0.08)]"
       style={{ boxShadow: "var(--shadow-card)" }}
     >
       <span
@@ -168,7 +168,7 @@ function StatCard({ stat }: { stat: Stat }) {
       <div className="mt-2 flex items-end justify-between gap-3">
         <p
           className="inline-flex items-center gap-1 text-[12px] font-semibold"
-          style={{ color: up ? "#16A34A" : "#EF4444" }}
+          style={{ color: up ? "#C75510" : "#9F430D" }}
         >
           {up ? (
             <ArrowUp size={14} color="currentColor" variant="Bold" />

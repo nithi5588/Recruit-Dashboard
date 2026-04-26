@@ -2,6 +2,13 @@
 
 import { forwardRef, type InputHTMLAttributes } from "react";
 
+/**
+ * Theme-aware checkbox. In light mode it stays white; in dark mode the
+ * unchecked background switches to a dark surface so it doesn't read as
+ * a glaring white square. The styling lives in globals.css under
+ * `.app-checkbox` so we can target the `:checked` state with proper
+ * pseudo-class CSS instead of fighting the native `accent-color`.
+ */
 export const Checkbox = forwardRef<
   HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement>
@@ -10,7 +17,7 @@ export const Checkbox = forwardRef<
     <input
       ref={ref}
       type="checkbox"
-      className={`h-4 w-4 shrink-0 cursor-pointer rounded-[4px] border border-[color:var(--color-border-strong)] accent-[color:var(--color-brand-500)] ${className}`}
+      className={`app-checkbox ${className}`}
       {...props}
     />
   );

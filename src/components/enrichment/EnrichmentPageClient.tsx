@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { UserSearch } from "iconsax-reactjs";
 import { Avatar } from "@/components/ui/Avatar";
 import { DonutChart } from "@/components/ui/DonutChart";
 import { Sparkline } from "@/components/enrichment/Sparkline";
@@ -24,6 +25,16 @@ import {
   VerifiedBadgeIcon,
   XIcon,
 } from "@/components/icons/AppIcons";
+
+function UserSearchHeaderIcon() {
+  return (
+    <UserSearch
+      size={20}
+      color="var(--color-brand-500)"
+      variant="Bulk"
+    />
+  );
+}
 
 // ─── Types & sample data ─────────────────────────────────────────────────────
 
@@ -117,7 +128,7 @@ const RECRUITERS: Recruiter[] = [
     name: "Neha Jain",
     title: "HR Recruiter",
     company: "Deloitte",
-    companyColor: "#86BC25",
+    companyColor: "#ED8E55",
     location: "Mumbai, India",
     verified: true,
     linkedin: "linkedin.com/in/nehajain",
@@ -241,10 +252,7 @@ export function EnrichmentPageClient() {
           <h1 className="text-[22px] font-bold leading-[30px] tracking-tight text-[color:var(--color-text)] sm:text-[26px] sm:leading-[34px]">
             Enrichment
           </h1>
-          <SparklesIcon
-            size={18}
-            className="text-[color:var(--color-brand-500)]"
-          />
+          <UserSearchHeaderIcon />
         </div>
         <p className="mt-1 max-w-[620px] text-[13px] leading-[20px] text-[color:var(--color-text-secondary)] sm:text-[14px]">
           Get verified email and phone number from a LinkedIn recruiter profile.
@@ -318,10 +326,10 @@ function UrlHero({
 }) {
   return (
     <section
-      className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-brand-200)] p-4 shadow-[var(--shadow-card)] sm:p-5"
+      className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-brand-200)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5"
       style={{
-        background:
-          "radial-gradient(900px 220px at 0% 0%, rgba(91,61,245,0.10), transparent 60%), linear-gradient(180deg, #FBFAFF 0%, #FFFFFF 70%)",
+        backgroundImage:
+          "radial-gradient(900px 220px at 0% 0%, rgba(var(--accent-rgb,234,104,20),0.10), transparent 60%)",
       }}
     >
       <div className="relative">
@@ -368,7 +376,7 @@ function UrlHero({
             type="button"
             onClick={onEnrich}
             disabled={isEnriching || !url.trim()}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-5 text-[14px] font-semibold text-white shadow-[0_8px_20px_rgba(91,61,245,0.28)] transition-all hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[160px]"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-5 text-[14px] font-semibold text-white shadow-[0_8px_20px_rgba(234,104,20,0.28)] transition-all hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[160px]"
           >
             {isEnriching ? (
               <>
@@ -384,7 +392,7 @@ function UrlHero({
           </button>
         </div>
 
-        <div className="mt-3 flex items-start gap-1.5 rounded-[10px] border border-[color:var(--color-border)] bg-white/60 px-3 py-2">
+        <div className="mt-3 flex items-start gap-1.5 rounded-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2">
           <ShieldIcon
             size={13}
             className="mt-[1px] shrink-0 text-[color:var(--color-brand-500)]"
@@ -452,8 +460,8 @@ function EnrichedProfile({
       <div
         className="relative overflow-hidden px-4 pb-4 pt-5 sm:px-5 sm:pt-6"
         style={{
-          background:
-            "radial-gradient(600px 140px at 0% 0%, rgba(91,61,245,0.06), transparent 60%), linear-gradient(180deg, rgba(91,61,245,0.03) 0%, transparent 100%)",
+          backgroundImage:
+            "radial-gradient(600px 140px at 0% 0%, rgba(var(--accent-rgb,234,104,20),0.08), transparent 60%), linear-gradient(180deg, rgba(var(--accent-rgb,234,104,20),0.04) 0%, transparent 100%)",
         }}
       >
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
@@ -461,7 +469,7 @@ function EnrichedProfile({
             <Avatar name={recruiter.name} size={64} />
             {recruiter.verified ? (
               <span
-                className="absolute -bottom-1 -right-1 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-[color:var(--color-success)] text-white shadow-[0_2px_8px_rgba(34,197,94,0.35)]"
+                className="absolute -bottom-1 -right-1 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-[color:var(--color-success)] text-white shadow-[0_2px_8px_rgba(234,104,20,0.35)]"
                 aria-label="Verified"
               >
                 <CheckIcon size={12} />
@@ -524,8 +532,8 @@ function EnrichedProfile({
         <RevealCard
           label="Email Address"
           kind="email"
-          accent="#5B3DF5"
-          tint="#F4F1FF"
+          accent="var(--color-brand-500)"
+          tint="var(--chip-warning-bg)"
           icon={<AtIcon size={14} />}
           value={recruiter.email}
           mask={maskEmail(recruiter.email)}
@@ -538,8 +546,8 @@ function EnrichedProfile({
         <RevealCard
           label="Phone Number"
           kind="phone"
-          accent="#16A34A"
-          tint="#EAFBF1"
+          accent="var(--color-brand-600)"
+          tint="var(--chip-brand-bg)"
           icon={<PhoneIcon size={14} />}
           value={recruiter.phone}
           mask={maskPhone(recruiter.phone)}
@@ -645,20 +653,20 @@ function DetailRow({
 
 function StatusPill({ status }: { status: Recruiter["status"] }) {
   const map = {
-    Success: { color: "#16A34A", bg: "#EAFBF1" },
-    Failed: { color: "#DC2626", bg: "#FDECEC" },
-    "In Progress": { color: "#3B82F6", bg: "#EAF2FF" },
+    Success:       { fg: "var(--chip-success-fg)", bg: "var(--chip-success-bg)" },
+    Failed:        { fg: "var(--chip-error-fg)",   bg: "var(--chip-error-bg)" },
+    "In Progress": { fg: "var(--chip-neutral-fg)", bg: "var(--chip-neutral-bg)" },
   } as const;
   const s = map[status];
   return (
     <span
       className="inline-flex items-center gap-1 rounded-[999px] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide"
-      style={{ color: s.color, background: s.bg }}
+      style={{ color: s.fg, background: s.bg }}
     >
       <span
         aria-hidden
         className="inline-block h-1.5 w-1.5 rounded-full"
-        style={{ background: s.color }}
+        style={{ background: s.fg }}
       />
       {status}
     </span>
@@ -710,11 +718,12 @@ function RevealCard({
           </p>
         </div>
         <span
-          className={`inline-flex items-center gap-1 rounded-[999px] px-1.5 py-0.5 text-[10px] font-bold ${
+          className="inline-flex items-center gap-1 rounded-[999px] px-1.5 py-0.5 text-[10px] font-bold"
+          style={
             revealed
-              ? "bg-[#EAFBF1] text-[#16A34A]"
-              : "bg-[color:var(--color-surface-2)] text-[color:var(--color-text-muted)]"
-          }`}
+              ? { background: "var(--chip-success-bg)", color: "var(--chip-success-fg)" }
+              : { background: "var(--chip-neutral-bg)", color: "var(--color-text-muted)" }
+          }
         >
           {revealed ? <CheckIcon size={9} /> : null}
           {revealed ? "Verified" : "Hidden"}
@@ -736,11 +745,20 @@ function RevealCard({
           <button
             type="button"
             onClick={onCopy}
-            className={`inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-[10px] border text-[12px] font-semibold transition-all ${
+            className="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-[10px] border text-[12px] font-semibold transition-all"
+            style={
               copied
-                ? "border-[#BBF0CF] bg-[#EAFBF1] text-[#16A34A]"
-                : "border-[color:var(--color-border)] text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text)]"
-            }`}
+                ? {
+                    background: "var(--chip-success-bg)",
+                    color: "var(--chip-success-fg)",
+                    borderColor: "var(--color-brand-200)",
+                  }
+                : {
+                    background: "transparent",
+                    color: "var(--color-text-secondary)",
+                    borderColor: "var(--color-border)",
+                  }
+            }
           >
             {copied ? (
               <>
@@ -763,7 +781,7 @@ function RevealCard({
             style={{
               background: tint,
               color: accent,
-              borderColor: `${accent}33`,
+              borderColor: "var(--color-brand-200)",
             }}
           >
             {isRevealing ? (
@@ -893,9 +911,9 @@ function OverviewCard({
   total: number;
 }) {
   const segments = [
-    { name: "Successful", value: successful, color: "#22C55E" },
-    { name: "Failed", value: failed, color: "#EF4444" },
-    { name: "In Progress", value: inProgress, color: "#3B82F6" },
+    { name: "Successful", value: successful, color: "#EA6814" },
+    { name: "Failed", value: failed, color: "#9F430D" },
+    { name: "In Progress", value: inProgress, color: "#6B6358" },
   ];
   const pct = (n: number) =>
     `${Math.round((n / Math.max(1, total)) * 1000) / 10}%`;
@@ -996,7 +1014,7 @@ function AccuracyCard({
         <div className="relative">
           <Sparkline
             data={points}
-            color="#22C55E"
+            color="#EA6814"
             width={280}
             height={80}
             fill

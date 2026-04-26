@@ -1,4 +1,5 @@
 import { PlusIcon } from "@/components/icons/AppIcons";
+import { CompanyLogo } from "@/components/ui/CompanyLogo";
 import type { OtherSkill } from "@/lib/candidate-detail";
 import {
   levelBadgeTone,
@@ -6,13 +7,13 @@ import {
 } from "@/components/candidate-detail/skills-shared";
 
 const TONE_HEX: Record<ReturnType<typeof levelBadgeTone>, string> = {
-  purple: "#5B4BAE",
-  blue: "#3B5887",
-  green: "#2F6B4A",
-  orange: "#8A5635",
-  red: "#8C4B4B",
-  amber: "#7A5B26",
-  gray: "#5A6478",
+  purple: "#9F430D",
+  blue: "#6B6358",
+  green: "#9F430D",
+  orange: "#C75510",
+  red: "#9F430D",
+  amber: "#9F430D",
+  gray: "#6B6358",
 };
 
 function SkillTile({ skill }: { skill: OtherSkill }) {
@@ -20,12 +21,15 @@ function SkillTile({ skill }: { skill: OtherSkill }) {
   return (
     <div className="flex min-w-0 flex-col gap-2 rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3.5 transition-all hover:border-[color:var(--color-brand-200)] hover:shadow-[var(--shadow-card)]">
       <div className="flex items-start gap-2.5">
-        <span
-          aria-hidden
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-[color:var(--color-brand-100)] text-[11px] font-bold text-[color:var(--color-brand-600)]"
-        >
-          {skill.abbr}
-        </span>
+        <CompanyLogo
+          company={skill.name}
+          size={28}
+          fallbackBg={skill.bg}
+          fallbackFg={skill.fg}
+          fallbackText={skill.abbr}
+          rounded="rounded-[8px]"
+          padding={3}
+        />
         <p className="truncate text-[13px] font-semibold text-[color:var(--color-text)]" title={skill.name}>
           {skill.name}
         </p>

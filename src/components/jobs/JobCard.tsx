@@ -9,25 +9,22 @@ import {
   PinIcon,
   TagIcon,
 } from "@/components/icons/AppIcons";
+import { CompanyLogo as RealCompanyLogo } from "@/components/ui/CompanyLogo";
 import type { Job } from "@/lib/jobs-data";
 
 type Variant = "list" | "grid";
 
 function CompanyLogo({ job, size = 44 }: { job: Job; size?: number }) {
   return (
-    <span
-      aria-label={`${job.company} logo`}
-      className="flex shrink-0 items-center justify-center rounded-[12px] border border-[color:var(--color-border)] font-bold"
-      style={{
-        background: job.logo.bg,
-        color: job.logo.fg,
-        width: size,
-        height: size,
-        fontSize: size >= 44 ? 16 : 14,
-      }}
-    >
-      {job.logo.abbr}
-    </span>
+    <RealCompanyLogo
+      company={job.company}
+      size={size}
+      fallbackBg={job.logo.bg}
+      fallbackFg={job.logo.fg}
+      fallbackText={job.logo.abbr}
+      rounded="rounded-[12px]"
+      padding={size >= 44 ? 6 : 4}
+    />
   );
 }
 

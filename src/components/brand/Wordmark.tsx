@@ -7,7 +7,7 @@ export function Wordmark({ className = "" }: { className?: string }) {
         style={{
           background:
             "linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-600) 100%)",
-          boxShadow: "0 6px 16px rgba(91, 61, 245, 0.28)",
+          boxShadow: "0 6px 16px rgba(234, 104, 20, 0.28)",
         }}
       >
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

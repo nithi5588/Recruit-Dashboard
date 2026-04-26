@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/Badge";
+import { CompanyLogo } from "@/components/ui/CompanyLogo";
 import type { ApplicationsBlock } from "@/lib/candidate-detail";
 import { applicationStatusTone } from "@/components/candidate-detail/applications-shared";
 
@@ -19,13 +20,15 @@ export function TopAppliedJobCard({
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
-          <span
-            aria-hidden
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] text-[14px] font-bold"
-            style={{ background: top.logo.bg, color: top.logo.fg }}
-          >
-            {top.logo.abbr}
-          </span>
+          <CompanyLogo
+            company={top.company}
+            size={44}
+            fallbackBg={top.logo.bg}
+            fallbackFg={top.logo.fg}
+            fallbackText={top.logo.abbr}
+            rounded="rounded-[12px]"
+            padding={6}
+          />
           <div className="min-w-0">
             <p className="truncate text-[14px] font-semibold text-[color:var(--color-text)]">
               {top.jobTitle}

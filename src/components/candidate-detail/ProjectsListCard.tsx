@@ -56,7 +56,7 @@ function ImpactValue({ impact }: { impact?: number }) {
       </span>
     );
   return (
-    <span className="text-[13px] font-semibold text-[#16A34A]">
+    <span className="text-[13px] font-semibold text-[#C75510]">
       {impact}%
     </span>
   );

@@ -38,8 +38,8 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 // ─── Team trend line chart (placements vs offers) ─────────────────────────────
 
 const TEAM_SERIES = [
-  { key: "offers"     as const, label: "Offers",     color: "#5B3DF5" },
-  { key: "placements" as const, label: "Placements", color: "#16A34A" },
+  { key: "offers"     as const, label: "Offers",     color: "#EA6814" },
+  { key: "placements" as const, label: "Placements", color: "#C75510" },
 ];
 
 function TeamTrendChart() {
@@ -193,12 +193,12 @@ export function TeamPerformanceTab() {
           <div
             className="absolute inset-0"
             style={{
-              background: "linear-gradient(135deg, #5B3DF5 0%, #8B5CF6 55%, #C4B5FD 100%)",
+              background: "linear-gradient(135deg, #EA6814 0%, #EA6814 55%, #FFC795 100%)",
             }}
           />
           <div
             className="absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30"
-            style={{ background: "radial-gradient(circle, #FDE68A 0%, transparent 60%)" }}
+            style={{ background: "radial-gradient(circle, #F8D5BD 0%, transparent 60%)" }}
           />
           <div className="relative p-5 text-white">
             <div className="mb-4 flex items-center justify-between">
@@ -330,9 +330,9 @@ export function TeamPerformanceTab() {
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">Activity Mix</h3>
             <div className="flex items-center gap-3 text-[10px] text-[color:var(--color-text-muted)]">
-              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#5B3DF5]" /> Calls</span>
-              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#3B82F6]" /> Emails</span>
-              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#22C55E]" /> Meetings</span>
+              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#EA6814]" /> Calls</span>
+              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#6B6358]" /> Emails</span>
+              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#EA6814]" /> Meetings</span>
             </div>
           </div>
           <ul className="space-y-3">
@@ -346,9 +346,9 @@ export function TeamPerformanceTab() {
                     <span className="shrink-0 font-bold text-[color:var(--color-text)]">{total}</span>
                   </div>
                   <div className="flex h-2 w-full overflow-hidden rounded-full bg-[color:var(--color-surface-2)]" style={{ width: `${w}%` }}>
-                    <div style={{ width: `${(r.calls / total) * 100}%`, backgroundColor: "#5B3DF5" }} />
-                    <div style={{ width: `${(r.emails / total) * 100}%`, backgroundColor: "#8B7DF7" }} />
-                    <div style={{ width: `${(r.meetings / total) * 100}%`, backgroundColor: "#16A34A" }} />
+                    <div style={{ width: `${(r.calls / total) * 100}%`, backgroundColor: "#EA6814" }} />
+                    <div style={{ width: `${(r.emails / total) * 100}%`, backgroundColor: "#ED8E55" }} />
+                    <div style={{ width: `${(r.meetings / total) * 100}%`, backgroundColor: "#C75510" }} />
                   </div>
                 </li>
               );

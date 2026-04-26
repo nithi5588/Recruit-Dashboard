@@ -11,10 +11,10 @@ import type { ComponentType } from "react";
 import { stats, type Stat } from "@/lib/sample-data";
 
 const TONE: Record<Stat["tone"], { bg: string; fg: string; outline: string }> = {
-  purple: { bg: "#EEE9FF", fg: "#5B3DF5", outline: "#D8D0FF" },
-  blue:   { bg: "#EAF2FF", fg: "#2563EB", outline: "#C7DBFC" },
-  orange: { bg: "#FFF1E6", fg: "#F97316", outline: "#FCD9B6" },
-  green:  { bg: "#EAFBF1", fg: "#16A34A", outline: "#BBF0CF" },
+  purple: { bg: "#FCE9DD", fg: "#EA6814", outline: "#F8D5BD" },
+  blue:   { bg: "#F4F2EE", fg: "#6B6358", outline: "#E8E4DC" },
+  orange: { bg: "#FFF6EE", fg: "#F97316", outline: "#F8D5BD" },
+  green:  { bg: "#FCE9DD", fg: "#C75510", outline: "#F8D5BD" },
 };
 
 type IconsaxComponent = ComponentType<IconsaxProps>;
@@ -58,7 +58,7 @@ function Card({ stat }: { stat: Stat }) {
         </p>
         <p
           className="mt-0.5 inline-flex items-center gap-1 text-[11px] font-semibold"
-          style={{ color: up ? "#16A34A" : "#EF4444" }}
+          style={{ color: up ? "#C75510" : "#9F430D" }}
         >
           {up ? (
             <ArrowUp size={12} color="currentColor" variant="Bold" />

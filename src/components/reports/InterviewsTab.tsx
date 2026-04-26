@@ -43,11 +43,11 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 // ─── Today's Schedule timeline ────────────────────────────────────────────────
 
 const STAGE_STYLES: Record<string, { bg: string; fg: string; border: string }> = {
-  Screening:  { bg: "#EEE9FF", fg: "#5B3DF5", border: "#D8D0FF" },
-  Technical:  { bg: "#EAF2FF", fg: "#5B3DF5", border: "#D8D0FF" },
-  HR:         { bg: "#EAFBF1", fg: "#16A34A", border: "#BBF0CF" },
-  Managerial: { bg: "#FFF4DB", fg: "#B45309", border: "#FCD9B6" },
-  Final:      { bg: "#FDECEC", fg: "#DC2626", border: "#FECACA" },
+  Screening:  { bg: "#FCE9DD", fg: "#EA6814", border: "#F8D5BD" },
+  Technical:  { bg: "#F4F2EE", fg: "#EA6814", border: "#F8D5BD" },
+  HR:         { bg: "#FCE9DD", fg: "#C75510", border: "#F8D5BD" },
+  Managerial: { bg: "#FFF6EE", fg: "#C75510", border: "#F8D5BD" },
+  Final:      { bg: "#F8D5BD", fg: "#9F430D", border: "#F8D5BD" },
 };
 
 function formatTime(hour: number) {
@@ -239,11 +239,11 @@ export function InterviewsTab() {
         <div className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-border)] shadow-[var(--shadow-card)]">
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #0F766E 0%, #22C55E 50%, #86EFAC 100%)" }}
+            style={{ background: "linear-gradient(135deg, #9F430D 0%, #EA6814 50%, #F2B187 100%)" }}
           />
           <div
             className="absolute -right-14 -top-14 h-48 w-48 rounded-full opacity-25"
-            style={{ background: "radial-gradient(circle, #FDE68A 0%, transparent 60%)" }}
+            style={{ background: "radial-gradient(circle, #F8D5BD 0%, transparent 60%)" }}
           />
           <div className="relative flex h-full flex-col p-5 text-white">
             <div className="mb-3 flex items-center justify-between">

@@ -42,8 +42,8 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 // ─── Growth chart (two series) ────────────────────────────────────────────────
 
 const GROWTH_SERIES = [
-  { key: "newCandidates"   as const, label: "New Candidates",   color: "#5B3DF5" },
-  { key: "updatedProfiles" as const, label: "Updated Profiles", color: "#16A34A" },
+  { key: "newCandidates"   as const, label: "New Candidates",   color: "#EA6814" },
+  { key: "updatedProfiles" as const, label: "Updated Profiles", color: "#C75510" },
 ];
 
 function GrowthChart() {
@@ -167,7 +167,7 @@ function SkillsCloud() {
   const shaded = [...skillsCloud]
     .sort((a, b) => b.size - a.size)
     .map((s) => {
-      const hue = s.size > 0.85 ? "#4B32D4" : s.size > 0.65 ? "#5B3DF5" : s.size > 0.5 ? "#5B3DF5" : s.size > 0.4 ? "#8B7DF7" : "#B8A9FC";
+      const hue = s.size > 0.85 ? "#C75510" : s.size > 0.65 ? "#EA6814" : s.size > 0.5 ? "#EA6814" : s.size > 0.4 ? "#ED8E55" : "#F2B187";
       return { ...s, hue };
     });
   return (
@@ -225,11 +225,11 @@ export function CandidatesTab() {
         <div className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-border)] shadow-[var(--shadow-card)]">
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #0F172A 0%, #4338CA 50%, #7C3AED 100%)" }}
+            style={{ background: "linear-gradient(135deg, #1F1B17 0%, #9F430D 50%, #EA6814 100%)" }}
           />
           <div
             className="absolute -right-20 -top-16 h-60 w-60 rounded-full opacity-25"
-            style={{ background: "radial-gradient(circle, #F59E0B 0%, transparent 60%)" }}
+            style={{ background: "radial-gradient(circle, #ED8E55 0%, transparent 60%)" }}
           />
           <div className="relative p-5 text-white">
             <div className="mb-4 flex items-center justify-between">
@@ -238,7 +238,7 @@ export function CandidatesTab() {
               </span>
               <div className="flex items-center gap-2">
                 <span className="text-[10px] opacity-80">Match score</span>
-                <span className="rounded-full bg-[#FDE68A] px-2 py-0.5 text-[11px] font-extrabold text-[#78350F]">
+                <span className="rounded-full bg-[#F8D5BD] px-2 py-0.5 text-[11px] font-extrabold text-[#9F430D]">
                   {candidateSpotlight.matchScore}%
                 </span>
               </div>

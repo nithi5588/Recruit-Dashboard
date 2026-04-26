@@ -4,12 +4,12 @@ import type { SkillCategory } from "@/lib/candidate-detail";
 // Muted palette aligned with the rest of the app — slate / plum / sage / clay
 // at matched luminance so the donut reads as a calm gradient.
 const MUTED_PALETTE = [
-  "#7C82A6", // dusty slate-violet (brand-aligned)
-  "#7E8A8A", // muted teal-sage
-  "#8E7E94", // muted plum
-  "#9A8A78", // warm clay
-  "#7E8E76", // sage olive
-  "#88869B", // cool slate
+  "#9A9183", // dusty slate-violet (brand-aligned)
+  "#9A9183", // muted teal-sage
+  "#9A9183", // muted plum
+  "#9A9183", // warm clay
+  "#857B6C", // sage olive
+  "#9A9183", // cool slate
 ];
 
 function muteColor(_original: string, idx: number): string {

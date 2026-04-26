@@ -43,7 +43,7 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 
 // ─── Activity Heatmap (7 days × 24 hours) ─────────────────────────────────────
 
-const HEAT_COLORS = ["#F3F4F8", "#E0D7FF", "#BAA6FF", "#8A6DF0", "#6344E0", "#4B32D4"];
+const HEAT_COLORS = ["#F4F2EE", "#F8D5BD", "#F2B187", "#ED8E55", "#C75510", "#C75510"];
 
 function ActivityHeatmap() {
   const [hov, setHov] = useState<{ d: number; h: number } | null>(null);
@@ -91,7 +91,7 @@ function ActivityHeatmap() {
                         className="h-6 rounded-[4px] transition-transform"
                         style={{
                           backgroundColor: HEAT_COLORS[v],
-                          outline: isHov ? "2px solid #5B3DF5" : "none",
+                          outline: isHov ? "2px solid #EA6814" : "none",
                           outlineOffset: 1,
                           transform: isHov ? "scale(1.2)" : "scale(1)",
                           zIndex: isHov ? 10 : 0,
@@ -128,8 +128,8 @@ function ActivityHeatmap() {
 // ─── Activity volume area chart (total vs responses) ──────────────────────────
 
 const VOL_SERIES = [
-  { key: "total"     as const, label: "Total Activities", color: "#5B3DF5" },
-  { key: "responses" as const, label: "Responses",        color: "#16A34A" },
+  { key: "total"     as const, label: "Total Activities", color: "#EA6814" },
+  { key: "responses" as const, label: "Responses",        color: "#C75510" },
 ];
 
 function VolumeChart() {
@@ -200,12 +200,12 @@ function VolumeChart() {
         onMouseMove={handleMove} onMouseLeave={() => setHovIdx(null)}>
         <defs>
           <linearGradient id="volAreaP" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#5B3DF5" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#5B3DF5" stopOpacity="0" />
+            <stop offset="0%" stopColor="#EA6814" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#EA6814" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="volAreaG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#16A34A" stopOpacity="0.14" />
-            <stop offset="100%" stopColor="#16A34A" stopOpacity="0" />
+            <stop offset="0%" stopColor="#C75510" stopOpacity="0.14" />
+            <stop offset="100%" stopColor="#C75510" stopOpacity="0" />
           </linearGradient>
         </defs>
         {yTicks.map((t) => (
@@ -257,7 +257,7 @@ function PeakHoursChart() {
               title={`${i % 12 === 0 ? 12 : i % 12}${i < 12 ? "a" : "p"} — ${v}`}
               style={{
                 height: h,
-                backgroundColor: isPeak ? "#5B3DF5" : "#D8D0FF",
+                backgroundColor: isPeak ? "#EA6814" : "#F8D5BD",
               }}
             />
           );
@@ -278,13 +278,13 @@ function PeakHoursChart() {
 
 function FeedIcon({ type }: { type: ActivityFeedItem["type"] }) {
   const configs = {
-    call:        { bg: "#EEE9FF", fg: "#5B3DF5", icon: <Call size={14} variant="Bulk" color="#5B3DF5" /> },
-    email:       { bg: "#EAF2FF", fg: "#8B7DF7", icon: <Send2 size={14} variant="Bulk" color="#8B7DF7" /> },
-    interview:   { bg: "#FFF4DB", fg: "#F59E0B", icon: <Calendar size={14} variant="Bulk" color="#F59E0B" /> },
-    application: { bg: "#EAFBF1", fg: "#16A34A", icon: <TickCircle size={14} variant="Bold" color="#16A34A" /> },
-    note:        { bg: "#FDECEC", fg: "#94A3B8", icon: <Note1 size={14} variant="Bulk" color="#94A3B8" /> },
-    followup:    { bg: "#FFF4DB", fg: "#B45309", icon: <Clock size={14} variant="Bulk" color="#B45309" /> },
-    offer:       { bg: "#EAFBF1", fg: "#16A34A", icon: <Cup size={14} variant="Bulk" color="#16A34A" /> },
+    call:        { bg: "#FCE9DD", fg: "#EA6814", icon: <Call size={14} variant="Bulk" color="#EA6814" /> },
+    email:       { bg: "#F4F2EE", fg: "#ED8E55", icon: <Send2 size={14} variant="Bulk" color="#ED8E55" /> },
+    interview:   { bg: "#FFF6EE", fg: "#ED8E55", icon: <Calendar size={14} variant="Bulk" color="#ED8E55" /> },
+    application: { bg: "#FCE9DD", fg: "#C75510", icon: <TickCircle size={14} variant="Bold" color="#C75510" /> },
+    note:        { bg: "#F8D5BD", fg: "#9A9183", icon: <Note1 size={14} variant="Bulk" color="#9A9183" /> },
+    followup:    { bg: "#FFF6EE", fg: "#C75510", icon: <Clock size={14} variant="Bulk" color="#C75510" /> },
+    offer:       { bg: "#FCE9DD", fg: "#C75510", icon: <Cup size={14} variant="Bulk" color="#C75510" /> },
   } as const;
   const c = configs[type];
   return (
