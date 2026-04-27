@@ -43,11 +43,11 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 // ─── Today's Schedule timeline ────────────────────────────────────────────────
 
 const STAGE_STYLES: Record<string, { bg: string; fg: string; border: string }> = {
-  Screening:  { bg: "#FCE9DD", fg: "#EA6814", border: "#F8D5BD" },
-  Technical:  { bg: "#F4F2EE", fg: "#EA6814", border: "#F8D5BD" },
-  HR:         { bg: "#FCE9DD", fg: "#C75510", border: "#F8D5BD" },
-  Managerial: { bg: "#FFF6EE", fg: "#C75510", border: "#F8D5BD" },
-  Final:      { bg: "#F8D5BD", fg: "#9F430D", border: "#F8D5BD" },
+  Screening:  { bg: "#E6E9FB", fg: "#2E47E0", border: "#C4CBF6" },
+  Technical:  { bg: "#F5F5F5", fg: "#2E47E0", border: "#C4CBF6" },
+  HR:         { bg: "#E6E9FB", fg: "#273DC0", border: "#C4CBF6" },
+  Managerial: { bg: "#F2F3FD", fg: "#273DC0", border: "#C4CBF6" },
+  Final:      { bg: "#C4CBF6", fg: "#20319C", border: "#C4CBF6" },
 };
 
 function formatTime(hour: number) {
@@ -239,11 +239,11 @@ export function InterviewsTab() {
         <div className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-border)] shadow-[var(--shadow-card)]">
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #9F430D 0%, #EA6814 50%, #F2B187 100%)" }}
+            style={{ background: "linear-gradient(135deg, #20319C 0%, #2E47E0 50%, #96A3EF 100%)" }}
           />
           <div
             className="absolute -right-14 -top-14 h-48 w-48 rounded-full opacity-25"
-            style={{ background: "radial-gradient(circle, #F8D5BD 0%, transparent 60%)" }}
+            style={{ background: "radial-gradient(circle, #C4CBF6 0%, transparent 60%)" }}
           />
           <div className="relative flex h-full flex-col p-5 text-white">
             <div className="mb-3 flex items-center justify-between">

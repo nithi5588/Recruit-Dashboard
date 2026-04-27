@@ -20,8 +20,8 @@ export function ScoreRing({
     clamped >= 80
       ? "var(--color-brand-500)"
       : clamped >= 60
-        ? "#C75510"
-        : "#C75510";
+        ? "#273DC0"
+        : "#273DC0";
   const track = "var(--color-surface-2)";
   const labelSuffix = suffix ? `${clamped}${suffix}` : `${clamped} out of 100`;
 

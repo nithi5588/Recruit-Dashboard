@@ -2,14 +2,14 @@
 // matched luminance (~50%) and saturation (~22%) so a list of avatars reads
 // as one calm set instead of a rainbow.
 const GRADIENTS = [
-  "linear-gradient(135deg,#9A9183,#9A9183)",  // dusty blue-slate
-  "linear-gradient(135deg,#9A9183,#857B6C)",  // muted lavender-gray
-  "linear-gradient(135deg,#9A9183,#857B6C)",  // soft teal-sage
-  "linear-gradient(135deg,#B8AE9F,#8E726B)",  // warm clay
-  "linear-gradient(135deg,#9A9183,#857B6C)",  // muted ochre
-  "linear-gradient(135deg,#9A9183,#9A9183)",  // cool slate
-  "linear-gradient(135deg,#9A9183,#857B6C)",  // mauve
-  "linear-gradient(135deg,#9A9183,#857B6C)",  // sage olive
+  "linear-gradient(135deg,#A3A3A3,#A3A3A3)",  // dusty blue-slate
+  "linear-gradient(135deg,#A3A3A3,#737373)",  // muted lavender-gray
+  "linear-gradient(135deg,#A3A3A3,#737373)",  // soft teal-sage
+  "linear-gradient(135deg,#A3A3A3,#8E726B)",  // warm clay
+  "linear-gradient(135deg,#A3A3A3,#737373)",  // muted ochre
+  "linear-gradient(135deg,#A3A3A3,#A3A3A3)",  // cool slate
+  "linear-gradient(135deg,#A3A3A3,#737373)",  // mauve
+  "linear-gradient(135deg,#A3A3A3,#737373)",  // sage olive
 ];
 
 function hashIndex(seed: string, mod: number) {

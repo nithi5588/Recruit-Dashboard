@@ -67,7 +67,7 @@ function TextField({
         autoComplete={autoComplete}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
-        className="h-11 w-full rounded-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 text-[14px] text-[color:var(--color-text)] outline-none transition-colors placeholder:text-[color:var(--color-text-muted)] hover:border-[color:var(--color-border-strong)] focus:border-[color:var(--color-brand-500)] focus:shadow-[var(--shadow-ring-brand)] aria-[invalid=true]:border-[color:var(--color-error)] aria-[invalid=true]:shadow-[0_0_0_4px_rgba(159,67,13,0.12)]"
+        className="h-11 w-full min-w-0 rounded-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 text-[14px] text-[color:var(--color-text)] outline-none transition-colors placeholder:text-[color:var(--color-text-muted)] hover:border-[color:var(--color-border-strong)] focus:border-[color:var(--color-brand-500)] focus:shadow-[var(--shadow-ring-brand)] aria-[invalid=true]:border-[color:var(--color-error)] aria-[invalid=true]:shadow-[0_0_0_4px_rgba(32,49,156,0.12)]"
       />
       {error ? (
         <p
@@ -104,8 +104,8 @@ function PhoneField({
       <FieldLabel htmlFor={id} required={required}>
         {label}
       </FieldLabel>
-      <div className="flex">
-        <label className="relative">
+      <div className="flex w-full">
+        <label className="relative shrink-0">
           <span className="sr-only">Country dial code</span>
           <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[16px]">
             🇺🇸
@@ -136,7 +136,7 @@ function PhoneField({
           required={required}
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? `${id}-error` : undefined}
-          className="h-11 w-full rounded-r-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 text-[14px] text-[color:var(--color-text)] outline-none transition-colors placeholder:text-[color:var(--color-text-muted)] hover:border-[color:var(--color-border-strong)] focus:border-[color:var(--color-brand-500)] focus:shadow-[var(--shadow-ring-brand)] aria-[invalid=true]:border-[color:var(--color-error)] aria-[invalid=true]:shadow-[0_0_0_4px_rgba(159,67,13,0.12)]"
+          className="h-11 w-full rounded-r-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 text-[14px] text-[color:var(--color-text)] outline-none transition-colors placeholder:text-[color:var(--color-text-muted)] hover:border-[color:var(--color-border-strong)] focus:border-[color:var(--color-brand-500)] focus:shadow-[var(--shadow-ring-brand)] aria-[invalid=true]:border-[color:var(--color-error)] aria-[invalid=true]:shadow-[0_0_0_4px_rgba(32,49,156,0.12)]"
         />
       </div>
       {error ? (

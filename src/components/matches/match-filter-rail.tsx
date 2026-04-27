@@ -272,7 +272,7 @@ function DualRange({
           height: 16px;
           border-radius: 9999px;
           background: white;
-          border: 2px solid #C75510;
+          border: 2px solid #273DC0;
           box-shadow: 0 1px 4px rgba(15, 23, 42, 0.18);
           cursor: pointer;
         }
@@ -282,7 +282,7 @@ function DualRange({
           height: 16px;
           border-radius: 9999px;
           background: white;
-          border: 2px solid #C75510;
+          border: 2px solid #273DC0;
           box-shadow: 0 1px 4px rgba(15, 23, 42, 0.18);
           cursor: pointer;
         }

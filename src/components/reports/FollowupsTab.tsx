@@ -45,8 +45,8 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 // ─── Trend line (completed vs pending) ────────────────────────────────────────
 
 const TREND_SERIES = [
-  { key: "completed" as const, label: "Completed", color: "#C75510" },
-  { key: "pending"   as const, label: "Pending",   color: "#ED8E55" },
+  { key: "completed" as const, label: "Completed", color: "#273DC0" },
+  { key: "pending"   as const, label: "Pending",   color: "#5C6FE7" },
 ];
 
 function FollowupTrendChart() {
@@ -175,9 +175,9 @@ function PriorityBar() {
 // ─── Priority chip + channel icon ─────────────────────────────────────────────
 
 const PRIORITY_STYLES: Record<FollowupPriority, { bg: string; fg: string }> = {
-  High:   { bg: "#F8D5BD", fg: "#9F430D" },
-  Medium: { bg: "#FFF6EE", fg: "#C75510" },
-  Low:    { bg: "#FCE9DD", fg: "#C75510" },
+  High:   { bg: "#C4CBF6", fg: "#20319C" },
+  Medium: { bg: "#F2F3FD", fg: "#273DC0" },
+  Low:    { bg: "#E6E9FB", fg: "#273DC0" },
 };
 
 function PriorityChip({ p }: { p: FollowupPriority }) {
@@ -226,7 +226,7 @@ export function FollowupsTab() {
 
       {/* Row 2: Completion ring (hero) | Trend chart | Status donut */}
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-[3fr_4fr_3fr]">
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-gradient-to-br from-[#FCE9DD] via-white to-white p-5 shadow-[var(--shadow-card)]">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-gradient-to-br from-[#E6E9FB] via-white to-white p-5 shadow-[var(--shadow-card)]">
           <div className="mb-3 flex items-center justify-between">
             <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">Completion Rate</h3>
             <span className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold text-[color:var(--color-success)] shadow-[var(--shadow-card)]">
@@ -234,7 +234,7 @@ export function FollowupsTab() {
             </span>
           </div>
           <div className="flex flex-col items-center gap-4">
-            <CircularProgress value={completionRate} label="Completed" size={168} color="#C75510" />
+            <CircularProgress value={completionRate} label="Completed" size={168} color="#273DC0" />
             <div className="grid w-full grid-cols-3 gap-2">
               {followupStatusDonut.map((s) => (
                 <div key={s.label} className="rounded-[10px] bg-white px-2 py-2 text-center shadow-[var(--shadow-card)]">
@@ -363,7 +363,7 @@ export function FollowupsTab() {
               <tbody>
                 {upcomingFollowups.map((f) => (
                   <tr key={f.candidate}
-                    className={`border-b border-[color:var(--color-border)] last:border-0 text-[12px] ${f.overdue ? "bg-[#F8D5BD]/30" : ""}`}>
+                    className={`border-b border-[color:var(--color-border)] last:border-0 text-[12px] ${f.overdue ? "bg-[#C4CBF6]/30" : ""}`}>
                     <td className="py-3 pr-3">
                       <div className="flex items-center gap-2.5">
                         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white" style={{ backgroundColor: f.color }}>

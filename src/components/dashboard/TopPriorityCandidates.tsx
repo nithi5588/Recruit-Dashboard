@@ -10,10 +10,10 @@ import {
 } from "@/lib/sample-data";
 
 function statusColor(text: string): string {
-  if (/open|available/i.test(text)) return "#C75510";
-  if (/interview/i.test(text)) return "#F97316";
-  if (/submitted|shortlisted/i.test(text)) return "#6B6358";
-  return "#6B6358";
+  if (/open|available/i.test(text)) return "#273DC0";
+  if (/interview/i.test(text)) return "#5C6FE7";
+  if (/submitted|shortlisted/i.test(text)) return "#525252";
+  return "#525252";
 }
 
 function PriorityCard({ candidate }: { candidate: Candidate }) {
@@ -22,7 +22,7 @@ function PriorityCard({ candidate }: { candidate: Candidate }) {
   return (
     <Link
       href={`/candidates/${candidate.id}`}
-      className="group flex h-full min-w-0 flex-col rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_24px_rgba(234,104,20,0.10)]"
+      className="group flex h-full min-w-0 flex-col rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_24px_rgba(46,71,224,0.10)]"
     >
       <div className="mb-3 flex items-start justify-between gap-2">
         <Avatar name={candidate.name} size={42} />

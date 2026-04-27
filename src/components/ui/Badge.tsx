@@ -12,13 +12,13 @@ export type BadgeTone =
 // Muted badge palette — backgrounds desaturated and borders dropped where
 // possible so a row of mixed badges reads as one cohesive band of color.
 const TONE: Record<BadgeTone, { bg: string; fg: string; border?: string }> = {
-  purple: { bg: "#FCE9DD", fg: "#9F430D", border: "#F8D5BD" },
-  blue:   { bg: "#F4F2EE", fg: "#6B6358", border: "#E8E4DC" },
-  green:  { bg: "#FFF6EE", fg: "#9F430D", border: "#F8D5BD" },
-  orange: { bg: "#F4F2EE", fg: "#C75510", border: "#E8E4DC" },
-  red:    { bg: "#F8D5BD", fg: "#9F430D", border: "#F8D5BD" },
-  amber:  { bg: "#F4F2EE", fg: "#9F430D", border: "#E8E4DC" },
-  gray:   { bg: "#F4F2EE", fg: "#6B6358", border: "#E8E4DC" },
+  purple: { bg: "#E6E9FB", fg: "#20319C", border: "#C4CBF6" },
+  blue:   { bg: "#F5F5F5", fg: "#525252", border: "#EAEAEA" },
+  green:  { bg: "#F2F3FD", fg: "#20319C", border: "#C4CBF6" },
+  orange: { bg: "#F5F5F5", fg: "#273DC0", border: "#EAEAEA" },
+  red:    { bg: "#C4CBF6", fg: "#20319C", border: "#C4CBF6" },
+  amber:  { bg: "#F5F5F5", fg: "#20319C", border: "#EAEAEA" },
+  gray:   { bg: "#F5F5F5", fg: "#525252", border: "#EAEAEA" },
 };
 
 export function Badge({

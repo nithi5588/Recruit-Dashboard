@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import { ThemeProvider, THEME_INIT_SCRIPT } from "@/components/theme/ThemeProvider";
+import { PostHogProvider } from "@/components/posthog/PostHogProvider";
+import { PostHogPageView } from "@/components/posthog/PostHogPageView";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,7 +32,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full antialiased" suppressHydrationWarning>
-        <ThemeProvider>{children}</ThemeProvider>
+        <PostHogProvider>
+          <ThemeProvider>
+            <Suspense fallback={null}>
+              <PostHogPageView />
+            </Suspense>
+            {children}
+          </ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   );

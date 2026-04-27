@@ -44,10 +44,10 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 
 function ActivityTypeIcon({ type }: { type: string }) {
   const configs: Record<string, { bg: string; color: string; icon: React.ReactNode }> = {
-    interview:   { bg: "#FCE9DD", color: "#EA6814", icon: <Calendar size={14} variant="Bulk" color="#EA6814" /> },
-    application: { bg: "#F4F2EE", color: "#ED8E55", icon: <Send size={14} variant="Bulk" color="#ED8E55" /> },
-    followup:    { bg: "#FFF6EE", color: "#ED8E55", icon: <Chart size={14} variant="Bulk" color="#ED8E55" /> },
-    offer:       { bg: "#FCE9DD", color: "#C75510", icon: <TickCircle size={14} variant="Bold" color="#C75510" /> },
+    interview:   { bg: "#F5F3FF", color: "#8B5CF6", icon: <Calendar size={14} variant="Bulk" color="#8B5CF6" /> },
+    application: { bg: "#ECFEFF", color: "#06B6D4", icon: <Send size={14} variant="Bulk" color="#06B6D4" /> },
+    followup:    { bg: "#FFFBEB", color: "#F59E0B", icon: <Chart size={14} variant="Bulk" color="#F59E0B" /> },
+    offer:       { bg: "#ECFDF5", color: "#10B981", icon: <TickCircle size={14} variant="Bold" color="#10B981" /> },
   };
   const c = configs[type] ?? configs.interview;
   return (
@@ -73,32 +73,31 @@ function TaperedFunnel() {
   const funnelCx = funnelX + funnelW / 2;
   const max = funnelData[0].count;
   const widthFor = (n: number) => Math.max((n / max) * funnelW, 28);
-  const opacities = [0.92, 0.78, 0.62, 0.46, 0.30];
-  const accent = "#EA6814";
 
   const stages = funnelData.map((d, i) => ({
     ...d,
     topW:    widthFor(d.count),
     bottomW: widthFor(funnelData[i + 1]?.count ?? d.count * 0.85),
     y: i * (rowH + gap),
-    opacity: opacities[i] ?? 0.3,
   }));
 
   const VH = funnelData.length * (rowH + gap) - gap + 2;
 
   return (
     <svg viewBox={`0 0 ${VW} ${VH}`} className="w-full" style={{ maxWidth: "100%" }} role="img" aria-label="Recruitment funnel">
-      {/* Trapezoids + centered count labels */}
+      {/* Trapezoids + centered count labels.
+          Each stage carries its own color from the data — gives the funnel
+          a graceful indigo gradient instead of a single flat fill. */}
       {stages.map((s, i) => {
         const tL = funnelCx - s.topW / 2, tR = funnelCx + s.topW / 2;
         const bL = funnelCx - s.bottomW / 2, bR = funnelCx + s.bottomW / 2;
         const cy = s.y + rowH / 2;
+        const isLight = i < 2; // first two shades are pale → use dark text
         return (
           <g key={`trap-${i}`}>
             <path
               d={`M ${tL} ${s.y} L ${tR} ${s.y} L ${bR} ${s.y + rowH} L ${bL} ${s.y + rowH} Z`}
-              fill={accent}
-              fillOpacity={s.opacity}
+              fill={s.color}
             />
             <text
               x={funnelCx}
@@ -106,7 +105,7 @@ function TaperedFunnel() {
               textAnchor="middle"
               fontSize="14"
               fontWeight="700"
-              fill={s.opacity > 0.5 ? "white" : accent}
+              fill={isLight ? "#3730A3" : "white"}
             >
               {s.count}
             </text>
@@ -163,10 +162,10 @@ function TaperedFunnel() {
 // ─── Activity line chart ──────────────────────────────────────────────────────
 
 const CHART_SERIES = [
-  { key: "applications" as const, label: "Applications", color: "#EA6814" },
-  { key: "interviews"   as const, label: "Interviews",   color: "#ED8E55" },
-  { key: "followUps"    as const, label: "Follow-ups",   color: "#C75510" },
-  { key: "offers"       as const, label: "Offers",       color: "#ED8E55" },
+  { key: "applications" as const, label: "Applications", color: "#6366F1" }, // indigo
+  { key: "interviews"   as const, label: "Interviews",   color: "#8B5CF6" }, // violet
+  { key: "followUps"    as const, label: "Follow-ups",   color: "#F59E0B" }, // amber
+  { key: "offers"       as const, label: "Offers",       color: "#10B981" }, // emerald
 ];
 
 function ActivityChart() {

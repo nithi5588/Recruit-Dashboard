@@ -41,25 +41,25 @@ export function NotesSummaryCard({ summary }: { summary: NotesBlock["summary"] }
       icon: <NoteLinesIcon size={16} />,
       value: String(summary.total),
       label: "Total Notes",
-      tint: { bg: "#FCE9DD", fg: "#EA6814" },
+      tint: { bg: "#E6E9FB", fg: "#2E47E0" },
     },
     {
       icon: <UserIcon size={16} />,
       value: String(summary.mine),
       label: "My Notes",
-      tint: { bg: "#FCE9DD", fg: "#C75510" },
+      tint: { bg: "#E6E9FB", fg: "#273DC0" },
     },
     {
       icon: <UsersIcon size={16} />,
       value: String(summary.team),
       label: "Team Notes",
-      tint: { bg: "#FFF6EE", fg: "#C75510" },
+      tint: { bg: "#F2F3FD", fg: "#273DC0" },
     },
     {
       icon: <PushPinIcon size={16} />,
       value: String(summary.pinned),
       label: "Pinned Notes",
-      tint: { bg: "#F4F2EE", fg: "#6B6358" },
+      tint: { bg: "#F5F5F5", fg: "#525252" },
     },
   ];
 

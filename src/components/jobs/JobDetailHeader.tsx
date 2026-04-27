@@ -123,7 +123,7 @@ export function JobDetailHeader({ job }: { job: ResolvedJob }) {
             href={job.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-4 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(234,104,20,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-4 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
           >
             <ExternalLinkIcon size={16} />
             View on {job.source}

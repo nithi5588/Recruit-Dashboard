@@ -460,7 +460,7 @@ export function RecentCandidatesTable() {
                 onClick={() => setPage(n)}
                 className={`inline-flex h-9 min-w-[36px] items-center justify-center rounded-[10px] px-2 text-[13px] font-semibold transition-colors ${
                   n === safePage
-                    ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_12px_rgba(234,104,20,0.22)]"
+                    ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_12px_rgba(46,71,224,0.22)]"
                     : "border border-[color:var(--color-border)] text-[color:var(--color-text-secondary)] hover:border-[color:var(--color-border-strong)] hover:text-[color:var(--color-text)]"
                 }`}
               >

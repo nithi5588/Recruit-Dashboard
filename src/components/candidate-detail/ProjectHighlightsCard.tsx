@@ -19,7 +19,7 @@ export function ProjectHighlightsCard({
           <li key={h} className="flex items-start gap-3">
             <span
               aria-hidden
-              className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FCE9DD] text-[#C75510]"
+              className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#E6E9FB] text-[#273DC0]"
             >
               <CheckIcon size={12} />
             </span>

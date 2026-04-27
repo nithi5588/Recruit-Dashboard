@@ -125,21 +125,21 @@ function buildWorkbookXml<T>(opts: ExportOptions<T>): string {
   <Styles>
     <Style ss:ID="Default" ss:Name="Normal">
       <Alignment ss:Vertical="Center"/>
-      <Font ss:FontName="Inter" ss:Size="11" ss:Color="#1F1B17"/>
+      <Font ss:FontName="Inter" ss:Size="11" ss:Color="#0A0A0A"/>
     </Style>
     <Style ss:ID="sHeader">
       <Alignment ss:Vertical="Center" ss:Horizontal="Left"/>
       <Font ss:FontName="Inter" ss:Size="11" ss:Bold="1" ss:Color="#FFFFFF"/>
-      <Interior ss:Color="#EA6814" ss:Pattern="Solid"/>
+      <Interior ss:Color="#2E47E0" ss:Pattern="Solid"/>
       <Borders>
-        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#C75510"/>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#273DC0"/>
       </Borders>
     </Style>
     <Style ss:ID="sBody">
       <Alignment ss:Vertical="Center" ss:Horizontal="Left" ss:WrapText="1"/>
-      <Font ss:FontName="Inter" ss:Size="11" ss:Color="#1F1B17"/>
+      <Font ss:FontName="Inter" ss:Size="11" ss:Color="#0A0A0A"/>
       <Borders>
-        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#E5E7EF"/>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#EAEAEA"/>
       </Borders>
     </Style>
   </Styles>

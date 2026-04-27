@@ -5,7 +5,7 @@ function polarToXY(cx: number, cy: number, r: number, deg: number) {
 
 export function Sparkline({
   values,
-  color = "#EA6814",
+  color = "#2E47E0",
   width = 60,
   height = 22,
   fill = true,
@@ -59,7 +59,7 @@ export function CircularProgress({
   label,
   size = 180,
   stroke = 14,
-  color = "#EA6814",
+  color = "#2E47E0",
   trackColor,
   showLabel = true,
 }: {

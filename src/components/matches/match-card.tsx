@@ -21,36 +21,56 @@ import {
 // ─── Score-tone palette ───────────────────────────────────────────────────────
 
 const TONE: Record<MatchTone, {
-  ringBg: string;     // big circular score badge
-  ringText: string;   // text on score badge
-  segment: string;    // fit-breakdown segment fill
-  chipBg: string;     // skill chip bg
-  chipText: string;   // skill chip text
-  underline: string;  // active underline (matches tab strip)
+  ring: string;        // ring stroke color (CSS color value)
+  ringGlow: string;    // soft halo behind the score ring
+  scoreText: string;   // numeric label color
+  scoreLabel: string;  // small label under score
+  segment: string;     // fit-breakdown segment fill
+  chipBg: string;      // skill chip bg
+  chipText: string;    // skill chip text
+  underline: string;   // active underline (matches tab strip)
+  pillBg: string;      // tone pill bg
+  pillText: string;    // tone pill text
+  pillLabel: string;   // human-readable tone label
 }> = {
   excellent: {
-    ringBg: "bg-[color:var(--color-brand-500)]",
-    ringText: "text-white",
+    ring: "var(--color-brand-500)",
+    ringGlow: "rgba(46, 71, 224, 0.18)",
+    scoreText: "text-[color:var(--color-brand-700)]",
+    scoreLabel: "text-[color:var(--color-brand-600)]",
     segment: "bg-[color:var(--color-brand-500)]",
     chipBg: "bg-[color:var(--color-brand-100)]",
     chipText: "text-[color:var(--color-brand-700)]",
     underline: "bg-[color:var(--color-brand-500)]",
+    pillBg: "bg-[color:var(--color-brand-100)]",
+    pillText: "text-[color:var(--color-brand-700)]",
+    pillLabel: "Excellent fit",
   },
   good: {
-    ringBg: "bg-[color:var(--color-brand-400)]",
-    ringText: "text-white",
+    ring: "var(--color-brand-400)",
+    ringGlow: "rgba(46, 71, 224, 0.12)",
+    scoreText: "text-[color:var(--color-brand-700)]",
+    scoreLabel: "text-[color:var(--color-brand-600)]",
     segment: "bg-[color:var(--color-brand-400)]",
     chipBg: "bg-[color:var(--color-brand-100)]",
     chipText: "text-[color:var(--color-brand-700)]",
     underline: "bg-[color:var(--color-brand-400)]",
+    pillBg: "bg-[color:var(--color-brand-50)]",
+    pillText: "text-[color:var(--color-brand-700)]",
+    pillLabel: "Good fit",
   },
   fair: {
-    ringBg: "bg-[color:var(--color-text-muted)]",
-    ringText: "text-white",
+    ring: "var(--color-text-muted)",
+    ringGlow: "rgba(102, 112, 133, 0.12)",
+    scoreText: "text-[color:var(--color-text)]",
+    scoreLabel: "text-[color:var(--color-text-muted)]",
     segment: "bg-[color:var(--color-text-muted)]",
     chipBg: "bg-[color:var(--color-surface-2)]",
     chipText: "text-[color:var(--color-text)]",
     underline: "bg-[color:var(--color-text-muted)]",
+    pillBg: "bg-[color:var(--color-surface-2)]",
+    pillText: "text-[color:var(--color-text-secondary)]",
+    pillLabel: "Fair fit",
   },
 };
 
@@ -71,12 +91,7 @@ function FitBar({ match }: { match: Match }) {
   const [tip, setTip] = useState<{ key: keyof FitBreakdown; left: number } | null>(null);
   return (
     <div className="relative">
-      <div className="mb-1.5 grid grid-cols-4 gap-1 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--color-text-muted)]">
-        {FIT_LABELS.map((f) => (
-          <span key={f.key}>{f.label}</span>
-        ))}
-      </div>
-      <div className="grid grid-cols-4 gap-1">
+      <div className="grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-4">
         {FIT_LABELS.map((f, i) => {
           const value = match.fitBreakdown[f.key];
           const tone = segmentTone(value);
@@ -87,20 +102,26 @@ function FitBar({ match }: { match: Match }) {
               aria-label={tooltipForBreakdown(f.key, value, match)}
               onMouseEnter={() => setTip({ key: f.key, left: (i + 0.5) * 25 })}
               onMouseLeave={() => setTip(null)}
-              className="relative h-1.5 overflow-hidden rounded-full bg-[color:var(--color-surface-2)]"
+              className="min-w-0"
             >
-              <span
-                className={`block h-full rounded-full ${TONE[tone].segment}`}
-                style={{ width: `${value}%` }}
-              />
+              <div className="mb-1 flex items-baseline justify-between gap-2">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[color:var(--color-text-muted)]">
+                  {f.label}
+                </span>
+                <span className="text-[11px] font-bold tabular-nums text-[color:var(--color-text)]">
+                  {value}
+                  <span className="text-[color:var(--color-text-muted)]">%</span>
+                </span>
+              </div>
+              <div className="relative h-1.5 overflow-hidden rounded-full bg-[color:var(--color-surface-2)]">
+                <span
+                  className={`block h-full rounded-full ${TONE[tone].segment} transition-[width] duration-500 ease-out`}
+                  style={{ width: `${value}%` }}
+                />
+              </div>
             </div>
           );
         })}
-      </div>
-      <div className="mt-1 grid grid-cols-4 gap-1 text-[10px] font-semibold tabular-nums text-[color:var(--color-text-secondary)]">
-        {FIT_LABELS.map((f) => (
-          <span key={f.key}>{match.fitBreakdown[f.key]}%</span>
-        ))}
       </div>
       {tip && (
         <div
@@ -216,13 +237,74 @@ function SkillChips({ match, tone }: { match: Match; tone: MatchTone }) {
 
 function ScoreBadge({ score }: { score: number }) {
   const tone = scoreTone(score);
+  const t = TONE[tone];
+  const pct = Math.max(0, Math.min(100, score));
+  const size = 64;
+  const stroke = 6;
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  const dash = (pct / 100) * c;
+
   return (
     <span
       role="img"
       aria-label={`Match score: ${score} out of 100, ${tone}`}
-      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-[18px] font-bold tabular-nums ${TONE[tone].ringBg} ${TONE[tone].ringText}`}
+      className="relative flex h-16 w-16 shrink-0 items-center justify-center"
+      style={{ filter: `drop-shadow(0 6px 14px ${t.ringGlow})` }}
     >
-      {score}
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        className="-rotate-90"
+        aria-hidden
+      >
+        <defs>
+          <linearGradient id={`grad-${tone}-${score}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={t.ring} stopOpacity="0.85" />
+            <stop offset="100%" stopColor={t.ring} stopOpacity="1" />
+          </linearGradient>
+        </defs>
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          stroke="var(--color-surface-2)"
+          strokeWidth={stroke}
+        />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          stroke={`url(#grad-${tone}-${score})`}
+          strokeWidth={stroke}
+          strokeLinecap="round"
+          strokeDasharray={`${dash} ${c}`}
+          style={{ transition: "stroke-dasharray 600ms cubic-bezier(0.22, 0.94, 0.46, 1)" }}
+        />
+      </svg>
+      <span className="absolute inset-0 flex items-center justify-center leading-none">
+        <span className={`text-[20px] font-bold tabular-nums ${t.scoreText}`}>{score}</span>
+      </span>
+    </span>
+  );
+}
+
+function FitPill({ score }: { score: number }) {
+  const tone = scoreTone(score);
+  const t = TONE[tone];
+  return (
+    <span
+      className={`inline-flex items-center gap-1 rounded-full px-2 py-[2px] text-[10px] font-semibold ${t.pillBg} ${t.pillText}`}
+    >
+      <span
+        aria-hidden
+        className="h-1.5 w-1.5 rounded-full"
+        style={{ background: t.ring }}
+      />
+      {t.pillLabel}
     </span>
   );
 }
@@ -270,89 +352,120 @@ export function MatchCard({
       onClick={open}
       onFocus={onFocus}
       onKeyDown={handleKeyDown}
-      className={`group relative cursor-pointer rounded-xl border bg-[color:var(--color-surface)] p-5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-brand-500)] focus-visible:ring-offset-2 ${
+      className={`group relative cursor-pointer overflow-hidden rounded-2xl border bg-[color:var(--color-surface)] p-5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-brand-500)] focus-visible:ring-offset-2 ${
         isFocused
-          ? "border-[color:var(--color-brand-500)] shadow-md ring-2 ring-[color:var(--color-brand-200)]"
-          : "border-[color:var(--color-border)] hover:-translate-y-px hover:border-[color:var(--color-border-strong)] hover:shadow-sm"
+          ? "border-[color:var(--color-brand-500)] shadow-[0_10px_28px_rgba(46,71,224,0.14)] ring-2 ring-[color:var(--color-brand-200)]"
+          : "border-[color:var(--color-border)] hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_28px_rgba(23,26,43,0.08)]"
       }`}
     >
+      {/* Decorative tone wash on hover */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(46,71,224,0.10), transparent 70%)",
+        }}
+      />
+
       {/* ROW A — Headline */}
-      <div className="flex h-14 items-center gap-4">
-        <ScoreBadge score={match.score} />
-
-        {/* Candidate */}
-        <div className="flex min-w-0 flex-1 items-center gap-2.5">
-          <span
-            aria-hidden
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold text-white"
-            style={{ background: match.candidate.avatarColor }}
-          >
-            {match.candidate.initials}
-          </span>
-          <div className="min-w-0">
-            <p id={cardId} className="truncate text-sm font-medium text-[color:var(--color-text)]">
-              {match.candidate.name}
-            </p>
-            <p className="truncate text-sm text-[color:var(--color-text-secondary)]">{match.candidate.role}</p>
-            <p className="truncate text-xs text-[color:var(--color-text-muted)]">
-              {match.candidate.location} · {match.candidate.experienceLabel}
-            </p>
-          </div>
+      <div className="relative flex items-start gap-4">
+        {/* Score block */}
+        <div className="flex shrink-0 flex-col items-center gap-2 pt-0.5">
+          <ScoreBadge score={match.score} />
+          <FitPill score={match.score} />
         </div>
 
-        {/* Separator */}
-        <span aria-hidden className="hidden h-10 w-px bg-[color:var(--color-border)] sm:inline-block" />
+        {/* Candidate + matched job stack */}
+        <div className="min-w-0 flex-1">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex min-w-0 items-center gap-2.5">
+              <span
+                aria-hidden
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold text-white ring-2 ring-[color:var(--color-surface)]"
+                style={{
+                  background: match.candidate.avatarColor,
+                  boxShadow: "0 2px 8px rgba(23, 26, 43, 0.12)",
+                }}
+              >
+                {match.candidate.initials}
+              </span>
+              <div className="min-w-0">
+                <p id={cardId} className="truncate text-[15px] font-semibold leading-tight text-[color:var(--color-text)]">
+                  {match.candidate.name}
+                </p>
+                <p className="truncate text-[13px] leading-snug text-[color:var(--color-text-secondary)]">
+                  {match.candidate.role}
+                </p>
+                <p className="truncate text-[12px] leading-snug text-[color:var(--color-text-muted)]">
+                  {match.candidate.location} · {match.candidate.experienceLabel}
+                </p>
+              </div>
+            </div>
 
-        {/* Job */}
-        <div className="hidden min-w-0 flex-1 items-center gap-2.5 sm:flex">
-          <CompanyLogo
-            company={match.job.company}
-            size={32}
-            fallbackBg={match.job.companyLogoColor}
-            fallbackText={match.job.companyLogoText}
-            rounded="rounded-md"
-          />
-          <div className="min-w-0">
-            <p className="truncate text-sm font-medium text-[color:var(--color-text)]">{match.job.title}</p>
-            <p className="truncate text-sm text-[color:var(--color-text-secondary)]">{match.job.company}</p>
-            <p className="truncate text-xs text-[color:var(--color-text-muted)]">{match.job.salaryLabel}</p>
+            {/* Actions */}
+            <div className="flex shrink-0 items-center gap-1">
+              <button
+                type="button"
+                aria-label={saved ? "Remove from saved" : "Save match"}
+                aria-pressed={saved}
+                onClick={(e) => { e.stopPropagation(); onToggleSave(); }}
+                className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-brand-500)] focus-visible:ring-offset-2 ${
+                  saved
+                    ? "bg-[color:var(--color-brand-50)] text-[color:var(--color-brand-600)]"
+                    : "text-[color:var(--color-text-muted)] hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)]"
+                }`}
+              >
+                <BookmarkIcon size={16} />
+              </button>
+              <button
+                type="button"
+                aria-label={`More actions for ${match.candidate.name}`}
+                onClick={(e) => e.stopPropagation()}
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-[color:var(--color-text-muted)] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-brand-500)] focus-visible:ring-offset-2"
+              >
+                <MoreIcon size={16} />
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Actions */}
-        <div className="flex shrink-0 items-center gap-1">
-          <button
-            type="button"
-            aria-label={saved ? "Remove from saved" : "Save match"}
-            aria-pressed={saved}
-            onClick={(e) => { e.stopPropagation(); onToggleSave(); }}
-            className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-brand-500)] focus-visible:ring-offset-2 ${
-              saved
-                ? "text-[color:var(--color-brand-600)] hover:bg-[color:var(--color-brand-50)]"
-                : "text-[color:var(--color-text-muted)] hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)]"
-            }`}
-          >
-            <BookmarkIcon size={16} />
-          </button>
-          <button
-            type="button"
-            aria-label={`More actions for ${match.candidate.name}`}
-            onClick={(e) => e.stopPropagation()}
-            className="flex h-8 w-8 items-center justify-center rounded-md text-[color:var(--color-text-muted)] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-brand-500)] focus-visible:ring-offset-2"
-          >
-            <MoreIcon size={16} />
-          </button>
+          {/* Matched job sub-card */}
+          <div className="mt-3 flex items-center gap-2.5 rounded-xl border border-[color:var(--color-border)] bg-[color:var(--color-surface-2)]/60 px-3 py-2.5">
+            <span
+              aria-hidden
+              className="hidden text-[9px] font-bold uppercase tracking-[0.12em] text-[color:var(--color-text-muted)] sm:inline"
+            >
+              Match
+            </span>
+            <span aria-hidden className="hidden h-4 w-px bg-[color:var(--color-border)] sm:inline-block" />
+            <CompanyLogo
+              company={match.job.company}
+              size={28}
+              fallbackBg={match.job.companyLogoColor}
+              fallbackText={match.job.companyLogoText}
+              rounded="rounded-md"
+            />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-[13px] font-semibold leading-tight text-[color:var(--color-text)]">
+                {match.job.title}
+              </p>
+              <p className="truncate text-[12px] leading-snug text-[color:var(--color-text-secondary)]">
+                {match.job.company} · {match.job.salaryLabel}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Divider */}
+      <div className="my-4 h-px w-full bg-gradient-to-r from-transparent via-[color:var(--color-border)] to-transparent" />
 
       {/* ROW B — Fit breakdown */}
-      <div className="mt-4">
-        <FitBar match={match} />
-      </div>
+      <FitBar match={match} />
 
       {/* ROW C — Skills */}
       {(match.matchedSkills.length > 0 || match.missingSkills.length > 0) && (
-        <div className="mt-3">
+        <div className="mt-4">
           <SkillChips match={match} tone={tone} />
         </div>
       )}

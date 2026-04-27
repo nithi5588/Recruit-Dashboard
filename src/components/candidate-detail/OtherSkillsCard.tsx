@@ -7,13 +7,13 @@ import {
 } from "@/components/candidate-detail/skills-shared";
 
 const TONE_HEX: Record<ReturnType<typeof levelBadgeTone>, string> = {
-  purple: "#9F430D",
-  blue: "#6B6358",
-  green: "#9F430D",
-  orange: "#C75510",
-  red: "#9F430D",
-  amber: "#9F430D",
-  gray: "#6B6358",
+  purple: "#20319C",
+  blue: "#525252",
+  green: "#20319C",
+  orange: "#273DC0",
+  red: "#20319C",
+  amber: "#20319C",
+  gray: "#525252",
 };
 
 function SkillTile({ skill }: { skill: OtherSkill }) {

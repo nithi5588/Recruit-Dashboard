@@ -13,7 +13,7 @@ export function CompanyLogo({
   company,
   domain,
   size = 32,
-  fallbackBg = "#9A9183",
+  fallbackBg = "#A3A3A3",
   fallbackFg = "#FFFFFF",
   fallbackText,
   className = "",

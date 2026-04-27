@@ -64,14 +64,14 @@ export function Modal({
     <div
       role="presentation"
       onClick={handleBackdrop}
-      className="fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto bg-black/40 px-4 py-6 backdrop-blur-[2px]"
+      className="fixed inset-0 z-[60] flex items-end justify-center overflow-y-auto bg-black/40 px-0 py-0 backdrop-blur-[2px] sm:items-center sm:px-4 sm:py-6"
     >
       <div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy ?? fallbackLabelId}
-        className={`relative w-full max-w-[900px] rounded-[20px] bg-[color:var(--color-surface)] shadow-[var(--shadow-panel)] ${className}`}
+        className={`relative flex max-h-[95vh] w-full max-w-[900px] flex-col overflow-hidden rounded-t-[20px] bg-[color:var(--color-surface)] shadow-[var(--shadow-panel)] sm:max-h-[calc(100vh-3rem)] sm:rounded-[20px] ${className}`}
       >
         {children}
       </div>

@@ -51,9 +51,9 @@ const SORT_OPTIONS: { key: SortKey; label: string }[] = [
 const PRIORITY_RANK: Record<PipelinePriority, number> = { High: 0, Medium: 1, Low: 2 };
 
 const PRIORITY_STYLES: Record<PipelinePriority, { bg: string; fg: string; dot: string }> = {
-  High:   { bg: "#F8D5BD", fg: "#9F430D", dot: "#9F430D" },
-  Medium: { bg: "#FFF6EE", fg: "#C75510", dot: "#ED8E55" },
-  Low:    { bg: "#FCE9DD", fg: "#C75510", dot: "#EA6814" },
+  High:   { bg: "#C4CBF6", fg: "#20319C", dot: "#20319C" },
+  Medium: { bg: "#F2F3FD", fg: "#273DC0", dot: "#5C6FE7" },
+  Low:    { bg: "#E6E9FB", fg: "#273DC0", dot: "#2E47E0" },
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -74,7 +74,7 @@ function uid() {
   return `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
 }
 
-const STAGE_AVATAR_COLORS = ["#EA6814", "#6B6358", "#EA6814", "#ED8E55", "#EA6814", "#6B6358"];
+const STAGE_AVATAR_COLORS = ["#2E47E0", "#525252", "#2E47E0", "#5C6FE7", "#2E47E0", "#525252"];
 
 function pickAvatarColor() {
   return STAGE_AVATAR_COLORS[Math.floor(Math.random() * STAGE_AVATAR_COLORS.length)];
@@ -462,7 +462,7 @@ function AddCardForm({
           type="button"
           disabled={!name.trim()}
           onClick={handleSubmit}
-          className="h-7 rounded-[6px] bg-[color:var(--color-brand-500)] px-3 text-[11px] font-semibold text-white shadow-[0_2px_8px_rgba(234,104,20,0.3)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
+          className="h-7 rounded-[6px] bg-[color:var(--color-brand-500)] px-3 text-[11px] font-semibold text-white shadow-[0_2px_8px_rgba(46,71,224,0.3)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
         >
           Add card
         </button>
@@ -888,8 +888,8 @@ export function PipelineBoardClient() {
       <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
         <div className="rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
           <div className="flex items-start gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#FCE9DD" }}>
-              <UsersIcon size={16} style={{ color: "#EA6814" }} />
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#E6E9FB" }}>
+              <UsersIcon size={16} style={{ color: "#2E47E0" }} />
             </span>
             <div className="min-w-0">
               <p className="text-[11px] font-medium text-[color:var(--color-text-secondary)]">Total in Pipeline</p>
@@ -904,8 +904,8 @@ export function PipelineBoardClient() {
 
         <div className="rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
           <div className="flex items-start gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#F4F2EE" }}>
-              <TargetIcon size={16} style={{ color: "#6B6358" }} />
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#F5F5F5" }}>
+              <TargetIcon size={16} style={{ color: "#525252" }} />
             </span>
             <div className="min-w-0">
               <p className="text-[11px] font-medium text-[color:var(--color-text-secondary)]">Active Candidates</p>
@@ -919,7 +919,7 @@ export function PipelineBoardClient() {
 
         <div className="rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
           <div className="flex items-start gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#F8D5BD" }}>
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#C4CBF6" }}>
               <span aria-hidden className="text-[15px]">🔥</span>
             </span>
             <div className="min-w-0">
@@ -934,7 +934,7 @@ export function PipelineBoardClient() {
 
         <div className="rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
           <div className="flex items-start gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#FCE9DD" }}>
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]" style={{ background: "#E6E9FB" }}>
               <span aria-hidden className="text-[15px]">🏆</span>
             </span>
             <div className="min-w-0">

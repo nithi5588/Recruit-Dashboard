@@ -114,23 +114,23 @@ function NotificationIcon({ kind }: { kind: NotificationKind }) {
       icon: <MatchIcon size={16} />,
     },
     interview: {
-      bg: "bg-[color:var(--color-warning-50,#FFF6EE)]",
-      fg: "text-[color:var(--color-warning,#ED8E55)]",
+      bg: "bg-[color:var(--color-warning-50,#F2F3FD)]",
+      fg: "text-[color:var(--color-warning,#5C6FE7)]",
       icon: <CalendarIcon size={16} />,
     },
     task: {
-      bg: "bg-[color:var(--color-error-50,#F8D5BD)]",
-      fg: "text-[color:var(--color-error,#9F430D)]",
+      bg: "bg-[color:var(--color-error-50,#C4CBF6)]",
+      fg: "text-[color:var(--color-error,#20319C)]",
       icon: <TasksIcon size={16} />,
     },
     candidate: {
-      bg: "bg-[color:var(--color-info-50,#F4F2EE)]",
-      fg: "text-[color:var(--color-info,#6B6358)]",
+      bg: "bg-[color:var(--color-info-50,#F5F5F5)]",
+      fg: "text-[color:var(--color-info,#525252)]",
       icon: <UserPlusIcon size={16} />,
     },
     submission: {
-      bg: "bg-[color:var(--color-success-50,#FCE9DD)]",
-      fg: "text-[color:var(--color-success,#EA6814)]",
+      bg: "bg-[color:var(--color-success-50,#E6E9FB)]",
+      fg: "text-[color:var(--color-success,#2E47E0)]",
       icon: <CheckIcon size={16} />,
     },
   };
@@ -203,7 +203,7 @@ function SearchItem({
             result.kind === "candidate"
               ? "text-[color:var(--color-brand-600)]"
               : result.kind === "job"
-                ? "text-[#6B6358]"
+                ? "text-[#525252]"
                 : "text-[color:var(--color-text-muted)]"
           }`}
         >
@@ -625,7 +625,7 @@ export function Topbar({
         type="button"
         aria-label="Add candidate"
         onClick={onAddCandidate}
-        className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-3 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(234,104,20,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)] sm:px-4"
+        className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-3 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(46,71,224,0.22)] transition-colors hover:bg-[color:var(--color-brand-600)] sm:px-4"
       >
         <PlusIcon size={16} />
         <span className="hidden sm:inline">Add Candidate</span>

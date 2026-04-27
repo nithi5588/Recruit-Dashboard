@@ -15,13 +15,15 @@ export type ThemeMode = "light" | "dark" | "system";
 export type Density = "compact" | "default" | "spacious";
 
 /**
- * The product is locked to a single monochrome orange accent — no color
- * picker UI ships, but the export is kept for any internal tooling.
+ * The product is locked to a single monochrome royal-blue accent — no
+ * color picker UI ships, but the export is kept for any internal tooling.
  */
-export const ACCENT_PRESETS = ["#EA6814"] as const;
+export const ACCENT_PRESETS = ["#2E47E0"] as const;
 
 export const DEFAULT_ACCENT = ACCENT_PRESETS[0];
-const STORAGE_KEY = "recruit:appearance:v2";
+// Bumped storage-key version so existing users pick up the new accent
+// rather than reading a stale orange value out of localStorage.
+const STORAGE_KEY = "recruit:appearance:v3";
 
 type Appearance = {
   theme: ThemeMode;

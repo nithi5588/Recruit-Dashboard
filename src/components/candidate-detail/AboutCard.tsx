@@ -93,7 +93,7 @@ export function AboutCard({
           <span className="inline-flex items-center gap-1.5">
             <span
               aria-hidden
-              className="inline-block h-2 w-2 rounded-full bg-[#EA6814]"
+              className="inline-block h-2 w-2 rounded-full bg-[#2E47E0]"
             />
             {detail.relocation}
           </span>

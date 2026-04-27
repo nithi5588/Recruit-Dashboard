@@ -41,7 +41,7 @@ export function NotesCard({
               {note.pinned ? (
                 <span
                   aria-label="Pinned note"
-                  className="absolute right-3 top-3 text-[#ED8E55]"
+                  className="absolute right-3 top-3 text-[#5C6FE7]"
                 >
                   <BookmarkIcon size={14} />
                 </span>

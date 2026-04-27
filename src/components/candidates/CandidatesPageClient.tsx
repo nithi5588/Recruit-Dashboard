@@ -120,17 +120,17 @@ function statusCount(status: CandidateStatus | "all"): number {
 }
 
 function availabilityDotColor(text: string) {
-  if (/available in/i.test(text)) return "#ED8E55";
-  return "#EA6814";
+  if (/available in/i.test(text)) return "#5C6FE7";
+  return "#2E47E0";
 }
 
 function priorityBadgeTone(p: Candidate["priority"]): {
   bg: string;
   fg: string;
 } {
-  if (p === "High") return { bg: "#F8D5BD", fg: "#9F430D" };
-  if (p === "Medium") return { bg: "#FFF6EE", fg: "#C75510" };
-  return { bg: "#F4F2EE", fg: "#6B6358" };
+  if (p === "High") return { bg: "#C4CBF6", fg: "#20319C" };
+  if (p === "Medium") return { bg: "#F2F3FD", fg: "#273DC0" };
+  return { bg: "#F5F5F5", fg: "#525252" };
 }
 
 function matchesExperience(e: string, buckets: string[]): boolean {
@@ -348,7 +348,7 @@ function CandidateCard({
 }) {
   const pt = priorityBadgeTone(c.priority);
   return (
-    <article className="group relative flex flex-col rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_24px_rgba(234,104,20,0.10)]">
+    <article className="group relative flex flex-col rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_24px_rgba(46,71,224,0.10)]">
       <div className="absolute left-3 top-3">
         <Checkbox
           aria-label={`Select ${c.name}`}
@@ -826,7 +826,7 @@ export function CandidatesPageClient() {
                 <button
                   type="button"
                   onClick={() => setFiltersOpen(false)}
-                  className="inline-flex h-9 items-center rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(234,104,20,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+                  className="inline-flex h-9 items-center rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
                 >
                   Done
                 </button>
@@ -921,7 +921,7 @@ export function CandidatesPageClient() {
 
       {/* ── Bulk selection bar ───────────────────────── */}
       {selected.size > 0 ? (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-[14px] border border-[color:var(--color-brand-200)] bg-[color:var(--color-brand-50)] px-4 py-3 shadow-[0_4px_14px_rgba(234,104,20,0.08)]">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-[14px] border border-[color:var(--color-brand-200)] bg-[color:var(--color-brand-50)] px-4 py-3 shadow-[0_4px_14px_rgba(46,71,224,0.08)]">
           <p className="text-[13px] font-semibold text-[color:var(--color-brand-600)]">
             {selected.size} selected
           </p>
@@ -1079,7 +1079,7 @@ function StatusTab({
       onClick={onClick}
       className={`inline-flex h-8 shrink-0 items-center gap-1.5 rounded-[999px] px-3 text-[12px] font-semibold transition-colors ${
         active
-          ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(234,104,20,0.25)]"
+          ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(46,71,224,0.25)]"
           : "bg-[color:var(--color-surface-2)] text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)]/80 hover:text-[color:var(--color-text)]"
       }`}
     >

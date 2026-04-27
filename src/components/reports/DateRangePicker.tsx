@@ -255,7 +255,7 @@ function CalendarMonth({
               <span
                 className={`relative z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-medium transition-colors ${
                   isEndpoint
-                    ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(234,104,20,0.28)]"
+                    ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(46,71,224,0.28)]"
                     : inRange
                     ? "text-[color:var(--color-brand-700)]"
                     : inMonth
@@ -465,7 +465,7 @@ export function DateRangePicker({
                     onClick={() => applyPreset(p)}
                     className={`whitespace-nowrap rounded-[999px] px-2.5 py-1 text-[12px] font-semibold transition-colors sm:rounded-[8px] sm:px-3 sm:py-1.5 sm:text-left sm:font-medium ${
                       active
-                        ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(234,104,20,0.25)]"
+                        ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_10px_rgba(46,71,224,0.25)]"
                         : "border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text-secondary)] hover:border-[color:var(--color-border-strong)] hover:text-[color:var(--color-text)] sm:border-0 sm:bg-transparent sm:hover:bg-[color:var(--color-surface)]"
                     }`}
                   >
@@ -606,7 +606,7 @@ export function DateRangePicker({
                 type="button"
                 disabled={!pendingStart || !pendingEnd}
                 onClick={apply}
-                className="h-9 rounded-[8px] bg-[color:var(--color-brand-500)] px-4 text-[12px] font-semibold text-white shadow-[0_4px_10px_rgba(234,104,20,0.25)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none sm:h-7 sm:rounded-[6px] sm:px-3 sm:text-[11px]"
+                className="h-9 rounded-[8px] bg-[color:var(--color-brand-500)] px-4 text-[12px] font-semibold text-white shadow-[0_4px_10px_rgba(46,71,224,0.25)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none sm:h-7 sm:rounded-[6px] sm:px-3 sm:text-[11px]"
               >
                 Apply
               </button>

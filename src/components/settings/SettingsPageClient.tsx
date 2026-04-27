@@ -27,10 +27,10 @@ const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
 ];
 
 const TEAM_MEMBERS = [
-  { id: "1", name: "Nithish Baddula", email: "Invisiedge@gmail.com",       role: "Admin",     avatar: "NB", color: "#EA6814", status: "active",  lastActive: "Active now" },
-  { id: "2", name: "Priya Mehta",     email: "priya.mehta@recruit.io",     role: "Recruiter", avatar: "PM", color: "#6B6358", status: "active",  lastActive: "12 min ago" },
-  { id: "3", name: "Alex Johnson",    email: "alex.johnson@recruit.io",    role: "Recruiter", avatar: "AJ", color: "#EA6814", status: "active",  lastActive: "3 hr ago" },
-  { id: "4", name: "Sarah Wilson",    email: "sarah.wilson@recruit.io",    role: "Viewer",    avatar: "SW", color: "#ED8E55", status: "pending", lastActive: "Invited 2 days ago" },
+  { id: "1", name: "Nithish Baddula", email: "Invisiedge@gmail.com",       role: "Admin",     avatar: "NB", color: "#2E47E0", status: "active",  lastActive: "Active now" },
+  { id: "2", name: "Priya Mehta",     email: "priya.mehta@recruit.io",     role: "Recruiter", avatar: "PM", color: "#525252", status: "active",  lastActive: "12 min ago" },
+  { id: "3", name: "Alex Johnson",    email: "alex.johnson@recruit.io",    role: "Recruiter", avatar: "AJ", color: "#2E47E0", status: "active",  lastActive: "3 hr ago" },
+  { id: "4", name: "Sarah Wilson",    email: "sarah.wilson@recruit.io",    role: "Viewer",    avatar: "SW", color: "#5C6FE7", status: "pending", lastActive: "Invited 2 days ago" },
 ];
 
 type Integration = {
@@ -120,7 +120,7 @@ function SaveBtn({ label = "Save changes" }: { label?: string }) {
   const [saved, setSaved] = useState(false);
   const [hover, setHover] = useState(false);
   const background = saved
-    ? "#C75510"
+    ? "#273DC0"
     : hover
       ? "var(--color-brand-600)"
       : "var(--color-brand-500)";
@@ -147,8 +147,8 @@ function SaveBtn({ label = "Save changes" }: { label?: string }) {
         justifyContent: "center",
         gap: 7,
         boxShadow: hover
-          ? "0 6px 16px rgba(234, 104, 20, 0.28)"
-          : "0 2px 6px rgba(234, 104, 20, 0.18)",
+          ? "0 6px 16px rgba(46, 71, 224, 0.28)"
+          : "0 2px 6px rgba(46, 71, 224, 0.18)",
         transform: hover ? "translateY(-1px)" : "translateY(0)",
         letterSpacing: "-0.01em",
       }}
@@ -174,7 +174,7 @@ function ProfileTab() {
         <h3 style={{ margin: "0 0 16px", fontSize: 16, fontWeight: 700, color: "var(--color-text)" }}>Personal Information</h3>
         {/* Avatar */}
         <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-          <div style={{ width: 72, height: 72, borderRadius: 16, background: "linear-gradient(135deg,#EA6814,#F2B187)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 700, color: "var(--color-surface)" }}>
+          <div style={{ width: 72, height: 72, borderRadius: 16, background: "linear-gradient(135deg,#2E47E0,#96A3EF)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 700, color: "var(--color-surface)" }}>
             NB
           </div>
           <div>
@@ -259,7 +259,7 @@ const ROLE_DESCRIPTIONS: Record<TeamRole, string> = {
 };
 
 const ROLE_OPTIONS: TeamRole[] = ["Admin", "Recruiter", "Viewer"];
-const AVATAR_PALETTE = ["#EA6814", "#C75510", "#ED8E55", "#9F430D", "#6B6358", "#F2B187"];
+const AVATAR_PALETTE = ["#2E47E0", "#273DC0", "#5C6FE7", "#20319C", "#525252", "#96A3EF"];
 
 function emailIsValid(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
@@ -381,10 +381,10 @@ function TeamTab() {
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <style>{`
         /* ── Hero invite block ─────────────────────────────────────────── */
-        .team-hero { position:relative; overflow:hidden; border-radius:16px; padding:22px; border:1px solid var(--color-brand-200); background:radial-gradient(900px 220px at 0% 0%, rgba(234,104,20,0.10), transparent 60%), linear-gradient(180deg, #FFF6EE 0%, var(--color-surface) 70%); }
-        html[data-theme="dark"] .team-hero { background:radial-gradient(900px 220px at 0% 0%, rgba(234,104,20,0.18), transparent 60%), linear-gradient(180deg, rgba(234,104,20,0.06) 0%, var(--color-surface) 70%); border-color:rgba(234,104,20,0.32); }
+        .team-hero { position:relative; overflow:hidden; border-radius:16px; padding:22px; border:1px solid var(--color-brand-200); background:radial-gradient(900px 220px at 0% 0%, rgba(46,71,224,0.10), transparent 60%), linear-gradient(180deg, #F2F3FD 0%, var(--color-surface) 70%); }
+        html[data-theme="dark"] .team-hero { background:radial-gradient(900px 220px at 0% 0%, rgba(46,71,224,0.18), transparent 60%), linear-gradient(180deg, rgba(46,71,224,0.06) 0%, var(--color-surface) 70%); border-color:rgba(46,71,224,0.32); }
         .team-hero-head { display:flex; align-items:flex-start; gap:14px; margin-bottom:18px; }
-        .team-hero-tile { width:44px; height:44px; border-radius:12px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--color-brand-500), var(--color-brand-600)); color:#fff; box-shadow:0 6px 18px rgba(234,104,20,0.32); }
+        .team-hero-tile { width:44px; height:44px; border-radius:12px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--color-brand-500), var(--color-brand-600)); color:#fff; box-shadow:0 6px 18px rgba(46,71,224,0.32); }
         .team-hero-text h3 { margin:0; font-size:17px; font-weight:800; letter-spacing:-0.01em; color:var(--color-text); }
         .team-hero-text p  { margin:3px 0 0; font-size:13px; color:var(--color-text-secondary); }
 
@@ -397,8 +397,8 @@ function TeamTab() {
         .team-role-select:hover { border-color:var(--color-border-strong); }
         .team-role-select:focus { outline:none; border-color:var(--color-brand-500); box-shadow:var(--shadow-ring-brand); }
 
-        .invite-btn { height:46px; padding:0 20px; border-radius:12px; border:none; background:var(--color-brand-500); color:#fff; font-size:13.5px; font-weight:700; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:7px; transition: background .15s, box-shadow .15s, transform .15s; box-shadow:0 6px 18px rgba(234,104,20,0.34); }
-        .invite-btn:hover:not(:disabled) { background:var(--color-brand-600); transform:translateY(-1px); box-shadow:0 8px 22px rgba(234,104,20,0.42); }
+        .invite-btn { height:46px; padding:0 20px; border-radius:12px; border:none; background:var(--color-brand-500); color:#fff; font-size:13.5px; font-weight:700; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:7px; transition: background .15s, box-shadow .15s, transform .15s; box-shadow:0 6px 18px rgba(46,71,224,0.34); }
+        .invite-btn:hover:not(:disabled) { background:var(--color-brand-600); transform:translateY(-1px); box-shadow:0 8px 22px rgba(46,71,224,0.42); }
         .invite-btn:disabled { opacity:0.5; cursor:not-allowed; box-shadow:none; }
 
         .team-role-hint { margin-top:8px; font-size:12px; color:var(--color-text-muted); display:flex; align-items:center; gap:6px; }
@@ -438,8 +438,8 @@ function TeamTab() {
         .team-row { display:grid; gap:14px; align-items:center; padding:14px 16px; border-bottom:1px solid var(--color-border); transition:background .15s; }
         .team-row:last-child { border-bottom:none; }
         .team-row:hover { background:var(--color-bg-base); }
-        .team-row-pending { background:rgba(237,142,85,0.04); }
-        html[data-theme="dark"] .team-row-pending { background:rgba(237,142,85,0.06); }
+        .team-row-pending { background:rgba(92,111,231,0.04); }
+        html[data-theme="dark"] .team-row-pending { background:rgba(92,111,231,0.06); }
 
         /* Compact: avatar+name | role | actions */
         .team-row { grid-template-columns: minmax(0, 1fr) 138px 90px; }
@@ -1088,19 +1088,19 @@ function IntegrationsTab() {
         @media(min-width:1200px){ .int-grid { grid-template-columns:repeat(3, minmax(0,1fr)); } }
 
         .int-card { position:relative; border-radius:14px; border:1.5px solid var(--color-border); background:var(--color-surface); transition:border-color .18s, transform .18s, box-shadow .18s; overflow:hidden; }
-        .int-card[data-connected="true"] { border-color:rgba(234,104,20,0.22); }
-        .int-card:hover { border-color:var(--color-brand-300); transform:translateY(-2px); box-shadow:0 8px 22px rgba(234,104,20,0.10); }
+        .int-card[data-connected="true"] { border-color:rgba(46,71,224,0.22); }
+        .int-card:hover { border-color:var(--color-brand-300); transform:translateY(-2px); box-shadow:0 8px 22px rgba(46,71,224,0.10); }
         .int-card-body { display:flex; flex-direction:column; gap:12px; padding:16px; height:100%; }
 
-        .int-ribbon { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent 0%, rgba(234,104,20,0.55) 50%, transparent 100%); }
+        .int-ribbon { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent 0%, rgba(46,71,224,0.55) 50%, transparent 100%); }
 
         .int-card-head { display:flex; gap:12px; align-items:center; }
         .int-icon { flex-shrink:0; width:40px; height:40px; border-radius:11px; display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:16px; letter-spacing:-0.01em; text-transform:lowercase; }
         .int-title-wrap { min-width:0; flex:1; display:flex; flex-direction:column; gap:3px; }
         .int-title-row { display:flex; align-items:center; gap:6px; }
         .int-title { font-size:14px; font-weight:700; color:var(--color-text); letter-spacing:-0.01em; }
-        .int-mini-status { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:999px; background:rgba(234,104,20,0.15); }
-        .int-mini-dot { width:6px; height:6px; border-radius:999px; background:#EA6814; box-shadow:0 0 0 2px rgba(234,104,20,0.25); }
+        .int-mini-status { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:999px; background:rgba(46,71,224,0.15); }
+        .int-mini-dot { width:6px; height:6px; border-radius:999px; background:#2E47E0; box-shadow:0 0 0 2px rgba(46,71,224,0.25); }
         .int-category { display:inline-flex; align-self:flex-start; font-size:9.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--color-text-muted); background:var(--color-surface-2); padding:2px 7px; border-radius:999px; }
         .int-desc { margin:0; font-size:12.5px; line-height:1.5; color:var(--color-text-secondary); }
 
@@ -1108,15 +1108,15 @@ function IntegrationsTab() {
         .int-status { display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; color:var(--color-text-muted); }
         .int-status-label { white-space:nowrap; }
         .int-status-dot { width:7px; height:7px; border-radius:999px; background:var(--color-border-strong); flex-shrink:0; }
-        .int-status[data-connected="true"] { color:#C75510; }
-        .int-status[data-connected="true"] .int-status-dot { background:#EA6814; box-shadow:0 0 0 3px rgba(234,104,20,0.22); }
+        .int-status[data-connected="true"] { color:#273DC0; }
+        .int-status[data-connected="true"] .int-status-dot { background:#2E47E0; box-shadow:0 0 0 3px rgba(46,71,224,0.22); }
         .int-sync { font-size:11px; font-weight:500; color:var(--color-text-muted); white-space:nowrap; }
 
         .int-btn { width:100%; height:34px; padding:0 14px; border-radius:9px; font-size:12.5px; font-weight:700; cursor:pointer; transition:background .15s, border-color .15s, color .15s, transform .12s; border:1.5px solid transparent; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; letter-spacing:-0.01em; }
-        .int-btn-primary { background:var(--color-brand-500); color:#fff; box-shadow:0 4px 12px rgba(234,104,20,0.22); }
+        .int-btn-primary { background:var(--color-brand-500); color:#fff; box-shadow:0 4px 12px rgba(46,71,224,0.22); }
         .int-btn-primary:hover { background:var(--color-brand-600); transform:translateY(-1px); }
         .int-btn-secondary { background:var(--color-surface-2); border-color:var(--color-border); color:var(--color-text-secondary); }
-        .int-btn-secondary:hover { border-color:rgba(159,67,13,0.35); color:#9F430D; background:rgba(159,67,13,0.08); }
+        .int-btn-secondary:hover { border-color:rgba(32,49,156,0.35); color:#20319C; background:rgba(32,49,156,0.08); }
 
         .int-empty { padding:40px 16px; border:1.5px dashed var(--color-border); border-radius:14px; text-align:center; color:var(--color-text-muted); font-size:12.5px; }
       `}</style>
@@ -1204,15 +1204,15 @@ function AppearanceTab() {
                 style={{
                   padding: 14, borderRadius: 12, cursor: "pointer",
                   border: selected ? "2px solid var(--color-brand-500)" : "1.5px solid var(--color-border)",
-                  background: t === "dark" ? "#2A241B" : "var(--color-bg-base)",
+                  background: t === "dark" ? "#262626" : "var(--color-bg-base)",
                   display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
                   transition: "transform .12s, border-color .12s",
                 }}
               >
-                <div style={{ width: "100%", height: 48, borderRadius: 8, background: t === "dark" ? "#2A241B" : "var(--color-surface)", border: "1px solid rgba(0,0,0,.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <MonitorIcon size={18} style={{ color: t === "dark" ? "#F2B187" : "var(--color-brand-500)" }} />
+                <div style={{ width: "100%", height: 48, borderRadius: 8, background: t === "dark" ? "#262626" : "var(--color-surface)", border: "1px solid rgba(0,0,0,.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <MonitorIcon size={18} style={{ color: t === "dark" ? "#96A3EF" : "var(--color-brand-500)" }} />
                 </div>
-                <span style={{ fontSize: 13, fontWeight: 600, color: t === "dark" ? "#E8E4DC" : "var(--color-text)", textTransform: "capitalize" }}>{t}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: t === "dark" ? "#EAEAEA" : "var(--color-text)", textTransform: "capitalize" }}>{t}</span>
               </button>
             );
           })}
@@ -1351,7 +1351,7 @@ function AppearanceTab() {
             aria-hidden
             style={{
               width: 8, height: 8, borderRadius: 999,
-              background: isDirty ? "#ED8E55" : justSaved ? "#EA6814" : "#D6D1C5",
+              background: isDirty ? "#5C6FE7" : justSaved ? "#2E47E0" : "#D4D4D4",
               flexShrink: 0,
               transition: "background .15s",
             }}
@@ -1402,13 +1402,13 @@ function AppearanceTab() {
             disabled={!isDirty && !justSaved}
             style={{
               height: 40, padding: "0 22px", borderRadius: 10, border: "none",
-              background: justSaved ? "#EA6814" : "var(--color-brand-500)",
+              background: justSaved ? "#2E47E0" : "var(--color-brand-500)",
               color: "var(--color-surface)", fontSize: 14, fontWeight: 600,
               cursor: isDirty || justSaved ? "pointer" : "not-allowed",
               opacity: isDirty || justSaved ? 1 : 0.55,
               display: "flex", alignItems: "center", gap: 6,
               transition: "background .15s, opacity .15s",
-              boxShadow: isDirty ? "0 6px 16px rgba(234, 104, 20, 0.25)" : "none",
+              boxShadow: isDirty ? "0 6px 16px rgba(46, 71, 224, 0.25)" : "none",
             }}
           >
             {justSaved ? <><CheckIcon size={14} /> Saved</> : "Save changes"}
@@ -1463,7 +1463,7 @@ export function SettingsPageClient() {
         /* Danger zone */
         .settings-danger { margin-top:24px; padding:0 8px; }
         .settings-danger-title { font-size:11px; font-weight:700; color:var(--color-text-muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:8px; }
-        .settings-danger-btn { width:100%; height:38px; border-radius:10px; border:1.5px solid #F8D5BD; background:#F8D5BD; color:#9F430D; font-size:13px; font-weight:600; cursor:pointer; transition:all .15s; }
+        .settings-danger-btn { width:100%; height:38px; border-radius:10px; border:1.5px solid #C4CBF6; background:#C4CBF6; color:#20319C; font-size:13px; font-weight:600; cursor:pointer; transition:all .15s; }
         .settings-danger-btn:hover { background:transparent; }
 
         /* Content */

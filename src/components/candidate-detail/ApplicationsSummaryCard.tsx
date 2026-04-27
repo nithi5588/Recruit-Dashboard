@@ -44,25 +44,25 @@ export function ApplicationsSummaryCard({
       icon: <InboxIcon size={16} />,
       value: String(summary.total),
       label: "Total Applications",
-      tint: { bg: "#FCE9DD", fg: "#EA6814" },
+      tint: { bg: "#E6E9FB", fg: "#2E47E0" },
     },
     {
       icon: <UserIcon size={16} />,
       value: String(summary.inProgress),
       label: "In Progress",
-      tint: { bg: "#F4F2EE", fg: "#6B6358" },
+      tint: { bg: "#F5F5F5", fg: "#525252" },
     },
     {
       icon: <UsersIcon size={16} />,
       value: String(summary.underReview),
       label: "Under Review",
-      tint: { bg: "#FFF6EE", fg: "#C75510" },
+      tint: { bg: "#F2F3FD", fg: "#273DC0" },
     },
     {
       icon: <UsersIcon size={16} />,
       value: String(summary.shortlisted),
       label: "Shortlisted",
-      tint: { bg: "#FCE9DD", fg: "#C75510" },
+      tint: { bg: "#E6E9FB", fg: "#273DC0" },
     },
   ];
 

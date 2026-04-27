@@ -8,7 +8,7 @@ export function PdfFileIcon({
   return (
     <span
       aria-hidden
-      className="relative flex shrink-0 items-center justify-center rounded-[10px] bg-[#F8D5BD] text-[#9F430D]"
+      className="relative flex shrink-0 items-center justify-center rounded-[10px] bg-[#C4CBF6] text-[#20319C]"
       style={{ width: size, height: size }}
     >
       <svg
@@ -43,7 +43,7 @@ export function PdfFileIcon({
       {activeDot ? (
         <span
           aria-label="Active"
-          className="absolute -right-1 -top-1 inline-flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-[#EA6814] text-white"
+          className="absolute -right-1 -top-1 inline-flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-[#2E47E0] text-white"
         >
           <svg width="8" height="8" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path

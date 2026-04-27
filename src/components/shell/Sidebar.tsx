@@ -59,8 +59,8 @@ const navItems: NavEntry[] = [
       <span
         className="inline-flex items-center rounded-[5px] px-[6px] py-[2px] text-[9px] font-bold uppercase tracking-wider text-white"
         style={{
-          background: "linear-gradient(135deg, #EA6814 0%, #C75510 100%)",
-          boxShadow: "0 2px 6px rgba(234, 104, 20, 0.32)",
+          background: "linear-gradient(135deg, #2E47E0 0%, #273DC0 100%)",
+          boxShadow: "0 2px 6px rgba(46, 71, 224, 0.32)",
         }}
       >
         New
@@ -125,19 +125,20 @@ function NavItem({
   );
 }
 
-function ProPlanCard() {
+function ProPlanCard({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="pro-card-wrap px-3 pb-3">
       <Link
         href="/pricing"
+        onClick={onNavigate}
         className="pro-card group flex items-center gap-2.5 rounded-[10px] border px-2.5 py-2 transition-all hover:-translate-y-[1px]"
       >
         <span
           aria-hidden
           className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] text-white"
           style={{
-            background: "linear-gradient(135deg, #EA6814 0%, #9F430D 100%)",
-            boxShadow: "0 4px 10px rgba(234, 104, 20, 0.30)",
+            background: "linear-gradient(135deg, #2E47E0 0%, #20319C 100%)",
+            boxShadow: "0 4px 10px rgba(46, 71, 224, 0.30)",
           }}
         >
           <SparklesIcon size={13} />
@@ -172,7 +173,7 @@ function CollapsedSidebar({ onToggleCollapse }: { onToggleCollapse: () => void }
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] text-white"
           style={{
             background: "linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-700) 100%)",
-            boxShadow: "0 6px 16px rgba(234, 104, 20, 0.28)",
+            boxShadow: "0 6px 16px rgba(46, 71, 224, 0.28)",
           }}
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -272,7 +273,7 @@ function ExpandedSidebar({
         </div>
       </nav>
 
-      <ProPlanCard />
+      <ProPlanCard onNavigate={onNavigate ?? onToggleCollapse} />
     </>
   );
 }

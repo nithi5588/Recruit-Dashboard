@@ -1,8 +1,9 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { MagicStar, TrendUp } from "iconsax-reactjs";
+import { MagicStar } from "iconsax-reactjs";
 import { Sparkline } from "@/components/reports/charts";
+import { TrendPill } from "@/components/ui/TrendPill";
 
 // ─── Stat card ────────────────────────────────────────────────────────────────
 
@@ -24,34 +25,40 @@ export function StatCard({
   spark?: { values: number[]; color?: string };
 }) {
   const showTrend = typeof change === "number";
-  const trendColor = positive ? "var(--color-success)" : "var(--color-error)";
+  const direction =
+    !showTrend
+      ? "flat"
+      : change! > 0
+        ? positive
+          ? "up"
+          : "down"
+        : change! < 0
+          ? positive
+            ? "down"
+            : "up"
+          : "flat";
   return (
     <div className="group rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-panel)]">
       <div className="flex items-start gap-3">
         {icon}
         <div className="min-w-0 flex-1 pt-0.5">
           <p className="truncate text-[12px] font-medium text-[color:var(--color-text-secondary)]">{label}</p>
-          <p className="mt-0.5 text-[24px] font-extrabold leading-none text-[color:var(--color-text)]">{value}</p>
+          <p className="mt-0.5 text-[24px] font-extrabold leading-none tabular-nums text-[color:var(--color-text)]">{value}</p>
         </div>
       </div>
       <div className="mt-3 flex items-center justify-between gap-2">
         {showTrend ? (
-          <div className="flex min-w-0 items-center gap-1 text-[11px] font-semibold" style={{ color: trendColor }}>
-            <TrendUp
-              size={12}
-              variant="Bold"
-              color="currentColor"
-              style={change! < 0 ? { transform: "rotate(180deg)" } : undefined}
-            />
-            {Math.abs(change!)}%
-            <span className="truncate font-normal text-[color:var(--color-text-muted)]"> vs last 7 days</span>
-          </div>
+          <TrendPill
+            direction={direction}
+            value={`${Math.abs(change!)}%`}
+            description="vs last 7 days"
+          />
         ) : (
           <p className="min-w-0 truncate text-[11px] text-[color:var(--color-text-muted)]">{subtitle ?? ""}</p>
         )}
         {spark && (
           <div className="hidden shrink-0 opacity-90 sm:block">
-            <Sparkline values={spark.values} color={spark.color ?? "#EA6814"} />
+            <Sparkline values={spark.values} color={spark.color ?? "#2E47E0"} />
           </div>
         )}
       </div>
@@ -77,9 +84,9 @@ export type Insight = { tone: InsightTone; title: string; body: string };
 
 export function InsightBadge({ tone }: { tone: InsightTone }) {
   const map = {
-    positive: { bg: "#FCE9DD", fg: "#C75510", icon: "📈" },
-    warning:  { bg: "#FFF6EE", fg: "#C75510", icon: "⚠" },
-    info:     { bg: "#F4F2EE", fg: "#6B6358", icon: "💡" },
+    positive: { bg: "#E6E9FB", fg: "#273DC0", icon: "📈" },
+    warning:  { bg: "#F2F3FD", fg: "#273DC0", icon: "⚠" },
+    info:     { bg: "#F5F5F5", fg: "#525252", icon: "💡" },
   } as const;
   const c = map[tone];
   return (

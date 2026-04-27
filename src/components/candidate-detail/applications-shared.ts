@@ -26,17 +26,17 @@ export function applicationStatusTone(status: ApplicationStatus): BadgeTone {
 export function stageDotColor(dot: ApplicationStageDot): string {
   switch (dot) {
     case "purple":
-      return "#EA6814";
+      return "#2E47E0";
     case "blue":
-      return "#6B6358";
+      return "#525252";
     case "orange":
-      return "#ED8E55";
+      return "#5C6FE7";
     case "green":
-      return "#EA6814";
+      return "#2E47E0";
     case "red":
-      return "#9F430D";
+      return "#20319C";
     case "gray":
     default:
-      return "#9A9183";
+      return "#A3A3A3";
   }
 }

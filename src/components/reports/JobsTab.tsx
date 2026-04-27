@@ -95,7 +95,7 @@ function ApplicationsChart() {
           <p className="mb-1.5 text-[11px] font-semibold text-[color:var(--color-text)]">{applicationsOverTime.labels[hovIdx]}, 2024</p>
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: "#EA6814" }} />
+              <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: "#2E47E0" }} />
               <span className="text-[10px] text-[color:var(--color-text-secondary)]">Applications</span>
             </div>
             <span className="text-[10px] font-bold text-[color:var(--color-text)]">{applicationsOverTime.values[hovIdx]}</span>
@@ -107,8 +107,8 @@ function ApplicationsChart() {
         onMouseMove={handleMove} onMouseLeave={() => setHovIdx(null)}>
         <defs>
           <linearGradient id="appAreaFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#EA6814" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#EA6814" stopOpacity="0" />
+            <stop offset="0%" stopColor="#2E47E0" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="#2E47E0" stopOpacity="0" />
           </linearGradient>
         </defs>
         {yTicks.map((t) => (
@@ -124,10 +124,10 @@ function ApplicationsChart() {
         {hovIdx !== null && (
           <line x1={gx(hovIdx)} y1={P.t} x2={gx(hovIdx)} y2={P.t + ph} style={{ stroke: "var(--color-border-strong)" }} strokeWidth={1} strokeDasharray="4 2" />
         )}
-        <path d={pathD} fill="none" stroke="#EA6814" strokeWidth={2.5} strokeLinecap="round" />
+        <path d={pathD} fill="none" stroke="#2E47E0" strokeWidth={2.5} strokeLinecap="round" />
         {applicationsOverTime.values.map((v, i) => (
           <circle key={i} cx={gx(i)} cy={gy(v)} r={hovIdx === i ? 4.5 : 2.5}
-            fill={hovIdx === i ? "#EA6814" : "white"} stroke="#EA6814" strokeWidth={1.5} />
+            fill={hovIdx === i ? "#2E47E0" : "white"} stroke="#2E47E0" strokeWidth={1.5} />
         ))}
       </svg>
     </div>
@@ -137,11 +137,11 @@ function ApplicationsChart() {
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
 const STATUS_STYLES: Record<JobStatus, { bg: string; fg: string }> = {
-  "Active":  { bg: "#FCE9DD", fg: "#C75510" },
-  "Draft":   { bg: "#F4F2EE", fg: "#6B6358" },
-  "On Hold": { bg: "#FFF6EE", fg: "#C75510" },
-  "Closed":  { bg: "#F4F2EE", fg: "#EA6814" },
-  "Expired": { bg: "#F8D5BD", fg: "#9F430D" },
+  "Active":  { bg: "#E6E9FB", fg: "#273DC0" },
+  "Draft":   { bg: "#F5F5F5", fg: "#525252" },
+  "On Hold": { bg: "#F2F3FD", fg: "#273DC0" },
+  "Closed":  { bg: "#F5F5F5", fg: "#2E47E0" },
+  "Expired": { bg: "#C4CBF6", fg: "#20319C" },
 };
 
 function StatusBadge({ status }: { status: JobStatus }) {
@@ -248,11 +248,11 @@ export function JobsTab() {
         <div className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-border)] shadow-[var(--shadow-card)]">
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #1F1B17 0%, #EA6814 60%, #EA6814 100%)" }}
+            style={{ background: "linear-gradient(135deg, #0A0A0A 0%, #2E47E0 60%, #2E47E0 100%)" }}
           />
           <div
             className="absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-25"
-            style={{ background: "radial-gradient(circle, #EA6814 0%, transparent 60%)" }}
+            style={{ background: "radial-gradient(circle, #2E47E0 0%, transparent 60%)" }}
           />
           <div className="relative p-5 text-white">
             <div className="mb-4 flex items-center justify-between">
@@ -367,7 +367,7 @@ export function JobsTab() {
               <p className="mt-0.5 truncate text-[12px] font-semibold text-[color:var(--color-text)]">{timeToFill.fastest.job}</p>
               <p className="text-[11px] text-[color:var(--color-text-secondary)]">{timeToFill.fastest.days} days</p>
             </div>
-            <div className="col-span-2 rounded-[14px] bg-[#F8D5BD]/60 p-3">
+            <div className="col-span-2 rounded-[14px] bg-[#C4CBF6]/60 p-3">
               <p className="text-[10px] font-semibold uppercase tracking-wide text-[color:var(--color-error)]">Slowest</p>
               <p className="mt-0.5 truncate text-[12px] font-semibold text-[color:var(--color-text)]">{timeToFill.slowest.job}</p>
               <p className="text-[11px] text-[color:var(--color-text-secondary)]">{timeToFill.slowest.days} days</p>

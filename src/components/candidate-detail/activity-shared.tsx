@@ -22,45 +22,45 @@ export function activityTheme(
   switch (kind) {
     case "resume":
       return {
-        bg: "#FCE9DD",
-        fg: "#EA6814",
+        bg: "#E6E9FB",
+        fg: "#2E47E0",
         icon: <NoteLinesIcon size={iconSize} />,
       };
     case "status":
       return {
-        bg: "#FCE9DD",
-        fg: "#C75510",
+        bg: "#E6E9FB",
+        fg: "#273DC0",
         icon: <UsersIcon size={iconSize} />,
       };
     case "interview":
       return {
-        bg: "#FFF6EE",
-        fg: "#C75510",
+        bg: "#F2F3FD",
+        fg: "#273DC0",
         icon: <CalendarIcon size={iconSize} />,
       };
     case "note":
       return {
-        bg: "#F4F2EE",
-        fg: "#6B6358",
+        bg: "#F5F5F5",
+        fg: "#525252",
         icon: <ChatIcon size={iconSize} />,
       };
     case "application":
       return {
-        bg: "#FCE9DD",
-        fg: "#9F430D",
+        bg: "#E6E9FB",
+        fg: "#20319C",
         icon: <InboxIcon size={iconSize} />,
       };
     case "shortlist":
       return {
-        bg: "#FFF6EE",
-        fg: "#9F430D",
+        bg: "#F2F3FD",
+        fg: "#20319C",
         icon: <StarOutlineIcon size={iconSize} />,
       };
     case "added":
     default:
       return {
-        bg: "#FCE9DD",
-        fg: "#EA6814",
+        bg: "#E6E9FB",
+        fg: "#2E47E0",
         icon: <UserPlusIcon size={iconSize} />,
       };
   }

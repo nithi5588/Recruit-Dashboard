@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import {
   ExpandIcon,
@@ -27,10 +28,13 @@ export function AIAssistant({
   variant?: "sidebar" | "hero";
 }) {
   const [prompt, setPrompt] = useState("");
+  const router = useRouter();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!prompt.trim()) return;
+    const trimmed = prompt.trim();
+    if (!trimmed) return;
+    router.push(`/assistant?q=${encodeURIComponent(trimmed)}`);
     setPrompt("");
   }
 
@@ -62,6 +66,81 @@ export function AIAssistant({
             radial-gradient(1200px 240px at 0% 0%, rgba(var(--accent-rgb, 91, 61, 245), 0.18), transparent 60%),
             linear-gradient(180deg, rgba(var(--accent-rgb, 91, 61, 245), 0.05) 0%, var(--color-surface) 100%);
         }
+
+        /* sparkle header badge — gentle twinkle + soft halo */
+        .sparkle-badge { position: relative; isolation: isolate; }
+        .sparkle-badge::after {
+          content: "";
+          position: absolute; inset: -3px;
+          border-radius: 14px;
+          background: radial-gradient(circle, rgba(var(--accent-rgb, 46, 71, 224), 0.40), transparent 70%);
+          opacity: 0; z-index: -1;
+          animation: sp-halo 3.4s ease-in-out infinite;
+        }
+        .sparkle-badge :global(svg) {
+          animation: sp-twinkle 3.4s ease-in-out infinite;
+          transform-origin: 50% 50%;
+        }
+        .sparkle-badge:hover :global(svg) { animation-duration: 1.6s; }
+        @keyframes sp-twinkle {
+          0%, 100% { transform: rotate(0deg) scale(1); }
+          45%      { transform: rotate(-7deg) scale(0.96); }
+          55%      { transform: rotate(11deg) scale(1.10); }
+        }
+        @keyframes sp-halo {
+          0%, 100% { opacity: 0; transform: scale(0.85); }
+          55%      { opacity: 1; transform: scale(1.25); }
+        }
+
+        /* generic icon-button springy press + per-icon hover effects */
+        .icn :global(svg) {
+          transition: transform 240ms cubic-bezier(.34,1.56,.64,1);
+          will-change: transform;
+        }
+        .icn:active :global(svg) { transform: scale(0.82); }
+
+        .icn-refresh:hover :global(svg) { transform: rotate(180deg); }
+        .icn-expand:hover  :global(svg) { transform: scale(1.18); }
+        .icn-clip:hover    :global(svg) { transform: rotate(-18deg) translateY(-1px); }
+        .icn-image:hover   :global(svg) { transform: rotate(6deg) scale(1.10); }
+        .icn-template:hover :global(svg) { transform: translateY(-2px) scale(1.06); }
+
+        /* send button — paper plane "takes off" */
+        .icn-send :global(svg) { transition: transform 280ms cubic-bezier(.34,1.56,.64,1); }
+        .icn-send:hover :global(svg) {
+          transform: translate(3px, -3px) rotate(20deg) scale(1.06);
+        }
+        .icn-send[data-active="true"] :global(svg) {
+          animation: sp-ready 1.6s ease-in-out infinite;
+        }
+        .icn-send[data-active="true"]:hover :global(svg) { animation: none; }
+        @keyframes sp-ready {
+          0%, 100% { transform: translate(0,0) rotate(0deg); }
+          50%      { transform: translate(1px, -1px) rotate(7deg); }
+        }
+
+        /* "Ready to help" status dot — ping ring */
+        .ping-dot { position: relative; isolation: isolate; }
+        .ping-dot::before {
+          content: "";
+          position: absolute; inset: 0;
+          border-radius: 999px;
+          background: var(--color-success);
+          z-index: -1;
+          animation: sp-ping 1.9s cubic-bezier(0,0,.2,1) infinite;
+        }
+        @keyframes sp-ping {
+          0%        { transform: scale(0.8); opacity: 0.55; }
+          80%, 100% { transform: scale(2.4); opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .sparkle-badge :global(svg),
+          .sparkle-badge::after,
+          .icn-send[data-active="true"] :global(svg),
+          .ping-dot::before { animation: none !important; }
+          .icn :global(svg), .icn-send :global(svg) { transition: none !important; }
+        }
       `}</style>
       {hero && (
         <>
@@ -73,7 +152,7 @@ export function AIAssistant({
           <span
             aria-hidden
             className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full blur-3xl"
-            style={{ background: "rgba(107,99,88,0.12)" }}
+            style={{ background: "rgba(82,82,82,0.12)" }}
           />
         </>
       )}
@@ -90,7 +169,7 @@ export function AIAssistant({
           <header className="mb-3 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <span
-                className={`inline-flex shrink-0 items-center justify-center rounded-[10px] bg-[color:var(--color-surface)] text-[color:var(--color-brand-600)] shadow-[0_2px_8px_rgba(234,104,20,0.15)] ${
+                className={`sparkle-badge inline-flex shrink-0 items-center justify-center rounded-[10px] bg-[color:var(--color-surface)] text-[color:var(--color-brand-600)] shadow-[0_2px_8px_rgba(46,71,224,0.15)] ${
                   hero ? "h-9 w-9" : "h-8 w-8"
                 }`}
               >
@@ -111,7 +190,7 @@ export function AIAssistant({
                 </div>
                 {hero ? (
                   <p className="mt-0.5 flex items-center gap-1.5 text-[11px] font-medium text-[color:var(--color-text-secondary)]">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--color-success)]" />
+                    <span className="ping-dot inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--color-success)]" />
                     Ready to help
                   </p>
                 ) : null}
@@ -123,7 +202,7 @@ export function AIAssistant({
                 aria-label="Reset conversation"
                 title="Clear prompt"
                 onClick={() => setPrompt("")}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface)] hover:text-[color:var(--color-text-secondary)]"
+                className="icn icn-refresh inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface)] hover:text-[color:var(--color-text-secondary)]"
               >
                 <RefreshIcon size={14} />
               </button>
@@ -131,7 +210,7 @@ export function AIAssistant({
                 href="/assistant"
                 aria-label="Open full assistant"
                 title="Open full assistant"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface)] hover:text-[color:var(--color-text-secondary)]"
+                className="icn icn-expand inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface)] hover:text-[color:var(--color-text-secondary)]"
               >
                 <ExpandIcon size={14} />
               </Link>
@@ -173,21 +252,21 @@ export function AIAssistant({
               <button
                 type="button"
                 aria-label="Attach file"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)]"
+                className="icn icn-clip inline-flex h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)]"
               >
                 <PaperclipIcon size={16} />
               </button>
               <button
                 type="button"
                 aria-label="Attach screenshot"
-                className="hidden h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)] sm:inline-flex"
+                className="icn icn-image hidden h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)] sm:inline-flex"
               >
                 <ImageIcon size={16} />
               </button>
               <button
                 type="button"
                 aria-label="Use template"
-                className="hidden h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)] sm:inline-flex"
+                className="icn icn-template hidden h-8 w-8 items-center justify-center rounded-[8px] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)] sm:inline-flex"
               >
                 <TemplateIcon size={16} />
               </button>
@@ -209,7 +288,8 @@ export function AIAssistant({
             <button
               type="submit"
               aria-label="Send prompt"
-              className={`inline-flex items-center justify-center gap-1.5 rounded-[8px] bg-[color:var(--color-brand-500)] font-semibold text-white shadow-[0_4px_12px_rgba(234,104,20,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)] ${
+              data-active={prompt.trim().length > 0}
+              className={`icn icn-send inline-flex items-center justify-center gap-1.5 rounded-[8px] bg-[color:var(--color-brand-500)] font-semibold text-white shadow-[0_4px_12px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)] ${
                 hero ? "h-9 px-3 text-[13px]" : "h-8 w-8"
               }`}
             >
@@ -234,7 +314,7 @@ export function AIAssistant({
                   key={ex}
                   type="button"
                   onClick={() => setPrompt(ex)}
-                  className="rounded-[999px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-[12px] text-[color:var(--color-text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[color:var(--color-brand-300)] hover:text-[color:var(--color-brand-600)] hover:shadow-[0_4px_12px_rgba(234,104,20,0.10)]"
+                  className="rounded-[999px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-[12px] text-[color:var(--color-text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[color:var(--color-brand-300)] hover:text-[color:var(--color-brand-600)] hover:shadow-[0_4px_12px_rgba(46,71,224,0.10)]"
                 >
                   {ex}
                 </button>
