@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useState, useRef, useEffect, useCallback, KeyboardEvent } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo, KeyboardEvent } from "react";
 import {
   SparklesIcon, PaperPlaneIcon,
   UsersIcon, CalendarIcon, RefreshIcon, MoreIcon,
@@ -9,6 +9,7 @@ import {
   FilterIcon, TasksIcon, SearchIcon,
   BriefcaseIcon, MatchIcon,
   ChevronLeft, ChevronRight, XIcon,
+  PlusIcon, ChatIcon, EditIcon,
 } from "@/components/icons/AppIcons";
 import { exportToExcel } from "@/lib/export-utils";
 
@@ -148,6 +149,110 @@ const SEED: Msg[] = [
     ts: new Date(Date.now() - 115000),
   },
 ];
+
+/* ─── Conversations (chat history) ─────────────────────────────────────────── */
+
+type Conversation = {
+  id: string;
+  title: string;
+  msgs: Msg[];
+  updatedAt: Date;
+};
+
+const DAY = 24 * 60 * 60 * 1000;
+const HOUR = 60 * 60 * 1000;
+
+const SEED_CONVERSATIONS: Conversation[] = [
+  {
+    id: "conv-current",
+    title: "Top frontend devs in Bangalore",
+    msgs: SEED,
+    updatedAt: new Date(Date.now() - 2 * 60 * 1000),
+  },
+  {
+    id: "conv-2",
+    title: "Match candidates to ML Engineer JD",
+    msgs: [],
+    updatedAt: new Date(Date.now() - 4 * HOUR),
+  },
+  {
+    id: "conv-3",
+    title: "Pipeline summary · this week",
+    msgs: [],
+    updatedAt: new Date(Date.now() - 8 * HOUR),
+  },
+  {
+    id: "conv-4",
+    title: "Interviews scheduled today",
+    msgs: [],
+    updatedAt: new Date(Date.now() - 1 * DAY),
+  },
+  {
+    id: "conv-5",
+    title: "Find Python data scientists",
+    msgs: [],
+    updatedAt: new Date(Date.now() - 2 * DAY),
+  },
+  {
+    id: "conv-6",
+    title: "Top React Native candidates",
+    msgs: [],
+    updatedAt: new Date(Date.now() - 4 * DAY),
+  },
+  {
+    id: "conv-7",
+    title: "DevOps engineers in Hyderabad",
+    msgs: [],
+    updatedAt: new Date(Date.now() - 6 * DAY),
+  },
+  {
+    id: "conv-8",
+    title: "Generate Senior PM job description",
+    msgs: [],
+    updatedAt: new Date(Date.now() - 12 * DAY),
+  },
+  {
+    id: "conv-9",
+    title: "Stalled candidates in Submitted stage",
+    msgs: [],
+    updatedAt: new Date(Date.now() - 20 * DAY),
+  },
+];
+
+function groupConversations(convs: Conversation[]) {
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const startOfYesterday = new Date(startOfToday); startOfYesterday.setDate(startOfYesterday.getDate() - 1);
+  const sevenDaysAgo  = new Date(startOfToday); sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const thirtyDaysAgo = new Date(startOfToday); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+  const today: Conversation[] = [];
+  const yesterday: Conversation[] = [];
+  const week: Conversation[] = [];
+  const month: Conversation[] = [];
+  const older: Conversation[] = [];
+  for (const c of convs) {
+    const t = c.updatedAt;
+    if (t >= startOfToday)        today.push(c);
+    else if (t >= startOfYesterday) yesterday.push(c);
+    else if (t >= sevenDaysAgo)   week.push(c);
+    else if (t >= thirtyDaysAgo)  month.push(c);
+    else                          older.push(c);
+  }
+  return [
+    { label: "Today",            items: today },
+    { label: "Yesterday",        items: yesterday },
+    { label: "Previous 7 Days",  items: week },
+    { label: "Previous 30 Days", items: month },
+    { label: "Older",            items: older },
+  ].filter((g) => g.items.length > 0);
+}
+
+function deriveTitle(text: string) {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= 40) return clean;
+  return clean.slice(0, 40).trimEnd() + "…";
+}
 
 type StarterCard = {
   icon: ReactNode;
@@ -311,11 +416,24 @@ function QAIcon({ icon, color }: { icon: string; color: string }) {
 /* ──────────────────────────────── Main ────────────────────────────────────── */
 
 export function AssistantPageClient() {
-  const [msgs, setMsgs]     = useState<Msg[]>(SEED);
+  const [conversations, setConversations] = useState<Conversation[]>(SEED_CONVERSATIONS);
+  const [activeId, setActiveId]           = useState<string>(SEED_CONVERSATIONS[0].id);
   const [input, setInput]   = useState("");
   const [typing, setTyping] = useState(false);
   const [scope, setScope]   = useState<Scope>("all");
+  const [historySearch, setHistorySearch] = useState("");
   const STARTER_CARDS = STARTER_CARDS_FACTORY();
+
+  const activeConv = conversations.find((c) => c.id === activeId) ?? conversations[0];
+  const msgs = useMemo(() => activeConv?.msgs ?? [], [activeConv]);
+
+  const groupedConvs = useMemo(() => {
+    const lowered = historySearch.trim().toLowerCase();
+    const filtered = lowered
+      ? conversations.filter((c) => c.title.toLowerCase().includes(lowered))
+      : conversations;
+    return groupConversations(filtered);
+  }, [conversations, historySearch]);
 
   // ── Responsive sidebar state ───────────────────────────────
   const [sidebarWidth, setSidebarWidth]       = useState(SIDEBAR_DEFAULT);
@@ -323,6 +441,10 @@ export function AssistantPageClient() {
   const [mobileOpen, setMobileOpen]            = useState(false);
   const [isMobile, setIsMobile]                = useState(false);
   const [isDragging, setIsDragging]            = useState(false);
+
+  // Chat history (left) sidebar state
+  const [historyCollapsed, setHistoryCollapsed] = useState(false);
+  const [historyMobileOpen, setHistoryMobileOpen] = useState(false);
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef  = useRef<HTMLTextAreaElement>(null);
@@ -336,11 +458,21 @@ export function AssistantPageClient() {
     if (!q) return;
     const trimmed = q.trim();
     if (!trimmed) return;
-    setMsgs([{ id: uid(), role: "user", text: trimmed, ts: new Date() }]);
+    const newId = uid();
+    const userMsg: Msg = { id: uid(), role: "user", text: trimmed, ts: new Date() };
+    setConversations((prev) => [
+      { id: newId, title: deriveTitle(trimmed), msgs: [userMsg], updatedAt: new Date() },
+      ...prev,
+    ]);
+    setActiveId(newId);
     setTyping(true);
     const timer = setTimeout(() => {
       const reply = generateReply(trimmed, "all");
-      setMsgs((p) => [...p, reply]);
+      setConversations((prev) =>
+        prev.map((c) =>
+          c.id === newId ? { ...c, msgs: [...c.msgs, reply], updatedAt: new Date() } : c,
+        ),
+      );
       setTyping(false);
     }, 1400);
     params.delete("q");
@@ -422,15 +554,92 @@ export function AssistantPageClient() {
     else setSidebarCollapsed((c) => !c);
   }, [isMobile]);
 
+  const toggleHistory = () => {
+    if (isMobile) setHistoryMobileOpen((o) => !o);
+    else setHistoryCollapsed((c) => !c);
+  };
+
+  // Lock body scroll when history drawer is open on mobile
+  useEffect(() => {
+    if (!isMobile) return;
+    if (!historyMobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, [isMobile, historyMobileOpen]);
+
+  // Close history drawer on Escape (mobile)
+  useEffect(() => {
+    if (!historyMobileOpen) return;
+    const onKey = (e: globalThis.KeyboardEvent) => { if (e.key === "Escape") setHistoryMobileOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [historyMobileOpen]);
+
+  const newChat = () => {
+    const id = uid();
+    const conv: Conversation = { id, title: "New chat", msgs: [], updatedAt: new Date() };
+    setConversations((prev) => [conv, ...prev]);
+    setActiveId(id);
+    setInput("");
+    setScope("all");
+    setHistoryMobileOpen(false);
+  };
+
+  const selectConversation = (id: string) => {
+    setActiveId(id);
+    setInput("");
+    setHistoryMobileOpen(false);
+  };
+
+  const deleteConversation = (id: string) => {
+    const idx = conversations.findIndex((c) => c.id === id);
+    const remaining = conversations.filter((c) => c.id !== id);
+    if (remaining.length === 0) {
+      const fresh: Conversation = { id: uid(), title: "New chat", msgs: [], updatedAt: new Date() };
+      setConversations([fresh]);
+      setActiveId(fresh.id);
+      return;
+    }
+    setConversations(remaining);
+    if (id === activeId) {
+      const fallback = conversations[idx + 1] ?? conversations[idx - 1] ?? remaining[0];
+      setActiveId(fallback.id);
+    }
+  };
+
+  const renameConversation = (id: string, title: string) => {
+    const clean = title.trim();
+    if (!clean) return;
+    setConversations((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, title: clean } : c)),
+    );
+  };
+
   function send(text: string, overrideScope?: Scope) {
     const t = text.trim();
     if (!t) return;
     const useScope: Scope = overrideScope ?? scope;
-    setMsgs(p => [...p, { id:uid(), role:"user", text:t, ts:new Date() }]);
+    setConversations((prev) =>
+      prev.map((c) => {
+        if (c.id !== activeId) return c;
+        const isFirstUserMsg = !c.msgs.some((m) => m.role === "user");
+        return {
+          ...c,
+          title: isFirstUserMsg ? deriveTitle(t) : c.title,
+          msgs: [...c.msgs, { id: uid(), role: "user", text: t, ts: new Date() }],
+          updatedAt: new Date(),
+        };
+      }),
+    );
     setInput(""); setTyping(true);
     setTimeout(() => {
       const reply = generateReply(t, useScope);
-      setMsgs(p => [...p, reply]);
+      setConversations((prev) =>
+        prev.map((c) =>
+          c.id === activeId ? { ...c, msgs: [...c.msgs, reply], updatedAt: new Date() } : c,
+        ),
+      );
       setTyping(false);
     }, 1400);
   }
@@ -519,6 +728,79 @@ export function AssistantPageClient() {
         .assist-main    { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; background:var(--color-bg-base); }
         .chat-inner     { max-width:820px; margin:0 auto; width:100%; }
 
+        /* ── Chat history sidebar (left, ChatGPT style) ───────────────── */
+        .assist-history { width:272px; flex-shrink:0; display:flex; flex-direction:column;
+          background:var(--color-surface); border-right:1.5px solid var(--color-border);
+          overflow:hidden; transition:width .22s ease, opacity .18s; }
+        .assist-history.is-collapsed { width:0; border-right:none; opacity:0; pointer-events:none; }
+        .hist-head      { padding:12px 12px 8px; display:flex; flex-direction:column; gap:8px; flex-shrink:0;
+          border-bottom:1px solid var(--color-border); }
+        .hist-newchat   { display:flex; align-items:center; justify-content:space-between; gap:8px;
+          padding:9px 12px; border-radius:10px; border:1.5px dashed var(--color-border);
+          background:var(--color-surface); color:var(--color-text); cursor:pointer;
+          font-size:13px; font-weight:600; transition:all .15s; }
+        .hist-newchat:hover { border-color:var(--color-brand-300); background:var(--color-brand-50); color:var(--color-brand-600); }
+        .hist-search    { display:flex; align-items:center; gap:8px; padding:8px 11px;
+          border:1.5px solid var(--color-border); border-radius:10px; background:var(--color-surface);
+          transition:border-color .15s, box-shadow .15s; }
+        .hist-search:focus-within { border-color:var(--color-brand-500); box-shadow:0 0 0 3px rgba(var(--accent-rgb,46,71,224),.10); }
+        .hist-search input { flex:1; min-width:0; border:none; outline:none; background:transparent;
+          font-size:12.5px; color:var(--color-text); font-family:inherit; }
+        .hist-search input::placeholder { color:var(--color-text-muted); }
+        .hist-list      { flex:1; overflow-y:auto; padding:8px 6px 12px; }
+        .hist-list::-webkit-scrollbar { width:6px; }
+        .hist-list::-webkit-scrollbar-thumb { background:var(--color-border); border-radius:3px; }
+        .hist-section-label { padding:10px 8px 4px; font-size:10px; font-weight:700; letter-spacing:.06em;
+          text-transform:uppercase; color:var(--color-text-muted); }
+        .hist-empty     { padding:18px 8px; text-align:center; font-size:12px; color:var(--color-text-muted); }
+
+        .hist-item      { position:relative; display:flex; align-items:center; gap:9px;
+          width:100%; padding:9px 10px; margin:1px 0; border:none; border-radius:9px;
+          background:transparent; color:var(--color-text-secondary); cursor:pointer; text-align:left;
+          font-size:13px; font-weight:500; transition:background .12s, color .12s; }
+        .hist-item:hover { background:var(--color-surface-2); color:var(--color-text); }
+        .hist-item.is-active { background:var(--color-brand-50); color:var(--color-brand-600); font-weight:600; }
+        .hist-item.is-active::before { content:""; position:absolute; left:2px; top:8px; bottom:8px; width:2px;
+          border-radius:2px; background:var(--color-brand-500); }
+        .hist-item .hist-title { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; line-height:1.35; }
+        .hist-item .hist-icon  { flex-shrink:0; opacity:.7; }
+        .hist-item.is-active .hist-icon { opacity:1; }
+
+        .hist-actions   { position:absolute; right:6px; top:50%; transform:translateY(-50%);
+          display:flex; gap:2px; opacity:0; transition:opacity .12s; pointer-events:none; }
+        .hist-item:hover .hist-actions, .hist-item:focus-within .hist-actions { opacity:1; pointer-events:auto; }
+        .hist-action-btn { width:24px; height:24px; border-radius:6px; border:none; background:transparent;
+          color:var(--color-text-muted); cursor:pointer; display:flex; align-items:center; justify-content:center;
+          transition:background .12s, color .12s; }
+        .hist-action-btn:hover { background:var(--color-surface); color:var(--color-text); }
+        .hist-action-btn.is-danger:hover { background:var(--color-error-light); color:var(--color-error); }
+
+        .hist-foot      { padding:10px 12px; border-top:1px solid var(--color-border); flex-shrink:0;
+          display:flex; align-items:center; gap:9px; background:var(--color-surface); }
+        .hist-foot-avatar { width:30px; height:30px; border-radius:50%;
+          background:linear-gradient(135deg,var(--color-brand-400),var(--color-brand-600));
+          color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+        .hist-toggle-rail { position:relative; flex-shrink:0; width:14px; cursor:pointer;
+          display:flex; align-items:center; justify-content:center; background:transparent;
+          border:none; padding:0; z-index:5; }
+        .hist-toggle-rail::before { content:""; position:absolute; top:0; bottom:0; left:50%; width:1.5px; background:var(--color-border); transform:translateX(-50%); transition:background .15s; }
+        .hist-toggle-rail:hover::before { background:var(--color-brand-300); }
+        .hist-toggle-rail .hist-toggle-pill { position:relative; width:18px; height:34px; border-radius:6px;
+          background:var(--color-surface); border:1.5px solid var(--color-border); display:flex; align-items:center; justify-content:center;
+          color:var(--color-text-secondary); transition:border-color .15s, color .15s, background .15s; }
+        .hist-toggle-rail:hover .hist-toggle-pill { border-color:var(--color-brand-300); color:var(--color-brand-600); background:var(--color-brand-50); }
+
+        @media(max-width:899px){
+          .assist-history { position:fixed; left:0; top:0; bottom:0; z-index:60; width:min(86vw, 320px) !important;
+            transform:translateX(-100%); transition:transform .25s ease-out; box-shadow:8px 0 30px rgba(0,0,0,.22);
+            border-right:1.5px solid var(--color-border); opacity:1; pointer-events:auto; }
+          .assist-history.mobile-open { transform:translateX(0); }
+          .assist-history.is-collapsed { transform:translateX(-100%); width:min(86vw, 320px) !important; opacity:1; pointer-events:auto; }
+          .hist-toggle-rail { display:none; }
+        }
+
+
         /* Desktop resizable sidebar */
         .assist-sidebar { background:var(--color-surface); overflow-y:auto; flex-shrink:0; position:relative; transition:box-shadow .18s; }
         .assist-sidebar.is-docked { border-left:1.5px solid var(--color-border); }
@@ -574,6 +856,154 @@ export function AssistantPageClient() {
 
       <div className="assist-root">
 
+        {/* ══ CHAT HISTORY (left, ChatGPT-inspired) ═══════════════════════ */}
+        <aside
+          className={[
+            "assist-history",
+            !isMobile && historyCollapsed ? "is-collapsed" : "",
+            isMobile && historyMobileOpen ? "mobile-open" : "",
+            isMobile && !historyMobileOpen ? "is-collapsed" : "",
+          ].filter(Boolean).join(" ")}
+          aria-label="Chat history"
+          aria-hidden={isMobile ? !historyMobileOpen : historyCollapsed}
+        >
+          <div className="hist-head">
+            <button type="button" onClick={newChat} className="hist-newchat" aria-label="Start new chat">
+              <span style={{ display:"flex", alignItems:"center", gap:8 }}>
+                <PlusIcon size={14} />
+                New chat
+              </span>
+              <SparklesIcon size={13} style={{ color:"var(--color-brand-500)" }} />
+            </button>
+            <div className="hist-search">
+              <SearchIcon size={13} style={{ color:"var(--color-text-muted)" }} />
+              <input
+                type="text"
+                placeholder="Search chats…"
+                value={historySearch}
+                onChange={(e) => setHistorySearch(e.target.value)}
+                aria-label="Search chats"
+              />
+              {historySearch && (
+                <button
+                  type="button"
+                  onClick={() => setHistorySearch("")}
+                  aria-label="Clear search"
+                  className="hist-action-btn"
+                  style={{ width:20, height:20 }}
+                >
+                  <XIcon size={10} />
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="hist-list">
+            {groupedConvs.length === 0 ? (
+              <p className="hist-empty">No chats found</p>
+            ) : (
+              groupedConvs.map((g) => (
+                <div key={g.label}>
+                  <p className="hist-section-label">{g.label}</p>
+                  {g.items.map((c) => {
+                    const isActive = c.id === activeId;
+                    return (
+                      <div
+                        key={c.id}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => selectConversation(c.id)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            selectConversation(c.id);
+                          }
+                        }}
+                        className={`hist-item${isActive ? " is-active" : ""}`}
+                        title={c.title}
+                        aria-current={isActive ? "page" : undefined}
+                      >
+                        <ChatIcon size={14} className="hist-icon" />
+                        <span className="hist-title">{c.title}</span>
+                        <div className="hist-actions" onClick={(e) => e.stopPropagation()}>
+                          <button
+                            type="button"
+                            aria-label={`Rename ${c.title}`}
+                            className="hist-action-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const t = window.prompt("Rename chat", c.title);
+                              if (t) renameConversation(c.id, t);
+                            }}
+                          >
+                            <EditIcon size={11} />
+                          </button>
+                          <button
+                            type="button"
+                            aria-label={`Delete ${c.title}`}
+                            className="hist-action-btn is-danger"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              deleteConversation(c.id);
+                            }}
+                          >
+                            <XIcon size={11} />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className="hist-foot">
+            <span className="hist-foot-avatar" aria-hidden>N</span>
+            <div style={{ flex:1, minWidth:0 }}>
+              <div style={{ fontSize:12, fontWeight:700, color:"var(--color-text)", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
+                Nithish
+              </div>
+              <div style={{ fontSize:10.5, color:"var(--color-text-muted)" }}>
+                {conversations.length} chat{conversations.length === 1 ? "" : "s"}
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={toggleHistory}
+              aria-label="Hide chat history"
+              style={{ width:28, height:28, borderRadius:7, border:"1.5px solid var(--color-border)",
+                background:"var(--color-surface)", color:"var(--color-text-secondary)",
+                cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}
+            >
+              <ChevronLeft size={13} />
+            </button>
+          </div>
+        </aside>
+
+        {/* History toggle rail when collapsed (desktop) */}
+        {!isMobile && historyCollapsed && (
+          <button
+            type="button"
+            onClick={() => setHistoryCollapsed(false)}
+            className="hist-toggle-rail"
+            aria-label="Show chat history"
+            title="Show chat history"
+          >
+            <div className="hist-toggle-pill">
+              <ChevronRight size={12} />
+            </div>
+          </button>
+        )}
+
+        {/* Mobile backdrop for history drawer */}
+        <div
+          className={`assist-backdrop${historyMobileOpen ? " mobile-open" : ""}`}
+          onClick={() => setHistoryMobileOpen(false)}
+          aria-hidden
+          style={{ zIndex: 55 }}
+        />
+
         {/* ══ MAIN ════════════════════════════════════════════════════════ */}
         <div className="assist-main">
 
@@ -604,10 +1034,15 @@ export function AssistantPageClient() {
                 </div>
               </div>
               <div style={{ display:"flex", gap:8, flexShrink:0 }}>
-                <button style={{ height:34, padding:"0 13px", borderRadius:9, border:"1.5px solid var(--color-border)", background:"var(--color-surface)", color:"var(--color-text-secondary)", fontSize:12, fontWeight:600, cursor:"pointer", display:"flex", alignItems:"center", gap:5 }}>
+                <button
+                  onClick={toggleHistory}
+                  aria-label={(isMobile ? historyMobileOpen : !historyCollapsed) ? "Hide chat history" : "Show chat history"}
+                  className="hist-btn"
+                  style={{ height:34, padding:"0 13px", borderRadius:9, border:"1.5px solid var(--color-border)", background:"var(--color-surface)", color:"var(--color-text-secondary)", fontSize:12, fontWeight:600, cursor:"pointer", display:"flex", alignItems:"center", gap:5 }}
+                >
                   <ClockIcon size={13} /> History
                 </button>
-                <button onClick={() => { setMsgs([]); setInput(""); }}
+                <button onClick={newChat}
                   style={{ height:34, padding:"0 13px", borderRadius:9, border:"none",
                     background:"linear-gradient(135deg,var(--color-brand-500),var(--color-brand-600))", color:"#fff",
                     fontSize:12, fontWeight:700, cursor:"pointer", display:"flex", alignItems:"center", gap:5,
