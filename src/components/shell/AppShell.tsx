@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { AddCandidateModal } from "@/components/add-candidate/AddCandidateModal";
+import { PageTransition } from "@/components/shell/PageTransition";
 import { Sidebar } from "@/components/shell/Sidebar";
 import { Topbar } from "@/components/shell/Topbar";
 
@@ -50,7 +51,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           onOpenDrawer={() => setDrawerOpen(true)}
           onAddCandidate={() => setAddCandidateOpen(true)}
         />
-        <main className="min-w-0 flex-1">{children}</main>
+        <main className="min-w-0 flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
       </div>
 
       <AddCandidateModal

@@ -2,23 +2,51 @@ import type { ReactNode } from "react";
 
 export type TrendDirection = "up" | "down" | "flat";
 
-type ToneStyle = { bg: string; fg: string; ring: string };
+type ToneStyle = { bg: string; fg: string; ring: string; descFg: string };
 
-const TONE: Record<TrendDirection, ToneStyle> = {
+// Light theme — clean B&W cards: pill shows a soft green/red tinted background
+// with a stronger green/red foreground. Direction is the only color.
+const TONE_LIGHT: Record<TrendDirection, ToneStyle> = {
   up: {
-    bg: "var(--color-success-light)",
-    fg: "var(--color-success)",
-    ring: "color-mix(in srgb, var(--color-success) 22%, transparent)",
+    bg: "rgba(22, 163, 74, 0.08)",
+    fg: "#15803D",
+    ring: "rgba(22, 163, 74, 0.18)",
+    descFg: "var(--color-text-muted)",
   },
   down: {
-    bg: "var(--color-error-light)",
-    fg: "var(--color-error)",
-    ring: "color-mix(in srgb, var(--color-error) 26%, transparent)",
+    bg: "rgba(220, 38, 38, 0.08)",
+    fg: "#B91C1C",
+    ring: "rgba(220, 38, 38, 0.20)",
+    descFg: "var(--color-text-muted)",
   },
   flat: {
     bg: "var(--color-surface-2)",
     fg: "var(--color-text-secondary)",
     ring: "var(--color-border)",
+    descFg: "var(--color-text-muted)",
+  },
+};
+
+// Dark anchor card (black bg) — bg has more brightness so the pill reads,
+// description text needs to be lighter.
+const TONE_INVERTED: Record<TrendDirection, ToneStyle> = {
+  up: {
+    bg: "rgba(74, 222, 128, 0.16)",
+    fg: "#86EFAC",
+    ring: "rgba(74, 222, 128, 0.24)",
+    descFg: "rgba(255,255,255,0.55)",
+  },
+  down: {
+    bg: "rgba(248, 113, 113, 0.18)",
+    fg: "#FCA5A5",
+    ring: "rgba(248, 113, 113, 0.26)",
+    descFg: "rgba(255,255,255,0.55)",
+  },
+  flat: {
+    bg: "rgba(255,255,255,0.08)",
+    fg: "rgba(255,255,255,0.75)",
+    ring: "rgba(255,255,255,0.14)",
+    descFg: "rgba(255,255,255,0.55)",
   },
 };
 
@@ -31,19 +59,8 @@ function TrendArrow({
 }) {
   if (direction === "flat") {
     return (
-      <svg
-        viewBox="0 0 12 12"
-        width={size}
-        height={size}
-        fill="none"
-        aria-hidden
-      >
-        <path
-          d="M2.5 6h7"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
+      <svg viewBox="0 0 12 12" width={size} height={size} fill="none" aria-hidden>
+        <path d="M2.5 6h7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
       </svg>
     );
   }
@@ -72,15 +89,18 @@ export function TrendPill({
   value,
   description,
   size = "sm",
+  inverted = false,
   className = "",
 }: {
   direction: TrendDirection;
   value: ReactNode;
   description?: ReactNode;
   size?: "sm" | "md";
+  /** Use the inverted (dark-card) palette so the chip reads on a black bg. */
+  inverted?: boolean;
   className?: string;
 }) {
-  const tone = TONE[direction];
+  const tone = (inverted ? TONE_INVERTED : TONE_LIGHT)[direction];
   const isMd = size === "md";
   const padY = isMd ? "py-1" : "py-[3px]";
   const padX = isMd ? "px-2.5" : "px-2";
@@ -101,7 +121,10 @@ export function TrendPill({
         {value}
       </span>
       {description ? (
-        <span className="truncate text-[11px] font-medium text-[color:var(--color-text-muted)]">
+        <span
+          className="truncate text-[11px] font-medium"
+          style={{ color: tone.descFg }}
+        >
           {description}
         </span>
       ) : null}

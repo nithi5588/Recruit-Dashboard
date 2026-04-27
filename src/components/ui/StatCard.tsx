@@ -6,48 +6,76 @@ import { TrendPill, type TrendDirection } from "@/components/ui/TrendPill";
 export type StatTone = "primary" | "neutral" | "subtle" | "strong";
 
 type ToneStyle = {
+  cardBg: string;
+  cardBorder: string;
+  labelFg: string;
+  valueFg: string;
   iconBg: string;
   iconFg: string;
   iconRing: string;
-  accent: string;
-  spark: string;
+  sparkColor: string;
+  /** TrendPill needs a different background tint on the dark anchor card. */
+  invertedTrend: boolean;
+  /** Adds a subtle gloss highlight overlay (used by the dark anchor card). */
+  glossy?: boolean;
 };
 
-// Four tones spread across the enterprise hierarchy:
-//   primary  → soft brand-blue moment (the "active" stat)
-//   neutral  → true neutral grey (the calmest, most stats look like this)
-//   subtle   → neutral grey wrap, brand-blue icon (a quieter brand moment)
-//   strong   → near-black wrap with white icon (high-impact "win" stat —
-//              gives the dashboard a black anchor so it doesn't feel
-//              all-blue)
+// Strict black-and-white treatment.
+//
+//   primary  → BLACK anchor card. One per row, the high-impact stat.
+//   neutral  → CLEAN WHITE card. The rhythm of every other stat.
+//   subtle   → WHITE card, slightly muted icon (kept for API parity).
+//   strong   → WHITE card (renamed from the old inverted style — now sits
+//              quietly alongside neutral so multiple cards can repeat
+//              without jarring contrast).
+//
+// Trend chips keep semantic green/red because direction *is* the signal.
 const TONE: Record<StatTone, ToneStyle> = {
   primary: {
-    iconBg: "rgba(var(--accent-rgb, 46, 71, 224), 0.10)",
-    iconFg: "var(--color-brand-600)",
-    iconRing: "rgba(var(--accent-rgb, 46, 71, 224), 0.18)",
-    accent: "var(--color-brand-500)",
-    spark: "var(--color-brand-500)",
+    // Flat charcoal surface (gradient removed for a clean, calm look).
+    cardBg: "#1B1B1F",
+    cardBorder: "rgba(255,255,255,0.06)",
+    labelFg: "rgba(255,255,255,0.72)",
+    valueFg: "#FFFFFF",
+    iconBg: "rgba(255,255,255,0.08)",
+    iconFg: "rgba(255,255,255,0.92)",
+    iconRing: "rgba(255,255,255,0.16)",
+    sparkColor: "#FFFFFF",
+    invertedTrend: true,
+    glossy: true,
   },
   neutral: {
+    cardBg: "var(--color-surface)",
+    cardBorder: "var(--color-border)",
+    labelFg: "var(--color-text-secondary)",
+    valueFg: "var(--color-text)",
     iconBg: "var(--color-surface-2)",
     iconFg: "var(--color-text-secondary)",
     iconRing: "var(--color-border)",
-    accent: "var(--color-text-secondary)",
-    spark: "var(--color-text-secondary)",
+    sparkColor: "var(--color-text-secondary)",
+    invertedTrend: false,
   },
   subtle: {
+    cardBg: "var(--color-surface)",
+    cardBorder: "var(--color-border)",
+    labelFg: "var(--color-text-secondary)",
+    valueFg: "var(--color-text)",
     iconBg: "var(--color-surface-2)",
-    iconFg: "var(--color-brand-500)",
+    iconFg: "var(--color-text)",
     iconRing: "var(--color-border)",
-    accent: "var(--color-brand-400)",
-    spark: "var(--color-brand-400)",
+    sparkColor: "var(--color-text)",
+    invertedTrend: false,
   },
   strong: {
-    iconBg: "var(--color-text)",
-    iconFg: "#FFFFFF",
-    iconRing: "var(--color-text)",
-    accent: "var(--color-text)",
-    spark: "var(--color-text)",
+    cardBg: "var(--color-surface)",
+    cardBorder: "var(--color-border)",
+    labelFg: "var(--color-text-secondary)",
+    valueFg: "var(--color-text)",
+    iconBg: "var(--color-surface-2)",
+    iconFg: "var(--color-text)",
+    iconRing: "var(--color-border)",
+    sparkColor: "var(--color-text)",
+    invertedTrend: false,
   },
 };
 
@@ -64,7 +92,7 @@ export type StatCardProps = {
   spark?: number[];
   /** Optional href makes the card a link with a hover affordance. */
   href?: string;
-  /** Hide the top accent strip if you want a plainer card. */
+  /** Hide the (no-op in B&W) accent strip — kept for API parity. */
   showAccent?: boolean;
   className?: string;
 };
@@ -77,37 +105,39 @@ export function StatCard({
   trend,
   spark,
   href,
-  showAccent = true,
   className = "",
 }: StatCardProps) {
   const t = TONE[tone];
-  const cardClass = `group relative block overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 transition-all duration-[var(--motion-normal)] ${
+  const cardClass = `group relative block overflow-hidden rounded-[var(--radius-card)] border p-5 transition-all duration-[var(--motion-normal)] ${
     href
-      ? "hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[var(--shadow-card-hover)]"
+      ? "hover:-translate-y-[2px] hover:shadow-[var(--shadow-card-hover)]"
       : ""
   } ${className}`;
-  const cardStyle = { boxShadow: "var(--shadow-card)" } as const;
+  const cardStyle = {
+    background: t.cardBg,
+    borderColor: t.cardBorder,
+    boxShadow: t.glossy
+      // Glossy anchor: soft outer shadow + inset top highlight for the
+      // shine, plus a gentle bottom inset shadow to deepen the bevel.
+      ? "0 1px 2px rgba(0,0,0,0.10), 0 12px 28px -8px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.10), inset 0 -10px 24px rgba(0,0,0,0.25)"
+      : "var(--shadow-card)",
+  } as const;
 
   const inner = (
     <>
-      {showAccent ? (
-        <span
-          aria-hidden
-          className="absolute inset-x-0 top-0 h-[3px] opacity-90"
-          style={{
-            background: `linear-gradient(90deg, ${t.accent}, color-mix(in srgb, ${t.accent} 35%, transparent) 60%, transparent)`,
-          }}
-        />
-      ) : null}
+      {/* Glossy overlays removed — flat surface. */}
 
-      <div className="flex items-start justify-between gap-3">
-        <p className="truncate text-[12.5px] font-medium text-[color:var(--color-text-secondary)]">
+      <div className="relative flex items-start justify-between gap-3">
+        <p
+          className="truncate text-[12.5px] font-medium"
+          style={{ color: t.labelFg }}
+        >
           {label}
         </p>
         {icon ? (
           <span
             aria-hidden
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px]"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]"
             style={{
               background: t.iconBg,
               color: t.iconFg,
@@ -119,23 +149,27 @@ export function StatCard({
         ) : null}
       </div>
 
-      <p className="mt-3 text-[28px] font-bold leading-[34px] tracking-tight tabular-nums text-[color:var(--color-text)] sm:text-[30px]">
+      <p
+        className="relative mt-3 text-[28px] font-bold leading-[34px] tracking-tight tabular-nums sm:text-[30px]"
+        style={{ color: t.valueFg }}
+      >
         {value}
       </p>
 
-      <div className="mt-2 flex min-h-[28px] items-end justify-between gap-3">
+      <div className="relative mt-2 flex min-h-[28px] items-end justify-between gap-3">
         {trend ? (
           <TrendPill
             direction={trend.direction}
             value={trend.value}
             description={trend.description}
+            inverted={t.invertedTrend}
           />
         ) : (
           <span aria-hidden />
         )}
         {spark && spark.length > 1 ? (
           <div className="hidden shrink-0 opacity-90 transition-opacity group-hover:opacity-100 sm:block">
-            <Sparkline values={spark} color={t.spark} width={84} height={30} />
+            <Sparkline values={spark} color={t.sparkColor} width={84} height={30} />
           </div>
         ) : null}
       </div>

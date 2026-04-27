@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Avatar } from "@/components/ui/Avatar";
-import { ChevronDown, SettingsIcon } from "@/components/icons/AppIcons";
+import { ChevronDown } from "@/components/icons/AppIcons";
 
 export function SidebarProfile({
   userName,
@@ -71,53 +71,105 @@ export function SidebarProfile({
           id={menuId}
           role="menu"
           aria-label="Profile"
-          className="absolute bottom-full left-3 right-3 z-50 mb-1.5 overflow-hidden rounded-[12px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-1 shadow-[var(--shadow-dropdown)]"
+          className="profile-menu absolute bottom-full left-3 right-3 z-50 mb-2 overflow-hidden rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-[var(--shadow-dropdown)]"
         >
-          <div className="flex items-center gap-2.5 px-2 py-2">
-            <Avatar name={userName} size={36} />
-            <div className="min-w-0 leading-tight">
-              <p className="truncate text-[13px] font-semibold text-[color:var(--color-text)]">
-                {userName}
-              </p>
-              <p className="truncate text-[11px] text-[color:var(--color-text-secondary)]">
-                {userRole}
-              </p>
+          <style>{`
+            .profile-menu {
+              animation: pm-pop 180ms cubic-bezier(.2,.7,.2,1);
+              transform-origin: bottom center;
+            }
+            @keyframes pm-pop {
+              from { opacity: 0; transform: translateY(6px) scale(.98); }
+              to   { opacity: 1; transform: translateY(0) scale(1); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .profile-menu { animation: none; }
+            }
+            .pm-online-dot {
+              position: absolute; right: -2px; bottom: -2px;
+              width: 10px; height: 10px; border-radius: 50%;
+              background: var(--color-success);
+              border: 2px solid var(--color-surface);
+            }
+            .pm-item {
+              display: flex; align-items: center; gap: 10px;
+              padding: 10px 10px; border-radius: 10px;
+              font-size: 13px; font-weight: 500;
+              color: var(--color-text);
+              outline: none;
+              transition: background 130ms ease, color 130ms ease, transform 130ms ease;
+            }
+            .pm-item:hover, .pm-item:focus-visible {
+              background: var(--color-surface-2);
+              color: var(--color-text);
+            }
+            .pm-item:active { transform: translateY(1px); }
+            .pm-icon {
+              display: inline-flex; align-items: center; justify-content: center;
+              width: 22px; height: 22px; flex-shrink: 0;
+              color: var(--color-text-muted);
+              transition: color 130ms ease;
+            }
+            .pm-item:hover .pm-icon, .pm-item:focus-visible .pm-icon {
+              color: var(--color-text-secondary);
+            }
+            .pm-danger:hover, .pm-danger:focus-visible {
+              background: var(--color-error-light, #FDECEC);
+              color: var(--color-error, #DC2626);
+            }
+            .pm-danger:hover .pm-icon, .pm-danger:focus-visible .pm-icon {
+              color: var(--color-error, #DC2626);
+            }
+          `}</style>
+
+          {/* Header */}
+          <div className="border-b border-[color:var(--color-border)] px-3 py-3">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <Avatar name={userName} size={38} />
+                <span className="pm-online-dot" aria-label="Online" />
+              </div>
+              <div className="min-w-0 leading-tight">
+                <p className="truncate text-[14px] font-semibold text-[color:var(--color-text)]">
+                  {userName}
+                </p>
+                <p className="mt-0.5 truncate text-[11.5px] text-[color:var(--color-text-secondary)]">
+                  {userRole}
+                </p>
+              </div>
             </div>
           </div>
-          <div
-            className="my-1 h-px bg-[color:var(--color-border)]"
-            role="separator"
-          />
-          <Link
-            href="/settings"
-            role="menuitem"
-            onClick={() => {
-              close();
-              onNavigate?.();
-            }}
-            className="flex w-full items-center gap-2.5 rounded-[10px] px-3 py-2.5 text-[13px] font-medium text-[color:var(--color-text)] transition-colors outline-none hover:bg-[color:var(--color-surface-2)] focus:bg-[color:var(--color-surface-2)]"
-          >
-            <SettingsIcon
-              size={16}
-              className="shrink-0 text-[color:var(--color-text-muted)]"
-            />
-            Account &amp; settings
-          </Link>
-          <div
-            className="my-1 h-px bg-[color:var(--color-border)]"
-            role="separator"
-          />
-          <Link
-            href="/login"
-            role="menuitem"
-            onClick={() => {
-              close();
-              onNavigate?.();
-            }}
-            className="flex w-full items-center gap-2.5 rounded-[10px] px-3 py-2.5 text-[13px] font-medium text-[color:var(--color-text-secondary)] transition-colors outline-none hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-error)] focus:bg-[color:var(--color-surface-2)]"
-          >
-            Log out
-          </Link>
+
+          {/* Single action */}
+          <div className="p-1.5">
+            <Link
+              href="/login"
+              role="menuitem"
+              onClick={() => {
+                close();
+                onNavigate?.();
+              }}
+              className="pm-item pm-danger"
+            >
+              <span className="pm-icon" aria-hidden>
+                <svg
+                  width={14}
+                  height={14}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.8}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+              </span>
+              <span>Log out</span>
+            </Link>
+          </div>
         </div>
       ) : null}
     </div>

@@ -129,16 +129,10 @@ export default function DashboardPage() {
           position: absolute;
           inset: 0;
           z-index: -1;
-          background:
-            radial-gradient(900px 240px at 0% 0%, rgba(var(--accent-rgb,46,71,224),0.10), transparent 60%),
-            radial-gradient(700px 220px at 100% 0%, rgba(var(--accent-rgb,46,71,224),0.06), transparent 65%),
-            linear-gradient(180deg, var(--color-brand-50) 0%, var(--color-surface) 75%);
+          background: var(--color-surface);
         }
         html[data-theme="dark"] .dash-hero::before {
-          background:
-            radial-gradient(900px 240px at 0% 0%, rgba(var(--accent-rgb,46,71,224),0.18), transparent 60%),
-            radial-gradient(700px 220px at 100% 0%, rgba(var(--accent-rgb,46,71,224),0.10), transparent 65%),
-            linear-gradient(180deg, rgba(var(--accent-rgb,46,71,224),0.05) 0%, var(--color-surface) 75%);
+          background: var(--color-surface);
         }
 
         .dash-date-pill {
@@ -279,7 +273,7 @@ export default function DashboardPage() {
         }
         .dash-action:active { transform: translateY(1px); }
         .dash-action-primary {
-          background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-600));
+          background: var(--color-brand-500);
           color: #fff;
           box-shadow: 0 4px 14px rgba(var(--accent-rgb,46,71,224),0.30);
         }

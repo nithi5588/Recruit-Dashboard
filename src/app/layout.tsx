@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { ThemeProvider, THEME_INIT_SCRIPT } from "@/components/theme/ThemeProvider";
 import { PostHogProvider } from "@/components/posthog/PostHogProvider";
 import { PostHogPageView } from "@/components/posthog/PostHogPageView";
+import { WebVitalsReporter } from "@/components/posthog/WebVitalsReporter";
 import "./globals.css";
 
 const inter = Inter({
@@ -37,6 +38,7 @@ export default function RootLayout({
             <Suspense fallback={null}>
               <PostHogPageView />
             </Suspense>
+            <WebVitalsReporter />
             {children}
           </ThemeProvider>
         </PostHogProvider>

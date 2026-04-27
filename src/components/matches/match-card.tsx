@@ -165,19 +165,21 @@ function SkillChips({ match, tone }: { match: Match; tone: MatchTone }) {
       {visibleMatched.map((s) => (
         <span
           key={s}
-          className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium ${TONE[tone].chipBg} ${TONE[tone].chipText}`}
+          title={s}
+          className={`inline-flex max-w-[44px] items-center gap-1 overflow-hidden rounded-md px-2 py-0.5 text-[11px] font-medium transition-[max-width] duration-200 ease-out group-hover:max-w-[160px] ${TONE[tone].chipBg} ${TONE[tone].chipText}`}
         >
-          <CheckIcon size={10} />
-          {s}
+          <CheckIcon size={10} className="shrink-0" />
+          <span className="truncate">{s}</span>
         </span>
       ))}
       {visibleMissing.map((s) => (
         <span
           key={s}
-          className="inline-flex items-center gap-1 rounded-md border border-dashed border-[color:var(--color-border-strong)] px-2 py-0.5 text-[11px] font-medium text-[color:var(--color-text-muted)]"
-          title="Required but missing"
+          title={`${s} — required but missing`}
+          className="inline-flex max-w-[44px] items-center gap-1 overflow-hidden rounded-md border border-dashed border-[color:var(--color-border-strong)] px-2 py-0.5 text-[11px] font-medium text-[color:var(--color-text-muted)] transition-[max-width] duration-200 ease-out group-hover:max-w-[160px]"
         >
-          {s}
+          <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-[color:var(--color-text-muted)]" />
+          <span className="truncate">{s}</span>
         </span>
       ))}
       {overflow > 0 && (
@@ -240,7 +242,7 @@ function ScoreBadge({ score }: { score: number }) {
   const t = TONE[tone];
   const pct = Math.max(0, Math.min(100, score));
   const size = 64;
-  const stroke = 6;
+  const stroke = 5;
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   const dash = (pct / 100) * c;
@@ -250,7 +252,6 @@ function ScoreBadge({ score }: { score: number }) {
       role="img"
       aria-label={`Match score: ${score} out of 100, ${tone}`}
       className="relative flex h-16 w-16 shrink-0 items-center justify-center"
-      style={{ filter: `drop-shadow(0 6px 14px ${t.ringGlow})` }}
     >
       <svg
         width={size}
@@ -259,12 +260,6 @@ function ScoreBadge({ score }: { score: number }) {
         className="-rotate-90"
         aria-hidden
       >
-        <defs>
-          <linearGradient id={`grad-${tone}-${score}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={t.ring} stopOpacity="0.85" />
-            <stop offset="100%" stopColor={t.ring} stopOpacity="1" />
-          </linearGradient>
-        </defs>
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -278,7 +273,7 @@ function ScoreBadge({ score }: { score: number }) {
           cy={size / 2}
           r={r}
           fill="none"
-          stroke={`url(#grad-${tone}-${score})`}
+          stroke={t.ring}
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={`${dash} ${c}`}
@@ -358,20 +353,10 @@ export function MatchCard({
           : "border-[color:var(--color-border)] hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_28px_rgba(23,26,43,0.08)]"
       }`}
     >
-      {/* Decorative tone wash on hover */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background:
-            "radial-gradient(closest-side, rgba(46,71,224,0.10), transparent 70%)",
-        }}
-      />
-
       {/* ROW A — Headline */}
       <div className="relative flex items-start gap-4">
         {/* Score block */}
-        <div className="flex shrink-0 flex-col items-center gap-2 pt-0.5">
+        <div className="flex shrink-0 flex-col items-center gap-2">
           <ScoreBadge score={match.score} />
           <FitPill score={match.score} />
         </div>
@@ -382,11 +367,8 @@ export function MatchCard({
             <div className="flex min-w-0 items-center gap-2.5">
               <span
                 aria-hidden
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold text-white ring-2 ring-[color:var(--color-surface)]"
-                style={{
-                  background: match.candidate.avatarColor,
-                  boxShadow: "0 2px 8px rgba(23, 26, 43, 0.12)",
-                }}
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold text-white"
+                style={{ background: match.candidate.avatarColor }}
               >
                 {match.candidate.initials}
               </span>
@@ -458,7 +440,7 @@ export function MatchCard({
       </div>
 
       {/* Divider */}
-      <div className="my-4 h-px w-full bg-gradient-to-r from-transparent via-[color:var(--color-border)] to-transparent" />
+      <div className="my-4 h-px w-full bg-[color:var(--color-border)]" />
 
       {/* ROW B — Fit breakdown */}
       <FitBar match={match} />

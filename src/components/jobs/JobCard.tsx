@@ -110,7 +110,7 @@ function JobCardList({
   const extraTags = job.tags.length - visibleTags.length;
 
   return (
-    <article className="group relative rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3.5 transition-all hover:border-[color:var(--color-brand-300)] hover:shadow-[var(--shadow-card)]">
+    <article className="group relative rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3.5 fx-hover-lift hover:border-[color:var(--color-brand-300)]">
       <div className="flex items-start gap-3.5">
         <CompanyLogo job={job} size={44} />
 
@@ -209,7 +209,7 @@ function JobCardGrid({
   const extraTags = job.tags.length - visibleTags.length;
 
   return (
-    <article className="group relative flex h-full flex-col rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 transition-all hover:border-[color:var(--color-brand-300)] hover:shadow-[var(--shadow-card)]">
+    <article className="group relative flex h-full flex-col rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 fx-hover-lift hover:border-[color:var(--color-brand-300)]">
       <div className="flex items-start justify-between gap-2">
         <CompanyLogo job={job} size={40} />
         <div className="flex items-center gap-0.5">

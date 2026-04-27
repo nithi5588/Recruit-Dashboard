@@ -54,28 +54,23 @@ export function AIAssistant({
     >
       <style jsx>{`
         .ai-assistant {
-          border-color: var(--color-brand-200);
-          background:
-            radial-gradient(1200px 240px at 0% 0%, rgba(var(--accent-rgb, 91, 61, 245), 0.10), transparent 60%),
-            linear-gradient(180deg, var(--color-brand-50) 0%, var(--color-surface) 100%);
+          border-color: var(--color-border);
+          background: var(--color-surface);
           box-shadow: var(--shadow-card);
         }
         :global(html[data-theme="dark"]) .ai-assistant {
-          border-color: rgba(var(--accent-rgb, 91, 61, 245), 0.30);
-          background:
-            radial-gradient(1200px 240px at 0% 0%, rgba(var(--accent-rgb, 91, 61, 245), 0.18), transparent 60%),
-            linear-gradient(180deg, rgba(var(--accent-rgb, 91, 61, 245), 0.05) 0%, var(--color-surface) 100%);
+          border-color: var(--color-border);
+          background: var(--color-surface);
         }
 
-        /* sparkle header badge — gentle twinkle + soft halo */
+        /* sparkle header badge — gentle twinkle (halo removed) */
         .sparkle-badge { position: relative; isolation: isolate; }
         .sparkle-badge::after {
           content: "";
           position: absolute; inset: -3px;
           border-radius: 14px;
-          background: radial-gradient(circle, rgba(var(--accent-rgb, 46, 71, 224), 0.40), transparent 70%);
+          background: transparent;
           opacity: 0; z-index: -1;
-          animation: sp-halo 3.4s ease-in-out infinite;
         }
         .sparkle-badge :global(svg) {
           animation: sp-twinkle 3.4s ease-in-out infinite;

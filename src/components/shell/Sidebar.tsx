@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { UserSearch } from "iconsax-reactjs";
+import { Moon, Sun1, UserSearch } from "iconsax-reactjs";
 import { Wordmark } from "@/components/brand/Wordmark";
 import {
   CollapsedSidebarProfile,
   SidebarProfile,
 } from "@/components/shell/SidebarProfile";
+import { useTheme } from "@/components/theme/ThemeProvider";
 import {
   BriefcaseIcon,
   CalendarIcon,
@@ -52,7 +53,19 @@ const navItems: NavEntry[] = [
   { label: "Matches", href: "/matches", icon: <MatchIcon size={18} /> },
   { label: "Pipeline", href: "/pipeline", icon: <PipelineNavIcon size={18} /> },
   { label: "Enrichment", href: "/enrichment", icon: <EnrichmentIcon size={18} /> },
-  { label: "Clients", href: "/clients", icon: <ClientsIcon size={18} /> },
+  {
+    label: "Clients",
+    href: "/clients",
+    icon: <ClientsIcon size={18} />,
+    badge: (
+      <span
+        className="inline-flex items-center rounded-[5px] px-[6px] py-[2px] text-[9px] font-bold uppercase tracking-wider text-white"
+        style={{ background: "#D97706" }}
+      >
+        Soon
+      </span>
+    ),
+  },
   { label: "Calendar", href: "/calendar", icon: <CalendarIcon size={18} /> },
   { label: "Tasks", href: "/tasks", icon: <TasksIcon size={18} /> },
   {
@@ -62,10 +75,7 @@ const navItems: NavEntry[] = [
     badge: (
       <span
         className="inline-flex items-center rounded-[5px] px-[6px] py-[2px] text-[9px] font-bold uppercase tracking-wider text-white"
-        style={{
-          background: "linear-gradient(135deg, #2E47E0 0%, #273DC0 100%)",
-          boxShadow: "0 2px 6px rgba(46, 71, 224, 0.32)",
-        }}
+        style={{ background: "var(--color-brand-500)" }}
       >
         New
       </span>
@@ -101,23 +111,16 @@ function NavItem({
       href={entry.href}
       aria-current={active ? "page" : undefined}
       onClick={onNavigate}
-      className={`group relative flex h-[42px] items-center gap-3 rounded-[10px] px-3 text-[13.5px] transition-all duration-150 ${
+      className={`group relative flex h-[42px] items-center gap-3 rounded-full px-3.5 text-[13.5px] transition-all duration-200 ease-out ${
         active
           ? "nav-item-active font-semibold"
           : "font-medium text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text)]"
       }`}
     >
-      {/* Active left accent bar */}
-      {active && (
-        <span
-          aria-hidden
-          className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-[3px] bg-[color:var(--color-brand-500)]"
-        />
-      )}
       <span
         className={`shrink-0 transition-colors duration-150 ${
           active
-            ? "text-[color:var(--color-brand-500)]"
+            ? "text-white"
             : "text-[color:var(--color-text-muted)] group-hover:text-[color:var(--color-text-secondary)]"
         }`}
       >
@@ -126,6 +129,65 @@ function NavItem({
       <span className="flex-1 truncate">{entry.label}</span>
       {entry.badge}
     </Link>
+  );
+}
+
+function ThemeToggle({ collapsed = false }: { collapsed?: boolean }) {
+  const { setTheme, resolvedTheme } = useTheme();
+  // Surface a binary toggle that respects system if user hasn't picked a side.
+  const isDark = resolvedTheme === "dark";
+
+  if (collapsed) {
+    return (
+      <button
+        type="button"
+        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        title={isDark ? "Light mode" : "Dark mode"}
+        onClick={() => setTheme(isDark ? "light" : "dark")}
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--color-brand-500)] text-white shadow-[0_6px_16px_-4px_rgba(46,71,224,0.45)] transition-transform hover:scale-105 active:scale-95"
+      >
+        {isDark ? <Sun1 size={16} variant="Bulk" /> : <Moon size={16} variant="Bulk" />}
+      </button>
+    );
+  }
+
+  return (
+    <div
+      role="radiogroup"
+      aria-label="Color theme"
+      className="flex h-9 w-full items-center rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface-2)] p-1"
+    >
+      <button
+        type="button"
+        role="radio"
+        aria-checked={!isDark}
+        aria-label="Light mode"
+        onClick={() => setTheme("light")}
+        className={`flex h-7 flex-1 items-center justify-center gap-1.5 rounded-full text-[11px] font-semibold transition-all duration-200 ${
+          !isDark
+            ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_12px_-2px_rgba(46,71,224,0.45)]"
+            : "text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-secondary)]"
+        }`}
+      >
+        <Sun1 size={13} variant={!isDark ? "Bulk" : "Linear"} />
+        <span className="hidden sm:inline">Light</span>
+      </button>
+      <button
+        type="button"
+        role="radio"
+        aria-checked={isDark}
+        aria-label="Dark mode"
+        onClick={() => setTheme("dark")}
+        className={`flex h-7 flex-1 items-center justify-center gap-1.5 rounded-full text-[11px] font-semibold transition-all duration-200 ${
+          isDark
+            ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_4px_12px_-2px_rgba(46,71,224,0.45)]"
+            : "text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-secondary)]"
+        }`}
+      >
+        <Moon size={13} variant={isDark ? "Bulk" : "Linear"} />
+        <span className="hidden sm:inline">Dark</span>
+      </button>
+    </div>
   );
 }
 
@@ -141,7 +203,7 @@ function ProPlanCard({ onNavigate }: { onNavigate?: () => void }) {
           aria-hidden
           className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] text-white"
           style={{
-            background: "linear-gradient(135deg, #2E47E0 0%, #20319C 100%)",
+            background: "var(--color-brand-500)",
             boxShadow: "0 4px 10px rgba(46, 71, 224, 0.30)",
           }}
         >
@@ -182,7 +244,7 @@ function CollapsedSidebar({
           aria-hidden
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] text-white"
           style={{
-            background: "linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-700) 100%)",
+            background: "var(--color-brand-500)",
             boxShadow: "0 6px 16px rgba(46, 71, 224, 0.28)",
           }}
         >
@@ -215,24 +277,21 @@ function CollapsedSidebar({
               aria-label={item.label}
               title={item.label}
               aria-current={active ? "page" : undefined}
-              className={`relative flex h-10 w-10 items-center justify-center rounded-[10px] transition-all duration-150 ${
+              className={`relative flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200 ease-out ${
                 active
-                  ? "bg-[color:var(--color-brand-100)] text-[color:var(--color-brand-500)]"
+                  ? "nav-item-active text-white"
                   : "text-[color:var(--color-text-muted)] hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text-secondary)]"
               }`}
             >
-              {active && (
-                <span
-                  aria-hidden
-                  className="absolute left-0 top-1/2 h-4 w-[2px] -translate-y-1/2 rounded-r-[2px] bg-[color:var(--color-brand-500)]"
-                />
-              )}
               {item.icon}
             </Link>
           );
         })}
       </nav>
 
+      <div className="flex flex-col items-center gap-2 border-t border-[color:var(--color-border)] py-3">
+        <ThemeToggle collapsed />
+      </div>
       <CollapsedSidebarProfile userName={userName} />
     </>
   );
@@ -290,6 +349,9 @@ function ExpandedSidebar({
       </nav>
 
       <ProPlanCard onNavigate={onNavigate ?? onToggleCollapse} />
+      <div className="px-3 pb-2">
+        <ThemeToggle />
+      </div>
       <SidebarProfile
         userName={userName}
         userRole={userRole}
@@ -316,15 +378,20 @@ export function Sidebar({
 }) {
   return (
     <>
-      {/* Desktop sidebar — FIXED, so the main content scrolls behind it
-         and the backdrop-blur becomes a true frosted-glass surface. */}
+      {/* Desktop sidebar — FLOATING, detached from the screen edges with
+         a 12px gap, fully rounded, on a soft drop shadow. The main content
+         padding tracks --sidebar-w + the floating gap (see globals.css). */}
       <aside
         style={{
           width: collapsed ? "72px" : "260px",
+          top: "12px",
+          left: "12px",
+          bottom: "12px",
+          height: "calc(100vh - 24px)",
           transition:
             "width 240ms cubic-bezier(0.22, 0.94, 0.46, 1), background-color 200ms ease, border-color 200ms ease",
         }}
-        className="sidebar-glass fixed inset-y-0 left-0 z-40 hidden h-screen flex-col overflow-hidden lg:flex"
+        className="sidebar-glass fixed z-40 hidden flex-col overflow-hidden lg:flex"
       >
         <div
           aria-hidden

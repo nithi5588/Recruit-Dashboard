@@ -226,7 +226,7 @@ export function FollowupsTab() {
 
       {/* Row 2: Completion ring (hero) | Trend chart | Status donut */}
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-[3fr_4fr_3fr]">
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-gradient-to-br from-[#E6E9FB] via-white to-white p-5 shadow-[var(--shadow-card)]">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-brand-50)] p-5 shadow-[var(--shadow-card)]">
           <div className="mb-3 flex items-center justify-between">
             <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">Completion Rate</h3>
             <span className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold text-[color:var(--color-success)] shadow-[var(--shadow-card)]">

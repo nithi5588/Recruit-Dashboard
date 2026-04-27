@@ -196,10 +196,6 @@ function UrlHero({
   return (
     <section
       className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-brand-200)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5"
-      style={{
-        backgroundImage:
-          "radial-gradient(900px 220px at 0% 0%, rgba(var(--accent-rgb,46,71,224),0.10), transparent 60%)",
-      }}
     >
       <div className="relative">
         <label
@@ -406,10 +402,6 @@ function ProfileHeader({ recruiter }: { recruiter: Recruiter }) {
   return (
     <div
       className="relative overflow-hidden px-4 pb-4 pt-5 sm:px-5 sm:pt-6"
-      style={{
-        backgroundImage:
-          "radial-gradient(600px 140px at 0% 0%, rgba(var(--accent-rgb,46,71,224),0.10), transparent 60%), linear-gradient(180deg, rgba(var(--accent-rgb,46,71,224),0.05) 0%, transparent 100%)",
-      }}
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
         <div className="relative shrink-0">

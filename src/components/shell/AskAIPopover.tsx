@@ -120,22 +120,13 @@ export function AskAIPopover() {
           aria-label="Ask Recruit AI"
           className="absolute right-0 top-full z-50 mt-2 w-[min(94vw,420px)] overflow-hidden rounded-[16px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-[var(--shadow-dropdown)]"
         >
-          <header
-            className="relative px-4 pb-3 pt-3.5"
-            style={{
-              backgroundImage:
-                "radial-gradient(600px 160px at 0% 0%, rgba(var(--accent-rgb,46,71,224),0.10), transparent 60%)",
-            }}
-          >
+          <header className="relative px-4 pb-3 pt-3.5">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2">
                 <span
                   aria-hidden
                   className="inline-flex h-7 w-7 items-center justify-center rounded-[9px] text-white"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-700) 100%)",
-                  }}
+                  style={{ background: "var(--color-brand-500)" }}
                 >
                   <SparklesIcon size={14} />
                 </span>

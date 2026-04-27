@@ -5,8 +5,7 @@ export function Wordmark({ className = "" }: { className?: string }) {
         aria-hidden
         className="flex h-9 w-9 items-center justify-center rounded-[10px] text-white"
         style={{
-          background:
-            "linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-600) 100%)",
+          background: "var(--color-brand-500)",
           boxShadow: "0 6px 16px rgba(46, 71, 224, 0.28)",
         }}
       >

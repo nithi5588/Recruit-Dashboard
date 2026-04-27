@@ -483,11 +483,11 @@ export function JobsPageClient({ jobs }: { jobs: Job[] }) {
         ) : (
           <>
             <ul
-              className={
+              className={`fx-stagger ${
                 view === "grid"
                   ? "grid grid-cols-1 gap-3 sm:grid-cols-2 2xl:grid-cols-3"
                   : "space-y-2.5"
-              }
+              }`}
             >
               {pageItems.map((job) => (
                 <li key={job.id} className={view === "grid" ? "h-full" : ""}>

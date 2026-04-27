@@ -418,7 +418,7 @@ export function MatchesPageClient() {
           {visible.length === 0 ? (
             <EmptyState onClear={clearAllFilters} hasFilters={chips.length > 0 || tab !== "all"} />
           ) : (
-            <div className="space-y-3">
+            <div className="fx-stagger space-y-3">
               {visible.map((m, i) => (
                 <MatchCard
                   key={m.id}

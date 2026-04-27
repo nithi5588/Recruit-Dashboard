@@ -239,11 +239,7 @@ export function InterviewsTab() {
         <div className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-border)] shadow-[var(--shadow-card)]">
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #20319C 0%, #2E47E0 50%, #96A3EF 100%)" }}
-          />
-          <div
-            className="absolute -right-14 -top-14 h-48 w-48 rounded-full opacity-25"
-            style={{ background: "radial-gradient(circle, #C4CBF6 0%, transparent 60%)" }}
+            style={{ background: "var(--color-brand-500)" }}
           />
           <div className="relative flex h-full flex-col p-5 text-white">
             <div className="mb-3 flex items-center justify-between">

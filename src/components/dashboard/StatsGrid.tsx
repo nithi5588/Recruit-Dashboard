@@ -63,7 +63,7 @@ export function StatsGrid() {
               <Icon
                 size={20}
                 color="currentColor"
-                variant={s.tone === "green" ? "Bold" : "Bulk"}
+                variant="Bulk"
               />
             }
             trend={{

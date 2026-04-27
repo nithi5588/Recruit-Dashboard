@@ -192,13 +192,7 @@ export function TeamPerformanceTab() {
         <div className="relative overflow-hidden rounded-[18px] border border-[color:var(--color-border)] shadow-[var(--shadow-card)]">
           <div
             className="absolute inset-0"
-            style={{
-              background: "linear-gradient(135deg, #2E47E0 0%, #2E47E0 55%, #B8C2FF 100%)",
-            }}
-          />
-          <div
-            className="absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30"
-            style={{ background: "radial-gradient(circle, #C4CBF6 0%, transparent 60%)" }}
+            style={{ background: "var(--color-brand-500)" }}
           />
           <div className="relative p-5 text-white">
             <div className="mb-4 flex items-center justify-between">

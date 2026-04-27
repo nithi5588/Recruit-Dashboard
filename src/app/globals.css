@@ -622,46 +622,25 @@ html[data-theme="dark"] [style*="#F6F4FF"],
 html[data-theme="dark"] [style*="#f6f4ff"],
 html[data-theme="dark"] [style*="#FAFAFF"],
 html[data-theme="dark"] [style*="#F9F8FF"] {
-  background: radial-gradient(
-      1200px 320px at 50% 0%,
-      rgba(var(--accent-rgb), 0.28),
-      transparent 60%
-    ),
-    linear-gradient(180deg, #171930 0%, #0F1020 80%) !important;
+  background: var(--color-surface) !important;
 }
 
 html[data-theme="dark"] [style*="#F4F1FF"],
 html[data-theme="dark"] [style*="#f4f1ff"] {
-  background: radial-gradient(
-      900px 200px at 100% 0%,
-      rgba(var(--accent-rgb), 0.22),
-      transparent 60%
-    ),
-    linear-gradient(180deg, #1C1E38 0%, #0F1020 80%) !important;
+  background: var(--color-surface) !important;
 }
 
 /* ------------------------------------------------------------------------- */
-/*  Accent color — recolor brand-tinted gradient backgrounds in LIGHT mode    */
-/*  so those hero/CTA strips follow the accent swatch.                        */
+/*  Accent color — flatten brand-tinted hero/CTA strips in LIGHT mode.        */
 /* ------------------------------------------------------------------------- */
 
 html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="#FBFAFF"],
 html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="#F9F7FF"],
 html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="#F6F4FF"] {
-  background: radial-gradient(
-      1200px 320px at 50% 0%,
-      rgba(var(--accent-rgb), 0.18),
-      transparent 60%
-    ),
-    linear-gradient(180deg, #FBFAFF 0%, #FFFFFF 70%) !important;
+  background: var(--color-surface) !important;
 }
 html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="#F4F1FF"] {
-  background: radial-gradient(
-      900px 200px at 100% 0%,
-      rgba(var(--accent-rgb), 0.18),
-      transparent 60%
-    ),
-    linear-gradient(180deg, rgba(var(--accent-rgb), 0.08) 0%, #FFFFFF 80%) !important;
+  background: var(--color-surface) !important;
 }
 
 /* Scrollbar styling for dark mode */
@@ -708,33 +687,22 @@ html:not([data-accent="#5b3df5"]):not([data-theme="dark"]) [style*="background:#
   background-color: rgba(var(--accent-rgb), 0.14) !important;
 }
 
-/* Purple hero / avatar gradients → follow the accent in both light and dark.
-   Covers all `linear-gradient(135deg, #5B3DF5 …)` variants used in the app. */
+/* Flatten any inline `linear-gradient(135deg, #5B3DF5 …)` to a solid accent. */
 html:not([data-accent="#5b3df5"]) [style*="linear-gradient(135deg, #5B3DF5"],
 html:not([data-accent="#5b3df5"]) [style*="linear-gradient(135deg,#5B3DF5"],
 html[data-theme="dark"] [style*="linear-gradient(135deg, #5B3DF5"],
 html[data-theme="dark"] [style*="linear-gradient(135deg,#5B3DF5"] {
-  background: linear-gradient(
-    135deg,
-    var(--accent) 0%,
-    var(--accent-600, var(--accent)) 100%
-  ) !important;
+  background: var(--accent) !important;
 }
 
 /* ------------------------------------------------------------------------- */
 /*  Auth & utility                                                            */
 /* ------------------------------------------------------------------------- */
 .auth-background {
-  background:
-    radial-gradient(1200px 600px at 85% -10%, rgba(var(--accent-rgb, 46, 71, 224), 0.04), transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, rgba(var(--accent-rgb, 46, 71, 224), 0.03), transparent 60%),
-    linear-gradient(180deg, #FAFAFA 0%, #FFFFFF 50%, #FAFAFA 100%);
+  background: var(--color-bg-base);
 }
 html[data-theme="dark"] .auth-background {
-  background:
-    radial-gradient(1200px 600px at 85% -10%, rgba(var(--accent-rgb), 0.08), transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, rgba(var(--accent-rgb), 0.05), transparent 60%),
-    linear-gradient(180deg, #0A0A0A 0%, #171717 50%, #0A0A0A 100%);
+  background: var(--color-bg-base);
 }
 
 /* Custom focus ring for inputs */
@@ -977,32 +945,34 @@ html[data-theme="dark"] .pro-card-arrow {
 }
 
 /* ─── Sidebar active nav item — theme-aware ───────────────────────────── */
-/* Brand-tinted soft fill, but kept low-opacity so the sidebar still reads
-   as a clean white surface. The brand color shows through the icon + text. */
+/* Active nav pill — fully-rounded brand-purple capsule that spans the row.
+   This is the "floating sidebar" treatment: a vivid pill instead of a soft
+   tint, with a subtle gradient + drop-shadow for depth. */
 .nav-item-active {
-  background-color: rgba(var(--accent-rgb, 46, 71, 224), 0.08);
-  color: var(--color-brand-600);
+  background: var(--color-brand-500);
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px -4px rgba(var(--accent-rgb, 46, 71, 224), 0.45);
+}
+.nav-item-active .text-\[color\:var\(--color-brand-500\)\] {
+  color: #FFFFFF !important;
 }
 html[data-theme="dark"] .nav-item-active {
-  background-color: rgba(var(--accent-rgb, 46, 71, 224), 0.14);
-  color: #B8C2FF;
+  background: var(--color-brand-500);
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px -4px rgba(var(--accent-rgb, 46, 71, 224), 0.55);
 }
 html[data-theme="dark"] .nav-item-active .text-\[color\:var\(--color-brand-500\)\] {
-  color: #B8C2FF;
+  color: #FFFFFF !important;
 }
 
 /* ─── Global UI polish — applies across every page ─────────────────────── */
 
-/* Background grain — kept extremely subtle. The surface is meant to feel
-   crisp and white, not washed in blue. */
+/* Flat page background — no decorative wash. */
 html, body {
-  background-image:
-    radial-gradient(1200px 600px at 0% 0%, rgba(var(--accent-rgb, 46, 71, 224), 0.018), transparent 60%);
-  background-attachment: fixed;
+  background-image: none;
 }
 html[data-theme="dark"] body {
-  background-image:
-    radial-gradient(1200px 600px at 0% 0%, rgba(var(--accent-rgb, 46, 71, 224), 0.05), transparent 60%);
+  background-image: none;
 }
 
 /* Smoother transitions on the things users touch. */
@@ -1086,25 +1056,14 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
 /* ─── Sidebar — frosted glass surface ───────────────────────────────────── */
 
 .sidebar-glass {
-  /* Frosted-glass surface — translucent over the page content. We keep the
-     surface predominantly white/neutral; the brand color appears only via
-     the active nav item, the brand mark, and a barely-there top-edge tint. */
-  background-color: color-mix(
-    in oklab,
-    var(--color-surface) 88%,
-    transparent
-  );
-  backdrop-filter: saturate(140%) blur(20px);
-  -webkit-backdrop-filter: saturate(140%) blur(20px);
-  background-image: linear-gradient(
-    180deg,
-    rgba(var(--accent-rgb, 46, 71, 224), 0.025) 0%,
-    transparent 30%
-  );
-  border-right: 1px solid var(--color-border);
+  /* Floating sidebar — detached from the screen edges, fully rounded,
+     resting on a soft drop shadow. Flat surface, no gradient wash. */
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 22px;
   box-shadow:
-    inset -1px 0 0 rgba(255, 255, 255, 0.5),
-    1px 0 18px rgba(0, 0, 0, 0.04);
+    0 8px 28px -10px rgba(0, 0, 0, 0.10),
+    0 24px 48px -20px rgba(0, 0, 0, 0.06);
 }
 
 /* Fallback for browsers without backdrop-filter — solid surface. */
@@ -1147,33 +1106,14 @@ html[data-theme="dark"] .sidebar-glass-drawer {
     1px 0 32px rgba(0, 0, 0, 0.35);
 }
 
-/* Top inner highlight — subtle catch of light along the top edge */
+/* Top inner highlight removed — flat sidebar surface. */
 .sidebar-glass::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.7) 40%,
-    rgba(255, 255, 255, 0.7) 60%,
-    transparent
-  );
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
-/* Floating accent orbs — kept barely visible. We want the sidebar to read
-   as a clean, mostly-white surface with the brand color limited to the
-   active nav item and brand mark. */
+/* Floating accent orbs hidden — flat sidebar surface. */
 .sidebar-glass-orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(80px);
-  opacity: 0.35;
-  pointer-events: none;
-  will-change: transform;
+  display: none;
 }
 .sidebar-glass-orb-1 {
   width: 320px;
@@ -1221,44 +1161,25 @@ html[data-theme="dark"] .sidebar-glass-drawer {
 html[data-theme="dark"] .sidebar-glass {
   background-color: color-mix(
     in oklab,
-    var(--color-surface) 60%,
+    var(--color-surface) 70%,
     transparent
   );
-  border-right-color: color-mix(
+  border-color: color-mix(
     in oklab,
     var(--color-border) 80%,
     transparent
   );
   box-shadow:
-    inset -1px 0 0 rgba(255, 255, 255, 0.06),
-    1px 0 28px rgba(0, 0, 0, 0.40);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 28px -10px rgba(0, 0, 0, 0.50),
+    0 24px 48px -20px rgba(var(--accent-rgb, 46, 71, 224), 0.30);
 }
-html[data-theme="dark"] .sidebar-glass::before {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.10) 40%,
-    rgba(255, 255, 255, 0.10) 60%,
-    transparent
-  );
-}
+html[data-theme="dark"] .sidebar-glass::before { display: none; }
 html[data-theme="dark"] .sidebar-glass-orb {
   opacity: 0.30;
 }
-html[data-theme="dark"] .sidebar-glass-orb-1 {
-  background: radial-gradient(
-    circle,
-    rgba(var(--accent-rgb, 46, 71, 224), 0.40),
-    transparent 70%
-  );
-}
-html[data-theme="dark"] .sidebar-glass-orb-2 {
-  background: radial-gradient(
-    circle,
-    rgba(var(--accent-rgb, 46, 71, 224), 0.22),
-    transparent 70%
-  );
-}
+html[data-theme="dark"] .sidebar-glass-orb-1 { display: none; }
+html[data-theme="dark"] .sidebar-glass-orb-2 { display: none; }
 
 /* Fallback for browsers without backdrop-filter — opaque surface */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -1269,15 +1190,15 @@ html[data-theme="dark"] .sidebar-glass-orb-2 {
 
 /* ─── Shell content padding tracks the desktop sidebar width ─────────── */
 /* Mobile/tablet: no padding (sidebar slides in over the page).
-   Desktop ≥1024px: pad left by --sidebar-w so the page content sits
-   beside the fixed sidebar — but its pixels still scroll behind the
-   frosted-glass edge for the real backdrop-filter effect. */
+   Desktop ≥1024px: pad left by --sidebar-w + the floating gap so the page
+   content sits beside the floating sidebar with a proper breathing space. */
 .shell-padded {
   padding-left: 0;
 }
 @media (min-width: 1024px) {
   .shell-padded {
-    padding-left: var(--sidebar-w, 260px);
+    /* sidebar width + 12px outer left gap + 12px gap between sidebar & content */
+    padding-left: calc(var(--sidebar-w, 260px) + 24px);
   }
 }
 
@@ -1399,4 +1320,118 @@ html[data-theme="dark"] .overflow-x-auto:hover::-webkit-scrollbar-thumb,
 html[data-theme="dark"] .overflow-y-auto:hover::-webkit-scrollbar-thumb,
 html[data-theme="dark"] .overflow-auto:hover::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.20);
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Frontend-excellence utility set                                           */
+/*  Reusable motion / hover / focus primitives that any screen can opt into.  */
+/* ------------------------------------------------------------------------- */
+
+/* Subtle card lift on hover — same shape as design tokens, motion-safe. */
+.fx-hover-lift {
+  transition:
+    transform var(--motion-normal) var(--ease-out-soft),
+    box-shadow var(--motion-normal) var(--ease-out-soft),
+    border-color var(--motion-normal) var(--ease-out-soft);
+  will-change: transform;
+}
+.fx-hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Page entrance — gentle fade + lift. Apply to a page wrapper for instant
+   "we noticed you arrived" feedback. Honors prefers-reduced-motion. */
+@keyframes fx-page-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fx-page-enter {
+  animation: fx-page-enter 320ms var(--ease-out-soft) both;
+}
+
+/* Stagger children on first paint — adds polish to grids/lists.
+   Wrap a parent with `.fx-stagger` and direct children animate in sequence. */
+@keyframes fx-stagger-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fx-stagger > * {
+  animation: fx-stagger-in 360ms var(--ease-out-soft) both;
+}
+.fx-stagger > *:nth-child(1)  { animation-delay:  20ms; }
+.fx-stagger > *:nth-child(2)  { animation-delay:  60ms; }
+.fx-stagger > *:nth-child(3)  { animation-delay: 100ms; }
+.fx-stagger > *:nth-child(4)  { animation-delay: 140ms; }
+.fx-stagger > *:nth-child(5)  { animation-delay: 180ms; }
+.fx-stagger > *:nth-child(6)  { animation-delay: 220ms; }
+.fx-stagger > *:nth-child(7)  { animation-delay: 260ms; }
+.fx-stagger > *:nth-child(8)  { animation-delay: 300ms; }
+.fx-stagger > *:nth-child(n+9){ animation-delay: 340ms; }
+
+/* Pulsing status dot — for "Live" indicators, online presence, etc. */
+@keyframes fx-pulse-ring {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.fx-pulse-dot {
+  position: relative;
+  display: inline-flex;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.fx-pulse-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: fx-pulse-ring 1.6s var(--ease-out-soft) infinite;
+}
+.fx-pulse-dot::after {
+  content: "";
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background: currentColor;
+}
+
+/* Skeleton shimmer — neutral bone for loading states. */
+@keyframes fx-skeleton-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.fx-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-2) 0%,
+    color-mix(in srgb, var(--color-surface-2) 60%, var(--color-bg-base)) 40%,
+    var(--color-surface-2) 80%
+  );
+  background-size: 200% 100%;
+  animation: fx-skeleton-shimmer 1.6s linear infinite;
+  border-radius: 8px;
+}
+
+/* Focus-ring for any focusable element — branded, calm, accessible. */
+.fx-focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px var(--color-brand-300);
+  border-radius: inherit;
+}
+
+/* Honors reduced-motion globally. */
+@media (prefers-reduced-motion: reduce) {
+  .fx-hover-lift,
+  .fx-page-enter,
+  .fx-stagger > *,
+  .fx-pulse-dot::before,
+  .fx-skeleton {
+    animation: none !important;
+    transition: none !important;
+  }
+  .fx-hover-lift:hover {
+    transform: none;
+  }
 }

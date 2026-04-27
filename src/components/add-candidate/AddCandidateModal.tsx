@@ -59,8 +59,7 @@ function ProfileIllustration() {
       <span
         className="absolute inset-x-3 inset-y-3 flex items-center justify-center rounded-[14px] border border-[color:var(--color-brand-200)]"
         style={{
-          background:
-            "linear-gradient(180deg, #F2F3FD 0%, #E6E9FB 100%)",
+          background: "var(--color-brand-100)",
           boxShadow: "var(--shadow-card)",
         }}
       >
@@ -85,8 +84,7 @@ function ProfileIllustration() {
       <span
         className="absolute -right-1 -bottom-1 flex h-7 w-7 items-center justify-center rounded-full text-white"
         style={{
-          background:
-            "linear-gradient(135deg, #2E47E0 0%, #273DC0 100%)",
+          background: "var(--color-brand-500)",
           boxShadow: "0 6px 16px rgba(46, 71, 224, 0.3)",
         }}
       >
@@ -132,9 +130,7 @@ function PrefilledBanner() {
   return (
     <div
       className="mb-5 flex items-start gap-3 rounded-[14px] border border-[color:var(--color-brand-200)] p-3 sm:p-4"
-      style={{
-        background: "linear-gradient(180deg, #F2F3FD 0%, #FAFAFA 100%)",
-      }}
+      style={{ background: "var(--color-brand-50)" }}
     >
       <span
         aria-hidden

@@ -778,7 +778,7 @@ export function AssistantPageClient() {
         .hist-foot      { padding:10px 12px; border-top:1px solid var(--color-border); flex-shrink:0;
           display:flex; align-items:center; gap:9px; background:var(--color-surface); }
         .hist-foot-avatar { width:30px; height:30px; border-radius:50%;
-          background:linear-gradient(135deg,var(--color-brand-400),var(--color-brand-600));
+          background:var(--color-brand-500);
           color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 
         .hist-toggle-rail { position:relative; flex-shrink:0; width:14px; cursor:pointer;
@@ -1012,7 +1012,7 @@ export function AssistantPageClient() {
             <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:10 }}>
               <div style={{ display:"flex", alignItems:"center", gap:11 }}>
                 <div style={{ width:38, height:38, borderRadius:11, flexShrink:0,
-                  background:"linear-gradient(135deg,#2E47E0 0%,#96A3EF 100%)",
+                  background:"var(--color-brand-500)",
                   display:"flex", alignItems:"center", justifyContent:"center",
                   boxShadow:"0 3px 12px rgba(46,71,224,.32)" }}>
                   <SparklesIcon size={18} style={{ color:"#fff" }} />
@@ -1044,7 +1044,7 @@ export function AssistantPageClient() {
                 </button>
                 <button onClick={newChat}
                   style={{ height:34, padding:"0 13px", borderRadius:9, border:"none",
-                    background:"linear-gradient(135deg,var(--color-brand-500),var(--color-brand-600))", color:"#fff",
+                    background:"var(--color-brand-500)", color:"#fff",
                     fontSize:12, fontWeight:700, cursor:"pointer", display:"flex", alignItems:"center", gap:5,
                     boxShadow:"0 2px 10px rgba(46,71,224,.28)" }}>
                   <SparklesIcon size={13} /> New Chat
@@ -1073,7 +1073,7 @@ export function AssistantPageClient() {
                   {/* greeting */}
                   <div style={{ textAlign:"center" }}>
                     <div style={{ width:56, height:56, borderRadius:18, margin:"0 auto 14px",
-                      background:"linear-gradient(135deg,#2E47E0,#96A3EF)",
+                      background:"var(--color-brand-500)",
                       display:"flex", alignItems:"center", justifyContent:"center",
                       boxShadow:"0 6px 24px rgba(46,71,224,.28)" }}>
                       <SparklesIcon size={26} style={{ color:"#fff" }} />
@@ -1128,7 +1128,7 @@ export function AssistantPageClient() {
                 /* ── User message ── */
                 <div key={m.id} style={{ display:"flex", justifyContent:"flex-end", gap:10, alignItems:"flex-end" }}>
                   <div style={{ maxWidth:"72%" }}>
-                    <div style={{ background:"linear-gradient(135deg,#2E47E0 0%,#2E47E0 100%)",
+                    <div style={{ background:"var(--color-brand-500)",
                       color:"#fff", borderRadius:"18px 18px 4px 18px",
                       padding:"12px 16px", fontSize:14, lineHeight:1.65,
                       boxShadow:"0 4px 18px rgba(46,71,224,.28)" }}>
@@ -1137,7 +1137,7 @@ export function AssistantPageClient() {
                     <div style={{ textAlign:"right", fontSize:10, color:"#A3A3A3", marginTop:4 }}>{fmt(m.ts)}</div>
                   </div>
                   <div style={{ width:32, height:32, borderRadius:"50%", flexShrink:0,
-                    background:"linear-gradient(135deg,#E6E9FB,#C4CBF6)",
+                    background:"var(--color-brand-100)",
                     border:"2px solid #fff", boxShadow:"0 2px 8px rgba(46,71,224,.18)",
                     color:"var(--color-brand-500)", display:"flex", alignItems:"center", justifyContent:"center",
                     fontSize:12, fontWeight:800 }}>N</div>
@@ -1146,7 +1146,7 @@ export function AssistantPageClient() {
                 /* ── AI message ── */
                 <div key={m.id} style={{ display:"flex", gap:10, alignItems:"flex-start" }}>
                   <div style={{ width:34, height:34, borderRadius:11, flexShrink:0,
-                    background:"linear-gradient(135deg,#2E47E0,#96A3EF)",
+                    background:"var(--color-brand-500)",
                     display:"flex", alignItems:"center", justifyContent:"center",
                     boxShadow:"0 3px 10px rgba(46,71,224,.30)" }}>
                     <SparklesIcon size={16} style={{ color:"#fff" }} />
@@ -1223,7 +1223,7 @@ export function AssistantPageClient() {
               {typing && (
                 <div style={{ display:"flex", gap:10, alignItems:"center" }}>
                   <div style={{ width:34, height:34, borderRadius:11, flexShrink:0,
-                    background:"linear-gradient(135deg,#2E47E0,#96A3EF)",
+                    background:"var(--color-brand-500)",
                     display:"flex", alignItems:"center", justifyContent:"center",
                     boxShadow:"0 3px 10px rgba(46,71,224,.28)" }}>
                     <SparklesIcon size={16} style={{ color:"#fff" }} />
@@ -1332,7 +1332,7 @@ export function AssistantPageClient() {
                       onClick={() => send(input)}
                       disabled={!input.trim() || typing}
                       style={{ width:36, height:36, borderRadius:10, border:"none",
-                        background: input.trim() && !typing ? "linear-gradient(135deg,#2E47E0,#2E47E0)" : "var(--color-surface-2)",
+                        background: input.trim() && !typing ? "var(--color-brand-500)" : "var(--color-surface-2)",
                         color: input.trim() && !typing ? "#fff" : "var(--color-text-muted)",
                         display:"flex", alignItems:"center", justifyContent:"center",
                         cursor: input.trim() && !typing ? "pointer" : "default",

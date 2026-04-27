@@ -174,7 +174,7 @@ function ProfileTab() {
         <h3 style={{ margin: "0 0 16px", fontSize: 16, fontWeight: 700, color: "var(--color-text)" }}>Personal Information</h3>
         {/* Avatar */}
         <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-          <div style={{ width: 72, height: 72, borderRadius: 16, background: "linear-gradient(135deg,#2E47E0,#96A3EF)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 700, color: "var(--color-surface)" }}>
+          <div style={{ width: 72, height: 72, borderRadius: 16, background: "var(--color-brand-500)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 700, color: "var(--color-surface)" }}>
             NB
           </div>
           <div>
@@ -381,10 +381,10 @@ function TeamTab() {
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <style>{`
         /* ── Hero invite block ─────────────────────────────────────────── */
-        .team-hero { position:relative; overflow:hidden; border-radius:16px; padding:22px; border:1px solid var(--color-brand-200); background:radial-gradient(900px 220px at 0% 0%, rgba(46,71,224,0.10), transparent 60%), linear-gradient(180deg, #F2F3FD 0%, var(--color-surface) 70%); }
-        html[data-theme="dark"] .team-hero { background:radial-gradient(900px 220px at 0% 0%, rgba(46,71,224,0.18), transparent 60%), linear-gradient(180deg, rgba(46,71,224,0.06) 0%, var(--color-surface) 70%); border-color:rgba(46,71,224,0.32); }
+        .team-hero { position:relative; overflow:hidden; border-radius:16px; padding:22px; border:1px solid var(--color-border); background:var(--color-surface); }
+        html[data-theme="dark"] .team-hero { background:var(--color-surface); border-color:var(--color-border); }
         .team-hero-head { display:flex; align-items:flex-start; gap:14px; margin-bottom:18px; }
-        .team-hero-tile { width:44px; height:44px; border-radius:12px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--color-brand-500), var(--color-brand-600)); color:#fff; box-shadow:0 6px 18px rgba(46,71,224,0.32); }
+        .team-hero-tile { width:44px; height:44px; border-radius:12px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:var(--color-brand-500); color:#fff; box-shadow:0 6px 18px rgba(46,71,224,0.32); }
         .team-hero-text h3 { margin:0; font-size:17px; font-weight:800; letter-spacing:-0.01em; color:var(--color-text); }
         .team-hero-text p  { margin:3px 0 0; font-size:13px; color:var(--color-text-secondary); }
 
@@ -630,7 +630,7 @@ function TeamTab() {
                     <div
                       className="team-avatar"
                       style={{
-                        background: `linear-gradient(135deg, ${m.color}33 0%, ${m.color}1A 100%)`,
+                        background: `${m.color}1F`,
                         color: m.color,
                         boxShadow: `inset 0 0 0 1.5px ${m.color}40`,
                       }}
@@ -1092,7 +1092,7 @@ function IntegrationsTab() {
         .int-card:hover { border-color:var(--color-brand-300); transform:translateY(-2px); box-shadow:0 8px 22px rgba(46,71,224,0.10); }
         .int-card-body { display:flex; flex-direction:column; gap:12px; padding:16px; height:100%; }
 
-        .int-ribbon { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent 0%, rgba(46,71,224,0.55) 50%, transparent 100%); }
+        .int-ribbon { position:absolute; top:0; left:0; right:0; height:3px; background:rgba(46,71,224,0.55); }
 
         .int-card-head { display:flex; gap:12px; align-items:center; }
         .int-icon { flex-shrink:0; width:40px; height:40px; border-radius:11px; display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:16px; letter-spacing:-0.01em; text-transform:lowercase; }

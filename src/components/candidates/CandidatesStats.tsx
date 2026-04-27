@@ -33,7 +33,7 @@ function parseDelta(delta: string): { value: string; description: string } {
 
 export function CandidatesStats() {
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="fx-stagger grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
       {stats.map((s) => {
         const Icon = ICON_MAP[s.tone];
         const tone = TONE_MAP[s.tone];
@@ -48,7 +48,7 @@ export function CandidatesStats() {
               <Icon
                 size={20}
                 color="currentColor"
-                variant={s.tone === "green" ? "Bold" : "Bulk"}
+                variant="Bulk"
               />
             }
             trend={{

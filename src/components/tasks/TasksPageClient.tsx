@@ -1014,7 +1014,7 @@ export function TasksPageClient() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
+        <div className="fx-stagger grid grid-cols-1 gap-5 xl:grid-cols-3">
           {(
             [
               {

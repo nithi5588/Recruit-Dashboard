@@ -147,56 +147,21 @@ export function PricingPageClient() {
         .pp-orb-a { animation: pp-orb-a 9s ease-in-out infinite; }
         .pp-orb-b { animation: pp-orb-b 11s ease-in-out infinite; }
 
-        /* Hero background (light + dark) */
-        .pp-hero {
-          background:
-            radial-gradient(1200px 360px at 50% -10%, rgba(var(--accent-rgb), 0.20), transparent 60%),
-            radial-gradient(900px 280px at 0% 100%, rgba(0,0,0,0.05), transparent 55%),
-            linear-gradient(180deg, var(--color-bg-base) 0%, var(--color-surface) 75%);
-        }
-        :global(html[data-theme="dark"]) .pp-hero {
-          background:
-            radial-gradient(1200px 360px at 50% -10%, rgba(var(--accent-rgb), 0.28), transparent 60%),
-            radial-gradient(900px 280px at 0% 100%, rgba(255,255,255,0.04), transparent 55%),
-            linear-gradient(180deg, #0E0E0E 0%, var(--color-surface) 80%);
-        }
+        /* Hero background — flat */
+        .pp-hero { background: var(--color-bg-base); }
+        :global(html[data-theme="dark"]) .pp-hero { background: var(--color-bg-base); }
 
-        /* CTA strip background */
-        .pp-cta {
-          background:
-            radial-gradient(900px 240px at 100% 0%, rgba(var(--accent-rgb), 0.20), transparent 60%),
-            radial-gradient(700px 200px at 0% 100%, rgba(0,0,0,0.06), transparent 60%),
-            linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface) 80%);
-        }
-        :global(html[data-theme="dark"]) .pp-cta {
-          background:
-            radial-gradient(900px 240px at 100% 0%, rgba(var(--accent-rgb), 0.28), transparent 60%),
-            radial-gradient(700px 200px at 0% 100%, rgba(255,255,255,0.04), transparent 60%),
-            linear-gradient(180deg, #161616 0%, var(--color-surface) 80%);
-        }
+        /* CTA strip background — flat */
+        .pp-cta { background: var(--color-surface); }
+        :global(html[data-theme="dark"]) .pp-cta { background: var(--color-surface); }
 
-        /* Subtle dot grid — invisible on dark unless we lift it */
-        .pp-dot-grid {
-          background-image: radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px);
-          background-size: 22px 22px;
-        }
-        :global(html[data-theme="dark"]) .pp-dot-grid {
-          background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
-        }
+        /* Dot grid removed — flat surface */
+        .pp-dot-grid { background-image: none; }
+        :global(html[data-theme="dark"]) .pp-dot-grid { background-image: none; }
 
-        /* Drifting orbs */
-        .pp-orb-warm {
-          background: radial-gradient(circle, rgba(var(--accent-rgb), 0.42), transparent 70%);
-        }
-        .pp-orb-neutral {
-          background: radial-gradient(circle, rgba(0,0,0,0.18), transparent 70%);
-        }
-        :global(html[data-theme="dark"]) .pp-orb-warm {
-          background: radial-gradient(circle, rgba(var(--accent-rgb), 0.50), transparent 70%);
-        }
-        :global(html[data-theme="dark"]) .pp-orb-neutral {
-          background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%);
-        }
+        /* Decorative orbs hidden */
+        .pp-orb-warm { display: none; }
+        .pp-orb-neutral { display: none; }
 
         /* Plan card hover */
         .pp-card { transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, border-color .2s ease; }
@@ -207,36 +172,23 @@ export function PricingPageClient() {
         .pp-card.is-hl:hover { transform: translateY(-6px); box-shadow: 0 26px 60px rgba(var(--accent-rgb),.22); }
         :global(html[data-theme="dark"]) .pp-card.is-hl:hover { box-shadow: 0 26px 60px rgba(var(--accent-rgb),.32); }
 
-        /* Highlighted plan card inner surface */
+        /* Highlighted plan card inner surface — flat */
         .pp-hl-surface {
-          background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.06) 0%, var(--color-surface) 60%);
+          background: var(--color-surface);
           box-shadow: 0 16px 40px rgba(var(--accent-rgb), 0.16);
         }
         :global(html[data-theme="dark"]) .pp-hl-surface {
-          background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.10) 0%, var(--color-surface) 60%);
+          background: var(--color-surface);
           box-shadow: 0 16px 40px rgba(var(--accent-rgb), 0.28);
         }
 
-        /* Highlighted card glossy sheen */
-        .pp-hl-shine {
-          position: absolute; top: 0; left: 0;
-          width: 60%; height: 100%;
-          background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%);
-          mix-blend-mode: overlay; pointer-events: none;
-          animation: pp-shine 5.5s ease-in-out infinite;
-        }
-        :global(html[data-theme="dark"]) .pp-hl-shine {
-          background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.16) 50%, transparent 70%);
-          mix-blend-mode: screen;
-        }
+        /* Glossy sheen removed for flat surface */
+        .pp-hl-shine { display: none; }
+        :global(html[data-theme="dark"]) .pp-hl-shine { display: none; }
 
-        /* Compare table — Growth column tint */
-        .pp-growth-col-head {
-          background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.10) 0%, rgba(var(--accent-rgb), 0.04) 100%);
-        }
-        :global(html[data-theme="dark"]) .pp-growth-col-head {
-          background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.18) 0%, rgba(var(--accent-rgb), 0.06) 100%);
-        }
+        /* Compare table — Growth column tint (flat) */
+        .pp-growth-col-head { background: rgba(var(--accent-rgb), 0.06); }
+        :global(html[data-theme="dark"]) .pp-growth-col-head { background: rgba(var(--accent-rgb), 0.12); }
         .pp-growth-col { background: rgba(var(--accent-rgb), 0.05); }
         :global(html[data-theme="dark"]) .pp-growth-col { background: rgba(var(--accent-rgb), 0.10); }
 
@@ -294,15 +246,7 @@ export function PricingPageClient() {
 
           <h1 className="mx-auto mt-5 max-w-[820px] text-[30px] font-bold leading-[38px] tracking-tight text-[color:var(--color-text)] sm:text-[44px] sm:leading-[52px]">
             A plan for every recruiting{" "}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage:
-                  "linear-gradient(95deg, #EA6814 0%, #C75510 100%)",
-              }}
-            >
-              team
-            </span>
+            <span style={{ color: "#EA6814" }}>team</span>
           </h1>
 
           <p className="mx-auto mt-3 max-w-[600px] text-[14px] leading-[22px] text-[color:var(--color-text-secondary)] sm:text-[15.5px] sm:leading-[24px]">
@@ -491,14 +435,7 @@ function PlanCard({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
       className={`pp-card relative isolate flex h-full flex-col overflow-hidden rounded-[22px] p-[1.5px] ${
         highlight ? "is-hl lg:-translate-y-2" : ""
       }`}
-      style={
-        highlight
-          ? {
-              background:
-                "linear-gradient(160deg, rgba(var(--accent-rgb), 0.85) 0%, rgba(var(--accent-rgb), 0.55) 35%, rgba(var(--accent-rgb), 0.10) 70%, rgba(var(--accent-rgb), 0) 100%)",
-            }
-          : undefined
-      }
+      style={highlight ? { background: "var(--color-brand-500)" } : undefined}
     >
       <div
         className={`relative flex h-full flex-col rounded-[20px] bg-[color:var(--color-surface)] p-6 ${

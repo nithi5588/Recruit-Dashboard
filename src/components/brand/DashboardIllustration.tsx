@@ -61,10 +61,7 @@ export function DashboardIllustration() {
               <div
                 className="h-7 w-7 rounded-full"
                 style={{
-                  background:
-                    i % 2 === 0
-                      ? "linear-gradient(135deg,#96A3EF,#2E47E0)"
-                      : "linear-gradient(135deg,#C4CBF6,#5C6FE7)",
+                  background: i % 2 === 0 ? "var(--color-brand-500)" : "var(--color-brand-300)",
                 }}
               />
               <div className="flex-1 space-y-1.5">
@@ -87,8 +84,7 @@ export function DashboardIllustration() {
       <div
         className="absolute right-[4%] top-[2%] flex h-10 w-10 items-center justify-center rounded-full text-white"
         style={{
-          background:
-            "linear-gradient(135deg, var(--color-brand-500), var(--color-brand-600))",
+          background: "var(--color-brand-500)",
           boxShadow: "var(--shadow-panel)",
         }}
       >
@@ -107,7 +103,7 @@ export function DashboardIllustration() {
       <div
         className="absolute bottom-[6%] left-[0%] flex h-9 w-9 items-center justify-center rounded-full text-white"
         style={{
-          background: "linear-gradient(135deg,#96A3EF,#273DC0)",
+          background: "var(--color-brand-600)",
           boxShadow: "var(--shadow-panel)",
         }}
       >
@@ -126,7 +122,7 @@ export function DashboardIllustration() {
       <div
         className="absolute bottom-[2%] right-[12%] flex h-9 w-9 items-center justify-center rounded-full text-white"
         style={{
-          background: "linear-gradient(135deg,#5C6FE7,#5C6FE7)",
+          background: "#5C6FE7",
           boxShadow: "var(--shadow-panel)",
         }}
       >

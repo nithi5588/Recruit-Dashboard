@@ -1,15 +1,14 @@
-// Muted, cohesive avatar palette — slate / plum / sage / clay tones at
-// matched luminance (~50%) and saturation (~22%) so a list of avatars reads
-// as one calm set instead of a rainbow.
+// Muted, cohesive avatar palette — flat neutral tones so a list of avatars
+// reads as one calm set.
 const GRADIENTS = [
-  "linear-gradient(135deg,#A3A3A3,#A3A3A3)",  // dusty blue-slate
-  "linear-gradient(135deg,#A3A3A3,#737373)",  // muted lavender-gray
-  "linear-gradient(135deg,#A3A3A3,#737373)",  // soft teal-sage
-  "linear-gradient(135deg,#A3A3A3,#8E726B)",  // warm clay
-  "linear-gradient(135deg,#A3A3A3,#737373)",  // muted ochre
-  "linear-gradient(135deg,#A3A3A3,#A3A3A3)",  // cool slate
-  "linear-gradient(135deg,#A3A3A3,#737373)",  // mauve
-  "linear-gradient(135deg,#A3A3A3,#737373)",  // sage olive
+  "#A3A3A3",
+  "#737373",
+  "#8E726B",
+  "#A3A3A3",
+  "#737373",
+  "#A3A3A3",
+  "#737373",
+  "#737373",
 ];
 
 function hashIndex(seed: string, mod: number) {

@@ -169,10 +169,7 @@ export function UploadResumeStep({
       {isDone ? (
         <div
           className="rounded-[14px] border border-[color:var(--color-success)]/30 p-4"
-          style={{
-            background:
-              "linear-gradient(180deg, #EAFBF1 0%, #F7FCF9 100%)",
-          }}
+          style={{ background: "var(--color-success-light, #EAFBF1)" }}
         >
           <div className="flex items-start gap-3">
             <span
@@ -206,10 +203,7 @@ export function UploadResumeStep({
       ) : (
         <div
           className="flex items-start gap-3 rounded-[14px] border border-[color:var(--color-brand-200)] p-4"
-          style={{
-            background:
-              "linear-gradient(180deg, #F2F3FD 0%, #FAFAFA 100%)",
-          }}
+          style={{ background: "var(--color-brand-50)" }}
         >
           <span
             aria-hidden
