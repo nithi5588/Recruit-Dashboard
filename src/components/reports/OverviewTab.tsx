@@ -3,13 +3,18 @@
 import { useState } from "react";
 import {
   Briefcase,
+  Brush,
   Calendar,
   Chart,
+  Chart2,
+  Code,
   Cup,
   Profile2User,
+  SearchNormal1,
   Send,
   TickCircle,
   TrendUp,
+  VolumeHigh,
 } from "iconsax-reactjs";
 import { CircularProgress, MiniDonut } from "@/components/reports/charts";
 import { StatCard, StatIconWrap } from "@/components/reports/shared";
@@ -38,6 +43,20 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
     : icon === "check"     ? <TickCircle {...props} variant="Bold" />
     : <Cup {...props} />;
   return <StatIconWrap bg={bg}>{n}</StatIconWrap>;
+}
+
+// ─── Top Jobs icon mapping ────────────────────────────────────────────────────
+
+function TopJobIcon({ name, color }: { name: string; color: string }) {
+  const props = { size: 16, color, variant: "Bulk" as const };
+  switch (name) {
+    case "brush":     return <Brush {...props} />;
+    case "code":      return <Code {...props} />;
+    case "search":    return <SearchNormal1 {...props} />;
+    case "megaphone": return <VolumeHigh {...props} />;
+    case "chart":     return <Chart2 {...props} />;
+    default:          return <Briefcase {...props} />;
+  }
 }
 
 // ─── Activity type icon for feed ──────────────────────────────────────────────
@@ -260,7 +279,7 @@ export function OverviewTab() {
   return (
     <div className="space-y-5">
       {/* Stat cards with sparklines */}
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6">
         {reportStatCards.map((card, i) => (
           <StatCard
             key={card.label}
@@ -274,9 +293,9 @@ export function OverviewTab() {
       </div>
 
       {/* Row 2: Pulse hero | Tapered funnel */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[5fr_6fr]">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[5fr_6fr]">
         {/* Pulse hero — muted, clean */}
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)]">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5">
           <div className="mb-3 flex items-start justify-between gap-2">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--color-text-muted)]">
@@ -351,7 +370,7 @@ export function OverviewTab() {
         </div>
 
         {/* Tapered funnel — muted monochromatic */}
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)]">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5">
           <div className="mb-1 flex items-center justify-between">
             <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">
               Recruitment Funnel
@@ -366,8 +385,8 @@ export function OverviewTab() {
           <p className="mb-3 text-[11px] text-[color:var(--color-text-muted)]">
             Candidate progression — conversion % between stages
           </p>
-          <div className="overflow-x-auto">
-            <div className="min-w-[520px]">
+          <div className="overflow-x-auto -mx-1 px-1">
+            <div className="min-w-[420px]">
               <TaperedFunnel />
             </div>
           </div>
@@ -393,8 +412,8 @@ export function OverviewTab() {
       </div>
 
       {/* Row 3: Activity chart | Source donut | Top Jobs */}
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-[5fr_3fr_3fr]">
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 shadow-[var(--shadow-card)]">
+      <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 xl:grid-cols-[5fr_3fr_3fr]">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5 lg:col-span-2 xl:col-span-1">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">Activity Overview</h3>
             <button type="button" className="rounded-[8px] border border-[color:var(--color-border)] px-3 py-1 text-[12px] font-medium text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)]">Weekly ▾</button>
@@ -402,7 +421,7 @@ export function OverviewTab() {
           <ActivityChart />
         </div>
 
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 shadow-[var(--shadow-card)]">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5">
           <h3 className="mb-4 text-[14px] font-semibold text-[color:var(--color-text)]">Applications by Source</h3>
           <div className="flex flex-col items-center gap-4">
             <MiniDonut
@@ -428,22 +447,27 @@ export function OverviewTab() {
           </div>
         </div>
 
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 shadow-[var(--shadow-card)]">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">Top Jobs</h3>
             <button type="button" className="text-[12px] font-semibold text-[color:var(--color-brand-500)] hover:text-[color:var(--color-brand-600)]">View all</button>
           </div>
-          <div className="space-y-3">
+          <div className="space-y-3.5">
             {topJobsData.map((job) => {
               const pct = Math.round((job.applications / topJobsData[0].applications) * 100);
               return (
                 <div key={job.title}>
-                  <div className="mb-1.5 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[14px]">{job.icon}</span>
-                      <span className="text-[12px] font-medium text-[color:var(--color-text)]">{job.title}</span>
+                  <div className="mb-1.5 flex items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-2.5">
+                      <span
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px]"
+                        style={{ backgroundColor: `${job.color}1A` }}
+                      >
+                        <TopJobIcon name={job.icon} color={job.color} />
+                      </span>
+                      <span className="truncate text-[12px] font-medium text-[color:var(--color-text)]">{job.title}</span>
                     </div>
-                    <span className="text-[12px] font-bold text-[color:var(--color-text)]">{job.applications}</span>
+                    <span className="shrink-0 text-[12px] font-bold text-[color:var(--color-text)]">{job.applications}</span>
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-[color:var(--color-surface-2)]">
                     <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, backgroundColor: job.color }} />
@@ -456,8 +480,8 @@ export function OverviewTab() {
       </div>
 
       {/* Row 4: Interviews donut | Follow-ups | Recent Activities */}
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 shadow-[var(--shadow-card)]">
+      <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5">
           <h3 className="mb-4 text-[14px] font-semibold text-[color:var(--color-text)]">Interviews by Stage</h3>
           <div className="flex items-center gap-4">
             <div className="shrink-0">
@@ -486,7 +510,7 @@ export function OverviewTab() {
           </div>
         </div>
 
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 shadow-[var(--shadow-card)]">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">Follow-ups Overview</h3>
             <button type="button" className="rounded-[8px] border border-[color:var(--color-border)] px-3 py-1 text-[12px] font-medium text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-surface-2)]">This Week ▾</button>
@@ -523,7 +547,7 @@ export function OverviewTab() {
           </div>
         </div>
 
-        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 shadow-[var(--shadow-card)]">
+        <div className="rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] sm:p-5 md:col-span-2 xl:col-span-1">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">Recent Activity</h3>
             <button type="button" className="text-[12px] font-semibold text-[color:var(--color-brand-500)] hover:text-[color:var(--color-brand-600)]">View all</button>

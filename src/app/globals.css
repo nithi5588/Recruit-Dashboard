@@ -495,12 +495,68 @@ html[data-theme="dark"] [style*="border:3px solid #5b3df5"] {
 html[data-theme="dark"] .bg-white {
   background-color: var(--color-surface) !important;
 }
+/* Translucent white surfaces (bg-white/N) — common in glass cards / chips.
+   Switch to a translucent surface so dark mode keeps the same "lift" effect
+   without rendering as a glaring white pill on a dark background. */
+html[data-theme="dark"] .bg-white\/70,
+html[data-theme="dark"] .bg-white\/75,
+html[data-theme="dark"] .bg-white\/80,
+html[data-theme="dark"] .bg-white\/85,
+html[data-theme="dark"] .bg-white\/90,
+html[data-theme="dark"] .bg-white\/95 {
+  background-color: color-mix(in oklab, var(--color-surface) 88%, transparent) !important;
+}
+html[data-theme="dark"] .bg-white\/40,
+html[data-theme="dark"] .bg-white\/50,
+html[data-theme="dark"] .bg-white\/60 {
+  background-color: color-mix(in oklab, var(--color-surface-2) 70%, transparent) !important;
+}
+html[data-theme="dark"] .bg-white\/10,
+html[data-theme="dark"] .bg-white\/20,
+html[data-theme="dark"] .bg-white\/25 {
+  background-color: rgba(255, 255, 255, 0.10) !important;
+}
 html[data-theme="dark"] .hover\:bg-white\/95:hover,
 html[data-theme="dark"] .hover\:bg-white:hover {
   background-color: var(--color-surface-2) !important;
 }
 html[data-theme="dark"] .border-white {
   border-color: var(--color-border) !important;
+}
+
+/* Bare `white` keyword inline styles (background:white, background-color:white) */
+html[data-theme="dark"] [style*="background: white"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background:white"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background-color: white"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background-color:white"]:not([style*="gradient"]) {
+  background-color: var(--color-surface) !important;
+}
+html[data-theme="dark"] [style*="border: 1px solid white"],
+html[data-theme="dark"] [style*="border:1px solid white"],
+html[data-theme="dark"] [style*="border: 2px solid white"],
+html[data-theme="dark"] [style*="border:2px solid white"] {
+  border-color: var(--color-border) !important;
+}
+
+/* Warm-black literal (#1F1B17) used on Enterprise plan accents and icon fills.
+   In dark mode this is invisible on the dark surface. */
+html[data-theme="dark"] [style*="background:#1F1B17"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background:#1f1b17"]:not([style*="gradient"]),
+html[data-theme="dark"] [style*="background-color:#1F1B17"],
+html[data-theme="dark"] [style*="background:#1F1B171F"]:not([style*="gradient"]) {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+html[data-theme="dark"] [style*="color:#1F1B17"],
+html[data-theme="dark"] [style*="color:#1f1b17"] {
+  color: var(--color-text) !important;
+}
+
+/* Hardcoded shadow / blur backgrounds that use rgba(31, 27, 23, X) — soft
+   warm-black ambient. In dark mode these disappear into the background. */
+html[data-theme="dark"] [style*="rgba(31,27,23"],
+html[data-theme="dark"] [style*="rgba(31, 27, 23"] {
+  /* fallback: when used as box-shadow they still work; we only rewrite
+     plain backgrounds here. */
 }
 /* Tailwind arbitrary "bg-[#XXX]" values compile to escaped class names.
    These are the light-tint arbitrary values the codebase actually uses. */

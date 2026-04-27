@@ -12,12 +12,12 @@ import {
   type ReactNode,
 } from "react";
 import { Avatar } from "@/components/ui/Avatar";
+import { AskAIPopover } from "@/components/shell/AskAIPopover";
 import {
   BellIcon,
   BriefcaseIcon,
   CalendarIcon,
   CheckIcon,
-  ChevronDown,
   HomeIcon,
   MatchIcon,
   MenuListIcon,
@@ -232,18 +232,13 @@ const NAV_PAGES: SearchResult[] = [
 ];
 
 export function Topbar({
-  userName = "Nithish",
-  userRole = "Recruiter",
   onOpenDrawer,
   onAddCandidate,
 }: {
-  userName?: string;
-  userRole?: string;
   onOpenDrawer?: () => void;
   onAddCandidate?: () => void;
 }) {
   const router = useRouter();
-  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [notifications, setNotifications] =
     useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
@@ -251,14 +246,11 @@ export function Topbar({
   const [searchValue, setSearchValue] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const menuId = useId();
   const notifId = useId();
   const searchId = useId();
-  const rootRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const closeProfileMenu = useCallback(() => setProfileMenuOpen(false), []);
   const closeNotif = useCallback(() => setNotifOpen(false), []);
   const closeSearch = useCallback(() => {
     setSearchOpen(false);
@@ -353,26 +345,6 @@ export function Topbar({
       prev.map((n) => (n.id === id ? { ...n, unread: false } : n)),
     );
   }, []);
-
-  useEffect(() => {
-    if (!profileMenuOpen) return;
-    function onPointerDown(e: PointerEvent) {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
-        setProfileMenuOpen(false);
-      }
-    }
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        setProfileMenuOpen(false);
-      }
-    }
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [profileMenuOpen]);
 
   useEffect(() => {
     if (!notifOpen) return;
@@ -796,66 +768,7 @@ export function Topbar({
         ) : null}
       </div>
 
-      <div className="relative sm:ml-1" ref={rootRef}>
-        <button
-          type="button"
-          id={menuId + "-button"}
-          aria-label={`${userName}, ${userRole}. Open profile menu`}
-          aria-haspopup="menu"
-          aria-expanded={profileMenuOpen}
-          aria-controls={menuId}
-          onClick={() => setProfileMenuOpen((o) => !o)}
-          className="flex shrink-0 items-center gap-2.5 rounded-[12px] py-1 pl-1 pr-2 text-left transition-colors hover:bg-[color:var(--color-surface-2)] data-[state=open]:bg-[color:var(--color-surface-2)] sm:pr-3"
-          data-state={profileMenuOpen ? "open" : "closed"}
-        >
-          <Avatar name={userName} size={36} />
-          <div className="hidden min-w-0 text-left leading-tight sm:block">
-            <p className="truncate text-[13px] font-semibold text-[color:var(--color-text)]">
-              {userName}
-            </p>
-            <p className="truncate text-[11px] text-[color:var(--color-text-secondary)]">
-              {userRole}
-            </p>
-          </div>
-          <ChevronDown
-            className={`hidden shrink-0 text-[color:var(--color-text-muted)] transition-transform duration-200 sm:block ${
-              profileMenuOpen ? "rotate-180" : ""
-            }`}
-            size={16}
-          />
-        </button>
-
-        {profileMenuOpen ? (
-          <div
-            id={menuId}
-            role="menu"
-            aria-label="Profile"
-            className="absolute right-0 top-full z-50 mt-1.5 min-w-[220px] rounded-[12px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-1 shadow-[0_10px_30px_rgba(15,16,20,0.12)]"
-          >
-            <Link
-              href="/settings"
-              role="menuitem"
-              onClick={closeProfileMenu}
-              className="flex w-full items-center gap-2.5 rounded-[10px] px-3 py-2.5 text-[13px] font-medium text-[color:var(--color-text)] transition-colors outline-none hover:bg-[color:var(--color-surface-2)] focus:bg-[color:var(--color-surface-2)]"
-            >
-              <SettingsIcon size={18} className="shrink-0 text-[color:var(--color-text-muted)]" />
-              {"Account & settings"}
-            </Link>
-            <div
-              className="my-1 h-px bg-[color:var(--color-border)]"
-              role="separator"
-            />
-            <Link
-              href="/login"
-              role="menuitem"
-              onClick={closeProfileMenu}
-              className="flex w-full items-center gap-2.5 rounded-[10px] px-3 py-2.5 text-[13px] font-medium text-[color:var(--color-text-secondary)] transition-colors outline-none hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-error)] focus:bg-[color:var(--color-surface-2)]"
-            >
-              Log out
-            </Link>
-          </div>
-        ) : null}
-      </div>
+      <AskAIPopover />
     </header>
   );
 }

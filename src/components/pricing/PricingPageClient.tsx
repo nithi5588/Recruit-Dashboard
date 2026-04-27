@@ -266,20 +266,11 @@ export function PricingPageClient() {
       `}</style>
 
       {/* Hero */}
-      <section
-        className="relative mb-10 overflow-hidden rounded-[28px] border border-[color:var(--color-brand-200)] px-5 py-10 text-center sm:mb-12 sm:px-10 sm:py-14"
-        style={{
-          background:
-            "radial-gradient(1200px 360px at 50% -10%, rgba(234,104,20,0.20), transparent 60%), radial-gradient(900px 280px at 0% 100%, rgba(107,99,88,0.10), transparent 55%), linear-gradient(180deg, var(--color-bg-base) 0%, var(--color-surface) 75%)",
-        }}
-      >
+      <section className="pp-hero relative mb-10 overflow-hidden rounded-[28px] border border-[color:var(--color-brand-200)] px-5 py-10 text-center sm:mb-12 sm:px-10 sm:py-14">
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.35]"
+          className="pp-dot-grid pointer-events-none absolute inset-0 opacity-[0.35]"
           style={{
-            backgroundImage:
-              "radial-gradient(rgba(31,27,23,0.07) 1px, transparent 1px)",
-            backgroundSize: "22px 22px",
             maskImage:
               "radial-gradient(ellipse at center, black 40%, transparent 75%)",
             WebkitMaskImage:
@@ -288,19 +279,11 @@ export function PricingPageClient() {
         />
         <span
           aria-hidden
-          className="pp-orb-a pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-60 blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(234,104,20,0.42), transparent 70%)",
-          }}
+          className="pp-orb-a pp-orb-warm pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-60 blur-3xl"
         />
         <span
           aria-hidden
-          className="pp-orb-b pointer-events-none absolute -left-20 -bottom-24 h-56 w-56 rounded-full opacity-50 blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(107,99,88,0.35), transparent 70%)",
-          }}
+          className="pp-orb-b pp-orb-neutral pointer-events-none absolute -left-20 -bottom-24 h-56 w-56 rounded-full opacity-50 blur-3xl"
         />
 
         <div className="relative">
@@ -449,20 +432,10 @@ export function PricingPageClient() {
       </section>
 
       {/* CTA strip */}
-      <section
-        className="relative mt-12 overflow-hidden rounded-[24px] border border-[color:var(--color-brand-200)] p-6 sm:p-10"
-        style={{
-          background:
-            "radial-gradient(900px 240px at 100% 0%, rgba(234,104,20,0.20), transparent 60%), radial-gradient(700px 200px at 0% 100%, rgba(107,99,88,0.12), transparent 60%), linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface) 80%)",
-        }}
-      >
+      <section className="pp-cta relative mt-12 overflow-hidden rounded-[24px] border border-[color:var(--color-brand-200)] p-6 sm:p-10">
         <span
           aria-hidden
-          className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-50 blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(234,104,20,0.40), transparent 70%)",
-          }}
+          className="pp-orb-warm pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-60 blur-3xl"
         />
         <div className="relative flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <div className="min-w-0">
@@ -522,7 +495,7 @@ function PlanCard({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
         highlight
           ? {
               background:
-                "linear-gradient(160deg, rgba(234,104,20,0.85) 0%, rgba(199,85,16,0.55) 35%, rgba(234,104,20,0.10) 70%, rgba(255,255,255,0) 100%)",
+                "linear-gradient(160deg, rgba(var(--accent-rgb), 0.85) 0%, rgba(var(--accent-rgb), 0.55) 35%, rgba(var(--accent-rgb), 0.10) 70%, rgba(var(--accent-rgb), 0) 100%)",
             }
           : undefined
       }
@@ -530,18 +503,9 @@ function PlanCard({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
       <div
         className={`relative flex h-full flex-col rounded-[20px] bg-[color:var(--color-surface)] p-6 ${
           highlight
-            ? ""
+            ? "pp-hl-surface"
             : "border border-[color:var(--color-border)] shadow-[var(--shadow-card)]"
         }`}
-        style={
-          highlight
-            ? {
-                background:
-                  "linear-gradient(180deg, rgba(255,243,233,0.55) 0%, var(--color-surface) 60%)",
-                boxShadow: "0 16px 40px rgba(234,104,20,0.16)",
-              }
-            : undefined
-        }
       >
         {highlight ? <span aria-hidden className="pp-hl-shine" /> : null}
 
@@ -555,7 +519,9 @@ function PlanCard({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
         <div className="flex items-center gap-2.5">
           <span
             aria-hidden
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px]"
+            className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] ${
+              isEnterprise ? "pp-icon-enterprise" : ""
+            }`}
             style={{
               background: `${plan.accent}1A`,
               color: plan.accent,
@@ -628,7 +594,7 @@ function PlanCard({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
             highlight
               ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_10px_24px_rgba(234,104,20,0.32)] hover:bg-[color:var(--color-brand-600)]"
               : isEnterprise
-                ? "bg-[color:var(--color-text)] text-white hover:brightness-110"
+                ? "pp-cta-enterprise bg-[color:var(--color-text)] text-white hover:brightness-110"
                 : "border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text)] hover:border-[color:var(--color-brand-300)] hover:bg-[color:var(--color-surface-2)]"
           }`}
         >
@@ -818,13 +784,7 @@ function CompareTable() {
                   $100 / mo
                 </p>
               </th>
-              <th
-                className="relative px-4 py-4 text-center sm:px-6"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(234,104,20,0.10) 0%, rgba(234,104,20,0.04) 100%)",
-                }}
-              >
+              <th className="pp-growth-col-head relative px-4 py-4 text-center sm:px-6">
                 <p className="inline-flex items-center gap-1 text-[13px] font-bold text-[color:var(--color-brand-600)]">
                   Growth
                   <span className="inline-flex items-center rounded-[999px] bg-[color:var(--color-brand-500)] px-1.5 py-0.5 text-[9px] font-bold uppercase text-white">
@@ -867,10 +827,7 @@ function CompareTable() {
                     <td className="px-4 py-3 text-center sm:px-6">
                       <CompareCell value={row.team} accent="#6B6358" />
                     </td>
-                    <td
-                      className="px-4 py-3 text-center sm:px-6"
-                      style={{ background: "rgba(234,104,20,0.05)" }}
-                    >
+                    <td className="pp-growth-col px-4 py-3 text-center sm:px-6">
                       <CompareCell value={row.growth} accent="#EA6814" />
                     </td>
                     <td className="px-4 py-3 text-center sm:px-6">

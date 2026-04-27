@@ -38,15 +38,22 @@ export function StatCard({
             : "up"
           : "flat";
   return (
-    <div className="group rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-panel)]">
-      <div className="flex items-start gap-3">
+    <div className="group rounded-[18px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-3.5 shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[color:var(--color-brand-300)] hover:shadow-[var(--shadow-panel)] sm:p-4">
+      <div className="flex items-center justify-between gap-2">
         {icon}
-        <div className="min-w-0 flex-1 pt-0.5">
-          <p className="truncate text-[12px] font-medium text-[color:var(--color-text-secondary)]">{label}</p>
-          <p className="mt-0.5 text-[24px] font-extrabold leading-none tabular-nums text-[color:var(--color-text)]">{value}</p>
-        </div>
+        {spark && (
+          <div className="shrink-0 opacity-90">
+            <Sparkline values={spark.values} color={spark.color ?? "#2E47E0"} />
+          </div>
+        )}
       </div>
-      <div className="mt-3 flex items-center justify-between gap-2">
+      <p className="mt-3 text-[11.5px] font-medium leading-tight text-[color:var(--color-text-secondary)] sm:text-[12px]">
+        {label}
+      </p>
+      <p className="mt-1 text-[22px] font-extrabold leading-none tabular-nums text-[color:var(--color-text)] sm:text-[26px]">
+        {value}
+      </p>
+      <div className="mt-2.5">
         {showTrend ? (
           <TrendPill
             direction={direction}
@@ -56,11 +63,6 @@ export function StatCard({
         ) : (
           <p className="min-w-0 truncate text-[11px] text-[color:var(--color-text-muted)]">{subtitle ?? ""}</p>
         )}
-        {spark && (
-          <div className="hidden shrink-0 opacity-90 sm:block">
-            <Sparkline values={spark.values} color={spark.color ?? "#2E47E0"} />
-          </div>
-        )}
       </div>
     </div>
   );
@@ -69,7 +71,7 @@ export function StatCard({
 export function StatIconWrap({ children, bg }: { children: ReactNode; bg: string }) {
   return (
     <div
-      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px]"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] sm:h-10 sm:w-10 sm:rounded-[12px]"
       style={{ background: bg }}
     >
       {children}

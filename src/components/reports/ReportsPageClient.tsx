@@ -201,17 +201,19 @@ export function ReportsPageClient() {
   };
 
   return (
-    <div className="min-h-full bg-[color:var(--color-bg-base)] px-4 py-6 sm:px-6 xl:px-8 xl:py-8">
+    <div className="min-h-full bg-[color:var(--color-bg-base)] px-4 py-5 sm:px-6 sm:py-6 xl:px-8 xl:py-8">
       {/* Header */}
-      <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-        <div>
-          <div className="flex items-center gap-2">
+      <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-9 w-9 items-center justify-center rounded-[12px] bg-[color:var(--color-brand-100)] sm:h-10 sm:w-10">
+              <Chart size={20} variant="Bulk" color="var(--color-brand-500)" />
+            </span>
             <h1 className="text-[22px] font-bold tracking-tight text-[color:var(--color-text)] sm:text-[26px]">
               Reports
             </h1>
-            <Chart size={22} variant="Bulk" color="var(--color-brand-500)" />
           </div>
-          <p className="mt-0.5 text-[13px] text-[color:var(--color-text-secondary)]">
+          <p className="mt-1.5 text-[13px] text-[color:var(--color-text-secondary)]">
             Track your recruitment activities and performance in one place.
           </p>
         </div>
@@ -222,7 +224,7 @@ export function ReportsPageClient() {
             type="button"
             onClick={handleExportReport}
             title={`Export ${activeTab} report to Excel`}
-            className="flex h-9 items-center gap-2 rounded-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 text-[12px] font-semibold text-[color:var(--color-text)] shadow-[var(--shadow-card)] transition-colors hover:border-[color:var(--color-brand-300)] hover:bg-[color:var(--color-brand-50)] hover:text-[color:var(--color-brand-600)]"
+            className="flex h-9 items-center gap-2 rounded-[10px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 text-[12px] font-semibold text-[color:var(--color-text)] shadow-[var(--shadow-card)] transition-colors hover:border-[color:var(--color-brand-300)] hover:bg-[color:var(--color-brand-50)] hover:text-[color:var(--color-brand-600)] sm:px-4"
           >
             <DocumentDownload size={14} variant="Bulk" color="currentColor" />
             <span className="hidden sm:inline">Export {activeTab}</span>
@@ -232,25 +234,35 @@ export function ReportsPageClient() {
       </div>
 
       {/* Tabs */}
-      <div className="mb-6 border-b border-[color:var(--color-border)]">
-        <div className="-mx-1 flex gap-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {REPORT_TABS.map((tab) => (
-            <button
-              key={tab}
-              type="button"
-              onClick={() => setActiveTab(tab)}
-              className={`relative shrink-0 px-3 pb-3 pt-2 text-[13px] font-medium transition-colors sm:px-4 ${
-                activeTab === tab
-                  ? "text-[color:var(--color-brand-500)]"
-                  : "text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text)]"
-              }`}
-            >
-              {tab}
-              {activeTab === tab && (
-                <span className="absolute bottom-0 left-1 right-1 h-[2px] rounded-t-full bg-[color:var(--color-brand-500)]" />
-              )}
-            </button>
-          ))}
+      <div className="relative mb-6">
+        <div className="absolute inset-x-0 bottom-0 h-px bg-[color:var(--color-border)]" aria-hidden />
+        <div
+          role="tablist"
+          aria-label="Report sections"
+          className="-mx-1 flex gap-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {REPORT_TABS.map((tab) => {
+            const active = activeTab === tab;
+            return (
+              <button
+                key={tab}
+                role="tab"
+                aria-selected={active}
+                type="button"
+                onClick={() => setActiveTab(tab)}
+                className={`relative shrink-0 px-3 pb-3 pt-2 text-[13px] font-medium transition-colors sm:px-4 ${
+                  active
+                    ? "text-[color:var(--color-brand-500)]"
+                    : "text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text)]"
+                }`}
+              >
+                {tab}
+                {active && (
+                  <span className="absolute bottom-0 left-1 right-1 h-[2px] rounded-t-full bg-[color:var(--color-brand-500)]" />
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
 

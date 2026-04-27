@@ -44,11 +44,11 @@ export const interviewStageData = [
 ];
 
 export const topJobsData = [
-  { title: "Product Designer",   applications: 12, color: "#8B5CF6", icon: "🎨" }, // violet
-  { title: "Frontend Developer", applications:  9, color: "#6366F1", icon: "💻" }, // indigo
-  { title: "UX Researcher",      applications:  7, color: "#06B6D4", icon: "🔍" }, // cyan
-  { title: "Marketing Manager",  applications:  6, color: "#F59E0B", icon: "📢" }, // amber
-  { title: "Data Analyst",       applications:  5, color: "#10B981", icon: "📊" }, // emerald
+  { title: "Product Designer",   applications: 12, color: "#8B5CF6", icon: "brush" },     // violet
+  { title: "Frontend Developer", applications:  9, color: "#6366F1", icon: "code" },      // indigo
+  { title: "UX Researcher",      applications:  7, color: "#06B6D4", icon: "search" },    // cyan
+  { title: "Marketing Manager",  applications:  6, color: "#F59E0B", icon: "megaphone" }, // amber
+  { title: "Data Analyst",       applications:  5, color: "#10B981", icon: "chart" },     // emerald
 ];
 
 export const followUpsData = [

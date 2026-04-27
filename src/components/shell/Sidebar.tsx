@@ -6,6 +6,10 @@ import type { ReactNode } from "react";
 import { UserSearch } from "iconsax-reactjs";
 import { Wordmark } from "@/components/brand/Wordmark";
 import {
+  CollapsedSidebarProfile,
+  SidebarProfile,
+} from "@/components/shell/SidebarProfile";
+import {
   BriefcaseIcon,
   CalendarIcon,
   ChevronLeft,
@@ -162,7 +166,13 @@ function ProPlanCard({ onNavigate }: { onNavigate?: () => void }) {
   );
 }
 
-function CollapsedSidebar({ onToggleCollapse }: { onToggleCollapse: () => void }) {
+function CollapsedSidebar({
+  onToggleCollapse,
+  userName,
+}: {
+  onToggleCollapse: () => void;
+  userName: string;
+}) {
   const pathname = usePathname() ?? "";
 
   return (
@@ -222,6 +232,8 @@ function CollapsedSidebar({ onToggleCollapse }: { onToggleCollapse: () => void }
           );
         })}
       </nav>
+
+      <CollapsedSidebarProfile userName={userName} />
     </>
   );
 }
@@ -229,9 +241,13 @@ function CollapsedSidebar({ onToggleCollapse }: { onToggleCollapse: () => void }
 function ExpandedSidebar({
   onNavigate,
   onToggleCollapse,
+  userName,
+  userRole,
 }: {
   onNavigate?: () => void;
   onToggleCollapse?: () => void;
+  userName: string;
+  userRole: string;
 }) {
   const pathname = usePathname() ?? "";
 
@@ -274,6 +290,11 @@ function ExpandedSidebar({
       </nav>
 
       <ProPlanCard onNavigate={onNavigate ?? onToggleCollapse} />
+      <SidebarProfile
+        userName={userName}
+        userRole={userRole}
+        onNavigate={onNavigate}
+      />
     </>
   );
 }
@@ -283,11 +304,15 @@ export function Sidebar({
   onCloseDrawer,
   collapsed,
   onToggleCollapse,
+  userName = "Nithish",
+  userRole = "Recruiter",
 }: {
   drawerOpen: boolean;
   onCloseDrawer: () => void;
   collapsed: boolean;
   onToggleCollapse: () => void;
+  userName?: string;
+  userRole?: string;
 }) {
   return (
     <>
@@ -310,9 +335,16 @@ export function Sidebar({
         </div>
 
         {collapsed ? (
-          <CollapsedSidebar onToggleCollapse={onToggleCollapse} />
+          <CollapsedSidebar
+            onToggleCollapse={onToggleCollapse}
+            userName={userName}
+          />
         ) : (
-          <ExpandedSidebar onToggleCollapse={onToggleCollapse} />
+          <ExpandedSidebar
+            onToggleCollapse={onToggleCollapse}
+            userName={userName}
+            userRole={userRole}
+          />
         )}
       </aside>
 
@@ -347,7 +379,11 @@ export function Sidebar({
           <span className="sidebar-glass-orb sidebar-glass-orb-1" />
           <span className="sidebar-glass-orb sidebar-glass-orb-2" />
         </div>
-        <ExpandedSidebar onNavigate={onCloseDrawer} />
+        <ExpandedSidebar
+          onNavigate={onCloseDrawer}
+          userName={userName}
+          userRole={userRole}
+        />
       </aside>
     </>
   );
