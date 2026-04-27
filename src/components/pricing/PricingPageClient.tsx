@@ -84,7 +84,7 @@ const PLANS: Plan[] = [
     yearly: null,
     seatLabel: "Unlimited seats",
     cta: { label: "Contact sales", href: "mailto:sales@recruit.app" },
-    accent: "var(--color-text)",
+    accent: "#1F1B17",
     Icon: ShieldIcon,
     features: [
       { label: "Everything in Growth, plus:", included: true, bold: true },
@@ -147,11 +147,77 @@ export function PricingPageClient() {
         .pp-orb-a { animation: pp-orb-a 9s ease-in-out infinite; }
         .pp-orb-b { animation: pp-orb-b 11s ease-in-out infinite; }
 
-        .pp-card { transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, border-color .2s ease; }
-        .pp-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(31,27,23,.10); }
-        .pp-card.is-hl { transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease; }
-        .pp-card.is-hl:hover { transform: translateY(-6px); box-shadow: 0 26px 60px rgba(234,104,20,.22); }
+        /* Hero background (light + dark) */
+        .pp-hero {
+          background:
+            radial-gradient(1200px 360px at 50% -10%, rgba(var(--accent-rgb), 0.20), transparent 60%),
+            radial-gradient(900px 280px at 0% 100%, rgba(0,0,0,0.05), transparent 55%),
+            linear-gradient(180deg, var(--color-bg-base) 0%, var(--color-surface) 75%);
+        }
+        :global(html[data-theme="dark"]) .pp-hero {
+          background:
+            radial-gradient(1200px 360px at 50% -10%, rgba(var(--accent-rgb), 0.28), transparent 60%),
+            radial-gradient(900px 280px at 0% 100%, rgba(255,255,255,0.04), transparent 55%),
+            linear-gradient(180deg, #0E0E0E 0%, var(--color-surface) 80%);
+        }
 
+        /* CTA strip background */
+        .pp-cta {
+          background:
+            radial-gradient(900px 240px at 100% 0%, rgba(var(--accent-rgb), 0.20), transparent 60%),
+            radial-gradient(700px 200px at 0% 100%, rgba(0,0,0,0.06), transparent 60%),
+            linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface) 80%);
+        }
+        :global(html[data-theme="dark"]) .pp-cta {
+          background:
+            radial-gradient(900px 240px at 100% 0%, rgba(var(--accent-rgb), 0.28), transparent 60%),
+            radial-gradient(700px 200px at 0% 100%, rgba(255,255,255,0.04), transparent 60%),
+            linear-gradient(180deg, #161616 0%, var(--color-surface) 80%);
+        }
+
+        /* Subtle dot grid — invisible on dark unless we lift it */
+        .pp-dot-grid {
+          background-image: radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px);
+          background-size: 22px 22px;
+        }
+        :global(html[data-theme="dark"]) .pp-dot-grid {
+          background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+        }
+
+        /* Drifting orbs */
+        .pp-orb-warm {
+          background: radial-gradient(circle, rgba(var(--accent-rgb), 0.42), transparent 70%);
+        }
+        .pp-orb-neutral {
+          background: radial-gradient(circle, rgba(0,0,0,0.18), transparent 70%);
+        }
+        :global(html[data-theme="dark"]) .pp-orb-warm {
+          background: radial-gradient(circle, rgba(var(--accent-rgb), 0.50), transparent 70%);
+        }
+        :global(html[data-theme="dark"]) .pp-orb-neutral {
+          background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%);
+        }
+
+        /* Plan card hover */
+        .pp-card { transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, border-color .2s ease; }
+        .pp-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(0,0,0,.10); }
+        :global(html[data-theme="dark"]) .pp-card:hover { box-shadow: 0 20px 44px rgba(0,0,0,.55); }
+
+        .pp-card.is-hl { transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease; }
+        .pp-card.is-hl:hover { transform: translateY(-6px); box-shadow: 0 26px 60px rgba(var(--accent-rgb),.22); }
+        :global(html[data-theme="dark"]) .pp-card.is-hl:hover { box-shadow: 0 26px 60px rgba(var(--accent-rgb),.32); }
+
+        /* Highlighted plan card inner surface */
+        .pp-hl-surface {
+          background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.06) 0%, var(--color-surface) 60%);
+          box-shadow: 0 16px 40px rgba(var(--accent-rgb), 0.16);
+        }
+        :global(html[data-theme="dark"]) .pp-hl-surface {
+          background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.10) 0%, var(--color-surface) 60%);
+          box-shadow: 0 16px 40px rgba(var(--accent-rgb), 0.28);
+        }
+
+        /* Highlighted card glossy sheen */
         .pp-hl-shine {
           position: absolute; top: 0; left: 0;
           width: 60%; height: 100%;
@@ -159,7 +225,37 @@ export function PricingPageClient() {
           mix-blend-mode: overlay; pointer-events: none;
           animation: pp-shine 5.5s ease-in-out infinite;
         }
-        :global(html[data-theme="dark"]) .pp-hl-shine { opacity: .35; }
+        :global(html[data-theme="dark"]) .pp-hl-shine {
+          background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.16) 50%, transparent 70%);
+          mix-blend-mode: screen;
+        }
+
+        /* Compare table — Growth column tint */
+        .pp-growth-col-head {
+          background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.10) 0%, rgba(var(--accent-rgb), 0.04) 100%);
+        }
+        :global(html[data-theme="dark"]) .pp-growth-col-head {
+          background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.18) 0%, rgba(var(--accent-rgb), 0.06) 100%);
+        }
+        .pp-growth-col { background: rgba(var(--accent-rgb), 0.05); }
+        :global(html[data-theme="dark"]) .pp-growth-col { background: rgba(var(--accent-rgb), 0.10); }
+
+        /* Enterprise plan icon — flip in dark since #1F1B17 is invisible */
+        :global(html[data-theme="dark"]) .pp-icon-enterprise {
+          background: rgba(255,255,255,0.06) !important;
+          color: var(--color-text) !important;
+          box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12) !important;
+        }
+        /* Same for Enterprise CTA button */
+        :global(html[data-theme="dark"]) .pp-cta-enterprise {
+          background: var(--color-surface-2) !important;
+          color: var(--color-text) !important;
+          box-shadow: inset 0 0 0 1px var(--color-border-strong);
+        }
+        :global(html[data-theme="dark"]) .pp-cta-enterprise:hover {
+          background: var(--color-border-strong) !important;
+          filter: none !important;
+        }
 
         .pp-toggle-thumb { transition: left .28s cubic-bezier(.34,1.56,.64,1); }
 
