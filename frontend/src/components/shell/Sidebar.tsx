@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Moon, Sun1, UserSearch } from "iconsax-reactjs";
 import { Wordmark } from "@/components/brand/Wordmark";
 import {
@@ -348,14 +348,16 @@ function ExpandedSidebar({
   const isActive = (href: string) =>
     pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
 
-  // The section that holds the current page — always kept open so its active
-  // item stays visible regardless of the user's collapse choices.
+  // The section that holds the current page.
   const activeSectionId = sections.find((s) =>
     s.items.some((item) => isActive(item.href)),
   )?.id;
 
-  // Only "Main" is expanded by default; the rest start collapsed.
-  const [openSet, setOpenSet] = useState<Set<string>>(() => new Set(["main"]));
+  // "Main" plus whichever section holds the current page start expanded; the
+  // rest start collapsed. The user can freely open/close ANY section after.
+  const [openSet, setOpenSet] = useState<Set<string>>(
+    () => new Set(["main", activeSectionId].filter(Boolean) as string[]),
+  );
   const toggleSection = (id: string) =>
     setOpenSet((prev) => {
       const next = new Set(prev);
@@ -363,6 +365,18 @@ function ExpandedSidebar({
       else next.add(id);
       return next;
     });
+
+  // When navigation lands in a different section, auto-open that section so the
+  // active item is visible — but don't force it open, so it stays collapsible.
+  useEffect(() => {
+    if (!activeSectionId) return;
+    setOpenSet((prev) => {
+      if (prev.has(activeSectionId)) return prev;
+      const next = new Set(prev);
+      next.add(activeSectionId);
+      return next;
+    });
+  }, [activeSectionId]);
 
   return (
     <>
@@ -385,7 +399,7 @@ function ExpandedSidebar({
         className="flex flex-1 flex-col gap-1.5 overflow-y-auto px-3 pb-2"
       >
         {sections.map((section) => {
-          const open = openSet.has(section.id) || section.id === activeSectionId;
+          const open = openSet.has(section.id);
           const panelId = `nav-section-${section.id}`;
           return (
             <div key={section.id} className="flex flex-col">

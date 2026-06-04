@@ -19,6 +19,7 @@ export const revenueMarginTrend = {
 
 export type MarginPlacement = {
   consultant: string;
+  image: string;
   client: string;
   recruiter: string;
   billRate: string;
@@ -30,12 +31,12 @@ export type MarginPlacement = {
 };
 
 export const marginPerPlacement: MarginPlacement[] = [
-  { consultant: "Vikram Reddy", client: "TechCorp", recruiter: "Sarah Khan", billRate: "$100/hr", payRate: "$75/hr", marginHr: "$25/hr", hours: "160", monthlyMargin: "$4,000", type: "Contract" },
-  { consultant: "Priya Sharma", client: "FinServe", recruiter: "Alex Morgan", billRate: "$110/hr", payRate: "$80/hr", marginHr: "$30/hr", hours: "160", monthlyMargin: "$4,800", type: "Contract" },
-  { consultant: "Arjun Mehta", client: "Walmart", recruiter: "Sarah Khan", billRate: "$95/hr", payRate: "$72/hr", marginHr: "$23/hr", hours: "168", monthlyMargin: "$3,864", type: "Contract" },
-  { consultant: "Neha Verma", client: "JPMorgan", recruiter: "Jason Brown", billRate: "$120/hr", payRate: "$85/hr", marginHr: "$35/hr", hours: "160", monthlyMargin: "$5,600", type: "Contract" },
-  { consultant: "Sneha Iyer", client: "Microsoft", recruiter: "Lisa Patel", billRate: "—", payRate: "—", marginHr: "—", hours: "—", monthlyMargin: "$18,000", type: "Permanent" },
-  { consultant: "Karan Singh", client: "Deloitte", recruiter: "Jason Brown", billRate: "—", payRate: "—", marginHr: "—", hours: "—", monthlyMargin: "$15,000", type: "Permanent" },
+  { consultant: "Vikram Reddy", image: "https://randomuser.me/api/portraits/men/32.jpg", client: "TechCorp", recruiter: "Sarah Khan", billRate: "$100/hr", payRate: "$75/hr", marginHr: "$25/hr", hours: "160", monthlyMargin: "$4,000", type: "Contract" },
+  { consultant: "Priya Sharma", image: "https://randomuser.me/api/portraits/women/65.jpg", client: "FinServe", recruiter: "Alex Morgan", billRate: "$110/hr", payRate: "$80/hr", marginHr: "$30/hr", hours: "160", monthlyMargin: "$4,800", type: "Contract" },
+  { consultant: "Arjun Mehta", image: "https://randomuser.me/api/portraits/men/45.jpg", client: "Walmart", recruiter: "Sarah Khan", billRate: "$95/hr", payRate: "$72/hr", marginHr: "$23/hr", hours: "168", monthlyMargin: "$3,864", type: "Contract" },
+  { consultant: "Neha Verma", image: "https://randomuser.me/api/portraits/women/24.jpg", client: "JPMorgan", recruiter: "Jason Brown", billRate: "$120/hr", payRate: "$85/hr", marginHr: "$35/hr", hours: "160", monthlyMargin: "$5,600", type: "Contract" },
+  { consultant: "Sneha Iyer", image: "https://randomuser.me/api/portraits/women/57.jpg", client: "Microsoft", recruiter: "Lisa Patel", billRate: "—", payRate: "—", marginHr: "—", hours: "—", monthlyMargin: "$18,000", type: "Permanent" },
+  { consultant: "Karan Singh", image: "https://randomuser.me/api/portraits/men/36.jpg", client: "Deloitte", recruiter: "Jason Brown", billRate: "—", payRate: "—", marginHr: "—", hours: "—", monthlyMargin: "$15,000", type: "Permanent" },
 ];
 
 export const contractVsPermanent = { contract: 70, permanent: 30 };

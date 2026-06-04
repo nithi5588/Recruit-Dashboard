@@ -268,29 +268,106 @@ function MetricStrip() {
 }
 
 /* ── Toolbar ──────────────────────────────────────────────────────────────── */
-function OwnerAvatarGroup() {
+function OwnerAvatarGroup({
+  selected,
+  onToggle,
+  onClear,
+}: {
+  selected: Set<string>;
+  onToggle: (initials: string) => void;
+  onClear: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useClickOutside(ref, () => setOpen(false), open);
   const visible = ownerPipelineOwners.slice(0, 3);
+  const hasSelection = selected.size > 0;
+
   return (
-    <div className="flex items-center">
-      {visible.map((o, i) => (
-        <span
-          key={o.initials}
-          className={`flex h-8 w-8 items-center justify-center rounded-full text-[11px] font-bold text-white ring-2 ring-[color:var(--color-surface)] ${
-            i > 0 ? "-ml-2" : ""
-          }`}
-          style={{ background: o.color }}
-          title={o.name}
-        >
-          {o.initials}
-        </span>
-      ))}
+    <div className="relative flex items-center" ref={ref}>
+      {visible.map((o, i) => {
+        const on = selected.has(o.initials);
+        return (
+          <button
+            key={o.initials}
+            type="button"
+            onClick={() => onToggle(o.initials)}
+            aria-pressed={on}
+            title={`${o.name}${on ? " (filtering)" : ""}`}
+            className={`relative flex h-8 w-8 items-center justify-center rounded-full text-[11px] font-bold text-white ring-2 transition-all ${
+              i > 0 ? "-ml-2" : ""
+            } ${on ? "z-10 ring-[color:var(--color-brand-500)]" : "ring-[color:var(--color-surface)]"} ${
+              hasSelection && !on ? "opacity-45 hover:opacity-100" : "hover:z-10"
+            }`}
+            style={{ background: o.color }}
+          >
+            {o.initials}
+          </button>
+        );
+      })}
       <button
         type="button"
-        aria-label="Add recruiter filter"
-        className="-ml-2 flex h-8 w-8 items-center justify-center rounded-full border border-dashed border-[color:var(--color-border-strong)] bg-[color:var(--color-surface)] text-[color:var(--color-text-muted)] ring-2 ring-[color:var(--color-surface)] transition-colors hover:text-[color:var(--color-text)]"
+        aria-label="Filter by recruiter"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        className={`-ml-2 flex h-8 w-8 items-center justify-center rounded-full border border-dashed bg-[color:var(--color-surface)] ring-2 ring-[color:var(--color-surface)] transition-colors ${
+          open
+            ? "border-[color:var(--color-brand-400)] text-[color:var(--color-brand-600)]"
+            : "border-[color:var(--color-border-strong)] text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)]"
+        }`}
       >
         <PlusIcon size={13} />
       </button>
+
+      {open ? (
+        <div
+          role="menu"
+          className="absolute left-0 top-full z-30 mt-2 w-[224px] overflow-hidden rounded-[12px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-1 shadow-[var(--shadow-dropdown)]"
+        >
+          <p className="px-3 pb-1 pt-2 text-[11px] font-bold uppercase tracking-[0.06em] text-[color:var(--color-text-muted)]">
+            Filter by recruiter
+          </p>
+          {ownerPipelineOwners.map((o) => {
+            const on = selected.has(o.initials);
+            return (
+              <button
+                key={o.initials}
+                type="button"
+                role="menuitemcheckbox"
+                aria-checked={on}
+                onClick={() => onToggle(o.initials)}
+                className="flex w-full items-center gap-2.5 px-3 py-2 text-left transition-colors hover:bg-[color:var(--color-surface-2)]"
+              >
+                <span
+                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[9.5px] font-bold text-white"
+                  style={{ background: o.color }}
+                >
+                  {o.initials}
+                </span>
+                <span className="flex-1 truncate text-[13px] font-medium text-[color:var(--color-text)]">
+                  {o.name}
+                </span>
+                {on ? <CheckIcon size={14} className="text-[color:var(--color-brand-500)]" /> : null}
+              </button>
+            );
+          })}
+          {hasSelection ? (
+            <div className="mt-1 border-t border-[color:var(--color-border)] pt-1">
+              <button
+                type="button"
+                onClick={() => {
+                  onClear();
+                  setOpen(false);
+                }}
+                className="w-full px-3 py-2 text-left text-[12.5px] font-semibold text-[color:var(--color-text-secondary)] transition-colors hover:bg-[color:var(--color-surface-2)] hover:text-[color:var(--color-text)]"
+              >
+                Clear filter ({selected.size})
+              </button>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -354,11 +431,17 @@ function Toolbar({
   setQuery,
   sortKey,
   setSortKey,
+  selectedOwners,
+  onToggleOwner,
+  onClearOwners,
 }: {
   query: string;
   setQuery: (v: string) => void;
   sortKey: SortKey;
   setSortKey: (k: SortKey) => void;
+  selectedOwners: Set<string>;
+  onToggleOwner: (initials: string) => void;
+  onClearOwners: () => void;
 }) {
   return (
     <div className="flex flex-wrap items-center gap-3">
@@ -370,7 +453,7 @@ function Toolbar({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search candidate, skill, client..."
-          className="ml-2.5 flex-1 bg-transparent text-[13px] text-[color:var(--color-text)] outline-none placeholder:text-[color:var(--color-text-muted)]"
+          className="ml-2.5 flex-1 bg-transparent text-[13px] text-[color:var(--color-text)] outline-none focus-visible:shadow-none placeholder:text-[color:var(--color-text-muted)]"
         />
         {query ? (
           <button
@@ -385,7 +468,7 @@ function Toolbar({
       </div>
 
       <SortMenu sortKey={sortKey} setSortKey={setSortKey} />
-      <OwnerAvatarGroup />
+      <OwnerAvatarGroup selected={selectedOwners} onToggle={onToggleOwner} onClear={onClearOwners} />
     </div>
   );
 }
@@ -500,17 +583,28 @@ export function OwnerPipelineBoard() {
   const [cards, setCards] = useState<OwnerPipelineCard[]>(INITIAL_CARDS);
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("default");
+  const [selectedOwners, setSelectedOwners] = useState<Set<string>>(new Set());
 
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [dragOverStage, setDragOverStage] = useState<OwnerStageId | null>(null);
 
+  const toggleOwner = (initials: string) =>
+    setSelectedOwners((prev) => {
+      const next = new Set(prev);
+      if (next.has(initials)) next.delete(initials);
+      else next.add(initials);
+      return next;
+    });
+  const clearOwners = () => setSelectedOwners(new Set());
+
   const filteredCards = useMemo(() => {
     const q = query.trim().toLowerCase();
     return cards.filter((c) => {
+      if (selectedOwners.size > 0 && !selectedOwners.has(c.ownerInitials)) return false;
       if (!q) return true;
       return `${c.name} ${c.role} ${c.client} ${c.ownerInitials}`.toLowerCase().includes(q);
     });
-  }, [cards, query]);
+  }, [cards, query, selectedOwners]);
 
   const sortedCards = useMemo(() => {
     if (sortKey === "default") return filteredCards;
@@ -614,7 +708,15 @@ export function OwnerPipelineBoard() {
 
       {/* Toolbar */}
       <div className="mb-5">
-        <Toolbar query={query} setQuery={setQuery} sortKey={sortKey} setSortKey={setSortKey} />
+        <Toolbar
+          query={query}
+          setQuery={setQuery}
+          sortKey={sortKey}
+          setSortKey={setSortKey}
+          selectedOwners={selectedOwners}
+          onToggleOwner={toggleOwner}
+          onClearOwners={clearOwners}
+        />
       </div>
 
       {/* Board */}

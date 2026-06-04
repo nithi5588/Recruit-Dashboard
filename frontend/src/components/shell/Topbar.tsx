@@ -18,7 +18,6 @@ import {
   BriefcaseIcon,
   CalendarIcon,
   CheckIcon,
-  ChevronDown,
   HomeIcon,
   MatchIcon,
   MenuListIcon,
@@ -34,7 +33,6 @@ import {
 } from "@/components/icons/AppIcons";
 import { candidates as allCandidates } from "@/lib/sample-data";
 import { jobs as allJobs } from "@/lib/jobs-data";
-import { currentUser } from "@/lib/owner-dashboard-data";
 
 type NotificationKind = "match" | "interview" | "task" | "candidate" | "submission";
 
@@ -771,27 +769,6 @@ export function Topbar({
       </div>
 
       <AskAIPopover />
-
-      {/* Signed-in owner — photo + name/role, matching the dashboard mock. */}
-      <Link
-        href="/settings"
-        aria-label={`${currentUser.name}, ${currentUser.role}`}
-        className="ml-0.5 flex shrink-0 items-center gap-2 rounded-[12px] px-1 py-1 transition-colors hover:bg-[color:var(--color-surface-2)] sm:gap-2.5 sm:pl-1.5 sm:pr-2"
-      >
-        <Avatar name={currentUser.name} size={36} image={currentUser.image} />
-        <span className="hidden min-w-0 leading-tight sm:block">
-          <span className="block truncate text-[13px] font-semibold text-[color:var(--color-text)]">
-            {currentUser.name}
-          </span>
-          <span className="block truncate text-[11px] text-[color:var(--color-text-secondary)]">
-            {currentUser.role}
-          </span>
-        </span>
-        <ChevronDown
-          size={14}
-          className="hidden shrink-0 text-[color:var(--color-text-muted)] sm:block"
-        />
-      </Link>
     </header>
   );
 }

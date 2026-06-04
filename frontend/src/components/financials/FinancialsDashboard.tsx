@@ -268,7 +268,7 @@ function RevenueMarginChart() {
 
 function RevenueMarginCard() {
   return (
-    <div className={`${CARD} flex flex-col p-5 sm:p-6`}>
+    <div className={`${CARD} flex flex-col p-5`}>
       <div className="flex items-center justify-between gap-3">
         <h3 className="text-[17px] font-bold text-[color:var(--color-text)]">Revenue &amp; Margin Trend</h3>
         <div className="flex items-center gap-4 text-[12.5px] text-[color:var(--color-text-secondary)]">
@@ -303,7 +303,7 @@ function MarginPerPlacementCard() {
     "Type",
   ];
   return (
-    <div className={`${CARD} p-5 sm:p-6`}>
+    <div className={`${CARD} p-5`}>
       <h3 className="text-[17px] font-bold text-[color:var(--color-text)]">Margin per Placement</h3>
       <div className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[640px] border-collapse">
@@ -324,7 +324,7 @@ function MarginPerPlacementCard() {
               <tr key={r.consultant} className="border-t border-[color:var(--color-border)]">
                 <td className="py-2.5 pr-3">
                   <div className="flex items-center gap-2">
-                    <Avatar name={r.consultant} size={26} />
+                    <Avatar name={r.consultant} image={r.image} size={26} />
                     <span className="whitespace-nowrap text-[13px] font-semibold text-[color:var(--color-text)]">{r.consultant}</span>
                   </div>
                 </td>
@@ -393,7 +393,7 @@ function DirectVsVendorCard() {
   return (
     <div className={`${CARD} flex flex-col p-5`}>
       <h3 className="text-[17px] font-bold text-[color:var(--color-text)]">Direct vs Through-Vendor</h3>
-      <div className="mt-5 flex h-3 w-full overflow-hidden rounded-full" style={{ background: BRAND_SOFT }}>
+      <div className="mt-4 flex h-3 w-full overflow-hidden rounded-full" style={{ background: BRAND_SOFT }}>
         <div style={{ width: `${directVsVendor.direct}%`, background: BRAND }} />
       </div>
       <div className="mt-4 flex items-center justify-between">
@@ -426,7 +426,7 @@ function TopClientsCard() {
   return (
     <div className={`${CARD} p-5`}>
       <h3 className="text-[17px] font-bold text-[color:var(--color-text)]">Top Clients by Revenue</h3>
-      <div className="mt-5 space-y-3.5">
+      <div className="mt-4 space-y-3.5">
         {topClientsByRevenue.map((c) => (
           <div key={c.name} className="flex items-center gap-3">
             <span className="w-[68px] shrink-0 text-[13px] font-medium text-[color:var(--color-text)]">{c.name}</span>
@@ -445,9 +445,9 @@ function TopClientsCard() {
 function RevenuePerRecruiterCard() {
   const maxAmount = Math.max(...revenuePerRecruiter.map((r) => r.amount));
   return (
-    <div className={`${CARD} p-5 sm:p-6`}>
+    <div className={`${CARD} p-5`}>
       <h3 className="text-[17px] font-bold text-[color:var(--color-text)]">Revenue per Recruiter</h3>
-      <div className="mt-5 space-y-4">
+      <div className="mt-4 space-y-3.5">
         {revenuePerRecruiter.map((r, i) => (
           <div key={r.name} className="flex items-center gap-3">
             <span className="w-4 shrink-0 text-[13px] font-medium text-[color:var(--color-text-muted)]">{i + 1}</span>
@@ -467,9 +467,9 @@ function RevenuePerRecruiterCard() {
 function ForecastCard() {
   const total = forecast.actual.amount + forecast.next.amount;
   return (
-    <div className={`${CARD} flex flex-col p-5 sm:p-6`}>
+    <div className={`${CARD} flex flex-col p-5`}>
       <h3 className="text-[17px] font-bold text-[color:var(--color-text)]">Forecast</h3>
-      <p className="mt-3 text-[15px] text-[color:var(--color-text)]">
+      <p className="mt-4 text-[15px] text-[color:var(--color-text)]">
         <span className="text-[20px] font-extrabold tracking-tight">{forecast.expected}</span>{" "}
         <span className="text-[color:var(--color-text-secondary)]">
           expected from {forecast.fromCount} consultants in{" "}
@@ -525,7 +525,7 @@ function StatusChip({ status }: { status: "Pending" | "Overdue" }) {
 
 function OutstandingInvoicesCard() {
   return (
-    <div className={`${CARD} p-5 sm:p-6`}>
+    <div className={`${CARD} p-5`}>
       <h3 className="text-[17px] font-bold text-[color:var(--color-text)]">Outstanding Invoices</h3>
       <div className="mt-4 grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-0 lg:divide-x lg:divide-[color:var(--color-border)]">
         {/* Invoices table */}
@@ -542,10 +542,10 @@ function OutstandingInvoicesCard() {
             <tbody>
               {outstandingInvoices.map((inv) => (
                 <tr key={inv.client} className="border-t border-[color:var(--color-border)]">
-                  <td className="py-3 text-[13px] font-semibold text-[color:var(--color-text)]">{inv.client}</td>
-                  <td className="py-3 text-[13px] text-[color:var(--color-text)]">{inv.amount}</td>
-                  <td className="py-3 text-[13px] text-[color:var(--color-text-secondary)]">{inv.dueDate}</td>
-                  <td className="py-3"><StatusChip status={inv.status} /></td>
+                  <td className="py-2.5 text-[13px] font-semibold text-[color:var(--color-text)]">{inv.client}</td>
+                  <td className="py-2.5 text-[13px] text-[color:var(--color-text)]">{inv.amount}</td>
+                  <td className="py-2.5 text-[13px] text-[color:var(--color-text-secondary)]">{inv.dueDate}</td>
+                  <td className="py-2.5"><StatusChip status={inv.status} /></td>
                 </tr>
               ))}
             </tbody>
