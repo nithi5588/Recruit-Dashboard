@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { UserSearch } from "iconsax-reactjs";
@@ -240,7 +240,7 @@ function UrlHero({
             type="button"
             onClick={onEnrich}
             disabled={isEnriching || !url.trim()}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-5 text-[14px] font-semibold text-white shadow-[0_8px_20px_rgba(46,71,224,0.28)] transition-all hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[160px]"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-5 text-[14px] font-semibold text-white shadow-[0_8px_20px_rgba(91, 61, 245,0.28)] transition-all hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-[160px]"
           >
             {isEnriching ? (
               <>
@@ -408,7 +408,7 @@ function ProfileHeader({ recruiter }: { recruiter: Recruiter }) {
           <Avatar name={recruiter.name} size={72} />
           {recruiter.verified ? (
             <span
-              className="absolute -bottom-1 -right-1 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-[color:var(--color-surface)] bg-[color:var(--color-success)] text-white shadow-[0_2px_8px_rgba(46,71,224,0.35)]"
+              className="absolute -bottom-1 -right-1 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-[color:var(--color-surface)] bg-[color:var(--color-success)] text-white shadow-[0_2px_8px_rgba(91, 61, 245,0.35)]"
               aria-label="Verified"
             >
               <CheckIcon size={12} />
@@ -759,7 +759,7 @@ function OverviewCard({
   total: number;
 }) {
   const segments = [
-    { name: "Successful", value: successful, color: "#2E47E0" },
+    { name: "Successful", value: successful, color: "#5B3DF5" },
     { name: "Failed", value: failed, color: "#20319C" },
     { name: "In Progress", value: inProgress, color: "#525252" },
   ];
@@ -861,7 +861,7 @@ function AccuracyCard({
         <div className="relative">
           <Sparkline
             data={points}
-            color="#2E47E0"
+            color="#5B3DF5"
             width={280}
             height={80}
             fill

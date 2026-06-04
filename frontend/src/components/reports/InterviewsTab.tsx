@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   Calendar,
@@ -43,8 +43,8 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 // ─── Today's Schedule timeline ────────────────────────────────────────────────
 
 const STAGE_STYLES: Record<string, { bg: string; fg: string; border: string }> = {
-  Screening:  { bg: "#E6E9FB", fg: "#2E47E0", border: "#C4CBF6" },
-  Technical:  { bg: "#F5F5F5", fg: "#2E47E0", border: "#C4CBF6" },
+  Screening:  { bg: "#E6E9FB", fg: "#5B3DF5", border: "#C4CBF6" },
+  Technical:  { bg: "#F5F5F5", fg: "#5B3DF5", border: "#C4CBF6" },
   HR:         { bg: "#E6E9FB", fg: "#273DC0", border: "#C4CBF6" },
   Managerial: { bg: "#F2F3FD", fg: "#273DC0", border: "#C4CBF6" },
   Final:      { bg: "#C4CBF6", fg: "#20319C", border: "#C4CBF6" },

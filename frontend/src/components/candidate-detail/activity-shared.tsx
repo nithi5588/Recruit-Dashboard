@@ -1,4 +1,4 @@
-import {
+﻿import {
   CalendarIcon,
   ChatIcon,
   InboxIcon,
@@ -23,7 +23,7 @@ export function activityTheme(
     case "resume":
       return {
         bg: "#E6E9FB",
-        fg: "#2E47E0",
+        fg: "#5B3DF5",
         icon: <NoteLinesIcon size={iconSize} />,
       };
     case "status":
@@ -60,7 +60,7 @@ export function activityTheme(
     default:
       return {
         bg: "#E6E9FB",
-        fg: "#2E47E0",
+        fg: "#5B3DF5",
         icon: <UserPlusIcon size={iconSize} />,
       };
   }

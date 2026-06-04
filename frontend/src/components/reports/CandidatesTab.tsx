@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import {
@@ -42,7 +42,7 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 // ─── Growth chart (two series) ────────────────────────────────────────────────
 
 const GROWTH_SERIES = [
-  { key: "newCandidates"   as const, label: "New Candidates",   color: "#2E47E0" },
+  { key: "newCandidates"   as const, label: "New Candidates",   color: "#5B3DF5" },
   { key: "updatedProfiles" as const, label: "Updated Profiles", color: "#273DC0" },
 ];
 
@@ -167,7 +167,7 @@ function SkillsCloud() {
   const shaded = [...skillsCloud]
     .sort((a, b) => b.size - a.size)
     .map((s) => {
-      const hue = s.size > 0.85 ? "#273DC0" : s.size > 0.65 ? "#2E47E0" : s.size > 0.5 ? "#2E47E0" : s.size > 0.4 ? "#5C6FE7" : "#96A3EF";
+      const hue = s.size > 0.85 ? "#273DC0" : s.size > 0.65 ? "#5B3DF5" : s.size > 0.5 ? "#5B3DF5" : s.size > 0.4 ? "#5C6FE7" : "#96A3EF";
       return { ...s, hue };
     });
   return (

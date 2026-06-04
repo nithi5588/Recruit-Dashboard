@@ -1,20 +1,14 @@
 import Link from "next/link";
-import {
-  BriefcaseIcon,
-  CalendarIcon,
-  ChevronRight,
-  MatchIcon,
-  PlusIcon,
-  SparklesIcon,
-  TasksIcon,
-  UsersIcon,
-} from "@/components/icons/AppIcons";
+import { ChevronRight, SparklesIcon } from "@/components/icons/AppIcons";
 import { AIAssistant } from "@/components/dashboard/AIAssistant";
+import { DashboardHero } from "@/components/dashboard/DashboardHero";
+import { OwnerDashboard } from "@/components/dashboard/OwnerDashboard";
 import { RecentCandidatesTable } from "@/components/dashboard/RecentCandidatesTable";
 import { StatsGrid } from "@/components/dashboard/StatsGrid";
 import { TasksWidget } from "@/components/dashboard/TasksWidget";
 import { TodaysSchedule } from "@/components/dashboard/TodaysSchedule";
 import { TopPriorityCandidates } from "@/components/dashboard/TopPriorityCandidates";
+import { RoleGate } from "@/components/role/RoleGate";
 import { candidates, tasks, todaysSchedule } from "@/lib/sample-data";
 
 const userName = "Nithish";
@@ -29,53 +23,6 @@ function formatDateParts(d: Date) {
   const weekday = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(d);
   const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(d);
   return { weekday, month, day: d.getDate() };
-}
-
-type StatPillProps = {
-  value: number;
-  label: string;
-  href: string;
-  tone: "brand" | "amber" | "rose";
-  icon: React.ReactNode;
-};
-
-function StatPill({ value, label, href, tone, icon }: StatPillProps) {
-  const toneClass =
-    tone === "brand"
-      ? "dash-pill-brand"
-      : tone === "amber"
-        ? "dash-pill-amber"
-        : "dash-pill-rose";
-  return (
-    <Link href={href} className={`dash-stat-pill ${toneClass}`}>
-      <span className="dash-stat-pill-icon" aria-hidden>{icon}</span>
-      <span className="dash-stat-pill-value">{value}</span>
-      <span className="dash-stat-pill-label">{label}</span>
-    </Link>
-  );
-}
-
-type HeroActionProps = {
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-  variant: "primary" | "ghost";
-};
-
-function HeroAction({ href, icon, label, variant }: HeroActionProps) {
-  return (
-    <Link
-      href={href}
-      className={
-        variant === "primary"
-          ? "dash-action dash-action-primary"
-          : "dash-action dash-action-ghost"
-      }
-    >
-      <span aria-hidden>{icon}</span>
-      <span>{label}</span>
-    </Link>
-  );
 }
 
 function SectionLabel({
@@ -324,83 +271,36 @@ export default function DashboardPage() {
         }
       `}</style>
 
+      {/* Owner sees the agency operations dashboard. */}
+      <RoleGate allow="owner">
+        <OwnerDashboard />
+      </RoleGate>
+
+      {/* Recruiter & Bench Sales keep the personal/action dashboard. */}
+      <RoleGate allow={["recruiter", "bench_sales"]}>
       <div className="grid grid-cols-1 gap-6 px-4 py-6 sm:px-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:px-8 xl:py-8">
         <div className="dash-rise min-w-0 space-y-6">
-          {/* ─── Hero ────────────────────────────────────────────── */}
-          <header className="dash-hero">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="dash-date-pill">
-                <CalendarIcon size={12} />
-                {weekday}, {month} {day}
-              </span>
-              <span className="dash-status-pill" aria-label="System status">
-                Pipeline healthy
-              </span>
-            </div>
-
-            <h1 className="dash-hero-title">
-              {greeting}, {userName}.{" "}
-              <span className="wave" aria-hidden>👋</span>
-            </h1>
-            <p className="dash-hero-sub">
-              You have <strong>{interviewsToday} interview{interviewsToday === 1 ? "" : "s"}</strong>{" "}
-              and <strong>{openTasks} task{openTasks === 1 ? "" : "s"}</strong> on your plate today —
-              let&apos;s place some talent.
-            </p>
-
-            <div className="dash-stat-pills">
-              <StatPill
-                value={interviewsToday}
-                label="interviews today"
-                href="/calendar"
-                tone="brand"
-                icon={<CalendarIcon size={14} />}
-              />
-              <StatPill
-                value={openTasks}
-                label="tasks pending"
-                href="/tasks"
-                tone="amber"
-                icon={<TasksIcon size={14} />}
-              />
-              <StatPill
-                value={highPriority}
-                label="high priority"
-                href="/candidates?priority=high"
-                tone="rose"
-                icon={<UsersIcon size={14} />}
-              />
-            </div>
-
-            <div className="dash-actions">
-              <HeroAction
-                href="/candidates/new"
-                icon={<PlusIcon size={14} />}
-                label="Add candidate"
-                variant="primary"
-              />
-              <HeroAction
-                href="/assistant"
-                icon={<MatchIcon size={14} />}
-                label="Run AI match"
-                variant="ghost"
-              />
-              <HeroAction
-                href="/pipeline"
-                icon={<BriefcaseIcon size={14} />}
-                label="View pipeline"
-                variant="ghost"
-              />
-            </div>
-          </header>
+          {/* ─── Hero (role-aware) ───────────────────────────────── */}
+          <DashboardHero
+            userName={userName}
+            greeting={greeting}
+            weekday={weekday}
+            month={month}
+            day={day}
+            interviewsToday={interviewsToday}
+            openTasks={openTasks}
+            highPriority={highPriority}
+          />
 
           {/* ─── Pipeline overview ──────────────────────────────── */}
           <section aria-labelledby="dash-overview-label" className="space-y-3">
             <SectionLabel
               hint={
-                <Link href="/reports" className="link-brand inline-flex items-center gap-1">
-                  See full report <ChevronRight size={11} />
-                </Link>
+                <RoleGate allow="owner">
+                  <Link href="/reports" className="link-brand inline-flex items-center gap-1">
+                    See full report <ChevronRight size={11} />
+                  </Link>
+                </RoleGate>
               }
             >
               <span id="dash-overview-label">Pipeline overview</span>
@@ -428,6 +328,7 @@ export default function DashboardPage() {
           <TasksWidget />
         </aside>
       </div>
+      </RoleGate>
     </>
   );
 }

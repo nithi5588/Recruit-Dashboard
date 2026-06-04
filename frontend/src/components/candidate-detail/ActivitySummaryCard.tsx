@@ -1,4 +1,4 @@
-import {
+﻿import {
   CalendarIcon,
   InboxIcon,
   NoteLinesIcon,
@@ -45,7 +45,7 @@ export function ActivitySummaryCard({
       icon: <NoteLinesIcon size={16} />,
       value: String(summary.total),
       label: "Total Activities",
-      tint: { bg: "#E6E9FB", fg: "#2E47E0" },
+      tint: { bg: "#E6E9FB", fg: "#5B3DF5" },
     },
     {
       icon: <UserIcon size={16} />,

@@ -1,4 +1,4 @@
-import { Avatar } from "@/components/ui/Avatar";
+﻿import { Avatar } from "@/components/ui/Avatar";
 import { Badge, priorityTone, statusTone } from "@/components/ui/Badge";
 import { ScoreRing } from "@/components/ui/ScoreRing";
 import { EditIcon } from "@/components/icons/AppIcons";
@@ -61,7 +61,7 @@ export function CandidateSnapshot({
           <span className="inline-flex items-center gap-1.5">
             <span
               aria-hidden
-              className="h-2 w-2 rounded-full bg-[#2E47E0]"
+              className="h-2 w-2 rounded-full bg-[#5B3DF5]"
             />
             {candidate.availability}
           </span>

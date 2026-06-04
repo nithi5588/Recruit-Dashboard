@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import {
@@ -27,9 +27,9 @@ const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
 ];
 
 const TEAM_MEMBERS = [
-  { id: "1", name: "Nithish Baddula", email: "Invisiedge@gmail.com",       role: "Admin",     avatar: "NB", color: "#2E47E0", status: "active",  lastActive: "Active now" },
+  { id: "1", name: "Nithish Baddula", email: "Invisiedge@gmail.com",       role: "Admin",     avatar: "NB", color: "#5B3DF5", status: "active",  lastActive: "Active now" },
   { id: "2", name: "Priya Mehta",     email: "priya.mehta@recruit.io",     role: "Recruiter", avatar: "PM", color: "#525252", status: "active",  lastActive: "12 min ago" },
-  { id: "3", name: "Alex Johnson",    email: "alex.johnson@recruit.io",    role: "Recruiter", avatar: "AJ", color: "#2E47E0", status: "active",  lastActive: "3 hr ago" },
+  { id: "3", name: "Alex Johnson",    email: "alex.johnson@recruit.io",    role: "Recruiter", avatar: "AJ", color: "#5B3DF5", status: "active",  lastActive: "3 hr ago" },
   { id: "4", name: "Sarah Wilson",    email: "sarah.wilson@recruit.io",    role: "Viewer",    avatar: "SW", color: "#5C6FE7", status: "pending", lastActive: "Invited 2 days ago" },
 ];
 
@@ -147,8 +147,8 @@ function SaveBtn({ label = "Save changes" }: { label?: string }) {
         justifyContent: "center",
         gap: 7,
         boxShadow: hover
-          ? "0 6px 16px rgba(46, 71, 224, 0.28)"
-          : "0 2px 6px rgba(46, 71, 224, 0.18)",
+          ? "0 6px 16px rgba(91, 61, 245, 0.28)"
+          : "0 2px 6px rgba(91, 61, 245, 0.18)",
         transform: hover ? "translateY(-1px)" : "translateY(0)",
         letterSpacing: "-0.01em",
       }}
@@ -259,7 +259,7 @@ const ROLE_DESCRIPTIONS: Record<TeamRole, string> = {
 };
 
 const ROLE_OPTIONS: TeamRole[] = ["Admin", "Recruiter", "Viewer"];
-const AVATAR_PALETTE = ["#2E47E0", "#273DC0", "#5C6FE7", "#20319C", "#525252", "#96A3EF"];
+const AVATAR_PALETTE = ["#5B3DF5", "#273DC0", "#5C6FE7", "#20319C", "#525252", "#96A3EF"];
 
 function emailIsValid(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
@@ -384,7 +384,7 @@ function TeamTab() {
         .team-hero { position:relative; overflow:hidden; border-radius:16px; padding:22px; border:1px solid var(--color-border); background:var(--color-surface); }
         html[data-theme="dark"] .team-hero { background:var(--color-surface); border-color:var(--color-border); }
         .team-hero-head { display:flex; align-items:flex-start; gap:14px; margin-bottom:18px; }
-        .team-hero-tile { width:44px; height:44px; border-radius:12px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:var(--color-brand-500); color:#fff; box-shadow:0 6px 18px rgba(46,71,224,0.32); }
+        .team-hero-tile { width:44px; height:44px; border-radius:12px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:var(--color-brand-500); color:#fff; box-shadow:0 6px 18px rgba(91, 61, 245,0.32); }
         .team-hero-text h3 { margin:0; font-size:17px; font-weight:800; letter-spacing:-0.01em; color:var(--color-text); }
         .team-hero-text p  { margin:3px 0 0; font-size:13px; color:var(--color-text-secondary); }
 
@@ -397,8 +397,8 @@ function TeamTab() {
         .team-role-select:hover { border-color:var(--color-border-strong); }
         .team-role-select:focus { outline:none; border-color:var(--color-brand-500); box-shadow:var(--shadow-ring-brand); }
 
-        .invite-btn { height:46px; padding:0 20px; border-radius:12px; border:none; background:var(--color-brand-500); color:#fff; font-size:13.5px; font-weight:700; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:7px; transition: background .15s, box-shadow .15s, transform .15s; box-shadow:0 6px 18px rgba(46,71,224,0.34); }
-        .invite-btn:hover:not(:disabled) { background:var(--color-brand-600); transform:translateY(-1px); box-shadow:0 8px 22px rgba(46,71,224,0.42); }
+        .invite-btn { height:46px; padding:0 20px; border-radius:12px; border:none; background:var(--color-brand-500); color:#fff; font-size:13.5px; font-weight:700; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:7px; transition: background .15s, box-shadow .15s, transform .15s; box-shadow:0 6px 18px rgba(91, 61, 245,0.34); }
+        .invite-btn:hover:not(:disabled) { background:var(--color-brand-600); transform:translateY(-1px); box-shadow:0 8px 22px rgba(91, 61, 245,0.42); }
         .invite-btn:disabled { opacity:0.5; cursor:not-allowed; box-shadow:none; }
 
         .team-role-hint { margin-top:8px; font-size:12px; color:var(--color-text-muted); display:flex; align-items:center; gap:6px; }
@@ -1088,19 +1088,19 @@ function IntegrationsTab() {
         @media(min-width:1200px){ .int-grid { grid-template-columns:repeat(3, minmax(0,1fr)); } }
 
         .int-card { position:relative; border-radius:14px; border:1.5px solid var(--color-border); background:var(--color-surface); transition:border-color .18s, transform .18s, box-shadow .18s; overflow:hidden; }
-        .int-card[data-connected="true"] { border-color:rgba(46,71,224,0.22); }
-        .int-card:hover { border-color:var(--color-brand-300); transform:translateY(-2px); box-shadow:0 8px 22px rgba(46,71,224,0.10); }
+        .int-card[data-connected="true"] { border-color:rgba(91, 61, 245,0.22); }
+        .int-card:hover { border-color:var(--color-brand-300); transform:translateY(-2px); box-shadow:0 8px 22px rgba(91, 61, 245,0.10); }
         .int-card-body { display:flex; flex-direction:column; gap:12px; padding:16px; height:100%; }
 
-        .int-ribbon { position:absolute; top:0; left:0; right:0; height:3px; background:rgba(46,71,224,0.55); }
+        .int-ribbon { position:absolute; top:0; left:0; right:0; height:3px; background:rgba(91, 61, 245,0.55); }
 
         .int-card-head { display:flex; gap:12px; align-items:center; }
         .int-icon { flex-shrink:0; width:40px; height:40px; border-radius:11px; display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:16px; letter-spacing:-0.01em; text-transform:lowercase; }
         .int-title-wrap { min-width:0; flex:1; display:flex; flex-direction:column; gap:3px; }
         .int-title-row { display:flex; align-items:center; gap:6px; }
         .int-title { font-size:14px; font-weight:700; color:var(--color-text); letter-spacing:-0.01em; }
-        .int-mini-status { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:999px; background:rgba(46,71,224,0.15); }
-        .int-mini-dot { width:6px; height:6px; border-radius:999px; background:#2E47E0; box-shadow:0 0 0 2px rgba(46,71,224,0.25); }
+        .int-mini-status { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:999px; background:rgba(91, 61, 245,0.15); }
+        .int-mini-dot { width:6px; height:6px; border-radius:999px; background:#5B3DF5; box-shadow:0 0 0 2px rgba(91, 61, 245,0.25); }
         .int-category { display:inline-flex; align-self:flex-start; font-size:9.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--color-text-muted); background:var(--color-surface-2); padding:2px 7px; border-radius:999px; }
         .int-desc { margin:0; font-size:12.5px; line-height:1.5; color:var(--color-text-secondary); }
 
@@ -1109,11 +1109,11 @@ function IntegrationsTab() {
         .int-status-label { white-space:nowrap; }
         .int-status-dot { width:7px; height:7px; border-radius:999px; background:var(--color-border-strong); flex-shrink:0; }
         .int-status[data-connected="true"] { color:#273DC0; }
-        .int-status[data-connected="true"] .int-status-dot { background:#2E47E0; box-shadow:0 0 0 3px rgba(46,71,224,0.22); }
+        .int-status[data-connected="true"] .int-status-dot { background:#5B3DF5; box-shadow:0 0 0 3px rgba(91, 61, 245,0.22); }
         .int-sync { font-size:11px; font-weight:500; color:var(--color-text-muted); white-space:nowrap; }
 
         .int-btn { width:100%; height:34px; padding:0 14px; border-radius:9px; font-size:12.5px; font-weight:700; cursor:pointer; transition:background .15s, border-color .15s, color .15s, transform .12s; border:1.5px solid transparent; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; letter-spacing:-0.01em; }
-        .int-btn-primary { background:var(--color-brand-500); color:#fff; box-shadow:0 4px 12px rgba(46,71,224,0.22); }
+        .int-btn-primary { background:var(--color-brand-500); color:#fff; box-shadow:0 4px 12px rgba(91, 61, 245,0.22); }
         .int-btn-primary:hover { background:var(--color-brand-600); transform:translateY(-1px); }
         .int-btn-secondary { background:var(--color-surface-2); border-color:var(--color-border); color:var(--color-text-secondary); }
         .int-btn-secondary:hover { border-color:rgba(32,49,156,0.35); color:#20319C; background:rgba(32,49,156,0.08); }
@@ -1351,7 +1351,7 @@ function AppearanceTab() {
             aria-hidden
             style={{
               width: 8, height: 8, borderRadius: 999,
-              background: isDirty ? "#5C6FE7" : justSaved ? "#2E47E0" : "#D4D4D4",
+              background: isDirty ? "#5C6FE7" : justSaved ? "#5B3DF5" : "#D4D4D4",
               flexShrink: 0,
               transition: "background .15s",
             }}
@@ -1402,13 +1402,13 @@ function AppearanceTab() {
             disabled={!isDirty && !justSaved}
             style={{
               height: 40, padding: "0 22px", borderRadius: 10, border: "none",
-              background: justSaved ? "#2E47E0" : "var(--color-brand-500)",
+              background: justSaved ? "#5B3DF5" : "var(--color-brand-500)",
               color: "var(--color-surface)", fontSize: 14, fontWeight: 600,
               cursor: isDirty || justSaved ? "pointer" : "not-allowed",
               opacity: isDirty || justSaved ? 1 : 0.55,
               display: "flex", alignItems: "center", gap: 6,
               transition: "background .15s, opacity .15s",
-              boxShadow: isDirty ? "0 6px 16px rgba(46, 71, 224, 0.25)" : "none",
+              boxShadow: isDirty ? "0 6px 16px rgba(91, 61, 245, 0.25)" : "none",
             }}
           >
             {justSaved ? <><CheckIcon size={14} /> Saved</> : "Save changes"}

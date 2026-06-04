@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useId, useRef, useState, type FormEvent } from "react";
 import { Modal } from "@/components/ui/Modal";
@@ -64,16 +64,16 @@ function ProfileIllustration() {
         }}
       >
         <svg width="44" height="36" viewBox="0 0 44 36" fill="none">
-          <circle cx="13" cy="13" r="5" stroke="#2E47E0" strokeWidth="1.8" />
+          <circle cx="13" cy="13" r="5" stroke="#5B3DF5" strokeWidth="1.8" />
           <path
             d="M5 28a8 8 0 0 1 16 0"
-            stroke="#2E47E0"
+            stroke="#5B3DF5"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
           <path
             d="M25 11h14M25 16h10M25 21h14"
-            stroke="#2E47E0"
+            stroke="#5B3DF5"
             strokeWidth="1.8"
             strokeLinecap="round"
             opacity="0.55"
@@ -85,7 +85,7 @@ function ProfileIllustration() {
         className="absolute -right-1 -bottom-1 flex h-7 w-7 items-center justify-center rounded-full text-white"
         style={{
           background: "var(--color-brand-500)",
-          boxShadow: "0 6px 16px rgba(46, 71, 224, 0.3)",
+          boxShadow: "0 6px 16px rgba(91, 61, 245, 0.3)",
         }}
       >
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -393,7 +393,7 @@ export function AddCandidateModal({
             <button
               type="submit"
               disabled={nextDisabled}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_6px_16px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none sm:h-10"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_6px_16px_rgba(91, 61, 245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none sm:h-10"
             >
               {isAnalyzing ? (
                 <span

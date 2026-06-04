@@ -1,15 +1,24 @@
-export type DonutSegment = { name: string; value: number; color: string };
+export type DonutSegment = {
+  name: string;
+  value: number;
+  color: string;
+  /** Optional [from, to] linear gradient; overrides the flat `color` fill. */
+  gradient?: [string, string];
+};
 
 export function DonutChart({
   segments,
   size = 140,
   stroke = 22,
   ariaLabel = "Donut chart",
+  rounded = false,
 }: {
   segments: DonutSegment[];
   size?: number;
   stroke?: number;
   ariaLabel?: string;
+  /** Round the arc end caps for a softer ring. */
+  rounded?: boolean;
 }) {
   const total = segments.reduce((sum, s) => sum + s.value, 0) || 1;
   const radius = (size - stroke) / 2;
@@ -37,6 +46,23 @@ export function DonutChart({
       role="img"
       aria-label={ariaLabel}
     >
+      <defs>
+        {arcs.map(({ seg }) =>
+          seg.gradient ? (
+            <linearGradient
+              key={`grad-${seg.name}`}
+              id={`donut-grad-${seg.name}`}
+              x1="0"
+              y1="0"
+              x2="1"
+              y2="1"
+            >
+              <stop offset="0%" stopColor={seg.gradient[0]} />
+              <stop offset="100%" stopColor={seg.gradient[1]} />
+            </linearGradient>
+          ) : null,
+        )}
+      </defs>
       <circle
         cx={size / 2}
         cy={size / 2}
@@ -51,8 +77,9 @@ export function DonutChart({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke={seg.color}
+          stroke={seg.gradient ? `url(#donut-grad-${seg.name})` : seg.color}
           strokeWidth={stroke}
+          strokeLinecap={rounded ? "round" : "butt"}
           fill="none"
           strokeDasharray={`${dash} ${gap}`}
           transform={`rotate(${rotate} ${size / 2} ${size / 2})`}

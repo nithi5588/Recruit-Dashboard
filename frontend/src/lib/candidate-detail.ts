@@ -1,4 +1,4 @@
-import { candidates, type Candidate } from "@/lib/sample-data";
+﻿import { candidates, type Candidate } from "@/lib/sample-data";
 
 export type ExperienceEntry = {
   role: string;
@@ -282,7 +282,7 @@ const savannah: CandidateDetail = {
   tools: [
     { label: "Figma", abbr: "Fig", bg: "#C4CBF6", fg: "#20319C" },
     { label: "Sketch", abbr: "Sk", bg: "#F2F3FD", fg: "#273DC0" },
-    { label: "Adobe XD", abbr: "Xd", bg: "#E6E9FB", fg: "#2E47E0" },
+    { label: "Adobe XD", abbr: "Xd", bg: "#E6E9FB", fg: "#5B3DF5" },
     { label: "Photoshop", abbr: "Ps", bg: "#EAEAEA", fg: "#525252" },
     { label: "Illustrator", abbr: "Ai", bg: "#F2F3FD", fg: "#273DC0" },
     { label: "InDesign", abbr: "Id", bg: "#E6E9FB", fg: "#20319C" },
@@ -424,9 +424,9 @@ const savannah: CandidateDetail = {
       },
     ],
     funnel: [
-      { name: "Applied", count: 4, color: "#2E47E0" },
+      { name: "Applied", count: 4, color: "#5B3DF5" },
       { name: "Screening", count: 1, color: "#525252" },
-      { name: "Interview", count: 2, color: "#2E47E0" },
+      { name: "Interview", count: 2, color: "#5B3DF5" },
       { name: "Offered", count: 0, color: "#5C6FE7" },
       { name: "Rejected", count: 1, color: "#20319C" },
     ],
@@ -447,9 +447,9 @@ const savannah: CandidateDetail = {
       notesAdded: 2,
     },
     byType: [
-      { name: "Status Updates", count: 4, percent: 33, color: "#2E47E0" },
+      { name: "Status Updates", count: 4, percent: 33, color: "#5B3DF5" },
       { name: "Notes", count: 3, percent: 25, color: "#525252" },
-      { name: "Interviews", count: 2, percent: 17, color: "#2E47E0" },
+      { name: "Interviews", count: 2, percent: 17, color: "#5B3DF5" },
       { name: "Applications", count: 2, percent: 17, color: "#5C6FE7" },
       { name: "Others", count: 1, percent: 8, color: "#20319C" },
     ],
@@ -569,7 +569,7 @@ const savannah: CandidateDetail = {
       { name: "Information Architecture", level: "Intermediate" },
     ],
     otherSkills: [
-      { name: "Adobe XD", level: "Intermediate", abbr: "Xd", bg: "#E6E9FB", fg: "#2E47E0" },
+      { name: "Adobe XD", level: "Intermediate", abbr: "Xd", bg: "#E6E9FB", fg: "#5B3DF5" },
       { name: "Sketch", level: "Intermediate", abbr: "Sk", bg: "#F2F3FD", fg: "#273DC0" },
       { name: "Webflow", level: "Beginner", abbr: "W", bg: "#EAEAEA", fg: "#525252" },
       { name: "HTML/CSS", level: "Beginner", abbr: "H5", bg: "#F2F3FD", fg: "#273DC0" },
@@ -584,8 +584,8 @@ const savannah: CandidateDetail = {
       { name: "Prototyping", percent: 80, abbr: "P", iconBg: "#F2F3FD", iconFg: "#273DC0" },
     ],
     categories: [
-      { name: "Design", count: 8, color: "#2E47E0" },
-      { name: "Research", count: 3, color: "#2E47E0" },
+      { name: "Design", count: 8, color: "#5B3DF5" },
+      { name: "Research", count: 3, color: "#5B3DF5" },
       { name: "Tools", count: 5, color: "#525252" },
       { name: "Other", count: 2, color: "#5C6FE7" },
     ],
@@ -681,9 +681,9 @@ const savannah: CandidateDetail = {
       },
     ],
     byRole: [
-      { name: "Product Designer", count: 4, color: "#2E47E0" },
+      { name: "Product Designer", count: 4, color: "#5B3DF5" },
       { name: "UI/UX Designer", count: 3, color: "#525252" },
-      { name: "UX Designer", count: 1, color: "#2E47E0" },
+      { name: "UX Designer", count: 1, color: "#5B3DF5" },
     ],
     topSkills: [
       { name: "UI/UX Design", percent: 100 },

@@ -47,6 +47,7 @@ import {
   Layer,
   Link,
   Location,
+  Lock,
   MagicStar,
   Magicpen,
   Maximize,
@@ -57,6 +58,9 @@ import {
   Note1,
   Notification,
   Paperclip,
+  People,
+  Personalcard,
+  Profile,
   Profile2User,
   Refresh,
   RowVertical,
@@ -74,8 +78,10 @@ import {
   Tag2,
   TaskSquare,
   TickCircle,
+  Trash,
   TrendUp,
   UserAdd,
+  UserRemove,
   Verify,
   Video,
   Watch,
@@ -127,6 +133,8 @@ export const ReportsIcon       = wrap(Chart, "Linear");
 export const SparklesIcon      = wrap(MagicStar, "Bold");
 export const SettingsIcon      = wrap(Setting2, "Linear");
 export const MenuListIcon      = wrap(HamburgerMenu, "Linear");
+export const TeamIcon          = wrap(People, "Linear");
+export const FinancialsIcon    = wrap(DollarCircle, "Linear");
 
 // ─── Search / actions ────────────────────────────────────────────────────────
 
@@ -192,6 +200,8 @@ export const NoteLinesIcon     = wrap(Note1, "Linear");
 export const ExternalLinkIcon  = wrap(ExportSquare, "Linear");
 export const InboxIcon         = wrap(Sms, "Linear");
 export const UserPlusIcon      = wrap(UserAdd, "Linear");
+export const ProfileIcon       = wrap(Profile, "Linear");
+export const IdCardIcon        = wrap(Personalcard, "Linear");
 export const CodeBracketsIcon  = wrap(Code, "Linear");
 export const GraduationCapIcon = wrap(Bag2, "Linear");
 export const DotCircleIcon     = wrap(InfoCircle, "Linear");
@@ -206,5 +216,8 @@ export const XIcon             = wrap(CloseCircle, "Linear");
 export const TrophyIcon        = wrap(Cup, "Bold");
 export const TrendUpIcon       = wrap(TrendUp, "Linear");
 export const SyncIcon          = wrap(Refresh, "Linear");
+export const LockIcon          = wrap(Lock, "Linear");
+export const TrashIcon         = wrap(Trash, "Linear");
+export const UserRemoveIcon    = wrap(UserRemove, "Linear");
 
 export type { Variant as IconVariant };

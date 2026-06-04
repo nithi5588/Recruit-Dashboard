@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/Badge";
+﻿import { Badge } from "@/components/ui/Badge";
 import { PdfFileIcon } from "@/components/candidate-detail/PdfFileIcon";
 import {
   DownloadIcon,
@@ -87,7 +87,7 @@ export function ActiveResumeDetails({ resume }: { resume: Resume | null }) {
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <button
           type="button"
-          className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_6px_16px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)] sm:flex-initial"
+          className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_6px_16px_rgba(91, 61, 245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)] sm:flex-initial"
         >
           <EyeIcon size={16} />
           Preview

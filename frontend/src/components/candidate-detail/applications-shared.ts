@@ -1,4 +1,4 @@
-import type { BadgeTone } from "@/components/ui/Badge";
+﻿import type { BadgeTone } from "@/components/ui/Badge";
 import type {
   ApplicationStageDot,
   ApplicationStatus,
@@ -26,13 +26,13 @@ export function applicationStatusTone(status: ApplicationStatus): BadgeTone {
 export function stageDotColor(dot: ApplicationStageDot): string {
   switch (dot) {
     case "purple":
-      return "#2E47E0";
+      return "#5B3DF5";
     case "blue":
       return "#525252";
     case "orange":
       return "#5C6FE7";
     case "green":
-      return "#2E47E0";
+      return "#5B3DF5";
     case "red":
       return "#20319C";
     case "gray":

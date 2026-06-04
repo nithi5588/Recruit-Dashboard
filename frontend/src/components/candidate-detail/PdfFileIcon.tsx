@@ -1,4 +1,4 @@
-export function PdfFileIcon({
+﻿export function PdfFileIcon({
   size = 40,
   activeDot = false,
 }: {
@@ -43,7 +43,7 @@ export function PdfFileIcon({
       {activeDot ? (
         <span
           aria-label="Active"
-          className="absolute -right-1 -top-1 inline-flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-[#2E47E0] text-white"
+          className="absolute -right-1 -top-1 inline-flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-[#5B3DF5] text-white"
         >
           <svg width="8" height="8" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Excel export utility.
  *
  * Generates a SpreadsheetML 2003 (.xls) file — a native Excel XML format that
@@ -130,7 +130,7 @@ function buildWorkbookXml<T>(opts: ExportOptions<T>): string {
     <Style ss:ID="sHeader">
       <Alignment ss:Vertical="Center" ss:Horizontal="Left"/>
       <Font ss:FontName="Inter" ss:Size="11" ss:Bold="1" ss:Color="#FFFFFF"/>
-      <Interior ss:Color="#2E47E0" ss:Pattern="Solid"/>
+      <Interior ss:Color="#5B3DF5" ss:Pattern="Solid"/>
       <Borders>
         <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#273DC0"/>
       </Borders>

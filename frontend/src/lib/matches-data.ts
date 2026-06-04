@@ -1,4 +1,4 @@
-export type MatchQuality = "Excellent" | "Good" | "Fair" | "Low";
+﻿export type MatchQuality = "Excellent" | "Good" | "Fair" | "Low";
 
 export type MatchCandidate = {
   id: string;
@@ -374,7 +374,7 @@ export const allMatches: Match[] = [
       skills: ["Python", "React", "AWS"],
       extraSkills: 2,
       postedAgo: "3 days ago",
-      logoColor: "#2E47E0",
+      logoColor: "#5B3DF5",
       logoText: "A",
     },
     score: 69,

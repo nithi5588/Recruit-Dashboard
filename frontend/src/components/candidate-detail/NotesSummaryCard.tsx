@@ -1,4 +1,4 @@
-import {
+﻿import {
   NoteLinesIcon,
   PushPinIcon,
   UsersIcon,
@@ -41,7 +41,7 @@ export function NotesSummaryCard({ summary }: { summary: NotesBlock["summary"] }
       icon: <NoteLinesIcon size={16} />,
       value: String(summary.total),
       label: "Total Notes",
-      tint: { bg: "#E6E9FB", fg: "#2E47E0" },
+      tint: { bg: "#E6E9FB", fg: "#5B3DF5" },
     },
     {
       icon: <UserIcon size={16} />,

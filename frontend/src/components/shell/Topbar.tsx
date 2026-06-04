@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,6 +18,7 @@ import {
   BriefcaseIcon,
   CalendarIcon,
   CheckIcon,
+  ChevronDown,
   HomeIcon,
   MatchIcon,
   MenuListIcon,
@@ -33,6 +34,7 @@ import {
 } from "@/components/icons/AppIcons";
 import { candidates as allCandidates } from "@/lib/sample-data";
 import { jobs as allJobs } from "@/lib/jobs-data";
+import { currentUser } from "@/lib/owner-dashboard-data";
 
 type NotificationKind = "match" | "interview" | "task" | "candidate" | "submission";
 
@@ -130,7 +132,7 @@ function NotificationIcon({ kind }: { kind: NotificationKind }) {
     },
     submission: {
       bg: "bg-[color:var(--color-success-50,#E6E9FB)]",
-      fg: "text-[color:var(--color-success,#2E47E0)]",
+      fg: "text-[color:var(--color-success,#5B3DF5)]",
       icon: <CheckIcon size={16} />,
     },
   };
@@ -597,7 +599,7 @@ export function Topbar({
         type="button"
         aria-label="Add candidate"
         onClick={onAddCandidate}
-        className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-3 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(46,71,224,0.22)] transition-colors hover:bg-[color:var(--color-brand-600)] sm:px-4"
+        className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-3 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(91, 61, 245,0.22)] transition-colors hover:bg-[color:var(--color-brand-600)] sm:px-4"
       >
         <PlusIcon size={16} />
         <span className="hidden sm:inline">Add Candidate</span>
@@ -769,6 +771,27 @@ export function Topbar({
       </div>
 
       <AskAIPopover />
+
+      {/* Signed-in owner — photo + name/role, matching the dashboard mock. */}
+      <Link
+        href="/settings"
+        aria-label={`${currentUser.name}, ${currentUser.role}`}
+        className="ml-0.5 flex shrink-0 items-center gap-2 rounded-[12px] px-1 py-1 transition-colors hover:bg-[color:var(--color-surface-2)] sm:gap-2.5 sm:pl-1.5 sm:pr-2"
+      >
+        <Avatar name={currentUser.name} size={36} image={currentUser.image} />
+        <span className="hidden min-w-0 leading-tight sm:block">
+          <span className="block truncate text-[13px] font-semibold text-[color:var(--color-text)]">
+            {currentUser.name}
+          </span>
+          <span className="block truncate text-[11px] text-[color:var(--color-text-secondary)]">
+            {currentUser.role}
+          </span>
+        </span>
+        <ChevronDown
+          size={14}
+          className="hidden shrink-0 text-[color:var(--color-text-muted)] sm:block"
+        />
+      </Link>
     </header>
   );
 }

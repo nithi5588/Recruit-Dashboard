@@ -1,4 +1,4 @@
-import { Buildings } from "iconsax-reactjs";
+﻿import { Buildings } from "iconsax-reactjs";
 import {
   ClockIcon,
   StarOutlineIcon,
@@ -45,7 +45,7 @@ export function ProjectsSummaryCard({ block }: { block: ProjectsBlock }) {
       icon: <StarOutlineIcon size={16} />,
       value: String(block.totalProjects),
       label: "Total Projects",
-      tint: { bg: "#E6E9FB", fg: "#2E47E0" },
+      tint: { bg: "#E6E9FB", fg: "#5B3DF5" },
     },
     {
       icon: <UsersIcon size={16} />,

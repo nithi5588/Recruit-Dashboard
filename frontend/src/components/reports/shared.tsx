@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { ReactNode } from "react";
 import { MagicStar } from "iconsax-reactjs";
@@ -43,7 +43,7 @@ export function StatCard({
         {icon}
         {spark && (
           <div className="shrink-0 opacity-90">
-            <Sparkline values={spark.values} color={spark.color ?? "#2E47E0"} />
+            <Sparkline values={spark.values} color={spark.color ?? "#5B3DF5"} />
           </div>
         )}
       </div>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useId, useState, useRef, useEffect } from "react";
 import {
@@ -35,7 +35,7 @@ const TONE: Record<MatchTone, {
 }> = {
   excellent: {
     ring: "var(--color-brand-500)",
-    ringGlow: "rgba(46, 71, 224, 0.18)",
+    ringGlow: "rgba(91, 61, 245, 0.18)",
     scoreText: "text-[color:var(--color-brand-700)]",
     scoreLabel: "text-[color:var(--color-brand-600)]",
     segment: "bg-[color:var(--color-brand-500)]",
@@ -48,7 +48,7 @@ const TONE: Record<MatchTone, {
   },
   good: {
     ring: "var(--color-brand-400)",
-    ringGlow: "rgba(46, 71, 224, 0.12)",
+    ringGlow: "rgba(91, 61, 245, 0.12)",
     scoreText: "text-[color:var(--color-brand-700)]",
     scoreLabel: "text-[color:var(--color-brand-600)]",
     segment: "bg-[color:var(--color-brand-400)]",
@@ -349,7 +349,7 @@ export function MatchCard({
       onKeyDown={handleKeyDown}
       className={`group relative cursor-pointer overflow-hidden rounded-2xl border bg-[color:var(--color-surface)] p-5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-brand-500)] focus-visible:ring-offset-2 ${
         isFocused
-          ? "border-[color:var(--color-brand-500)] shadow-[0_10px_28px_rgba(46,71,224,0.14)] ring-2 ring-[color:var(--color-brand-200)]"
+          ? "border-[color:var(--color-brand-500)] shadow-[0_10px_28px_rgba(91, 61, 245,0.14)] ring-2 ring-[color:var(--color-brand-200)]"
           : "border-[color:var(--color-border)] hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_28px_rgba(23,26,43,0.08)]"
       }`}
     >

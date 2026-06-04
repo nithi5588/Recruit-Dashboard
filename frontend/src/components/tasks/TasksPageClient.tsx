@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   useCallback,
@@ -42,22 +42,22 @@ type Task = {
 };
 
 const sampleTasks: Task[] = [
-  { id: "t1",  title: "Follow up with Savannah Nguyen",            description: "Send updated resume to client and get feedback on product design role.", priority: "high",   status: "todo",        dueDate: "Today",       candidate: "Savannah Nguyen",    job: "Product Designer",      assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["Follow-up", "Interview"] },
-  { id: "t2",  title: "Schedule technical round for Ralph Edwards", description: "Coordinate with Atlassian hiring team for backend assessment.",          priority: "high",   status: "todo",        dueDate: "Today",       candidate: "Ralph Edwards",      job: "Frontend Developer",    assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["Interview"] },
-  { id: "t3",  title: "Review 5 new candidate profiles",            description: "Screen profiles for DevOps roles and update scores.",                    priority: "medium", status: "in-progress", dueDate: "Tomorrow",    candidate: undefined,            job: "DevOps Engineer",       assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["Screening"] },
-  { id: "t4",  title: "Send offer letter to Cameron Williamson",    description: "Prepare and send offer package for Product Manager position.",           priority: "high",   status: "in-progress", dueDate: "Today",       candidate: "Cameron Williamson", job: "Product Manager",       assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["Offer"] },
-  { id: "t5",  title: "Update JD for UX Researcher role",           description: "Add revised skill requirements and remote work policy.",                 priority: "low",    status: "todo",        dueDate: "Apr 25",      candidate: undefined,            job: "UX Researcher",         assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["Admin"] },
-  { id: "t6",  title: "Prepare weekly pipeline report",             description: "Compile metrics for leadership review meeting.",                         priority: "medium", status: "todo",        dueDate: "Apr 25",      candidate: undefined,            job: undefined,               assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["Report"] },
-  { id: "t7",  title: "Call Dianne Russell — follow-up pending",    description: "She asked for update on marketing manager screening result.",            priority: "medium", status: "in-progress", dueDate: "Yesterday",   candidate: "Dianne Russell",     job: "Marketing Manager",     assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["Follow-up"] },
-  { id: "t8",  title: "Send JD to Esther Howard",                   description: "UX Research role at Google — attach JD and instructions.",              priority: "low",    status: "done",        dueDate: "Apr 22",      candidate: "Esther Howard",      job: "UX Researcher",         assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["Outreach"] },
-  { id: "t9",  title: "Complete background check for Albert Flores", description: "Initiate BGV process through vendor portal.",                          priority: "medium", status: "done",        dueDate: "Apr 21",      candidate: "Albert Flores",      job: "DevOps Engineer",       assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["BGV"] },
-  { id: "t10", title: "Sync with client — Shopify hiring status",   description: "Weekly check-in on open positions and pipeline progress.",              priority: "medium", status: "todo",        dueDate: "Apr 26",      candidate: undefined,            job: undefined,               assignee: { initials: "NB", color: "#2E47E0", name: "Nithish" },    tags: ["Client"] },
+  { id: "t1",  title: "Follow up with Savannah Nguyen",            description: "Send updated resume to client and get feedback on product design role.", priority: "high",   status: "todo",        dueDate: "Today",       candidate: "Savannah Nguyen",    job: "Product Designer",      assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["Follow-up", "Interview"] },
+  { id: "t2",  title: "Schedule technical round for Ralph Edwards", description: "Coordinate with Atlassian hiring team for backend assessment.",          priority: "high",   status: "todo",        dueDate: "Today",       candidate: "Ralph Edwards",      job: "Frontend Developer",    assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["Interview"] },
+  { id: "t3",  title: "Review 5 new candidate profiles",            description: "Screen profiles for DevOps roles and update scores.",                    priority: "medium", status: "in-progress", dueDate: "Tomorrow",    candidate: undefined,            job: "DevOps Engineer",       assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["Screening"] },
+  { id: "t4",  title: "Send offer letter to Cameron Williamson",    description: "Prepare and send offer package for Product Manager position.",           priority: "high",   status: "in-progress", dueDate: "Today",       candidate: "Cameron Williamson", job: "Product Manager",       assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["Offer"] },
+  { id: "t5",  title: "Update JD for UX Researcher role",           description: "Add revised skill requirements and remote work policy.",                 priority: "low",    status: "todo",        dueDate: "Apr 25",      candidate: undefined,            job: "UX Researcher",         assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["Admin"] },
+  { id: "t6",  title: "Prepare weekly pipeline report",             description: "Compile metrics for leadership review meeting.",                         priority: "medium", status: "todo",        dueDate: "Apr 25",      candidate: undefined,            job: undefined,               assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["Report"] },
+  { id: "t7",  title: "Call Dianne Russell — follow-up pending",    description: "She asked for update on marketing manager screening result.",            priority: "medium", status: "in-progress", dueDate: "Yesterday",   candidate: "Dianne Russell",     job: "Marketing Manager",     assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["Follow-up"] },
+  { id: "t8",  title: "Send JD to Esther Howard",                   description: "UX Research role at Google — attach JD and instructions.",              priority: "low",    status: "done",        dueDate: "Apr 22",      candidate: "Esther Howard",      job: "UX Researcher",         assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["Outreach"] },
+  { id: "t9",  title: "Complete background check for Albert Flores", description: "Initiate BGV process through vendor portal.",                          priority: "medium", status: "done",        dueDate: "Apr 21",      candidate: "Albert Flores",      job: "DevOps Engineer",       assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["BGV"] },
+  { id: "t10", title: "Sync with client — Shopify hiring status",   description: "Weekly check-in on open positions and pipeline progress.",              priority: "medium", status: "todo",        dueDate: "Apr 26",      candidate: undefined,            job: undefined,               assignee: { initials: "NB", color: "#5B3DF5", name: "Nithish" },    tags: ["Client"] },
 ];
 
 const PRIORITY_CONFIG: Record<Priority, { label: string; bg: string; text: string; dot: string }> = {
   high:   { label: "High",   bg: "#C4CBF6", text: "#20319C", dot: "#20319C" },
   medium: { label: "Medium", bg: "#F2F3FD", text: "#273DC0", dot: "#5C6FE7" },
-  low:    { label: "Low",    bg: "#E6E9FB", text: "#20319C", dot: "#2E47E0" },
+  low:    { label: "Low",    bg: "#E6E9FB", text: "#20319C", dot: "#5B3DF5" },
 };
 
 const STATUS_CONFIG: Record<TaskStatus, { label: string; bg: string; text: string }> = {
@@ -75,7 +75,7 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "done",     label: "Completed" },
 ];
 
-const DEFAULT_ASSIGNEE = { initials: "NB", color: "#2E47E0", name: "Nithish" } as const;
+const DEFAULT_ASSIGNEE = { initials: "NB", color: "#5B3DF5", name: "Nithish" } as const;
 
 const MONTH_SHORT = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -294,10 +294,10 @@ function TaskStats({ tasks }: { tasks: Task[] }) {
     bg: string;
     pill?: string;
   }> = [
-    { label: "Total",     value: total,   color: "#2E47E0", bg: "#E6E9FB" },
+    { label: "Total",     value: total,   color: "#5B3DF5", bg: "#E6E9FB" },
     { label: "Due today", value: today,   color: "#5C6FE7", bg: "#F2F3FD" },
     { label: "Overdue",   value: overdue, color: "#20319C", bg: "#C4CBF6" },
-    { label: "Completed", value: done,    color: "#2E47E0", bg: "#E6E9FB", pill: `${progress}%` },
+    { label: "Completed", value: done,    color: "#5B3DF5", bg: "#E6E9FB", pill: `${progress}%` },
   ];
 
   return (
@@ -721,7 +721,7 @@ function TaskEditorModal({
             <button
               type="button"
               onClick={handleSave}
-              className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+              className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(91, 61, 245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
             >
               {isEdit ? (
                 <>
@@ -917,7 +917,7 @@ export function TasksPageClient() {
           <button
             type="button"
             onClick={() => openCreate()}
-            className="flex h-10 items-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+            className="flex h-10 items-center gap-2 rounded-[12px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(91, 61, 245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
           >
             <PlusIcon size={15} />
             Add Task
