@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Avatar } from "@/components/ui/Avatar";
 import { Badge, priorityTone } from "@/components/ui/Badge";
 import { ScoreRing } from "@/components/ui/ScoreRing";
@@ -22,7 +22,7 @@ function PriorityCard({ candidate }: { candidate: Candidate }) {
   return (
     <Link
       href={`/candidates/${candidate.id}`}
-      className="group flex h-full min-w-0 flex-col rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_24px_rgba(46,71,224,0.10)]"
+      className="group flex h-full min-w-0 flex-col rounded-[14px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 transition-all hover:-translate-y-[2px] hover:border-[color:var(--color-brand-200)] hover:shadow-[0_10px_24px_rgba(91, 61, 245,0.10)]"
     >
       <div className="mb-3 flex items-start justify-between gap-2">
         <Avatar name={candidate.name} size={42} />

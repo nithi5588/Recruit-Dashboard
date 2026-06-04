@@ -1,15 +1,37 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { AddCandidateModal } from "@/components/add-candidate/AddCandidateModal";
+import { RoleProvider, useRole } from "@/components/role/RoleProvider";
 import { PageTransition } from "@/components/shell/PageTransition";
 import { Sidebar } from "@/components/shell/Sidebar";
 import { Topbar } from "@/components/shell/Topbar";
+import { canAccess } from "@/lib/roles";
 
 export function AppShell({ children }: { children: ReactNode }) {
+  return (
+    <RoleProvider>
+      <AppShellInner>{children}</AppShellInner>
+    </RoleProvider>
+  );
+}
+
+function AppShellInner({ children }: { children: ReactNode }) {
+  const { role } = useRole();
+  const pathname = usePathname() ?? "";
+  const router = useRouter();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [addCandidateOpen, setAddCandidateOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  // If the current page isn't available to the active role (e.g. a recruiter
+  // landing on /reports after a switch), send them back to the dashboard.
+  useEffect(() => {
+    if (pathname && !canAccess(role, pathname)) {
+      router.replace("/dashboard");
+    }
+  }, [role, pathname, router]);
 
   useEffect(() => {
     if (!drawerOpen) return;

@@ -3,15 +3,18 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Avatar } from "@/components/ui/Avatar";
+import { RoleSwitcher } from "@/components/role/RoleSwitcher";
 import { ChevronDown } from "@/components/icons/AppIcons";
 
 export function SidebarProfile({
   userName,
   userRole,
+  userImage,
   onNavigate,
 }: {
   userName: string;
   userRole: string;
+  userImage?: string;
   onNavigate?: () => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -49,7 +52,7 @@ export function SidebarProfile({
         data-state={open ? "open" : "closed"}
         className="group flex w-full items-center gap-2.5 rounded-[12px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-2.5 py-2 text-left transition-all hover:border-[color:var(--color-border-strong)] hover:bg-[color:var(--color-surface-2)] data-[state=open]:border-[color:var(--color-brand-300)] data-[state=open]:bg-[color:var(--color-surface-2)]"
       >
-        <Avatar name={userName} size={34} />
+        <Avatar name={userName} size={34} image={userImage} />
         <div className="min-w-0 flex-1 leading-tight">
           <p className="truncate text-[13px] font-semibold text-[color:var(--color-text)]">
             {userName}
@@ -126,7 +129,7 @@ export function SidebarProfile({
           <div className="border-b border-[color:var(--color-border)] px-3 py-3">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <Avatar name={userName} size={38} />
+                <Avatar name={userName} size={38} image={userImage} />
                 <span className="pm-online-dot" aria-label="Online" />
               </div>
               <div className="min-w-0 leading-tight">
@@ -140,35 +143,12 @@ export function SidebarProfile({
             </div>
           </div>
 
-          {/* Single action */}
-          <div className="p-1.5">
-            <Link
-              href="/login"
-              role="menuitem"
-              onClick={() => {
-                close();
-                onNavigate?.();
-              }}
-              className="pm-item pm-danger"
-            >
-              <span className="pm-icon" aria-hidden>
-                <svg
-                  width={14}
-                  height={14}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.8}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                  <polyline points="16 17 21 12 16 7" />
-                  <line x1="21" y1="12" x2="9" y2="12" />
-                </svg>
-              </span>
-              <span>Log out</span>
-            </Link>
+          {/* Role switcher — pick the workspace to switch into */}
+          <div className="px-2 py-2">
+            <p className="px-1 pb-1 text-[10.5px] font-bold uppercase tracking-[0.08em] text-[color:var(--color-text-muted)]">
+              Switch role
+            </p>
+            <RoleSwitcher onSwitch={close} />
           </div>
         </div>
       ) : null}
@@ -176,7 +156,13 @@ export function SidebarProfile({
   );
 }
 
-export function CollapsedSidebarProfile({ userName }: { userName: string }) {
+export function CollapsedSidebarProfile({
+  userName,
+  userImage,
+}: {
+  userName: string;
+  userImage?: string;
+}) {
   return (
     <div className="flex flex-col items-center gap-2 border-t border-[color:var(--color-border)] py-3">
       <Link
@@ -185,7 +171,7 @@ export function CollapsedSidebarProfile({ userName }: { userName: string }) {
         title={userName}
         className="inline-flex items-center justify-center rounded-full ring-2 ring-transparent transition-shadow hover:ring-[color:var(--color-brand-200)]"
       >
-        <Avatar name={userName} size={32} />
+        <Avatar name={userName} size={32} image={userImage} />
       </Link>
     </div>
   );

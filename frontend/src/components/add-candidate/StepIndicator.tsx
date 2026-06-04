@@ -1,4 +1,4 @@
-import { CheckIcon } from "@/components/icons/AppIcons";
+﻿import { CheckIcon } from "@/components/icons/AppIcons";
 
 export type WizardStep = { label: string };
 
@@ -51,7 +51,7 @@ export function StepIndicator({
                 aria-current={isCurrent ? "step" : undefined}
                 className={`relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold transition-colors sm:h-8 sm:w-8 sm:text-[12px] ${
                   isCurrent
-                    ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_0_0_4px_rgba(46,71,224,0.15)]"
+                    ? "bg-[color:var(--color-brand-500)] text-white shadow-[0_0_0_4px_rgba(91, 61, 245,0.15)]"
                     : isCompleted
                       ? "bg-[color:var(--color-brand-500)] text-white"
                       : "border border-[color:var(--color-border-strong)] bg-[color:var(--color-surface)] text-[color:var(--color-text-muted)]"

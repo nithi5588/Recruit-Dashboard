@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { ReactNode } from "react";
 import { useState, useRef, useEffect, useCallback, useMemo, KeyboardEvent } from "react";
@@ -394,7 +394,7 @@ function CandidateCard({ c }: { c: Candidate }) {
             onMouseLeave={e => (e.currentTarget.style.borderColor="var(--color-border)")}>View Profile</button>
           <button style={{ height:29, padding:"0 11px", borderRadius:8, border:"none", background:"var(--color-brand-500)", fontSize:12, fontWeight:600, color:"#fff", cursor:"pointer", transition:"background .12s" }}
             onMouseEnter={e => (e.currentTarget.style.background="#273DC0")}
-            onMouseLeave={e => (e.currentTarget.style.background="#2E47E0")}>Add to Pipeline</button>
+            onMouseLeave={e => (e.currentTarget.style.background="#5B3DF5")}>Add to Pipeline</button>
         </div>
       </div>
     </div>
@@ -1014,7 +1014,7 @@ export function AssistantPageClient() {
                 <div style={{ width:38, height:38, borderRadius:11, flexShrink:0,
                   background:"var(--color-brand-500)",
                   display:"flex", alignItems:"center", justifyContent:"center",
-                  boxShadow:"0 3px 12px rgba(46,71,224,.32)" }}>
+                  boxShadow:"0 3px 12px rgba(91, 61, 245,.32)" }}>
                   <SparklesIcon size={18} style={{ color:"#fff" }} />
                 </div>
                 <div>
@@ -1046,7 +1046,7 @@ export function AssistantPageClient() {
                   style={{ height:34, padding:"0 13px", borderRadius:9, border:"none",
                     background:"var(--color-brand-500)", color:"#fff",
                     fontSize:12, fontWeight:700, cursor:"pointer", display:"flex", alignItems:"center", gap:5,
-                    boxShadow:"0 2px 10px rgba(46,71,224,.28)" }}>
+                    boxShadow:"0 2px 10px rgba(91, 61, 245,.28)" }}>
                   <SparklesIcon size={13} /> New Chat
                 </button>
                 <button
@@ -1075,7 +1075,7 @@ export function AssistantPageClient() {
                     <div style={{ width:56, height:56, borderRadius:18, margin:"0 auto 14px",
                       background:"var(--color-brand-500)",
                       display:"flex", alignItems:"center", justifyContent:"center",
-                      boxShadow:"0 6px 24px rgba(46,71,224,.28)" }}>
+                      boxShadow:"0 6px 24px rgba(91, 61, 245,.28)" }}>
                       <SparklesIcon size={26} style={{ color:"#fff" }} />
                     </div>
                     <p style={{ margin:"0 0 4px", fontSize:20, fontWeight:800, color:"var(--color-text)" }}>Hi Nithish 👋</p>
@@ -1131,14 +1131,14 @@ export function AssistantPageClient() {
                     <div style={{ background:"var(--color-brand-500)",
                       color:"#fff", borderRadius:"18px 18px 4px 18px",
                       padding:"12px 16px", fontSize:14, lineHeight:1.65,
-                      boxShadow:"0 4px 18px rgba(46,71,224,.28)" }}>
+                      boxShadow:"0 4px 18px rgba(91, 61, 245,.28)" }}>
                       {m.text}
                     </div>
                     <div style={{ textAlign:"right", fontSize:10, color:"#A3A3A3", marginTop:4 }}>{fmt(m.ts)}</div>
                   </div>
                   <div style={{ width:32, height:32, borderRadius:"50%", flexShrink:0,
                     background:"var(--color-brand-100)",
-                    border:"2px solid #fff", boxShadow:"0 2px 8px rgba(46,71,224,.18)",
+                    border:"2px solid #fff", boxShadow:"0 2px 8px rgba(91, 61, 245,.18)",
                     color:"var(--color-brand-500)", display:"flex", alignItems:"center", justifyContent:"center",
                     fontSize:12, fontWeight:800 }}>N</div>
                 </div>
@@ -1148,7 +1148,7 @@ export function AssistantPageClient() {
                   <div style={{ width:34, height:34, borderRadius:11, flexShrink:0,
                     background:"var(--color-brand-500)",
                     display:"flex", alignItems:"center", justifyContent:"center",
-                    boxShadow:"0 3px 10px rgba(46,71,224,.30)" }}>
+                    boxShadow:"0 3px 10px rgba(91, 61, 245,.30)" }}>
                     <SparklesIcon size={16} style={{ color:"#fff" }} />
                   </div>
                   <div style={{ flex:1, maxWidth:"calc(100% - 44px)" }}>
@@ -1225,7 +1225,7 @@ export function AssistantPageClient() {
                   <div style={{ width:34, height:34, borderRadius:11, flexShrink:0,
                     background:"var(--color-brand-500)",
                     display:"flex", alignItems:"center", justifyContent:"center",
-                    boxShadow:"0 3px 10px rgba(46,71,224,.28)" }}>
+                    boxShadow:"0 3px 10px rgba(91, 61, 245,.28)" }}>
                     <SparklesIcon size={16} style={{ color:"#fff" }} />
                   </div>
                   <div style={{ background:"var(--color-surface)", border:"1.5px solid var(--color-border)",
@@ -1265,7 +1265,7 @@ export function AssistantPageClient() {
                       aria-label="Clear scope"
                       style={{ display:"inline-flex", alignItems:"center", justifyContent:"center",
                         width:14, height:14, borderRadius:999, border:"none",
-                        background:"rgba(46,71,224,.15)", color:"var(--color-brand-600)",
+                        background:"rgba(91, 61, 245,.15)", color:"var(--color-brand-600)",
                         cursor:"pointer", padding:0 }}
                     >
                       <XIcon size={9} />
@@ -1337,7 +1337,7 @@ export function AssistantPageClient() {
                         display:"flex", alignItems:"center", justifyContent:"center",
                         cursor: input.trim() && !typing ? "pointer" : "default",
                         transition:"background .15s, box-shadow .15s",
-                        boxShadow: input.trim() && !typing ? "0 2px 10px rgba(46,71,224,.30)" : "none" }}>
+                        boxShadow: input.trim() && !typing ? "0 2px 10px rgba(91, 61, 245,.30)" : "none" }}>
                       <PaperPlaneIcon size={14} />
                     </button>
                   </div>

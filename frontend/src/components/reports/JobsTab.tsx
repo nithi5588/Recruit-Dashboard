@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import {
@@ -95,7 +95,7 @@ function ApplicationsChart() {
           <p className="mb-1.5 text-[11px] font-semibold text-[color:var(--color-text)]">{applicationsOverTime.labels[hovIdx]}, 2024</p>
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: "#2E47E0" }} />
+              <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: "#5B3DF5" }} />
               <span className="text-[10px] text-[color:var(--color-text-secondary)]">Applications</span>
             </div>
             <span className="text-[10px] font-bold text-[color:var(--color-text)]">{applicationsOverTime.values[hovIdx]}</span>
@@ -107,8 +107,8 @@ function ApplicationsChart() {
         onMouseMove={handleMove} onMouseLeave={() => setHovIdx(null)}>
         <defs>
           <linearGradient id="appAreaFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2E47E0" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#2E47E0" stopOpacity="0" />
+            <stop offset="0%" stopColor="#5B3DF5" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="#5B3DF5" stopOpacity="0" />
           </linearGradient>
         </defs>
         {yTicks.map((t) => (
@@ -124,10 +124,10 @@ function ApplicationsChart() {
         {hovIdx !== null && (
           <line x1={gx(hovIdx)} y1={P.t} x2={gx(hovIdx)} y2={P.t + ph} style={{ stroke: "var(--color-border-strong)" }} strokeWidth={1} strokeDasharray="4 2" />
         )}
-        <path d={pathD} fill="none" stroke="#2E47E0" strokeWidth={2.5} strokeLinecap="round" />
+        <path d={pathD} fill="none" stroke="#5B3DF5" strokeWidth={2.5} strokeLinecap="round" />
         {applicationsOverTime.values.map((v, i) => (
           <circle key={i} cx={gx(i)} cy={gy(v)} r={hovIdx === i ? 4.5 : 2.5}
-            fill={hovIdx === i ? "#2E47E0" : "white"} stroke="#2E47E0" strokeWidth={1.5} />
+            fill={hovIdx === i ? "#5B3DF5" : "white"} stroke="#5B3DF5" strokeWidth={1.5} />
         ))}
       </svg>
     </div>
@@ -140,7 +140,7 @@ const STATUS_STYLES: Record<JobStatus, { bg: string; fg: string }> = {
   "Active":  { bg: "#E6E9FB", fg: "#273DC0" },
   "Draft":   { bg: "#F5F5F5", fg: "#525252" },
   "On Hold": { bg: "#F2F3FD", fg: "#273DC0" },
-  "Closed":  { bg: "#F5F5F5", fg: "#2E47E0" },
+  "Closed":  { bg: "#F5F5F5", fg: "#5B3DF5" },
   "Expired": { bg: "#C4CBF6", fg: "#20319C" },
 };
 

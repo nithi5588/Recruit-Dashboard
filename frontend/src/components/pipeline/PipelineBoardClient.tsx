@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useRef, useState, type DragEvent } from "react";
 import {
@@ -49,7 +49,7 @@ const PRIORITY_RANK: Record<PipelinePriority, number> = { High: 0, Medium: 1, Lo
 const PRIORITY_STYLES: Record<PipelinePriority, { bg: string; fg: string; dot: string }> = {
   High:   { bg: "#C4CBF6", fg: "#20319C", dot: "#20319C" },
   Medium: { bg: "#F2F3FD", fg: "#273DC0", dot: "#5C6FE7" },
-  Low:    { bg: "#E6E9FB", fg: "#273DC0", dot: "#2E47E0" },
+  Low:    { bg: "#E6E9FB", fg: "#273DC0", dot: "#5B3DF5" },
 };
 
 // Pastel category colors per stage (used for tag chip on each card + column accent)
@@ -117,7 +117,7 @@ function uid() {
   return `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
 }
 
-const STAGE_AVATAR_COLORS = ["#2E47E0", "#525252", "#5C6FE7", "#20319C"];
+const STAGE_AVATAR_COLORS = ["#5B3DF5", "#525252", "#5C6FE7", "#20319C"];
 
 function pickAvatarColor() {
   return STAGE_AVATAR_COLORS[Math.floor(Math.random() * STAGE_AVATAR_COLORS.length)];
@@ -408,7 +408,7 @@ function AddCardForm({
           type="button"
           disabled={!name.trim()}
           onClick={handleSubmit}
-          className="h-7 rounded-[6px] bg-[color:var(--color-brand-500)] px-3 text-[11px] font-semibold text-white shadow-[0_2px_8px_rgba(46,71,224,0.3)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
+          className="h-7 rounded-[6px] bg-[color:var(--color-brand-500)] px-3 text-[11px] font-semibold text-white shadow-[0_2px_8px_rgba(91, 61, 245,0.3)] transition-all enabled:hover:bg-[color:var(--color-brand-600)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
         >
           Add card
         </button>

@@ -1,4 +1,4 @@
-import type { Match } from "./types";
+﻿import type { Match } from "./types";
 
 export const matches: Match[] = [
   // ─── Excellent (90+) ────────────────────────────────────────────────────────
@@ -62,7 +62,7 @@ export const matches: Match[] = [
       title: "Senior Backend Engineer",
       company: "Stripe",
       companyLogoText: "S",
-      companyLogoColor: "#2E47E0",
+      companyLogoColor: "#5B3DF5",
       location: "San Francisco, CA",
       workMode: "Hybrid",
       salaryMin: 145_000,

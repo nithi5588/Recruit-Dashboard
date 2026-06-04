@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import {
@@ -91,7 +91,7 @@ function ActivityHeatmap() {
                         className="h-6 rounded-[4px] transition-transform"
                         style={{
                           backgroundColor: HEAT_COLORS[v],
-                          outline: isHov ? "2px solid #2E47E0" : "none",
+                          outline: isHov ? "2px solid #5B3DF5" : "none",
                           outlineOffset: 1,
                           transform: isHov ? "scale(1.2)" : "scale(1)",
                           zIndex: isHov ? 10 : 0,
@@ -128,7 +128,7 @@ function ActivityHeatmap() {
 // ─── Activity volume area chart (total vs responses) ──────────────────────────
 
 const VOL_SERIES = [
-  { key: "total"     as const, label: "Total Activities", color: "#2E47E0" },
+  { key: "total"     as const, label: "Total Activities", color: "#5B3DF5" },
   { key: "responses" as const, label: "Responses",        color: "#273DC0" },
 ];
 
@@ -200,8 +200,8 @@ function VolumeChart() {
         onMouseMove={handleMove} onMouseLeave={() => setHovIdx(null)}>
         <defs>
           <linearGradient id="volAreaP" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2E47E0" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#2E47E0" stopOpacity="0" />
+            <stop offset="0%" stopColor="#5B3DF5" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#5B3DF5" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="volAreaG" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#273DC0" stopOpacity="0.14" />
@@ -257,7 +257,7 @@ function PeakHoursChart() {
               title={`${i % 12 === 0 ? 12 : i % 12}${i < 12 ? "a" : "p"} — ${v}`}
               style={{
                 height: h,
-                backgroundColor: isPeak ? "#2E47E0" : "#C4CBF6",
+                backgroundColor: isPeak ? "#5B3DF5" : "#C4CBF6",
               }}
             />
           );
@@ -278,7 +278,7 @@ function PeakHoursChart() {
 
 function FeedIcon({ type }: { type: ActivityFeedItem["type"] }) {
   const configs = {
-    call:        { bg: "#E6E9FB", fg: "#2E47E0", icon: <Call size={14} variant="Bulk" color="#2E47E0" /> },
+    call:        { bg: "#E6E9FB", fg: "#5B3DF5", icon: <Call size={14} variant="Bulk" color="#5B3DF5" /> },
     email:       { bg: "#F5F5F5", fg: "#5C6FE7", icon: <Send2 size={14} variant="Bulk" color="#5C6FE7" /> },
     interview:   { bg: "#F2F3FD", fg: "#5C6FE7", icon: <Calendar size={14} variant="Bulk" color="#5C6FE7" /> },
     application: { bg: "#E6E9FB", fg: "#273DC0", icon: <TickCircle size={14} variant="Bold" color="#273DC0" /> },

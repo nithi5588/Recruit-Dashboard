@@ -1,4 +1,4 @@
-export function DashboardIllustration() {
+﻿export function DashboardIllustration() {
   return (
     <div
       className="relative mx-auto aspect-[4/3] w-full max-w-[360px]"
@@ -26,8 +26,8 @@ export function DashboardIllustration() {
           <svg viewBox="0 0 200 64" className="h-full w-full" fill="none">
             <defs>
               <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#2E47E0" stopOpacity="0.28" />
-                <stop offset="100%" stopColor="#2E47E0" stopOpacity="0" />
+                <stop offset="0%" stopColor="#5B3DF5" stopOpacity="0.28" />
+                <stop offset="100%" stopColor="#5B3DF5" stopOpacity="0" />
               </linearGradient>
             </defs>
             <path
@@ -36,7 +36,7 @@ export function DashboardIllustration() {
             />
             <path
               d="M0 52 L22 44 L46 48 L70 30 L96 36 L120 22 L146 28 L172 14 L200 18"
-              stroke="#2E47E0"
+              stroke="#5B3DF5"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"

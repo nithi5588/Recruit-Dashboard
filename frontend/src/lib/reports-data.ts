@@ -1,4 +1,4 @@
-export const reportStatCards = [
+﻿export const reportStatCards = [
   { label: "Jobs Added",        value: 24,  change: 20, icon: "briefcase", iconBg: "#EEF2FF", iconColor: "#6366F1" }, // indigo
   { label: "New Candidates",   value: 126, change: 18, icon: "users",     iconBg: "#ECFDF5", iconColor: "#10B981" }, // emerald
   { label: "Applications Sent",value: 56,  change: 25, icon: "plane",     iconBg: "#ECFEFF", iconColor: "#06B6D4" }, // cyan
@@ -73,7 +73,7 @@ export const REPORT_TABS = [
 // ─── Jobs Analytics ───────────────────────────────────────────────────────────
 
 export const jobsStatCards = [
-  { label: "Total Jobs",              value: "24",    change: 20, icon: "briefcase", iconBg: "#E6E9FB", iconColor: "#2E47E0" },
+  { label: "Total Jobs",              value: "24",    change: 20, icon: "briefcase", iconBg: "#E6E9FB", iconColor: "#5B3DF5" },
   { label: "Total Views",             value: "1,348", change: 18, icon: "eye",       iconBg: "#E6E9FB", iconColor: "#273DC0" },
   { label: "Total Applications",      value: "256",   change: 25, icon: "cursor",    iconBg: "#F5F5F5", iconColor: "#96A3EF" },
   { label: "Avg. Applications / Job", value: "10.7",  change: 12, icon: "trophy",    iconBg: "#F2F3FD", iconColor: "#5C6FE7" },
@@ -86,7 +86,7 @@ export const applicationsOverTime = {
 };
 
 export const jobsByStatus = [
-  { label: "Active",  count: 12, pct: 50.0, color: "#2E47E0" },
+  { label: "Active",  count: 12, pct: 50.0, color: "#5B3DF5" },
   { label: "Draft",   count:  5, pct: 20.8, color: "#273DC0" },
   { label: "On Hold", count:  3, pct: 12.5, color: "#5C6FE7" },
   { label: "Closed",  count:  3, pct: 12.5, color: "#96A3EF" },
@@ -102,7 +102,7 @@ export const topPerformingJobs = [
 ];
 
 export const jobsApplicationsBySource = [
-  { label: "LinkedIn",        count: 96, pct: 37.5, color: "#2E47E0" },
+  { label: "LinkedIn",        count: 96, pct: 37.5, color: "#5B3DF5" },
   { label: "Company Careers", count: 64, pct: 25.0, color: "#273DC0" },
   { label: "Referral",        count: 48, pct: 18.8, color: "#5C6FE7" },
   { label: "Naukri",          count: 24, pct:  9.4, color: "#96A3EF" },
@@ -111,7 +111,7 @@ export const jobsApplicationsBySource = [
 ];
 
 export const jobsByDepartment = [
-  { label: "Engineering", count: 12, pct: 50.0, color: "#2E47E0" },
+  { label: "Engineering", count: 12, pct: 50.0, color: "#5B3DF5" },
   { label: "Design",      count:  5, pct: 20.8, color: "#96A3EF" },
   { label: "Marketing",   count:  3, pct: 12.5, color: "#5C6FE7" },
   { label: "Product",     count:  2, pct:  8.3, color: "#273DC0" },
@@ -149,7 +149,7 @@ export const jobsAiInsights: Array<{ tone: "positive" | "warning" | "info"; titl
 // ─── Candidates Analytics ─────────────────────────────────────────────────────
 
 export const candidateStatCards = [
-  { label: "Total Candidates", value: "126", change: 18, icon: "users",     iconBg: "#E6E9FB", iconColor: "#2E47E0" },
+  { label: "Total Candidates", value: "126", change: 18, icon: "users",     iconBg: "#E6E9FB", iconColor: "#5B3DF5" },
   { label: "New This Week",    value: "24",  change: 30, icon: "user-plus", iconBg: "#E6E9FB", iconColor: "#273DC0" },
   { label: "Active Candidates",value: "98",  change: 12, icon: "target",    iconBg: "#F5F5F5", iconColor: "#96A3EF" },
   { label: "Avg. Match Score", value: "78%", change:  5, icon: "trophy",    iconBg: "#F2F3FD", iconColor: "#5C6FE7" },
@@ -164,7 +164,7 @@ export const candidateGrowthData = {
 
 export const candidatesByStage = [
   { label: "New Profiles", count: 18, pct: 19.8, color: "#5C6FE7" },
-  { label: "Shortlisted",  count: 24, pct: 26.4, color: "#2E47E0" },
+  { label: "Shortlisted",  count: 24, pct: 26.4, color: "#5B3DF5" },
   { label: "Submitted",    count: 12, pct: 13.2, color: "#96A3EF" },
   { label: "Interview",    count:  8, pct:  8.8, color: "#5C6FE7" },
   { label: "Offered",      count:  5, pct:  5.5, color: "#A3A3A3" },
@@ -173,7 +173,7 @@ export const candidatesByStage = [
 ];
 
 export const topSkillsInDemand = [
-  { skill: "React",      candidates: 42, color: "#2E47E0" },
+  { skill: "React",      candidates: 42, color: "#5B3DF5" },
   { skill: "Python",     candidates: 38, color: "#96A3EF" },
   { skill: "TypeScript", candidates: 32, color: "#273DC0" },
   { skill: "Node.js",    candidates: 28, color: "#5C6FE7" },
@@ -183,13 +183,13 @@ export const topSkillsInDemand = [
 export const experienceDistribution = [
   { bucket: "0–2 yrs",  count: 18, color: "#C4CBF6" },
   { bucket: "3–5 yrs",  count: 42, color: "#5C6FE7" },
-  { bucket: "6–8 yrs",  count: 31, color: "#2E47E0" },
-  { bucket: "9–12 yrs", count: 22, color: "#2E47E0" },
+  { bucket: "6–8 yrs",  count: 31, color: "#5B3DF5" },
+  { bucket: "9–12 yrs", count: 22, color: "#5B3DF5" },
   { bucket: "13+ yrs",  count: 13, color: "#273DC0" },
 ];
 
 export const candidatesByLocation = [
-  { label: "New York",      count: 34, pct: 27.0, color: "#2E47E0" },
+  { label: "New York",      count: 34, pct: 27.0, color: "#5B3DF5" },
   { label: "San Francisco", count: 28, pct: 22.2, color: "#96A3EF" },
   { label: "Remote",        count: 24, pct: 19.1, color: "#273DC0" },
   { label: "Austin",        count: 18, pct: 14.3, color: "#5C6FE7" },
@@ -199,7 +199,7 @@ export const candidatesByLocation = [
 
 export const availabilityDistribution = [
   { label: "Immediate",   count: 38, pct: 30.2, color: "#273DC0" },
-  { label: "2 Weeks",     count: 42, pct: 33.3, color: "#2E47E0" },
+  { label: "2 Weeks",     count: 42, pct: 33.3, color: "#5B3DF5" },
   { label: "1 Month",     count: 28, pct: 22.2, color: "#5C6FE7" },
   { label: "2+ Months",   count: 18, pct: 14.3, color: "#A3A3A3" },
 ];
@@ -222,7 +222,7 @@ export const candidateAiInsights: Array<{ tone: "positive" | "warning" | "info";
 // ─── Interviews Analytics ─────────────────────────────────────────────────────
 
 export const interviewStatCards = [
-  { label: "Total Interviews",      value: "42",  change:  18, icon: "calendar", iconBg: "#E6E9FB", iconColor: "#2E47E0", positive: true  },
+  { label: "Total Interviews",      value: "42",  change:  18, icon: "calendar", iconBg: "#E6E9FB", iconColor: "#5B3DF5", positive: true  },
   { label: "Scheduled",             value: "18",  change:  12, icon: "clock",    iconBg: "#F5F5F5", iconColor: "#96A3EF", positive: true  },
   { label: "Completed",             value: "22",  change:  25, icon: "check",    iconBg: "#E6E9FB", iconColor: "#273DC0", positive: true  },
   { label: "No-Shows",              value: "2",   change: -50, icon: "x",        iconBg: "#C4CBF6", iconColor: "#20319C", positive: true  },
@@ -237,7 +237,7 @@ export const interviewsOverTime = {
 
 export const interviewsByRound = [
   { label: "Screening Call",    count: 14, pct: 33.3, color: "#5C6FE7" },
-  { label: "Technical Round",   count: 12, pct: 28.6, color: "#2E47E0" },
+  { label: "Technical Round",   count: 12, pct: 28.6, color: "#5B3DF5" },
   { label: "HR Round",          count:  8, pct: 19.0, color: "#96A3EF" },
   { label: "Managerial Round",  count:  5, pct: 11.9, color: "#5C6FE7" },
   { label: "Final Round",       count:  3, pct:  7.1, color: "#273DC0" },
@@ -260,7 +260,7 @@ export const interviewOutcomes = [
 ];
 
 export const avgTimePerStage = [
-  { label: "Screening → Technical", days: 3.2, color: "#2E47E0" },
+  { label: "Screening → Technical", days: 3.2, color: "#5B3DF5" },
   { label: "Technical → HR",        days: 4.5, color: "#96A3EF" },
   { label: "HR → Managerial",       days: 2.8, color: "#273DC0" },
   { label: "Managerial → Final",    days: 3.5, color: "#5C6FE7" },
@@ -293,7 +293,7 @@ export const interviewAiInsights: Array<{ tone: "positive" | "warning" | "info";
 // ─── Activities Analytics ─────────────────────────────────────────────────────
 
 export const activityStatCards = [
-  { label: "Total Activities",  value: "342",  change: 22,  icon: "activity", iconBg: "#E6E9FB", iconColor: "#2E47E0" },
+  { label: "Total Activities",  value: "342",  change: 22,  icon: "activity", iconBg: "#E6E9FB", iconColor: "#5B3DF5" },
   { label: "Daily Average",     value: "49",   change: 18,  icon: "calendar", iconBg: "#F5F5F5", iconColor: "#96A3EF" },
   { label: "Response Rate",     value: "87%",  change:  5,  icon: "check",    iconBg: "#E6E9FB", iconColor: "#273DC0" },
   { label: "Active Recruiters", value: "6",    change:  0,  icon: "users",    iconBg: "#F2F3FD", iconColor: "#5C6FE7" },
@@ -320,7 +320,7 @@ export const activityHeatmap: {
 };
 
 export const activityTypeBreakdown = [
-  { label: "Emails",       count: 98, pct: 28.7, color: "#2E47E0" },
+  { label: "Emails",       count: 98, pct: 28.7, color: "#5B3DF5" },
   { label: "Calls",        count: 82, pct: 24.0, color: "#96A3EF" },
   { label: "Applications", count: 56, pct: 16.4, color: "#273DC0" },
   { label: "Interviews",   count: 42, pct: 12.3, color: "#5C6FE7" },
@@ -360,7 +360,7 @@ export type ActivityFeedItem = {
 
 export const activityFeed: ActivityFeedItem[] = [
   { id: "1",  group: "Today",     type: "call",        actor: { name: "Sophia Patel",   initials: "SP", color: "#5C6FE7" }, title: "Called Savannah Nguyen", subject: "Product Designer role · 12 min", time: "2:30 PM" },
-  { id: "2",  group: "Today",     type: "interview",   actor: { name: "Priya Shah",     initials: "PS", color: "#2E47E0" }, title: "Technical round scheduled", subject: "Ralph Edwards · Frontend Developer", time: "1:12 PM" },
+  { id: "2",  group: "Today",     type: "interview",   actor: { name: "Priya Shah",     initials: "PS", color: "#5B3DF5" }, title: "Technical round scheduled", subject: "Ralph Edwards · Frontend Developer", time: "1:12 PM" },
   { id: "3",  group: "Today",     type: "email",       actor: { name: "Emma Rodriguez", initials: "ER", color: "#96A3EF" }, title: "Sent offer letter",    subject: "Cameron Williamson · Product Manager", time: "11:40 AM" },
   { id: "4",  group: "Today",     type: "application", actor: { name: "Liam Chen",      initials: "LC", color: "#273DC0" }, title: "Submitted profile",    subject: "Dianne Russell → Acme Corp", time: "9:58 AM" },
   { id: "5",  group: "Yesterday", type: "followup",    actor: { name: "Olivia Brown",   initials: "OB", color: "#5C6FE7" }, title: "Follow-up logged",     subject: "Esther Howard · UX Researcher", time: "5:20 PM" },
@@ -381,7 +381,7 @@ export const activityAiInsights: Array<{ tone: "positive" | "warning" | "info"; 
 // ─── Follow-ups Analytics ─────────────────────────────────────────────────────
 
 export const followupStatCards = [
-  { label: "Total Follow-ups",    value: "86",   change:  14, icon: "list",   iconBg: "#E6E9FB", iconColor: "#2E47E0", positive: true  },
+  { label: "Total Follow-ups",    value: "86",   change:  14, icon: "list",   iconBg: "#E6E9FB", iconColor: "#5B3DF5", positive: true  },
   { label: "Completed",           value: "58",   change:  22, icon: "check",  iconBg: "#E6E9FB", iconColor: "#273DC0", positive: true  },
   { label: "Pending",             value: "21",   change:  -8, icon: "clock",  iconBg: "#F5F5F5", iconColor: "#96A3EF", positive: true  },
   { label: "Overdue",             value: "7",    change: -30, icon: "alert",  iconBg: "#C4CBF6", iconColor: "#20319C", positive: true  },
@@ -408,7 +408,7 @@ export const followupPriority = [
 ];
 
 export const followupByChannel = [
-  { label: "Phone Call", count: 32, color: "#2E47E0" },
+  { label: "Phone Call", count: 32, color: "#5B3DF5" },
   { label: "Email",      count: 28, color: "#96A3EF" },
   { label: "LinkedIn",   count: 15, color: "#273DC0" },
   { label: "SMS",        count:  8, color: "#5C6FE7" },
@@ -417,7 +417,7 @@ export const followupByChannel = [
 
 export const responseTimeByChannel = [
   { label: "Phone Call", hours: 1.2, color: "#273DC0" },
-  { label: "SMS",        hours: 2.4, color: "#2E47E0" },
+  { label: "SMS",        hours: 2.4, color: "#5B3DF5" },
   { label: "Email",      hours: 6.8, color: "#96A3EF" },
   { label: "LinkedIn",   hours: 8.5, color: "#5C6FE7" },
 ];
@@ -436,7 +436,7 @@ export const upcomingFollowups: Array<{
   { candidate: "Cameron Williamson", initials: "CW", color: "#273DC0", role: "Product Manager",    due: "Tomorrow, 2:00 PM",  priority: "Medium", channel: "LinkedIn", assigned: "Olivia B" },
   { candidate: "Esther Howard",      initials: "EH", color: "#5C6FE7", role: "UX Researcher",      due: "May 20, 11:00 AM",   priority: "Low",    channel: "Email",    assigned: "Noah K" },
   { candidate: "Marcus Lee",         initials: "ML", color: "#C4CBF6", role: "Data Analyst",       due: "Yesterday, 4:00 PM", priority: "High",   channel: "Call",     assigned: "Sophia P", overdue: true },
-  { candidate: "Priya Sharma",       initials: "PS", color: "#2E47E0", role: "DevOps Engineer",    due: "2 days ago",         priority: "Medium", channel: "SMS",      assigned: "Aarav M", overdue: true },
+  { candidate: "Priya Sharma",       initials: "PS", color: "#5B3DF5", role: "DevOps Engineer",    due: "2 days ago",         priority: "Medium", channel: "SMS",      assigned: "Aarav M", overdue: true },
 ];
 
 export const followupAiInsights: Array<{ tone: "positive" | "warning" | "info"; title: string; body: string }> = [
@@ -449,7 +449,7 @@ export const followupAiInsights: Array<{ tone: "positive" | "warning" | "info"; 
 // ─── Team Performance Analytics ───────────────────────────────────────────────
 
 export const teamStatCards = [
-  { label: "Team Size",          value: "6",     change: null, icon: "team",   iconBg: "#E6E9FB", iconColor: "#2E47E0", subtitle: "6 active recruiters" },
+  { label: "Team Size",          value: "6",     change: null, icon: "team",   iconBg: "#E6E9FB", iconColor: "#5B3DF5", subtitle: "6 active recruiters" },
   { label: "Total Placements",   value: "12",    change:  20,  icon: "trophy", iconBg: "#F2F3FD", iconColor: "#5C6FE7" },
   { label: "Avg. Conversion",    value: "12.4%", change:   8,  icon: "target", iconBg: "#F5F5F5", iconColor: "#96A3EF" },
   { label: "Team Utilization",   value: "84%",   change:   6,  icon: "bolt",   iconBg: "#E6E9FB", iconColor: "#273DC0" },
@@ -594,7 +594,7 @@ export const topJobSpotlight = {
 };
 
 export const jobPipelineFlow = [
-  { title: "Frontend Developer", icon: "💻", stages: [512, 45, 18, 8, 3, 2], color: "#2E47E0" },
+  { title: "Frontend Developer", icon: "💻", stages: [512, 45, 18, 8, 3, 2], color: "#5B3DF5" },
   { title: "Product Designer",   icon: "🎨", stages: [398, 38, 16, 7, 2, 1], color: "#96A3EF" },
   { title: "UX Researcher",      icon: "🔍", stages: [276, 28, 12, 5, 2, 1], color: "#273DC0" },
   { title: "Marketing Manager",  icon: "📢", stages: [224, 22,  9, 4, 1, 0], color: "#5C6FE7" },

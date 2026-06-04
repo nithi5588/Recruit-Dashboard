@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 // Muted, cohesive avatar palette — flat neutral tones so a list of avatars
 // reads as one calm set.
 const GRADIENTS = [
@@ -21,20 +25,28 @@ export function Avatar({
   name,
   size = 40,
   className = "",
+  color,
+  image,
 }: {
   name: string;
   size?: number;
   className?: string;
+  /** Explicit background override; falls back to the muted hashed palette. */
+  color?: string;
+  /** Profile photo URL. Falls back to initials if it fails to load. */
+  image?: string;
 }) {
+  const [failed, setFailed] = useState(false);
   const initials = name
     .split(/\s+/)
     .slice(0, 2)
     .map((p) => p[0]?.toUpperCase() ?? "")
     .join("");
-  const gradient = GRADIENTS[hashIndex(name, GRADIENTS.length)];
+  const gradient = color ?? GRADIENTS[hashIndex(name, GRADIENTS.length)];
+  const showImage = Boolean(image) && !failed;
   return (
     <span
-      className={`inline-flex shrink-0 items-center justify-center rounded-full font-semibold text-white ${className}`}
+      className={`relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-semibold text-white ${className}`}
       style={{
         width: size,
         height: size,
@@ -44,7 +56,21 @@ export function Avatar({
       }}
       aria-hidden
     >
+      {/* Initials sit underneath as the fallback; the photo overlays them and
+         is removed on error, revealing the initials again. */}
       {initials}
+      {showImage ? (
+        <img
+          src={image}
+          alt=""
+          width={size}
+          height={size}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : null}
     </span>
   );
 }

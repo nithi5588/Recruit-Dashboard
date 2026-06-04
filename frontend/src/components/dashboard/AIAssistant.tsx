@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -164,7 +164,7 @@ export function AIAssistant({
           <header className="mb-3 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <span
-                className={`sparkle-badge inline-flex shrink-0 items-center justify-center rounded-[10px] bg-[color:var(--color-surface)] text-[color:var(--color-brand-600)] shadow-[0_2px_8px_rgba(46,71,224,0.15)] ${
+                className={`sparkle-badge inline-flex shrink-0 items-center justify-center rounded-[10px] bg-[color:var(--color-surface)] text-[color:var(--color-brand-600)] shadow-[0_2px_8px_rgba(91, 61, 245,0.15)] ${
                   hero ? "h-9 w-9" : "h-8 w-8"
                 }`}
               >
@@ -284,7 +284,7 @@ export function AIAssistant({
               type="submit"
               aria-label="Send prompt"
               data-active={prompt.trim().length > 0}
-              className={`icn icn-send inline-flex items-center justify-center gap-1.5 rounded-[8px] bg-[color:var(--color-brand-500)] font-semibold text-white shadow-[0_4px_12px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)] ${
+              className={`icn icn-send inline-flex items-center justify-center gap-1.5 rounded-[8px] bg-[color:var(--color-brand-500)] font-semibold text-white shadow-[0_4px_12px_rgba(91, 61, 245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)] ${
                 hero ? "h-9 px-3 text-[13px]" : "h-8 w-8"
               }`}
             >
@@ -309,7 +309,7 @@ export function AIAssistant({
                   key={ex}
                   type="button"
                   onClick={() => setPrompt(ex)}
-                  className="rounded-[999px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-[12px] text-[color:var(--color-text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[color:var(--color-brand-300)] hover:text-[color:var(--color-brand-600)] hover:shadow-[0_4px_12px_rgba(46,71,224,0.10)]"
+                  className="rounded-[999px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-[12px] text-[color:var(--color-text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[color:var(--color-brand-300)] hover:text-[color:var(--color-brand-600)] hover:shadow-[0_4px_12px_rgba(91, 61, 245,0.10)]"
                 >
                   {ex}
                 </button>

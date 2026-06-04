@@ -1,11 +1,11 @@
-function polarToXY(cx: number, cy: number, r: number, deg: number) {
+﻿function polarToXY(cx: number, cy: number, r: number, deg: number) {
   const rad = ((deg - 90) * Math.PI) / 180;
   return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
 }
 
 export function Sparkline({
   values,
-  color = "#2E47E0",
+  color = "#5B3DF5",
   width = 60,
   height = 22,
   fill = true,
@@ -59,7 +59,7 @@ export function CircularProgress({
   label,
   size = 180,
   stroke = 14,
-  color = "#2E47E0",
+  color = "#5B3DF5",
   trackColor,
   showLabel = true,
 }: {

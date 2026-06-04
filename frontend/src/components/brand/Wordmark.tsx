@@ -1,4 +1,4 @@
-export function Wordmark({ className = "" }: { className?: string }) {
+﻿export function Wordmark({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <span
@@ -6,7 +6,7 @@ export function Wordmark({ className = "" }: { className?: string }) {
         className="flex h-9 w-9 items-center justify-center rounded-[10px] text-white"
         style={{
           background: "var(--color-brand-500)",
-          boxShadow: "0 6px 16px rgba(46, 71, 224, 0.28)",
+          boxShadow: "0 6px 16px rgba(91, 61, 245, 0.28)",
         }}
       >
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

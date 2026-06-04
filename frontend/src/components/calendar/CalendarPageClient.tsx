@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
 import {
@@ -91,11 +91,11 @@ const EVENT_TYPE_ORDER: EventType[] = [
 ];
 
 const EVENT_STYLES: Record<EventType, { bg: string; text: string; dot: string }> = {
-  interview:               { bg: "#E6E9FB", text: "#273DC0", dot: "#2E47E0" },
+  interview:               { bg: "#E6E9FB", text: "#273DC0", dot: "#5B3DF5" },
   screening:               { bg: "#F2F3FD", text: "#273DC0", dot: "#5C6FE7" },
-  "client-call":           { bg: "#E6E9FB", text: "#20319C", dot: "#2E47E0" },
-  "client-meeting":        { bg: "#E6E9FB", text: "#20319C", dot: "#2E47E0" },
-  "hiring-manager-call":   { bg: "#E6E9FB", text: "#20319C", dot: "#2E47E0" },
+  "client-call":           { bg: "#E6E9FB", text: "#20319C", dot: "#5B3DF5" },
+  "client-meeting":        { bg: "#E6E9FB", text: "#20319C", dot: "#5B3DF5" },
+  "hiring-manager-call":   { bg: "#E6E9FB", text: "#20319C", dot: "#5B3DF5" },
   "offer-discussion":      { bg: "#F2F3FD", text: "#20319C", dot: "#273DC0" },
   "team-standup":          { bg: "#F5F5F5", text: "#525252", dot: "#525252" },
   "team-retro":            { bg: "#F5F5F5", text: "#525252", dot: "#525252" },
@@ -178,7 +178,7 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       id: "e1", title: "Interview", type: "interview",
       subtitle: "Savannah Nguyen", date: mon,
       startHour: 9, startMin: 0, endHour: 10, endMin: 0, iconType: "video",
-      candidate: { name: "Savannah Nguyen", role: "Senior Product Designer", company: "Shopify", initials: "SN", color: "#2E47E0" },
+      candidate: { name: "Savannah Nguyen", role: "Senior Product Designer", company: "Shopify", initials: "SN", color: "#5B3DF5" },
     },
     {
       id: "e2", title: "Client Call", type: "client-call",
@@ -208,10 +208,10 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       candidate: { name: "Ralph Edwards", role: "Frontend Developer", company: "Atlassian", initials: "RE", color: "#525252" },
       meetLink: "meet.google.com/abc-defg-hij",
       attendees: [
-        { initials: "SN", color: "#2E47E0" },
+        { initials: "SN", color: "#5B3DF5" },
         { initials: "EH", color: "#5C6FE7" },
         { initials: "RE", color: "#525252" },
-        { initials: "CM", color: "#2E47E0" },
+        { initials: "CM", color: "#5B3DF5" },
       ],
       notes: "Assess technical skills and culture fit...",
     },
@@ -229,7 +229,7 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       id: "e9", title: "Interview", type: "interview",
       subtitle: "Dianne Russell", date: wed,
       startHour: 9, startMin: 0, endHour: 10, endMin: 0, iconType: "video",
-      candidate: { name: "Dianne Russell", role: "Marketing Specialist", company: "Notion", initials: "DR", color: "#2E47E0" },
+      candidate: { name: "Dianne Russell", role: "Marketing Specialist", company: "Notion", initials: "DR", color: "#5B3DF5" },
     },
     {
       id: "e10", title: "Feedback Call", type: "feedback-call",
@@ -262,7 +262,7 @@ function genEvents(weekStart: Date): CalendarEvent[] {
       id: "e15", title: "Screening Call", type: "screening",
       subtitle: "Jane Cooper", date: fri,
       startHour: 14, startMin: 0, endHour: 15, endMin: 0, iconType: "phone",
-      candidate: { name: "Jane Cooper", role: "UI Designer", company: "Figma", initials: "JC", color: "#2E47E0" },
+      candidate: { name: "Jane Cooper", role: "UI Designer", company: "Figma", initials: "JC", color: "#5B3DF5" },
     },
     {
       id: "e16", title: "Team Retro", type: "team-retro",
@@ -299,7 +299,7 @@ function HourSlot({ hour, onClick }: { hour: number; onClick: () => void }) {
     >
       <span
         aria-hidden
-        className="pointer-events-none flex h-7 w-7 scale-90 items-center justify-center rounded-full bg-[color:var(--color-brand-500)] text-white opacity-0 shadow-[0_4px_12px_rgba(46,71,224,0.4)] transition-all group-hover/slot:scale-100 group-hover/slot:opacity-100"
+        className="pointer-events-none flex h-7 w-7 scale-90 items-center justify-center rounded-full bg-[color:var(--color-brand-500)] text-white opacity-0 shadow-[0_4px_12px_rgba(91, 61, 245,0.4)] transition-all group-hover/slot:scale-100 group-hover/slot:opacity-100"
       >
         <PlusIcon size={14} />
       </span>
@@ -488,7 +488,7 @@ function WeekView({
               <div
                 key={i}
                 className="relative min-w-0 flex-1 border-l border-[color:var(--color-border)]"
-                style={isToday ? { background: "rgba(46,71,224,0.07)" } : undefined}
+                style={isToday ? { background: "rgba(91, 61, 245,0.07)" } : undefined}
               >
                 {/* Hour grid lines */}
                 {HOURS.map((h) => (
@@ -601,7 +601,7 @@ function DayView({
 
           <div
             className="relative flex-1 border-l border-[color:var(--color-border)]"
-            style={isToday ? { background: "rgba(46,71,224,0.07)" } : undefined}
+            style={isToday ? { background: "rgba(91, 61, 245,0.07)" } : undefined}
           >
             {HOURS.map((h) => (
               <div
@@ -879,7 +879,7 @@ function MiniCalendar({
               {hasEv && !isToday && (
                 <span
                   className="absolute bottom-[3px] left-1/2 h-[3px] w-[3px] -translate-x-1/2 rounded-full"
-                  style={{ backgroundColor: "#2E47E0" }}
+                  style={{ backgroundColor: "#5B3DF5" }}
                 />
               )}
             </button>
@@ -1424,7 +1424,7 @@ function NewEventModal({
           <button
             type="button"
             onClick={handleSubmit}
-            className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+            className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-4 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(91, 61, 245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
           >
             <PlusIcon size={14} />
             Create event
@@ -1909,7 +1909,7 @@ export function CalendarPageClient() {
           <button
             type="button"
             onClick={() => setNewEventOpen(true)}
-            className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-3 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(46,71,224,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
+            className="inline-flex h-9 items-center gap-1.5 rounded-[10px] bg-[color:var(--color-brand-500)] px-3 text-[13px] font-semibold text-white shadow-[0_4px_12px_rgba(91, 61, 245,0.25)] transition-colors hover:bg-[color:var(--color-brand-600)]"
           >
             <PlusIcon size={15} />
             <span className="hidden sm:inline">New event</span>
@@ -2050,9 +2050,9 @@ export function CalendarPageClient() {
       {/* ── Legend Footer ────────────────────────────────── */}
       <div className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 sm:gap-x-5 sm:px-6">
         {[
-          { label: "Interviews", color: "#2E47E0" },
+          { label: "Interviews", color: "#5B3DF5" },
           { label: "Calls",      color: "#5C6FE7" },
-          { label: "Meetings",   color: "#2E47E0" },
+          { label: "Meetings",   color: "#5B3DF5" },
           { label: "Follow-ups", color: "#5C6FE7" },
           { label: "Reminders",  color: "#20319C" },
         ].map(({ label, color }) => (

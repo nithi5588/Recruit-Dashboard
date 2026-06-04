@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import {
@@ -38,7 +38,7 @@ function StatIcon({ icon, color, bg }: { icon: string; color: string; bg: string
 // ─── Team trend line chart (placements vs offers) ─────────────────────────────
 
 const TEAM_SERIES = [
-  { key: "offers"     as const, label: "Offers",     color: "#2E47E0" },
+  { key: "offers"     as const, label: "Offers",     color: "#5B3DF5" },
   { key: "placements" as const, label: "Placements", color: "#273DC0" },
 ];
 
@@ -324,9 +324,9 @@ export function TeamPerformanceTab() {
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-[14px] font-semibold text-[color:var(--color-text)]">Activity Mix</h3>
             <div className="flex items-center gap-3 text-[10px] text-[color:var(--color-text-muted)]">
-              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#2E47E0]" /> Calls</span>
+              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#5B3DF5]" /> Calls</span>
               <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#525252]" /> Emails</span>
-              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#2E47E0]" /> Meetings</span>
+              <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[#5B3DF5]" /> Meetings</span>
             </div>
           </div>
           <ul className="space-y-3">
@@ -340,7 +340,7 @@ export function TeamPerformanceTab() {
                     <span className="shrink-0 font-bold text-[color:var(--color-text)]">{total}</span>
                   </div>
                   <div className="flex h-2 w-full overflow-hidden rounded-full bg-[color:var(--color-surface-2)]" style={{ width: `${w}%` }}>
-                    <div style={{ width: `${(r.calls / total) * 100}%`, backgroundColor: "#2E47E0" }} />
+                    <div style={{ width: `${(r.calls / total) * 100}%`, backgroundColor: "#5B3DF5" }} />
                     <div style={{ width: `${(r.emails / total) * 100}%`, backgroundColor: "#5C6FE7" }} />
                     <div style={{ width: `${(r.meetings / total) * 100}%`, backgroundColor: "#273DC0" }} />
                   </div>
