@@ -5,7 +5,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Avatar } from "@/components/ui/Avatar";
 import { Badge, statusTone } from "@/components/ui/Badge";
 import { Checkbox } from "@/components/ui/Checkbox";
-import { ScoreRing } from "@/components/ui/ScoreRing";
 import { ArrowDown2 } from "iconsax-reactjs";
 import {
   CheckIcon,
@@ -297,7 +296,6 @@ export function RecentCandidatesTable() {
               <th className="hidden py-3 pr-4 xl:table-cell">Experience</th>
               <th className="hidden py-3 pr-4 lg:table-cell">Location</th>
               <th className="py-3 pr-4">Status</th>
-              <th className="hidden py-3 pr-4 sm:table-cell">Match Score</th>
               <th className="hidden py-3 pr-4 xl:table-cell">Updated</th>
               <th className="w-10 px-4 py-3" />
             </tr>
@@ -305,7 +303,7 @@ export function RecentCandidatesTable() {
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td colSpan={9} className="px-5 py-12 text-center">
+                <td colSpan={8} className="px-5 py-12 text-center">
                   <p className="text-[13px] font-semibold text-[color:var(--color-text-secondary)]">
                     No candidates match your filters
                   </p>
@@ -372,9 +370,6 @@ export function RecentCandidatesTable() {
                   </td>
                   <td className="py-4 pr-4 align-middle">
                     <Badge tone={statusTone(c.status)}>{c.status}</Badge>
-                  </td>
-                  <td className="hidden py-4 pr-4 align-middle sm:table-cell">
-                    <ScoreRing value={c.score} size={40} stroke={4} />
                   </td>
                   <td className="hidden py-4 pr-4 align-middle text-[13px] text-[color:var(--color-text-secondary)] xl:table-cell">
                     {c.updated}

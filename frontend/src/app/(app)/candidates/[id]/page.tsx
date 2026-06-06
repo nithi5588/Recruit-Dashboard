@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AboutCard } from "@/components/candidate-detail/AboutCard";
 import { ApplicationsCard } from "@/components/candidate-detail/ApplicationsCard";
-import { CandidateSnapshot } from "@/components/candidate-detail/CandidateSnapshot";
+import { BestMatchingJobs } from "@/components/candidate-detail/BestMatchingJobs";
 import { DocumentsCard } from "@/components/candidate-detail/DocumentsCard";
 import { EducationCard } from "@/components/candidate-detail/EducationCard";
 import { ExperienceCard } from "@/components/candidate-detail/ExperienceCard";
@@ -65,7 +65,7 @@ export default async function CandidateDetailPage({
         </div>
 
         <aside className="space-y-5 xl:sticky xl:top-[88px] xl:self-start">
-          <CandidateSnapshot candidate={candidate} detail={detail} />
+          <BestMatchingJobs candidate={candidate} />
           <ApplicationsCard
             applications={detail.applicationsBlock.applications.slice(0, 3)}
             totalCount={detail.applicationsBlock.summary.total}

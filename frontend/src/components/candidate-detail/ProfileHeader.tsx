@@ -1,6 +1,5 @@
 ﻿import { Avatar } from "@/components/ui/Avatar";
 import { Badge, statusTone } from "@/components/ui/Badge";
-import { ScoreRing } from "@/components/ui/ScoreRing";
 import {
   EditIcon,
   MoreIcon,
@@ -98,13 +97,6 @@ export function ProfileHeader({ candidate }: { candidate: Candidate }) {
           </dl>
 
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
-            <div className="flex items-center gap-2">
-              <ScoreRing value={candidate.score} size={38} stroke={4} />
-              <span className="text-[13px] text-[color:var(--color-text-secondary)]">
-                Match Score
-              </span>
-            </div>
-            <span className="hidden h-6 w-px bg-[color:var(--color-border)] sm:block" aria-hidden />
             <div className="flex items-center gap-2">
               <Badge tone={statusTone(candidate.status)}>{candidate.status}</Badge>
               <span className="text-[13px] text-[color:var(--color-text-secondary)]">

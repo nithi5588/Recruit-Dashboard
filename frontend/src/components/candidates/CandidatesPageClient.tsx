@@ -1185,7 +1185,6 @@ function ListView({
               <th className="hidden py-3 pr-4 xl:table-cell">Experience</th>
               <th className="hidden py-3 pr-4 lg:table-cell">Location</th>
               <th className="py-3 pr-4">Status</th>
-              <th className="hidden py-3 pr-4 sm:table-cell">Match</th>
               <th className="hidden py-3 pr-4 lg:table-cell">Availability</th>
               <th className="hidden py-3 pr-4 xl:table-cell">Updated</th>
               <th className="w-10 px-4 py-3" />
@@ -1266,9 +1265,6 @@ function ListView({
                   </td>
                   <td className="py-3 pr-4 align-middle">
                     <Badge tone={statusTone(c.status)}>{c.status}</Badge>
-                  </td>
-                  <td className="hidden py-3 pr-4 align-middle sm:table-cell">
-                    <ScoreRing value={c.score} size={36} stroke={3.5} />
                   </td>
                   <td className="hidden py-3 pr-4 align-middle lg:table-cell">
                     <p className="inline-flex items-center gap-2 text-[13px] text-[color:var(--color-text-secondary)]">

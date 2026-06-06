@@ -1,7 +1,6 @@
 ﻿import Link from "next/link";
 import { Avatar } from "@/components/ui/Avatar";
 import { Badge, priorityTone } from "@/components/ui/Badge";
-import { ScoreRing } from "@/components/ui/ScoreRing";
 import { ChevronRight, PinIcon } from "@/components/icons/AppIcons";
 import {
   candidateStatusText,
@@ -38,12 +37,8 @@ function PriorityCard({ candidate }: { candidate: Candidate }) {
         {candidate.role}
       </p>
 
-      <div className="my-3 flex justify-center">
-        <ScoreRing value={candidate.score} size={52} stroke={4} />
-      </div>
-
       <p
-        className="truncate text-center text-[12px] font-semibold leading-[18px]"
+        className="mt-3 truncate text-center text-[12px] font-semibold leading-[18px]"
         style={{ color: statusColor(statusText) }}
       >
         {statusText}
